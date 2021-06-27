@@ -2,7 +2,8 @@
 
 <p>¡Bienvenidos a nuestra presentación! Estos son nuestros integrantes:</p>
 
-<ul>Rodrigo: 20 años. Aficionado por la tecnología y los juegos de computadora. Estudia programación web.</ul>
+<ul><li>Rodrigo: 20 años. Aficionado por la tecnología y los juegos de computadora. Estudia programación web.</li></ul>
+<ul><li>Alexander: 24 años. Diseñador 3D, Texturas, Aficionado por el automovilismo y idiomas. Estudia programación web.</li></ul>
 
 Nuestra pagina esta orientada para todo publico
 
