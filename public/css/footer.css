@@ -1,0 +1,38 @@
+footer{
+    background-color: dimgrey;
+    color: white;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    height: 60px;
+}
+.redes p{
+    font-size: xx-small;
+}
+.redes {
+    padding: 1px 11px;
+    margin-bottom: 5px;
+}
+
+.menu-footer {   
+    border-radius: 10px;
+    padding: 5px;
+    padding-left: 20px;
+}
+
+.menu-footer ul {
+    list-style: none;
+    font-size: 13px;
+    margin-bottom: 2px;
+}
+ol, ul {
+     padding-left: 0px;
+}
+.home footer .logo-footer img{
+    width: 60px;
+    height: 30px;
+    margin: 10px;
+    margin-bottom: 12px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.707);
+
+}

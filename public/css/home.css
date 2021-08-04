@@ -1,122 +1,272 @@
-body{
-    margin: 0;
-    font-family: sans-serif;
+main {
+    width: 100%;
+}
+/* secciones mobile */
+.home .seccion-general{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: #80808040;
+    border-radius: 13px;
+    padding: 10px;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 50px;
 }
-label img{
-    width: 30px;
+
+.home .seccion-general .titulo-articulo{
+    background-color: #808080;
+    padding: 8px;
+    border-radius: 0px 15px;
+    position: relative;
+    bottom: 30px;
+    font-size: 14px;
+    text-align: center;
 }
-header{
+
+.home .seccion-general div img{
+    width: 300px;
+    height: 250px;
+}
+.home .seccion-general .descripcion-articulo{
+    margin-right: 198px;
+    margin-bottom: 10px;
+}
+
+.home .seccion-general hr {
+    background: linear-gradient(90deg, rgb(24,24,24), white);
+    height: 2px;
+    margin-bottom: 1rem;
     width: 100%;
-    background: #4E94AB;
+    border: none;
+}
+
+/* secion: articulos que pueden interesarte */
+.home .seccion-general article{
     display: flex;
-    justify-content: space-between;
-    height: 14vh;
-    flex-direction: row;
-    align-items: center;
+    justify-content: center;
+    border-block: 1px solid;
 }
 
-#btn-menu{
-    display: none;
+.home .seccion-general article div img{
+     width: 150px ;
+     height: 150px;
+
 }
 
-header label{
-    display: none;
-    width: 30px;
-    margin: 0 9vw;
-    border-radius: 1px solid #fff;
+.home .seccion-general article p {
+    margin-bottom: 15px;
 }
 
-header label:hover{
+.home .seccion-general .ver-mas{
+    padding: 10px;
     cursor: pointer;
 }
 
-
-.menu ul{
-    margin: 0%;
-    list-style: none;
-    padding: 0;
+/* crear cuenta */
+.home .crear-cuenta{
+    background-color: #8080805f;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 20px;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 45px;
 }
 
-.menu li{
-    border-right:  1px solid #fff;
+.home .crear-cuenta button{
+    margin: 11px;
+    width: 200px;
+    height: 39px;
+    padding: 5px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    font-size: 16px;
 }
-.menu li:hover{
-    background: rgba(0,0,0,0.3);
-}
-
-.menu li a{
-    display: block;
-    padding: 15px 20px;
-    color: white;
-    text-decoration: none;
-    
-}
-
-
-.iniciar-sesion{
+/* cosas desktop */
+.home .marcas{
     display: none;
 }
-input {
-    width: 35vw;
-    height: 23px;
-    padding: 4px;
+
+.home .seccion-general-desktop{
+    display: none;
+}
+.home .menu-categorias-desktop{
+    display: none;
+}
+.home .titulo-seccion-desktop h3{
+    display: none;
 }
 
-.logo{
-    width: 126px;
-}
 
-.iniciar-sesion p{
-    margin: 0px;
-    margin-top: 20px;
-    margin-bottom: 4px;
-}
-@media (max-width:768px){
-    header label{
-        display: block;
-    }
 
-    .menu{
-        position: absolute;
-        background: #4E94AB;
-        width: 70%;
-        margin-left: -70%;
-        transition: all 1s;
-        max-width: 229px;
-        
-    }
+/* termina secciones mobile*/
 
-    .menu ul{
+/* seccion tablet */
+@media (min-width: 768px){
+    .home .crear-cuenta{
+        background-color: #8080805f;
+        display: flex;
         flex-direction: column;
-        text-align:center ;
-
+        padding: 20px;
+        border-radius: 20px;
+        width: 90%;
+        margin: 0 auto;
+        margin-bottom: 45px;
+        text-align: center;
     }
-
-    .menu li{
-        border-top:1px solid #fff ;
+    .home .crear-cuenta button{
+        margin: 11px;
+        width: 200px;
+        height: 39px;
+        padding: 5px;
+        border: none;
+        border-radius: 20px;
+        outline: none;
+        font-size: 16px;
+        margin:15px auto;
     }
-
-    #btn-menu:checked ~ .menu{
-        margin: 0;
-        margin-top: 40vh;
-        max-width: 229px;
-    }
-    .iniciar-sesion{
-        display: block;
-    }
-    /* input{
+    .home .seccion-general{
+        display: none;
+        }
+        .home .crear-cuenta{
+        display: none;
+        }
+       .home .marcas{
+        display: flex;
+        justify-content: space-evenly;
+        width: 80%;
+        margin: 0 auto;
+       }
+       .home .marcas img{
+        width: 65px;
+        height: 50px;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+       }
+    
+       /* secion general desktop */
+       .home .titulo-seccion-desktop h3{
+           padding: 10px;
+           display: block;
+       }
+       .home .seccion-general-desktop{
+        display: flex;
+        padding: 10px;
+        margin: 0 auto;
+        margin-bottom: 50px;
+        width: 100%;
         
-    } */
+       }
+       .home .seccion-general-desktop article{
+        background-color: #8888885c;
+        margin: 13px;
+        padding: 10px;
+        width: 300px;
+        height: 280px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+       }
+       .home .seccion-general-desktop div img{
+        width: 150px;
+       }
+       .home .seccion-general-desktop .img{
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+        width: 80%;
+        margin: 18px auto;
+        text-align: center;
+       }
+       .home .seccion-general-desktop p {
+        padding-left: 25px;
+       }
+    
+       /* menu de categorias desktop */
+       .home .menu-categorias-desktop{
+        display: flex;
+        justify-content: space-evenly;
+       }
+       .home .menu-categorias-desktop .seccion{
+        text-align: center;
+        font-size: 20px;
+       }
+       .home .menu-categorias-desktop .seccion img{
+        width: 150px;
+       }
     
 }
 
-a{
-    text-decoration: none;
-    color: red;
-}
+/* seccion desktop */
 
+
+@media (min-width: 992px){
+    .home .seccion-general{
+    display: none;
+    }
+    .home .crear-cuenta{
+    display: none;
+    }
+   .home .marcas{
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+    margin: 0 auto;
+   }
+   .home .marcas img{
+    width: 65px;
+    height: 50px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+   }
+
+   /* secion general desktop */
+   .home .titulo-seccion-desktop h3{
+       padding: 10px;
+       display: block;
+   }
+   .home .seccion-general-desktop{
+    display: flex;
+    padding: 10px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    width: 100%;
+    
+   }
+   .home .seccion-general-desktop article{
+    background-color: #8888885c;
+    margin: 13px;
+    padding: 10px;
+    width: 300px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   }
+   .home .seccion-general-desktop div img{
+    width: 150px;
+   }
+   .home .seccion-general-desktop .img{
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    width: 80%;
+    margin: 18px auto;
+    text-align: center;
+   }
+   .home .seccion-general-desktop p {
+    padding-left: 25px;
+   }
+
+   /* menu de categorias desktop */
+   .home .menu-categorias-desktop{
+    display: flex;
+    justify-content: space-evenly;
+   }
+   .home .menu-categorias-desktop .seccion{
+    text-align: center;
+    font-size: 20px;
+   }
+   .home .menu-categorias-desktop .seccion img{
+    width: 150px;
+   }
+
+}
