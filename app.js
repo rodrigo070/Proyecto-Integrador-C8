@@ -7,7 +7,7 @@ app.use(express.static("public"))
 
 /* rutas */
 
-app.get('/', (req, res)=>{res.sendFile(path.join(__dirname,('/public/views/home.html')))}) //home
+app.get('/', (req, res)=>{res.sendFile(path.join(__dirname,('/views/home.html')))}) //home
 
 app.get('/',(req,res)=>{res.sendFile(path.join(__dirname,''))}) 
 
