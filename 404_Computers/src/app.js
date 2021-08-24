@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 let path = require('path');
-const port = 3001;
 let methodOverride = require('method-override');
+const port = 3001;
 
 // Routers - > maneja lo que se va a hacer en la vista (EJS "HTML")
 let homeRouter = require('./routes/home');
@@ -22,15 +22,15 @@ app.use(methodOverride('_method'));
 
 // Routes - > desde aca indicamos las rutas -> las direcciones estan declaradas en los archivos js de rutas
 
-//Home - local -
+//Home - vistas generales
 app.use('/', homeRouter);
-//login - register - profile
+//login - register - profile - carrito
 app.use('/', userRouter);
-//detalle del producto
+//detalle del producto - listado de productos
 app.use('/', productosRouter);
 //admin
 app.use('/', adminRouter)
 
 app.listen(port, () => {
-  console.log(`Servidor Corriendo en ${port}\ https://localhost:${port}`);
+  console.log(`Servidor Corriendo en el Puerto: ${port}\ https://localhost:${port}`);
 });
