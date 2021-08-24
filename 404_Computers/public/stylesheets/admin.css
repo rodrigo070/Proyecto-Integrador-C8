@@ -1,0 +1,242 @@
+/* vista mobile */
+
+.admin nav {
+    background-color: rgb(240, 229, 249);
+    display: flex;
+    justify-content: center;
+    
+}
+.admin nav a{
+    font-size: 14px;
+    margin: 15px auto;
+    box-sizing: border-box;
+    box-shadow: 0 2px 2px rgb(44, 0, 204), 0 5px 5px rgba(55, 0, 255, 0.1);
+    padding: 7px;
+    border-radius: 12px;
+    background-color: white;
+}
+
+.admin .titulo_Admin h2{
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 14px;
+}
+
+.admin .cheked{
+    text-align: center;
+}
+
+.admin .cheked input{
+    vertical-align: middle;
+    margin: 0 5px;
+}
+
+/* Lo de preview image lo dejo por si tenemos que 
+agregar una seccion para visualizar
+el producto a ser agregado.*/
+
+.admin_Grid{
+    display: grid;
+    grid-template-areas: 
+    'categoriasAdmin'
+    'productInfoAdd' 
+    'loadImage'
+    'previewImageAdd';
+    grid-template-columns: auto;
+    width: 100%;
+    height: 100%;
+}
+
+.admin .contenedor{
+    display: flex;
+    flex-direction: column;
+    grid-area: categoriasAdmin;
+    width: 80%;
+    margin: 20px auto;
+}
+
+.admin .contenedor .seleccionar{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.admin .contenedor .cat1admin,
+.admin .contenedor .cat2admin{
+    display: flex;
+    margin: 0 10px;
+    flex-direction: column;
+}
+
+.admin .contenedor .cat1admin select{
+    margin-bottom: 5px;
+}
+
+.admin .contenedor .input-select{
+    outline: none;
+    border: 2px solid #d379dd;
+    box-shadow: 0 2px 2px rgb(44, 0, 204), 0 5px 5px rgba(55, 0, 255, 0.1);
+    border-radius: 10px;
+    margin: 5px;
+    padding: 5px;
+    width: 100%; 
+}
+
+.admin .contenedor .input-select .fondo{
+    background-color: #f8e5f9;
+}
+
+.admin .infoProductAdmin,
+.admin .precio-admin,
+.admin .finalizar{
+    grid-area: productInfoAdd;
+}
+
+.admin .descripcion-producto{
+    width:90%;
+    text-align: center;
+    margin: 20px auto;
+}
+
+.admin .descripcion-producto textarea{
+    border: 1px solid #d379dd;
+    max-height: 150px;
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+    outline: none;
+    padding: 4px;
+}
+
+.precio-admin{
+    text-align: center;
+}
+
+.admin .precio-admin .input-select{
+    outline: none;
+    border: 2px solid #d379dd;
+    box-shadow: 0 2px 2px rgb(44, 0, 204), 0 5px 5px rgba(55, 0, 255, 0.1);
+    border-radius: 10px;
+    padding: 5px; 
+}
+
+.admin button{
+    display: flex;
+    margin: 11px auto;
+}
+
+.admin .finalizar{
+    outline: none;
+    border: 2px solid #d379dd;
+    box-shadow: 0 2px 2px rgb(44, 0, 204), 0 5px 5px rgba(55, 0, 255, 0.1);
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 20px;
+    background-color: white;
+}
+
+.admin .agregar-imagen{
+    border: 2px solid #d379dd;
+    border-radius: 10px;
+    padding: 10px;
+    width: 90%;
+    text-align: center;
+    margin: 20px auto;
+    grid-area: loadImage;
+}
+
+.admin .agregar-imagen hr{
+    background: #d379dd;
+    height: 2px;
+    margin-bottom: 1rem;
+    width: 100%;
+    border: none;
+    margin-top: 6px;    
+}
+
+.admin .agregar-imagen .input-select{
+    outline: none;
+    border: 2px solid #d379dd;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+/* tablet */
+
+@media screen and (min-width: 768px){
+    
+    .admin nav a{
+        min-width: 155px;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .admin .cheked{
+        margin: 10px 0;
+        text-align: left;
+    }
+
+    .admin_Grid{
+        grid-template-areas: 
+        'categoriasAdmin loadImage'
+        'productInfoAdd previewImageAdd';
+        grid-template-rows: auto;
+        grid-template-columns: 50% 50%;
+    }
+
+    .admin .contenedor .seleccionar{
+        width: 100%;
+    }
+
+    .admin .contenedor .seleccionar .cat1admin,
+    .admin .contenedor .seleccionar .cat2admin{
+        margin: 0;
+    }
+
+    .admin .contenedor .seleccionar .cat1admin{
+        display: flex;
+        flex-direction: column;
+        width:fit-content;
+    }
+
+    .admin .contenedor .seleccionar .cat2admin{
+        display: flex;
+        flex-direction: row;
+        width:fit-content;
+    }
+    
+    .admin .descripcion-producto{
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .admin .descripcion-producto h4{
+        text-align: left;
+    }
+    
+    .admin .agregar-imagen {
+        width: 80%;
+    }
+}
+
+
+/* desktop */
+
+@media screen and (min-width: 990px){
+    
+    .admin nav a{
+        font-size: 21px;
+    }
+
+    .admin .contenedor .seleccionar .cat1admin{
+        float: left;
+        margin-right: 10px;
+    }
+
+    .admin .contenedor .seleccionar .cat2admin input:nth-child(2){
+        max-width: 80px;
+    }
+
+    .admin .agregar-imagen {
+        width: 60%;
+    }
+}

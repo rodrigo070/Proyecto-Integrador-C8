@@ -1,0 +1,35 @@
+
+.termsSection{
+    width: 100%;
+}
+
+.termsAndConditionsPage{
+    width: 95%;
+    white-space: pre-line;
+    margin: 20px auto;
+    background-color: whitesmoke;
+    padding: 30px;
+    border-radius: 1rem;
+}
+
+.termsAndConditionsPage strong{
+    font-weight: bolder;
+}
+
+/*-----------------------------------------------------------------*/
+/*---------------------------- Tablet -----------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 768px){
+    .termsAndConditionsPage{
+        width: 70%;
+    }
+}
+
+/*-----------------------------------------------------------------*/
+/*------------------------------ PC -------------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 990px){
+    
+}

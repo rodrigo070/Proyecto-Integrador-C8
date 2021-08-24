@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head.ejs') %>
+<body>
+  <div class="container_Page">
+    <%- include('../partials/header.ejs') %>   
+    <main>
+        <div id="rgbar"></div>
+        <div class="cartBox">
+            <section class="list_Products_Box">
+                <!-- Header de la lista de productos -->
+                <div class="titlesGrid">
+                    <pre>  </pre>
+                    <div for="" >Producto</div>
+                    <div for="" class="titlesDesktop">Cantidad</div>
+                    <div for="" class="titlesDesktop">Precio de Lista</div>
+                    <div for="" class="titlesDesktop">Descuento</div>
+                    <div for="" >Precio Final</div>
+                    <pre>  </pre>
+                </div>
+                <!-- Caja de los productos que se agregan a la lista -->
+                <section class="container_products">
+                    <!-- Inicio caja del producto -->
+                    
+                    <!-- por el momento la caja no es funcional solo
+                    muestro 3 productos de la base de datos y aplico 
+                    los descuentos y precio final en esta vista -->
+                    <% var num = 100 %>
+                    <% var preciosAcum = [] %>
+                    <% var precioTotal = 0 %>  
+                    <% for( let i = 0; i < 4; i++ ) { %>
+                    <article class="product_Box">
+                        <!-- icono del producto -->
+                        <i class="fa fa-microchip" aria-hidden="true"></i>
+                        <!-- caja del producto y stock -->
+                        <div class="product_And_Stock">
+                            <!-- nombre del producto -->
+                            <label for=""><%= productsData[i].name %></label>
+                            <!-- boton de stock -->
+                            <div class="minus_plusButton">
+                                <button class="buttonIcon" onclick="decreaseCount(event, this)">
+                                    <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                                </button>
+                                <input type="number" id="stockProduct" value="1">
+                                <button class="buttonIcon" onclick="increaseCount(event, this)">
+                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- caja del precio de lista , descuento y precio final -->
+                        <div class="price_Discount_Total">
+                            <div class="price_List">
+                                <label for="">$<%= productsData[i].price %></label>
+                            </div>
+                            <div class="discount_Box">
+                                <p><%= productsData[i].discount %>% OFF</p>
+                            </div>
+                            <div class="final_Price_List">
+                               <label for="">$<%= preciosAcum[i] = productsData[i].price - ((productsData[i].price * productsData[i].discount)/num)%></label> 
+                                <% precioTotal = precioTotal + preciosAcum[i] %> 
+                            </div>
+                        </div>
+                        <!-- icono del boton eliminar producto -->
+                        <button class="buttonIconTrash">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </button>
+                    </article>
+                    <% } %>
+                    <!-- Fin caja del producto -->
+                </section>
+            <section class="totalPrice">
+                <p>Precio Total: </p>
+                <p>$<%= precioTotal %></p>
+            </section>
+            </section>
+            <!-- Seccion 2 -->
+            <div class="payment_Area">
+                <div class="title_Section2">
+                    <label for="" class="titlePayments">Detalle de su compra</label>
+                    <span class="line_Titles"></span>
+                </div>
+                
+                <section class="shippingSection">
+                    <p>Calcular Envio</p>
+                    <span class="line_Titles"></span>
+                    <div class="gridShipping">
+                        <section class="cp_Input">
+                            <label>Codigo Postal:</label>
+                            <input type="number" value="" placeholder="Ej: 1823">
+                        </section>
+                        <section class="cost_Area">
+                            <label>Costo:</label>
+                            <label>$0</label>
+                        </section>
+                    </div>
+                </section>
+    
+                <section class="paymentOptions">
+                    <label for="" class="titlePayments">Medios de Pago</label>
+                    <span class="line_Titles"></span>
+                    <div class="payments_list">
+                        <label><input type="radio" name="medioDePago" id="efectivo" value="efectivo" checked><i class="fa fa-usd iconPayment" aria-hidden="true"></i>Efectivo</label>
+                        <label><input type="radio" name="medioDePago" id="debito" value="debito"><i class="fa fa-credit-card iconPayment" aria-hidden="true"></i>Tarjeta de Debito</label>
+                        <label><input type="radio" name="medioDePago" id="credito" value="credito"><i class="fa fa-credit-card iconPayment" aria-hidden="true"></i>Tarjeta de Credito</label>
+                        <label><input type="radio" name="medioDePago" id="billetera" value="billetera"><i class="fa fa-handshake-o iconPayment" aria-hidden="true"></i>MercadoPago</label>
+                    </div>
+                    
+                    <section class="finalPrices">
+                        <label><input type="radio" name="precioFinal" value="precioLocal" checked>Total S/Envio: $<%= precioTotal %></label>
+                        <label><input type="radio" name="precioFinal" value="precioEnvio">Total + Envio: $<%= precioTotal %></label>
+                    </section>
+                </section>
+                <section class="buyButton">
+                    <button>Comprar</button>
+                </section>
+            </div>
+        </div>
+        <%- include('../partials/slider.ejs') %>  
+    </main>
+    <%- include('../partials/footer.ejs') %> 
+  </div>
+</body>
+</html>

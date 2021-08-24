@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('partials/head.ejs') %>
+<head>
+    <script src="/javascripts/carousel.js" defer></script>
+</head>
+<body>
+  <div class="container_Page">
+    <%- include('partials/header.ejs') %>   
+    <main class="home_Container">
+    <%- include('partials/carousel.ejs') %>   
+
+        <!-- SECCION MOBILE: Visto Recientemente -->
+        <section class="seccion-general">
+            <a href="/productos/3/21/1">
+                <div class="titulo-articulo"> 
+                    <h3> Visto Recientemente </h3>
+                </div>
+                <div>
+                    <img src="/images/products/notebook_C.jpg" alt=""> <!-- imagen que se muestra en el articulo -->
+                </div>
+                <div class="descripcion-articulo">
+                    <p>Notebook Lenovo 14P</p>
+                    <h1> $ 58.000 </h1>
+                </div>
+            </a>
+            <hr>
+            <div class="ver-historial-de-busqueda">
+                <h3>Ver Historial de Busqueda</h3>
+            </div>
+        </section>
+
+        <!-- SECCION MOBILE :ARTICULOS QUE PUEDEN INTERESARTE -->
+        <section class="seccion-general">
+        <div class="titulo-articulo">
+            <h3>Articulos que pueden interesarte</h3>
+        </div>
+
+        <% for( let i = 0; i < 3; i++ ) { %>
+            <article class="product_Item_Recommended">
+                <a href="/productos/<%= productsData[i].category %>/<%= productsData[i].subcategory%>/<%= productsData[i].id%>">
+                    <div class="img">
+                        <img src="/images/products/<%= productsData[i].image[0] %>" alt="">
+                    </div>
+                    <div class="descripcion-articulo">
+                        <p><%= productsData[i].name %></p>
+                        <h1>$<%= productsData[i].price %></h1>
+                        <p>Envio Gratis</p>
+                        <p>Hasta 12 Cuotas sin interes</p>
+                    </div>
+                </a>
+            </article>
+        <% } %>
+
+        <div class="ver-mas">
+            <h3>Ver mas productos</h3>
+        </div>
+        </section>
+
+        <!-- crear cuenta -->
+        <div class="crear-cuenta">
+            <h3>¡Crea una cuenta y mejora tu experiencia!</h3>
+
+            <button type="reset" onclick="location.href='/registro'">Crear Cuenta</button>
+
+            <p>
+                ¿Ya tienes cuenta? 
+                <br>
+                <a href="/login">Inicia Sesion Aca.</a>
+            </p>
+        </div>
+
+        <!-- seccion ofertas MOBILE -->
+        <section class="seccion-general">
+            <div class="titulo-articulo">
+                <h3>Ofertas</h3>
+            </div>
+            <% for( let i = 3; i < 6; i++ ) { %>
+                
+                <article class="product_Item_Recommended">
+                    <a href="/productos/<%= productsData[i].category %>/<%= productsData[i].subcategory%>/<%= productsData[i].id%>">
+                        <div class="img">
+                            <img src="/images/products/<%= productsData[i].image[0] %>" alt="">
+                        </div>
+                        <div class="descripcion-articulo">
+                            <p><%= productsData[i].name %></p>
+                            <h1>$<%= productsData[i].price %></h1>
+                            <p>Envio Gratis</p>
+                            <p>Hasta 12 Cuotas sin interes</p>
+                        </div>
+                    </a>
+                </article>
+
+            <% } %>
+            <div class="ver-mas">
+                <h3>Ver mas productos</h3>
+            </div>
+        </section>
+
+        <!------------------------------------------------------------------------>
+        <!---------------------------- SECCION DESKTOP --------------------------->
+        <!------------------------------------------------------------------------>
+
+        <!-- SLIDER DE MARCAS (INTEL, GIGABYTE ETC)  -->
+        <%- include('partials/sliderBrands.ejs') %>   
+
+        <div class="titulo-seccion-desktop">
+            <h3>Visto Recientemente</h3>
+        </div>
+        <section class="seccion-general-desktop">
+
+            <% for( let i = 0; i < 5; i++ ) { %>
+                <article class="product_Item_Recommended">
+                    <a href="/productos/<%= productsData[i].category %>/<%= productsData[i].subcategory%>/<%= productsData[i].id%>">
+                        <div class="img">
+                            <img src="/images/products/<%= productsData[i].image[0] %>" alt="">
+                        </div>
+                        <div class="descripcion-articulo">
+                            <p><%= productsData[i].name %></p>
+                            <p>$<%= productsData[i].price %></p>
+                            <p>Envio Gratis</p>
+                            <p>Hasta 12 Cuotas sin interes</p>
+                        </div>
+                    </a>
+                </article>
+            <% } %>
+        </section>
+
+        <!-- barra que vimos en maximus -->
+        <section class="menu-categorias-desktop">
+            <div class="seccion">
+            <img src="/images/logos/notebook.svg" alt="">
+            <h4>Notebook</h4>
+            </div>
+            <div class="seccion">
+            <img src="/images/logos/mouse.svg" alt="">
+            <h4>Mouse</h4>
+            </div>
+            <div class="seccion">
+            <img src="/images/logos/auriculares.svg" alt="">
+            <h4>Auriculares</h4>
+            </div>
+            <div class="seccion">
+            <img src="/images/logos/jostyck.svg" alt="">
+            <h4>Joysticks</h4>
+            </div>
+            <div class="seccion">
+            <img src="/images/logos/teclado.svg" alt="">
+            <h4>Teclado</h4>
+            </div>
+            <div class="seccion">
+            <img src="/images/logos/monitores.svg" alt="">
+            <h4>Monitores</h4>
+            </div>
+        </section>
+        
+        <div class="titulo-seccion-desktop">
+            <h3>Productos Recomendados</h3>
+            <%- include('partials/slider.ejs') %>  
+        </div>
+        <%- include('partials/paymentBanner.ejs') %>
+    </main>
+    <%- include('partials/footer.ejs') %> 
+  </div>
+</body>
+</html>

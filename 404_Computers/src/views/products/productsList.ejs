@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head.ejs') %>
+<body class="background_Leaves">
+  <div class="container_Page">
+    <%- include('../partials/header.ejs') %>   
+    <main>
+        <section class="product_Page_Grid">
+            <section class="categories_SidePanel">
+                <div class="optionsSidePanel">
+                    <%- include('../partials/productListSidePanel.ejs') %>  
+                </div>
+            </section>
+            <section class="options_productsPage">
+                <div class="sortProducts">
+                    <form action="">
+                        <label>Ordenar Por: </label>
+                        <select name="sortBy" id="sortby">
+                            <option value="lowPrices">Menor Precio</option>
+                            <option value="highPrices">Mayor Precio</option>
+                        </select>
+                    </form>
+                </div>
+            </section>
+            <section class="productListView">
+                <% products_List.forEach(productToShow => { %>
+                 
+                    <article class="products_Page_Article">
+                        <a href="/productos/<%= productToShow.category %>/<%= productToShow.subcategory %>/<%=productToShow.id%>">
+                            <div class="img_Product_Page">
+                                <img src="/images/products/<%= productToShow.image[0] %>" alt="">
+                            </div>
+                            <div class="description_Article_Page">
+                                <p>name: <%= productToShow.name %></p>
+                                <p>id: <%= productToShow.id %></p>
+                                <p>cat: <%= productToShow.category %></p>
+                                <p>sub: <%= productToShow.subcategory %></p>
+                            </div>
+                        </a>
+                    </article>
+    
+                <% }) %>
+            </section>
+        </section>
+    </main>
+    <%- include('../partials/footer.ejs') %> 
+  </div>
+</body>
+</html>

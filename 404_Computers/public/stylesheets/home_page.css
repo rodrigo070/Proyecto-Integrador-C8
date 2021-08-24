@@ -1,0 +1,417 @@
+/*-----------------------------------------------------------------*/
+/*----------------------- Pagina Principal ------------------------*/
+/*-----------------------------------------------------------------*/
+
+.home_Container .seccion-general{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #ccb6ff36;
+    border-radius: 13px;
+    padding: 20px;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+.home_Container .seccion-general .titulo-articulo{
+    background-color: rgb(94, 30, 196);;
+    padding: 8px;
+    border-radius: 0px 15px;
+    position: relative;
+    bottom: 40px;
+    font-size: 14px;
+    color: white;
+    text-align: center;
+}
+
+.home_Container .seccion-general div img{
+    width: 100%;
+    border-radius: 1rem;
+    background-color: white;
+    padding: 20px;
+}
+
+.descripcion-articulo{
+    text-align: center;
+    height: 150px;
+    border-top: 1px solid black;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    display: grid;
+    grid-template-rows: 37% 22% 21% 21%;
+}
+
+.descripcion-articulo p:nth-child(2){
+    font-weight: bolder;
+    font-size: x-large;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.home_Container .seccion-general .descripcion-articulo p{
+    color: black;
+    font-size: 20px;
+}
+
+.home_Container .seccion-general .descripcion-articulo h1{
+    text-align: center;
+    font-size: 25px;
+    color: black;
+}
+
+.home_Container .seccion-general hr {
+    background: linear-gradient(90deg, rgb(47, 12, 104), white);
+    height: 2px;
+    margin-bottom: 1rem;
+    width: 100%;
+    border: none;
+}
+
+.home_Container .seccion-general .product_Box_Home{
+    margin: 10px auto;
+}
+
+/* secion: articulos que pueden interesarte */
+.home_Container .seccion-general article{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    border-block: 1px solid;
+}
+
+/*esto contiene los productos mostrados en el home
+le cambie el color a negro por que por defecto los links a
+traen el color azul en la letra y esta contiene todo el articulo
+con texto incluido*/
+
+.product_Item_Recommended a{
+    color: black;
+}
+
+.home_Container .seccion-general article div img{
+     width: 100%;
+     margin: 20px auto;
+     background-color: white;
+     padding: 20px;
+}
+
+.home_Container .seccion-general article p {
+    margin-bottom: 15px;
+}
+
+.home_Container .seccion-general .ver-mas{
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* crear cuenta */
+.home_Container .crear-cuenta{
+    background-color: #ac88ff8f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 20px;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 45px;
+}
+
+.home_Container .crear-cuenta a{
+    color: black;
+}
+
+.home_Container .crear-cuenta button{
+    margin: 11px;
+    width: 200px;
+    height: 39px;
+    padding: 5px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+/* cosas desktop */
+
+.home_Container .seccion-general-desktop{
+    display: none;
+}
+.home_Container .menu-categorias-desktop{
+    display: none;
+}
+
+.home_Container .titulo-seccion-desktop{
+    margin: 25px 0 0 0;
+    display: none;
+}
+
+.home_Container .titulo-seccion-desktop h3{
+    display: none;
+    margin: 0px auto -3px auto;
+    background-color: rgb(81, 29, 165);
+    width: 25%;
+    border-radius: 1rem 1rem 0.3rem 0.3rem;
+    color: white;
+}
+
+.slides img{
+    height: 160px;
+}
+
+/* 
+en desarrollo
+
+.titleSliderBox {
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
+    margin: 0 auto;
+    background-color:red;
+}
+
+.titleSliderBox span{
+    display: inline-block;
+    position: relative;
+}
+.titleSliderBox span:hover{
+    animation: 3s linear 0s infinite alternate textSlider;
+}
+  
+@keyframes textSlider {
+    0%,
+    25% {
+        transform: translateX(0%);
+        right: 0%;
+    }
+    75%,
+    100% {
+        transform: translateX(100%);
+        right: 100%;
+    }
+
+} */
+
+
+/*-----------------------------------------------------------------*/
+/*------------------------- Media Queries -------------------------*/
+/*-----------------------------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------------*/
+/*---------------------------- Tablet -----------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 768px) and (max-width: 990px){
+
+    .slides img {
+        height: 300px;
+    }
+
+    .home_Container .crear-cuenta{
+        background-color: #8080805f;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        border-radius: 20px;
+        width: 90%;
+        margin: 0 auto;
+        margin-bottom: 45px;
+        text-align: center;
+    }
+    .home_Container .crear-cuenta button{
+        margin: 11px;
+        width: 200px;
+        height: 39px;
+        padding: 5px;
+        border: none;
+        border-radius: 20px;
+        outline: none;
+        font-size: 16px;
+        margin:15px auto;
+    }
+
+    .home_Container .seccion-general{
+        display: none;
+    }
+
+    .home_Container .crear-cuenta{
+        display: none;
+    }
+    
+    /* secion general desktop */
+    .home_Container .titulo-seccion-desktop h3{
+        padding: 10px;
+        display: block;
+        text-align: center;
+    }
+
+    .home_Container .seccion-general-desktop{
+        display: flex;
+        margin: 0 auto;
+        margin-bottom: 50px;
+        width: 100%;
+    }
+
+    .home_Container .seccion-general-desktop article{
+        background-color: #ccb6ff36;
+        padding: 10px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .product_Item_Recommended{
+        margin: 0 10px;
+        border-radius: 1rem;
+    }
+
+    .home_Container .seccion-general-desktop div img{
+        width: 100%;
+        padding: 10px;
+        background-color: white;
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+        border-radius: 0.5rem;
+    }
+
+    .home_Container .seccion-general-desktop .img{
+        width: 80%;
+        margin: 18px auto;
+        text-align: center;
+    }
+
+    .home_Container .seccion-general-desktop p {
+        padding-left: 25px;
+        font-size: 14px;
+    }
+
+    .home_Container .seccion-general-desktop p:nth-child(1) {
+        height: 60px;
+        width: 90%;
+        text-align: baseline;
+        padding-left: 20px;
+        margin: 10px auto 10px auto;
+    }
+    
+    /* menu de categorias desktop */
+    .home_Container .menu-categorias-desktop{
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .home_Container .menu-categorias-desktop .seccion{
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .home_Container .menu-categorias-desktop .seccion img{
+            padding: 10px;
+            width: 100%;
+    }
+}
+
+
+
+/*-----------------------------------------------------------------*/
+/*------------------------------ PC -------------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 990px){
+    .slides img {
+        height: 350px;
+    }
+
+    .home_Container .seccion-general{
+        display: none;
+    }
+
+    .home_Container .crear-cuenta{
+        display: none;
+    }
+
+
+    /* secion general desktop */
+    .home_Container .titulo-seccion-desktop{
+        display: block;
+    }
+    .home_Container .titulo-seccion-desktop h3{
+        padding: 10px;
+        position: relative;
+        display: block;
+        text-align: center;
+    }
+
+    .home_Container .seccion-general-desktop{
+        display: flex;
+        padding: 10px;
+        margin-bottom: 30px;
+        width: 100%;
+        background-color: whitesmoke;
+    }
+
+    .home_Container .seccion-general-desktop article{
+        background-color: white;
+        margin: 13px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .product_Item_Recommended{
+        margin: 0 10px;
+        border-radius: 0.5rem 0.5rem 1rem 1rem;
+    }
+
+    .product_Item_Recommended:hover{
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .product_Item_Recommended .descripcion-articulo:nth-child(even){
+        background-color: #5103d7;
+        color: white;
+        border-radius: 0 0 1rem 1rem;
+    }
+
+    .home_Container .seccion-general-desktop div img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 20px;
+        background-color: white;
+        border-radius: 0.5rem 0.5rem 0 0;
+    }
+
+    .home_Container .seccion-general-desktop .img{
+        width: 100%;
+        height: 200px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    /* menu de categorias desktop */
+    .home_Container .menu-categorias-desktop{
+        display: flex;
+        justify-content: space-evenly;
+        margin-bottom: 40px;
+    }
+
+    .home_Container .menu-categorias-desktop .seccion{
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .home_Container .menu-categorias-desktop .seccion img{
+        padding: 10px;
+        width: 100%;
+        cursor: pointer;
+    }
+}

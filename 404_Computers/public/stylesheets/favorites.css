@@ -1,0 +1,109 @@
+.favoritesSection{
+    width: 95%;
+    margin: 0 auto;
+}
+
+.titles{
+    margin-top: 10px;
+    font-size: 1.5rem !important;
+}
+
+
+.favoriteProduct{
+    width: 100%;
+    background-color: whitesmoke;
+    border-radius: 1rem;
+    padding: 5px;
+    margin: 10px auto;
+    display: grid;
+    grid-template-areas:
+    'select picture name delete' 
+    'select picture price delete';
+    grid-template-rows: repeat(2,auto);
+    grid-template-columns: 10% 25% 55% 10%;
+}
+
+#selectFavorite{
+    margin: auto;
+    transform: scale(1.5);
+    grid-area: select;
+    padding: 0;
+}
+
+.favoritePicture,
+.favoritePicture img{
+    display: flex;
+    grid-area: picture;
+    border-radius: 0.5rem;
+    margin: auto;
+    background-color: white;
+    width: 70px;
+    height: 70px;
+}
+
+.favoriteName{
+    margin: auto 0;
+    padding-left: 10px;
+    font-size: 16px;
+    grid-area: name;
+}
+
+.favoritePrice{
+    margin: auto 0;
+    padding-left: 10px;
+    font-size: 16px;
+    grid-area: price;
+}
+
+.favoriteDelete{
+    border-style: none;
+    outline: none;
+    grid-area: delete;
+    background-color: transparent;
+}
+
+.favoriteDelete i{
+    color: red;
+    cursor: pointer;
+    font-size: 25px;
+}
+
+/*-----------------------------------------------------------------*/
+/*---------------------------- Tablet -----------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 768px){
+    .favoritesSection{
+        width: 80%;
+    }
+
+    .favoriteProduct{
+        height: 150px;
+    }
+
+    #selectFavorite{
+        transform: scale(2);
+    }
+
+    .favoritePicture,
+    .favoritePicture img{
+        width: 135px;
+        height: 130px;
+    }
+
+    .favoriteName,
+    .favoritePrice{
+        font-size: 20px;
+    }
+    .favoriteDelete i{
+        font-size: 30px;
+    }
+}
+
+/*-----------------------------------------------------------------*/
+/*------------------------------ PC -------------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 990px){
+    
+}

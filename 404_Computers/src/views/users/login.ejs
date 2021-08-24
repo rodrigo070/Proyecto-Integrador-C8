@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head.ejs') %>
+<body class="background_Leaves">
+  <div class="container_Page">
+    <%- include('../partials/header.ejs') %>   
+    <main>
+      <form action="" method="">
+        <section class="login_Container">
+            <div class="login_Box">
+                <!-- <section class="title_Register">
+                    <label for="titleRegister">Completa tus Datos</label>
+                </section> -->
+                <section class="RGB_Title">
+                    <h1 for="titleLogin">Iniciar Sesion</h1>
+                    <div id="rgbar" class=""></div>
+                </section>
+                <section class="email_Area">
+                    <label for="emailUser">Ingrese su E-mail: </label>
+                    <input type="email" name="emailUser" id="emailUser">
+                    <span class="error-message">Debe ingresar su email</span>
+                </section>
+                <section class="password_Area">
+                    <label for="passUser">Ingrese su Contraseña: </label>
+                    <span class="error-message">Debe ingresar su contraseña</span>
+                    <input type="password" name="passUser" id="passUser">
+                </section>
+                <section class="rememberMe">
+                    <input type="checkbox" name="recordar" id="recordar">
+                    <label for="">Recordarme en este Dispositivo.</a></label>
+                </section>
+                <section class="buttonLogin">
+                    <span class="error-message">Credenciales inválidas</span>
+                    <button type="submit">Iniciar Sesion</button>
+                </section>
+                <section class="goToForgetPassword">
+                    <a href="/restablecer_contrasena">¿Olvidaste tu contraseña?&nbsp;<strong>Hace Click Aqui.</strong></a>
+                </section>
+                <section class="goToRegister">
+                    <a href="/registro">¿Aún no tiene cuenta?&nbsp;<strong>Registrate Aqui.</strong></a>
+                </section>
+            </div>
+            
+        </section>
+      </form>
+    </main>
+    <%- include('../partials/footer.ejs') %> 
+  </div>
+</body>
+</html>

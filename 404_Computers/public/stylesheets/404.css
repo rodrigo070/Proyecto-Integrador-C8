@@ -1,0 +1,152 @@
+.aboutUs{
+    width:100%;
+    margin: 0 auto;
+}
+
+.aboutUs a:nth-child(1){
+    font-family: 'Atari';
+    text-align: center;
+    font-size: 50px;
+    padding: 15px 0 15px 0;
+    margin: 0 auto;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    color: rgb(255, 255, 255);
+    text-shadow: 4px 4px rgb(0, 0, 0);
+    animation: 1s mobileFadeBar;
+    overflow: hidden;
+}
+
+.aboutUs a:nth-child(1):hover{
+    text-shadow: -4px -4px rgb(0, 0, 0);
+}
+
+.member{
+    display: grid;
+    grid-template-areas: 
+    'pic pic'
+    'data data';
+    grid-template-columns: 100%;
+    width: 95%;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15) inset;
+    padding: 20px;
+    background-color: white;
+    border-radius: 1rem;
+    transition: ease-in;
+    animation: 1s mobileFadeBar;
+}
+
+.member:hover,
+.member:hover > *,
+.member:hover i{
+    color: white;
+    background-color: black;
+}
+
+.memberPic{
+    grid-area: pic;
+    width:200px;
+    margin: auto;
+}
+
+.p1{
+    filter:hue-rotate(390deg);
+}
+
+.p2{
+    filter:hue-rotate(310deg);
+}
+
+.p3{
+    filter:hue-rotate(90deg);
+}
+
+.infoMember{
+    width: 100%;
+    position: relative;
+    margin-top: 20px;
+    grid-area: data;
+}
+
+.infoMember > *{
+    font-family: 'Atari';
+}
+
+.infoMember label{
+    font-size: 35px;
+}
+
+.infoMember pre{
+    margin-top: 10px;
+    font-size: 25px;
+    white-space: pre-line;
+}
+
+.infoMember a i{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    font-size: 50px;
+}
+
+.infoMember a i:hover{
+    color: rgb(134, 71, 250);
+    animation-name: bounceGithub;
+    animation-timing-function: ease;
+    animation-duration: 2s;
+
+}
+
+@keyframes bounceGithub {
+    0%   { transform: scale(1,1)    translateY(0); }
+    10%  { transform: scale(1.1,.9) translateY(0); }
+    30%  { transform: scale(.9,1.1) translateY(-5px); }
+    50%  { transform: scale(1,1)    translateY(0); }
+    100% { transform: scale(1,1)    translateY(0); }
+}
+
+/*-----------------------------------------------------------------*/
+/*---------------------------- Tablet -----------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 768px){
+    .member{
+        grid-template-areas: 
+        'pic data';
+        grid-template-columns: 28% 72%;
+        width: 95%;
+    }
+    
+    .infoMember{
+        margin-left: 20px;
+    }
+
+    .infoMember a i{
+        right: 30px;
+        top: -20px;
+    }
+}
+
+/*-----------------------------------------------------------------*/
+/*------------------------------ PC -------------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 990px){
+    .member{
+        grid-template-areas: 
+        'pic data';
+        grid-template-columns: 28% 72%;
+        width: 70%;
+    }
+
+    .infoMember{
+        margin-left: 20px;
+    }
+
+    .infoMember a i{
+        right: 30px;
+        top: -20px;
+    }
+}

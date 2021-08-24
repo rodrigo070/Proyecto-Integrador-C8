@@ -1,0 +1,571 @@
+
+/*-------------------------------------------------------------------*/
+/* Extras */
+/*-------------------------------------------------------------------*/
+/* Barra RGB - Fullh4rd.com */
+#rgbar {
+    background: #ff0059;
+    background: -webkit-linear-gradient(45deg,rgba(255,0,0,1) 0%,rgba(255,0,255,1) 18%,rgba(0,0,255,1) 30%,rgba(0,240,255,1) 45%,rgba(0,255,0,1) 63%,rgba(255,255,0,1) 80%,rgba(255,120,0,1) 90%,rgba(255,0,0,1) 100%);
+    background: -moz-linear-gradient(45deg,rgba(255,0,0,1) 0%,rgba(255,0,255,1) 18%,rgba(0,0,255,1) 30%,rgba(0,240,255,1) 45%,rgba(0,255,0,1) 63%,rgba(255,255,0,1) 80%,rgba(255,120,0,1) 90%,rgba(255,0,0,1) 100%);
+    background: -ms-linear-gradient(45deg,rgba(255,0,0,1) 0%,rgba(255,0,255,1) 18%,rgba(0,0,255,1) 30%,rgba(0,240,255,1) 45%,rgba(0,255,0,1) 63%,rgba(255,255,0,1) 80%,rgba(255,120,0,1) 90%,rgba(255,0,0,1) 100%);
+    background: -o-linear-gradient(45deg,rgba(255,0,0,1) 0%,rgba(255,0,255,1) 18%,rgba(0,0,255,1) 30%,rgba(0,240,255,1) 45%,rgba(0,255,0,1) 63%,rgba(255,255,0,1) 80%,rgba(255,120,0,1) 90%,rgba(255,0,0,1) 100%);
+    background: linear-gradient(45deg,rgba(255,0,0,1) 0%,rgba(255,0,255,1) 18%,rgba(0,0,255,1) 30%,rgba(0,240,255,1) 45%,rgba(0,255,0,1) 63%,rgba(255,255,0,1) 80%,rgba(255,120,0,1) 90%,rgba(255,0,0,1) 100%);
+    background-size: 400% 400%;
+    animation: rgbBg 20s linear infinite;
+    -moz-animation: rgbBg 20s linear infinite;
+    -webkit-animation: rgbBg 20s linear infinite;
+    height: 5px;
+    position: relative;
+}
+
+#rgbar::before {
+    content: '';
+    width: 0;
+    transition: all ease .4s;
+    -moz-transition: all ease .4s;
+    -webkit-transition: all ease .4s;
+}
+
+@keyframes rgbBg {
+    0% {
+    background-position: 400% 0%;
+    }
+    100% {
+    background-position: 0% 400%;
+    }
+}
+
+/* Fin Barra RGB */
+:root{
+    --searchBarColor : white;
+    --mainHeaderColor : white;
+    --mainHeaderButton : white;
+    --searchFormMobile : white;
+    --searchBarButton : white;
+    --subCatMenu : white;
+    --buttonsIconColor : black;
+}
+
+/* Header */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10500;
+    width: 100%;
+}
+
+/* Boton Hamburguesa */
+
+.menuButtonMobile {
+    transform: scale(0.6);
+    background-color: transparent;
+    outline: none;
+    border-style: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    vertical-align: middle;
+    order: 0;
+}
+
+.menuButtonMobile .burgerLine{
+    width: 50px;
+    height: 5px;
+    background-color: black;
+    display: block;
+    margin: 8px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.menuButtonMobile:hover{
+    cursor: pointer;
+}
+
+#burgerButton.is-active .burgerLine:nth-child(2){
+    opacity: 0;
+}
+
+#burgerButton.is-active .burgerLine:nth-child(1){
+    -webkit-transform: translateY(13px) rotate(45deg);
+    -ms-transform: translateY(13px) rotate(45deg);
+    -o-transform: translateY(13px) rotate(45deg);
+    transform: translateY(13px) rotate(45deg);
+}
+
+#burgerButton.is-active .burgerLine:nth-child(3){
+    -webkit-transform: translateY(-13px) rotate(-45deg);
+    -ms-transform: translateY(-13px) rotate(-45deg);
+    -o-transform: translateY(-13px) rotate(-45deg);
+    transform: translateY(-13px) rotate(-45deg);
+}
+
+/* Fin Boton Hamburguesa */
+
+/* Seccion Mobile Header */
+
+.main-header {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    height: fit-content;
+    height: -moz-fit-content;
+    min-height: 75px;
+    padding: 10px 15px;
+    width: 100%;
+    box-shadow: 0 2px 2px rgba(55, 0, 255, 0.1), 0 5px 5px rgba(55, 0, 255, 0.1);
+    -webkit-animation:violetWave 20s linear -3s infinite running forwards;
+    animation:violetWave 20s linear -3s infinite running forwards
+}
+
+@-webkit-keyframes violetWave{
+    50%{
+        background-position:10% 0
+    }
+}
+@keyframes violetWave{
+    50%{
+        background-position:10% 0
+    }
+}
+
+.logoPage {
+    order: 1;
+    width: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}  
+
+.logoPage img {
+    width: 75%;
+    display: flex;
+    margin: 0 auto;
+}
+
+.crear-cuenta{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.crear-cuenta button{
+    margin: 10px 5px;
+    width: 100px;
+    padding: 6px 0px;
+    outline: none;
+    border-style: none;
+    background-color: var(--mainHeaderColor);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 0.8rem;
+    font-size: 13px;
+}
+.crear-cuenta h2{
+    color: black;
+}
+
+.crear-cuenta i{
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+    padding: 5px;
+    color: black;
+}
+
+#mobile_Nav_Bar {
+    order: 4;
+    padding: 15px;
+    width: 100%;
+}
+
+.mobile_Nav_Bar_Menu{
+    display: none;
+    z-index: -1;
+    position: fixed; 
+    overflow-y: scroll;
+    overscroll-behavior: contain;
+    top: 73px; 
+    right: 0; 
+    bottom: 0; 
+    left: 0; 
+    background-color: white;
+    animation: mobileFade 0.8s;
+}
+
+.menu_Mobile .icons_Mobile_Menu{
+    height: 30px;
+    width: 25px;
+    margin: 4px 3px 0 3px;
+}
+
+.menu_Mobile li {
+    padding: 10px 0;
+}
+
+.menu_Mobile a,
+.menu_Mobile i{
+    color: black;
+}
+
+/* Barra de Busqueda */
+
+.search_Icon_Button {
+    order: 2;
+    font-size: 24px;
+    margin-right: 8px;
+}
+
+.search_Icon_Button i{
+    color: black;
+    cursor: pointer;
+}
+
+.search_Categ_Area {
+    order: 3;
+    width: 100%;
+}
+
+.search_Bar_Box {
+    display: none;
+    padding: 10px;
+    margin-top: -2px;
+    width: 100%;
+}
+
+.search_Bar {
+    border-radius: 50px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px;
+    margin: 0 10px;
+    animation: mobileFadeBar 0.3s;
+    z-index: 2;
+    background-color: white;
+}
+
+.search_Bar i{
+    text-align: center;
+    font-size: 17px;
+}
+
+.search_Bar input {
+    border: none;
+    flex-grow: 1;
+    background-color: transparent;
+}
+
+.search_Bar input:focus {
+    outline: none;
+}
+
+.search_Bar i:hover{
+    cursor: pointer;
+}
+
+.search_Bar input::placeholder {
+    color: gray;
+}
+
+.search_Bar button {
+    border: none;
+    background-color: transparent;
+}
+/* Fin Barra de Busqueda */
+
+/* FIN Seccion Mobile Header */
+
+/* Opciones Desktop (Oculto) */
+
+    .desktop_Bar_Options{
+        display: none;
+    }
+    
+    .desktop_User_Area{
+        display: none;
+    }
+
+
+/* Fin Desktop Options */
+
+
+/* Animacion del menu de Categorias */
+
+@keyframes fadeout {
+    from {
+        opacity: 0; 
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+/* Animacion del Menu de Mobile */
+
+@keyframes mobileFade {
+    from {
+        opacity: 0; 
+        -webkit-transform: translate3d(0, -100%, 0);
+    }
+    to{
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Animacion de la barra de busqueda de Mobile */
+
+@keyframes mobileFadeBar {
+    from {
+        opacity: 0; 
+        -webkit-transform: translate3d(0, -50%, 0);
+    }
+    to{
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+}
+
+
+/*******************************************************/
+
+/*-----------------------------------------------------------------*/
+/*------------------------- Media Queries -------------------------*/
+/*-----------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------*/
+/*---------------------------- Tablet -----------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 768px){
+    .main-header{
+        padding: 15px 5px 0 5px;
+        min-height: 110px;
+        align-items: center;
+    }
+
+    .logoPage{
+        width: 130px;
+        margin-bottom: 24px;
+    }
+
+    .logoPage img {
+        width: 85%;
+    }
+
+    .menuButtonMobile{
+        display: none;
+    }
+
+    .search_Icon_Button{
+        display: none;
+    }
+
+    .search_Categ_Area{
+        width: 40%;
+        order: 2;
+    }
+
+    .search_Bar_Box{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .desktop_Bar_Options ul{
+        display: flex;
+        margin-left: 10px;
+        vertical-align: middle;
+    }
+
+    .desktop_Bar_Options i{
+        margin-left: 4px;
+    }
+
+    .desktop_Bar_Options ul li:nth-child(2){
+        margin-left: 10px;
+    }
+
+    .desktop_Bar_Options button{
+        outline: none;
+        border-style: none;
+        background-color: var(--mainHeaderColor);
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        border-radius: 0.8rem;
+        width: 100px;
+        padding: 2px;
+        cursor: pointer;
+    }
+
+    /*Lista de Categorias*/
+
+    .dropdown_Categories{
+        display: none;
+        position: absolute;
+        background-color: white;
+        min-width: 80%;
+        top: 100px;
+        right: 90px;
+        left: 90px;
+    }
+
+    .dropdown_Categories a{
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+    .desktop_Bar_Options{
+        display: contents;
+    }
+
+    .desktop_Bar_Options li:hover .dropdown_Categories{
+        opacity: 0;
+        display: block;
+        animation: fadeout 0.7s;
+        opacity: 1;
+    }
+
+    .desktop_Bar_Options li:hover i{
+        transform: rotate(90deg);
+        transition: 0.3s ease-in-out;
+    }
+    /* Continuacion 20 agosto */
+
+    .column_Catg {
+        float: left;
+        width: 25%;
+        padding: 10px 10px 10px 20px;
+    }
+      
+    .column_Catg a {
+        float: none;
+        font-family: 'Atari';
+        color: black;
+        padding: 13px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        margin-left: 26px;
+    }
+
+    .column_Catg a:hover{
+        padding: 13px 13px 13px 5px;
+        background-color: whitesmoke;
+        transition: 0.1s ease-in-out;
+    }
+
+    .column_Catg a i{
+        width: 20px;
+        margin: 0px;
+        transform: rotate(360deg) !important;
+    }
+
+    .row_Catg:after{
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    /* Fin Categorias */
+
+    .desktop_User_Area{
+        margin-bottom: 25px;
+        order: 3;
+        display: flex;
+        width: 33%;
+        text-align: center;
+    }
+
+    .desktop_Profile{
+        width: 30%;
+    }
+
+    .desktop_Profile i{
+        color: black;
+        font-size: 25px;
+    }
+
+    .desktop_Profile i:nth-child(1){
+        margin-right: 7px;
+    }
+
+    .desktop_RegisterLogin{
+        width: 70%;
+    }
+
+    .desktop_RegisterLogin button{
+        outline: none;
+        border-style: none;
+        background-color: var(--mainHeaderColor);
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        padding: 4px;
+        cursor: pointer;
+        margin-left: -5px;
+        transition: 0.13s ease-in;
+    }
+
+    .desktop_RegisterLogin button:nth-child(1){
+        border-radius: 0.8rem 0 0 0.8rem;
+    }
+
+    .desktop_RegisterLogin button:nth-child(2){
+        border-radius: 0 0.8rem 0.8rem 0;
+    }
+
+    .desktop_RegisterLogin button:hover{
+        background-color: rgb(92, 43, 226);
+        color: var(--mainHeaderColor);
+    }
+
+}
+
+/*-----------------------------------------------------------------*/
+/*------------------------------ PC -------------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 990px){
+    
+    .logoPage{
+        width: 180px;
+        margin-left: 20px;
+    }
+
+    .logoPage img{
+        width: 80%;
+        margin-top: 5px;
+        margin-bottom: -10px;
+    }
+
+    .search_Bar_Box{
+        display: flex !important;
+    }
+
+    .search_Categ_Area{
+        width: 50%;
+    }
+
+    .desktop_Profile{
+        width: 35%;
+    }
+
+    .desktop_Bar_Options ul{
+        margin-left: 10px;
+    }
+
+    .desktop_User_Area{
+        width: 25%;
+    }
+
+    .desktop_Profile i:nth-child(1){
+        margin-right: 15px;
+    }
+}

@@ -1,0 +1,17 @@
+<div class="optionsSidePanel">
+    <section class="categoriesSection">
+        <a href="/productos">Ver Todos los Productos</a>
+        <br>
+        <% products_List_Catg.forEach(categoriesList => { %>
+            <a href="/productos/<%= categoriesList.category %>"><%= categoriesList.categoryName %></a>
+        <% }) %>
+    </section>
+    <br>
+    <% if (subCategoriesFiltered != 0) { %>
+    <p>Subcategorias: </p>
+    <br>
+    <% subCategoriesFiltered.forEach(subCategoriesList => { %>
+        <a href="/productos/<%= category.category %>/<%= subCategoriesList.subcategory %>"><p><%= subCategoriesList.subcategoryName %></p></a>
+    <% }) %>
+    <% } %>
+</div>

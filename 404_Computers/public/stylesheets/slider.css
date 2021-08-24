@@ -1,0 +1,307 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css);
+
+/* lo de arriba es parte de la libreria de Slick Slider sin eso no funciona */
+
+/************************* Slider Marcas *************************/
+
+.sliderBoxBrands{
+    display: flex;
+    width:100%;
+	position: relative;
+    margin-top: 20px;
+	align-items: center;
+	background-color: rgb(29, 29, 29);
+	height: 100px;
+	overflow: hidden;
+}
+.sliderBrands{
+    width:90%;
+    margin:0px auto;
+}
+
+.slick-slide{
+    margin:5px;
+}
+
+.slick-slide img{
+	width: 100%;
+}
+
+
+.sliderBoxBrands .slick-prev {
+    left: -20px;
+	margin-top: -20px;
+	z-index: 554;
+}
+
+.sliderBoxBrands .slick-next {
+    right: 5px;
+	margin-top: -20px;
+	z-index: 554;
+}
+
+.slick-prev:before, .slick-next:before {
+	font-size: 45px;
+}
+
+#button_Left_Slider,
+#button_Right_Slider{
+	position: absolute;
+	background-color: rgb(29, 29, 29);
+	height: 100%;
+	z-index: 555;
+	width: 20%;
+}
+
+#button_Left_Slider{
+	left: 0;
+}
+
+#button_Right_Slider{
+	right: 0;
+}
+
+#button_Left_Slider i,
+#button_Right_Slider i{
+	color: white;
+	/* font-size: 45px; */
+	font-size: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+/************************* Slider Productos *************************/
+
+.sliderBoxProducts{
+    display: flex;
+    width:100%;
+	position: relative;
+    margin-top: 20px;
+    text-align:center;
+	background-color: #ffffff;
+}
+.sliderProducts{
+    width:90%;
+    margin:0px auto;
+}
+
+.productRecommended img{
+	background-color: white;
+	box-shadow: 0 0 10px rgba(0,0,0,0.1) inset;
+	padding: 10px;
+	border-radius: 0.5rem;
+	height: 140px;
+	width: 100%;
+	transition: 0.3s ease-in;
+}
+.productRecommended img:hover{
+	padding: 4px;
+}
+
+.productRecommendedDescription{
+	position: relative;
+	min-height: 115px;
+	padding:5px;
+	border-radius: 0.5rem;
+	background-color: #5e52ff;
+	overflow: hidden;
+}
+
+.productRecommendedDescription p{
+	padding: 5px;
+	font-size: 13px;
+	color: white;
+}
+
+.productRecommendedDescription p:nth-child(1){
+	white-space: nowrap;
+	overflow: hidden;
+	width: 100%;
+	text-overflow: ellipsis;
+}
+
+.productRecommendedDescription p:nth-child(2){
+	padding: 0 5px 5px 5px;
+	font-size: 16px;
+	margin-bottom: 5px;
+}
+
+.productRecommendedDescription button{
+	background-color: white;
+	color: #5e52ff;
+	outline: none;
+	border-style: none;
+	border-radius: 1rem;
+	padding: 7px 10px;
+	cursor: pointer;
+	transition: 0.3s ease-in;
+}
+
+.productRecommendedDescription button:hover{
+	transform: scale(1.1);
+}
+
+#button_Left_Slider1,
+#button_Right_Slider1{
+	position: absolute;
+	background-color: rgb(255, 255, 255);
+	height: 100%;
+	z-index: 420;
+	width: 20%;
+}
+
+#button_Left_Slider1{
+	left: 0;
+}
+
+#button_Right_Slider1{
+	right: 0;
+}
+
+#button_Left_Slider1 i,
+#button_Right_Slider1 i{
+	color: rgb(0, 0, 0);
+	font-size: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	cursor: pointer;
+}
+
+/*-----------------------------------------------------------------*/
+/*------------------------- Media Queries -------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 380px){
+	.productRecommended img{
+		height: 120px;
+	}
+
+	#button_Left_Slider1,
+    #button_Right_Slider1{
+        width: 17%;
+    }
+}
+
+@media screen and (min-width: 480px){
+	.productRecommended img{
+		height: 130px;
+	}
+
+	#button_Left_Slider1,
+    #button_Right_Slider1{
+        width: 15%;
+    }
+}
+
+@media screen and (min-width: 580px){
+	.productRecommended img{
+		height: 160px;
+	}
+
+	#button_Left_Slider1,
+    #button_Right_Slider1{
+        width: 13%;
+    }
+}
+
+@media screen and (min-width: 680px){
+	.productRecommended img{
+		height: 150px;
+	}
+
+	#button_Left_Slider1,
+    #button_Right_Slider1{
+        width: 12%;
+    }
+}
+
+
+
+/*-----------------------------------------------------------------*/
+/*---------------------------- Tablet -----------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 768px){
+
+	/************************* Slider Marcas *************************/
+
+    .sliderBoxBrands{
+        height: 120px;
+		margin-bottom: 20px;
+    }
+
+    #button_Left_Slider,
+    #button_Right_Slider{
+        width: 10%;
+    }
+
+    /************************* Slider Productos *************************/
+	.productRecommendedDescription{
+		min-height: 120px;
+	}
+
+	.productRecommended img{
+		height: 160px;
+	}
+
+	.productRecommendedDescription p{
+		font-size: 16px;
+	}
+
+	.productRecommendedDescription p:nth-child(2){
+		font-size: 18px;
+	}
+
+    #button_Left_Slider1,
+    #button_Right_Slider1{
+        width: 11%;
+    }
+}
+
+/*-----------------------------------------------------------------*/
+/*------------------------------ PC -------------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 990px){
+
+	/************************* Slider Marcas *************************/
+
+    .sliderBoxBrands{
+        height: 120px;
+		margin-bottom: 20px;
+    }
+
+    #button_Left_Slider,
+    #button_Right_Slider{
+        width: 9%;
+    }
+
+    /************************* Slider Productos *************************/
+	
+	.productRecommended img{
+		padding: 13px;
+		height: 190px;
+	}
+	
+	.productRecommendedDescription{
+		min-height: 135px;
+	}
+
+	.productRecommendedDescription p{
+		font-size: 20px;
+	}
+
+	.productRecommendedDescription p:nth-child(2){
+		font-size: 22px;
+	}
+
+    #button_Left_Slider1,
+    #button_Right_Slider1{
+        width: 8%;
+    }
+}

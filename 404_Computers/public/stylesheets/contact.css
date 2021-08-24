@@ -1,0 +1,109 @@
+
+.contactPage{
+    margin: 30px auto;
+    width: 100%;
+}
+
+.contactContent{
+    width: 95%;
+    display: grid;
+    margin: 0 auto;
+    grid-template-areas:
+    'title title' 
+    'top1 top2'
+    'middle1 middle2'
+    'bottom1 bottom1'
+    'sendButton sendButton';
+    grid-template-rows: repeat(5,auto);
+    grid-template-columns: 48% 48%;
+    gap: 10px;
+    background-color: rgba(74,39,155,0.1);
+    border-radius: 1rem;
+    padding: 20px 10px;
+}
+
+.contactContent .titles{
+    text-align: center;
+    grid-area: title;
+}
+
+.contactContent button{
+    grid-area: sendButton;
+    border-radius: 1rem;
+    border-style: none;
+    background-color: royalblue;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    outline: none;
+    color: white;
+    height: 50px;
+    width: 50%;
+    font-size: 18px;
+    margin: 20px auto 0 auto;
+}
+
+#nameContact{
+    height: 40px;
+    grid-area: top1;
+    margin: auto 0;
+}
+
+#emailContact{
+    height: 40px;
+    grid-area: top2;
+    margin: auto 0;
+}
+
+#phoneContact{
+    height: 40px;
+    grid-area: middle1;
+    margin: auto 0;
+}
+
+#messageContact{
+    padding: 8px;
+    grid-area: bottom1;
+    min-height: 120px;
+    text-indent: 0px !important;
+}
+
+#nameContact,
+#emailContact,
+#phoneContact,
+#messageContact{
+    border-radius: 1rem;
+    border-style: none;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    outline: none;
+    text-indent: 10px;
+}
+
+/*-----------------------------------------------------------------*/
+/*---------------------------- Tablet -----------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 768px){
+    .contactPage{
+        margin: 30px auto;
+    }
+
+    .contactContent{
+        width: 55%;
+        padding: 30px;
+    }
+
+    .contactContent button{
+        width: 45%;
+    }
+}
+
+/*-----------------------------------------------------------------*/
+/*------------------------------ PC -------------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 990px){
+    .contactContent .titles{
+        margin-top: 0 !important;
+        font-size: 40px !important;
+        margin-bottom: 15px;
+    }
+}
