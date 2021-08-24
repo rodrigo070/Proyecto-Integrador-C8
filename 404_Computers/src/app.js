@@ -32,5 +32,5 @@ app.use('/', productosRouter);
 app.use('/', adminRouter)
 
 app.listen(port, () => {
-  console.log(`Servidor Corriendo en el Puerto: ${port}\ https://localhost:${port}`);
+  console.log(`Servidor Corriendo en el Puerto = ${port}\ -> https://localhost:${port}`);
 });
