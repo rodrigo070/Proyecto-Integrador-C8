@@ -58,22 +58,21 @@ Convirtiendonos así en el mejor sitio web que puedan elegir donde la calidad, s
 ## Wireframes
 ___________________________________________________________________________________________________________
 
-[Home](https://github.com/rodrigo070/Proyecto-Integrador-C8/blob/master/site_extra/Wireframes/PC/wireframe_home_pc.png)
+[Home](https://github.com/rodrigo070/Proyecto-Integrador-C8/blob/master/Wireframes/PC/wireframe_home_pc.png)
 
-[Login](https://github.com/rodrigo070/Proyecto-Integrador-C8/blob/master/site_extra/Wireframes/PC/wireframe_login_pc.png)
+[Login](https://github.com/rodrigo070/Proyecto-Integrador-C8/blob/master/Wireframes/PC/wireframe_login_pc.png)
 
-[Registro](https://github.com/rodrigo070/Proyecto-Integrador-C8/blob/master/site_extra/Wireframes/PC/wireframe_registro_pc.png)
+[Registro](https://github.com/rodrigo070/Proyecto-Integrador-C8/blob/master/Wireframes/PC/wireframe_registro_pc.png)
 
-[Detalle del Producto](https://github.com/rodrigo070/Proyecto-Integrador-C8/blob/master/site_extra/Wireframes/PC/wireframe_producto_pc.png)
+[Detalle del Producto](https://github.com/rodrigo070/Proyecto-Integrador-C8/blob/master/Wireframes/PC/wireframe_producto_pc.png)
 
-[Carrito de Compras](https://github.com/rodrigo070/Proyecto-Integrador-C8/blob/master/site_extra/Wireframes/PC/wireframe_carrito_pc.png)
-
+[Carrito de Compras](https://github.com/rodrigo070/Proyecto-Integrador-C8/blob/master/Wireframes/PC/wireframe_carrito_pc.png)
 
 
 ## Logo
 ___________________________________________________________________________________________________________
 
-[Logo](https://github.com/rodrigo070/Proyecto-Integrador-C8/blob/master/public/img/panda_logo_hq.png)
+[Logo](https://github.com/rodrigo070/Proyecto-Integrador-C8/blob/master/404_Computers/public/images/logos/panda_logo_hq.png)
 
 
 
