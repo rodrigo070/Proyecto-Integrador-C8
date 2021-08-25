@@ -26,6 +26,7 @@
 
 .slick-slide img{
 	width: 100%;
+	object-fit: contain;
 }
 
 
@@ -285,7 +286,7 @@
 	
 	.productRecommended img{
 		padding: 13px;
-		height: 190px;
+		height: 230px;
 	}
 	
 	.productRecommendedDescription{

@@ -4,16 +4,18 @@
     </div>
     <div class="sliderProducts">
         <% productsData.forEach(element => { %>
-            <div class="productRecommended">
-                <a href="/productos/<%= element.category %>/<%= element.subcategory %>/<%= element.id %>">
-                    <img src="/images/products/<%= element.image[0] %>">
-                    <div class="productRecommendedDescription">
-                        <p><%= element.name %></p>
-                        <p>$<%= element.price %></p>
-                        <button>Ver Producto</button>
-                    </div>
-                </a>
-            </div>
+            <% if (element.onSale === 1) { %>
+                <div class="productRecommended">
+                    <a href="/productos/<%= element.category %>/<%= element.subcategory %>/<%= element.id %>">
+                        <img src="/images/products/<%= element.image[0] %>">
+                        <div class="productRecommendedDescription">
+                            <p><%= element.name %></p>
+                            <p>$<%= element.price %></p>
+                            <button>Ver Producto</button>
+                        </div>
+                    </a>
+                </div>
+            <% } %>
         <% }) %>
     </div>
     <div id="button_Right_Slider1">

@@ -22,19 +22,32 @@
                     </form>
                 </div>
             </section>
+            <% var finalPrice = 0 %>  
             <section class="productListView">
                 <% products_List.forEach(productToShow => { %>
                  
                     <article class="products_Page_Article">
                         <a href="/productos/<%= productToShow.category %>/<%= productToShow.subcategory %>/<%=productToShow.id%>">
                             <div class="img_Product_Page">
-                                <img src="/images/products/<%= productToShow.image[0] %>" alt="">
+                                <% if (productToShow.discount > 1) { %>
+                                    <label><%= productToShow.discount %>% OFF</label>
+                                <% } %>
+                                <img src="/images/products/<%= productToShow.image[0] %>" alt="<%= productToShow.name %>">
                             </div>
                             <div class="description_Article_Page">
-                                <p>name: <%= productToShow.name %></p>
-                                <p>id: <%= productToShow.id %></p>
-                                <p>cat: <%= productToShow.category %></p>
-                                <p>sub: <%= productToShow.subcategory %></p>
+                                <p><%= productToShow.name %></p>
+                                <div class="prices_Product_Page">
+                                    <% if (productToShow.discount === 0) { %>
+                                        <p>$<%= productToShow.price %></p>
+                                    <% } else { %>
+                                        <p>$<%= finalPrice = productToShow.price - ((productToShow.price * productToShow.discount)/100) %></p>
+                                        <p>$<%= productToShow.price %></p>
+                                    <% } %>
+                                </div>
+                                <div class="goTo_Add_Item">
+                                    <button>Ver Producto</button>
+                                    <button>Agregar al Carrito</button>
+                                </div>
                             </div>
                         </a>
                     </article>

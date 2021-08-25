@@ -5,7 +5,7 @@
 		"name":"Notebook Lenovo 14P",
 		"color":"Negro",
 		"price":88000,
-		"stock": 10,
+		"stock": 3,
 		"discount":20,
 		"onSale":1,
 		"description":"Notebook AMD Lenovo",
@@ -58,7 +58,7 @@
 		"color":"Negro",
 		"price":9000,
 		"stock": 10,
-		"discount":20,
+		"discount":0,
 		"onSale":1,
 		"description":"Mouse Inalambrico",
 		"category":"gaming",
@@ -83,7 +83,7 @@
 		"name":"Monitor LG 22MK600M",
 		"color":"Negro",
 		"price":19000,
-		"stock": 10,
+		"stock": 3,
 		"discount":20,
 		"onSale":1,
 		"description":"Monitor 1080p",
@@ -123,7 +123,7 @@
 		"color":"Blanco",
 		"price":100000,
 		"stock": 10,
-		"discount":20,
+		"discount":0,
 		"onSale":1,
 		"description":"PS5 Digital",
 		"category":"gaming",
@@ -135,7 +135,7 @@
 		"name":"Router MikroTik RB750Gr3",
 		"color":"Blanco",
 		"price":8000,
-		"stock": 10,
+		"stock": 2,
 		"discount":20,
 		"onSale": 1,
 		"description":"Router MikroTik",
@@ -149,7 +149,7 @@
 		"color":"Negro",
 		"price":6000,
 		"stock": 15,
-		"discount":10,
+		"discount":0,
 		"onSale": 1,
 		"description":"Router TPLINK",
 		"category":"office",
@@ -170,15 +170,281 @@
 	},
 	{
 		"id":14,
-		"image":["nombredelafoto", "nombredelafoto","nombredelafoto","nombredelafoto"],
-		"name":"nombredelproducto",
-		"color":"Colordelproducto",
-		"price":10000,
-		"stock": 12,
-		"discount":18,
+		"image":["ther6001.webp", "ther6002.webp","ther6003.webp"],
+		"name":"Fuente Thermaltake 600w",
+		"color":"Negro",
+		"price":12000,
+		"stock": 6,
+		"discount":10,
 		"onSale": 0,
-		"description":"descripciondelproducto",
-		"category":"categoria",
-		"subcategory":"subcategoria"
+		"description":"Fuente 600W",
+		"category":"hardware",
+		"subcategory":"fuentes-psu"
+	}
+	,
+	{
+		"id":15,
+		"image":["10301.webp", "10302.webp","10303.webp","10304.webp"],
+		"name":"NVIDIA GT 1030 2GD4",
+		"color":"Negro",
+		"price":20000,
+		"stock": 99,
+		"discount":25,
+		"onSale": 0,
+		"description":"Placa de video",
+		"category":"hardware",
+		"subcategory":"placas-de-video"
+	}
+	,
+	{
+		"id":16,
+		"image":["ssd1.webp", "ssd2.webp","ssd3.webp"],
+		"name":"Gigabyte GP-GSTFS31240GNTD 240GB",
+		"color":"Negro",
+		"price":4500,
+		"stock": 19,
+		"discount":5,
+		"onSale": 0,
+		"description":"SSD",
+		"category":"hardware",
+		"subcategory":"discos-ssd"
+	}
+	,
+	{
+		"id":17,
+		"image":["hdd1.webp", "hdd2.webp"],
+		"name":"Seagate Barracuda ST1000DM010 1TB",
+		"color":"Gris",
+		"price":5000,
+		"stock": 17,
+		"discount":0,
+		"onSale": 0,
+		"description":"HDD",
+		"category":"hardware",
+		"subcategory":"discos-hdd"
+	}
+	,
+	{
+		"id":18,
+		"image":["ram1.webp", "ram2.webp","ram3.webp"],
+		"name":"Crucial Ram 8gb CT8G4DFS8266",
+		"color":"Verde",
+		"price":5000,
+		"stock": 7,
+		"discount":10,
+		"onSale": 0,
+		"description":"memoria ram",
+		"category":"hardware",
+		"subcategory":"memorias-ram"
+	}
+	,
+	{
+		"id":19,
+		"image":["mother1.webp", "mother2.webp","mother3.webp"],
+		"name":"Asus Prime H310m E",
+		"color":"Negro",
+		"price":8000,
+		"stock": 11,
+		"discount":0,
+		"onSale": 0,
+		"description":"motherboard",
+		"category":"hardware",
+		"subcategory":"motherboards"
+	}
+	,
+	{
+		"id":20,
+		"image":["tcl1.webp", "tcl2.webp","tcl3.webp","tcl4.webp"],
+		"name":"TCL 32 L32S60A",
+		"color":"Negro",
+		"price":35000,
+		"stock": 14,
+		"discount":30,
+		"onSale": 0,
+		"description":"Smart TV",
+		"category":"home",
+		"subcategory":"smarts-tv"
+	}
+	,
+	{
+		"id":21,
+		"image":["re2001.webp", "re2002.webp","re2003.webp"],
+		"name":"TP-Link RE200",
+		"color":"Blanco",
+		"price":2500,
+		"stock": 24,
+		"discount":0,
+		"onSale": 0,
+		"description":"Repetidor WiFi",
+		"category":"home",
+		"subcategory":"repetidores"
+	}
+	,
+	{
+		"id":22,
+		"image":["tab1.webp", "tab2.webp","tab3.webp","tab4.webp"],
+		"name":"Samsung Galaxy Tab A7 SM-T500 10.4'",
+		"color":"Negro",
+		"price":29000,
+		"stock": 4,
+		"discount":10,
+		"onSale": 0,
+		"description":"Tablet",
+		"category":"home",
+		"subcategory":"tablets"
+	}
+	,
+	{
+		"id":23,
+		"image":["cable1.webp", "cable2.webp","cable3.webp","cable4.webp"],
+		"name":"Cable HDMI Tedge",
+		"color":"Negro",
+		"price":1000,
+		"stock": 9,
+		"discount":0,
+		"onSale": 0,
+		"description":"cable hdmi",
+		"category":"home",
+		"subcategory":"cables"
+	}
+	,
+	{
+		"id":24,
+		"image":["anker1.webp", "anker2.webp","anker3.webp","anker4.webp"],
+		"name":"Cargador Anker",
+		"color":"Blanco",
+		"price":7000,
+		"stock": 36,
+		"discount":0,
+		"onSale": 0,
+		"description":"cargador",
+		"category":"home",
+		"subcategory":"cargadores"
+	}
+	,
+	{
+		"id":25,
+		"image":["thonet1.webp", "thonet2.webp","thonet3.webp"],
+		"name":"Thonet & Vander Vertrag BT",
+		"color":"Negro",
+		"price":27000,
+		"stock": 56,
+		"discount":10,
+		"onSale": 1,
+		"description":"Parlante",
+		"category":"home",
+		"subcategory":"parlantes"
+	}
+	,
+	{
+		"id":26,
+		"image":["mochila1.webp", "mochila2.webp","mochila3.webp"],
+		"name":"Mochila Notebook Urbana",
+		"color":"Gris",
+		"price":4000,
+		"stock": 86,
+		"discount":25,
+		"onSale": 1,
+		"description":"mochila notebook",
+		"category":"home",
+		"subcategory":"mochilas"
+	}
+	,
+	{
+		"id":27,
+		"image":["webcam1.webp", "webcam2.webp","webcam3.webp"],
+		"name":"Logitech C505",
+		"color":"Gris",
+		"price":5000,
+		"stock": 16,
+		"discount":0,
+		"onSale": 1,
+		"description":"webcam logitech",
+		"category":"office",
+		"subcategory":"webcams"
+	}
+	,
+	{
+		"id":28,
+		"image":["aro1.webp", "aro2.webp","aro3.webp","aro4.webp"],
+		"name":"Aro de Luz",
+		"color":"Blanco",
+		"price":2000,
+		"stock": 96,
+		"discount":0,
+		"onSale": 1,
+		"description":"aro de luz",
+		"category":"office",
+		"subcategory":"accesorios"
+	}
+	,
+	{
+		"id":29,
+		"image":["soporte1.webp", "soporte2.webp","soporte3.webp"],
+		"name":"Soporte para Notebook",
+		"color":"Gris",
+		"price":1000,
+		"stock": 99,
+		"discount":0,
+		"onSale": 1,
+		"description":"aro de luz",
+		"category":"office",
+		"subcategory":"soportes"
+	}
+	,
+	{
+		"id":30,
+		"image":["silla1.webp", "silla2.webp","silla3.webp","silla4.webp"],
+		"name":"Silla Ergonomica",
+		"color":"Gris",
+		"price":36000,
+		"stock": 16,
+		"discount":5,
+		"onSale": 0,
+		"description":"Silla Ergonomica",
+		"category":"office",
+		"subcategory":"sillas"
+	}
+	,
+	{
+		"id":31,
+		"image":["microfono1.webp", "microfono2.webp","microfono3.webp"],
+		"name":"Micrófono Blue Snowball Ice",
+		"color":"Blanco",
+		"price":6000,
+		"stock": 11,
+		"discount":10,
+		"onSale": 1,
+		"description":"Microfono",
+		"category":"gaming",
+		"subcategory":"microfonos"
+	}
+	,
+	{
+		"id":32,
+		"image":["teclado1.webp", "teclado2.webp","teclado3.webp","teclado4.webp"],
+		"name":"Logitech K780 QWERTY",
+		"color":"Gris",
+		"price":7600,
+		"stock": 26,
+		"discount":10,
+		"onSale": 1,
+		"description":"Teclado",
+		"category":"gaming",
+		"subcategory":"teclados"
+	}
+	,
+	{
+		"id":33,
+		"image":["joystick1.webp", "joystick2.webp","joystick3.webp"],
+		"name":"Logitech Extreme 3D Pro",
+		"color":"Negro",
+		"price":6000,
+		"stock": 19,
+		"discount":15,
+		"onSale": 0,
+		"description":"Joystick",
+		"category":"gaming",
+		"subcategory":"joysticks"
 	}
 ]
