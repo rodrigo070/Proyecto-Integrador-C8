@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-let path = require('path');
-let methodOverride = require('method-override');
+const path = require('path');
+const methodOverride = require('method-override');
 const port = 3001;
 
 // Routers - > maneja lo que se va a hacer en la vista (EJS "HTML")
@@ -29,7 +29,11 @@ app.use('/', userRouter);
 //detalle del producto - listado de productos
 app.use('/', productosRouter);
 //admin
-app.use('/', adminRouter)
+app.use('/admin', adminRouter)
+
+app.use((req, res, next) => {
+  res.status(404).render('errorPage', {error: ""});
+})
 
 app.listen(port, () => {
   console.log(`Servidor Corriendo en el Puerto = ${port}\ -> https://localhost:${port}`);

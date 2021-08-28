@@ -387,7 +387,8 @@ header {
         margin-left: 4px;
     }
 
-    .desktop_Bar_Options ul li:nth-child(2){
+    .desktop_Bar_Options ul li:nth-child(2),
+    .desktop_Bar_Options ul li:nth-child(3){
         margin-left: 10px;
     }
 
@@ -434,7 +435,7 @@ header {
         opacity: 1;
     }
 
-    .desktop_Bar_Options li:hover i{
+    .desktop_Bar_Options li:nth-child(1):hover i{
         transform: rotate(90deg);
         transition: 0.3s ease-in-out;
     }

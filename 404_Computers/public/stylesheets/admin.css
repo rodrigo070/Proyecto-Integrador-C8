@@ -1,3 +1,343 @@
+/* Panel de Admin */
+
+.adminBG{
+    background-color: black;
+}
+
+.adminPanel{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    gap: 50px;
+}
+
+.headerAdmin{
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    color: white;
+    transition: .3s ease;
+}
+
+.headerAdmin i{
+    font-size: 80px;
+}
+
+.adminPanel a{
+    margin: 10px 0;
+    padding: 20px;
+    border-radius: 1rem;
+    background-color: white;
+    flex-wrap: wrap;
+    font-size: 21px;
+    cursor: pointer;
+    text-align: center;
+    transition: .3s ease;
+}
+
+.adminPanel a:hover{
+    background-color: black;
+    color: white;
+    border:1px solid white;
+}
+
+/* Lista de Productos */
+
+.admin_Nav nav{
+    background-color: rgb(240, 229, 249);
+    display: flex;
+    justify-content: center;
+}
+
+.admin_Nav a{
+    font-size: 14px;
+    text-align: center;
+    margin: 15px auto;
+    box-sizing: border-box;
+    box-shadow: 0 2px 2px rgb(44, 0, 204), 0 5px 5px rgba(55, 0, 255, 0.1);
+    padding: 7px;
+    border-radius: 12px;
+    background-color: white;
+}
+
+.adminListProducts{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.product_Available{
+    width: 100%;
+    background-color: whitesmoke;
+    border-radius: 0.5rem;
+    padding: 5px;
+    margin: 5px auto;
+    display: grid;
+    grid-template-areas:
+    'id name goTo delete'
+    'id name edit delete';
+    grid-template-columns: 20% 30% 25% 25%;
+}
+
+.apHide{
+    display: none;
+}
+
+.apEditGoto{
+    display: block;
+    grid-area: goTo;
+}
+
+/* ap = Available Product */
+
+.apID,
+.apName,
+.apGoTo,
+.apEdit,
+.apDelete,
+.apDeleteBox{
+    margin: 0 auto;
+}
+
+.apID{
+    grid-area: id;
+}
+
+/* Despues de grid-area uso 
+text overflow para acortar
+los nombres de los productos */
+
+.apName{
+    margin: auto 0;
+    grid-area: name;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.apGoTo{
+    grid-area: goTo;
+}
+
+.apEdit{
+    grid-area: edit;
+}
+
+.apDeleteBox{
+    grid-area: delete;
+}
+
+.apDelete{
+    border-style: none;
+    outline: none;
+    grid-area: delete;
+    background-color: transparent;
+}
+
+.apDelete i{
+    color: red;
+    cursor: pointer;
+    font-size: 25px;
+}
+
+/* Vista de Edicion de Producto */
+
+.editProductSection{
+    text-align: left;
+    width: 77%;
+    margin: 0 auto;
+}
+
+.dataEditSection{
+    display: grid;
+    grid-template-areas: 
+    'col1 midcol col2';
+    grid-template-columns: 40% 20% 40%;
+    font-size: 20px;
+    width: 100%;
+
+}
+
+.dataEditSection section{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 100%;
+}
+
+.dataEditSection section:nth-child(1)
+{
+    grid-area: col1;
+}
+
+.dataEditSection section:nth-child(2)
+{
+    grid-area: col2;
+}
+
+.dataEditSection input,
+.dataEditSection select{
+    font-size: 20px;
+    margin-bottom: 10px;
+    border-radius: 0.5rem;
+    outline: none;
+    border: 1px solid black;
+    text-indent: 5px;
+    width: 100%;
+}
+
+.textAreaEditProduct{
+    resize: none;
+    outline: none;
+    border-style: none;
+    border: 1px solid black;
+    border-radius: 0.2rem;
+}
+
+.col2EditProduct{
+    display: grid;
+    grid-template-columns: 40% 20% 40%;
+    width: 100%;
+}
+
+.col2EditProduct article:nth-child(1){
+    grid-column: 1;
+}
+
+.col2EditProduct article:nth-child(2){
+    grid-column: 3;
+}
+
+/* Switch de Oferta */
+
+.switchButton {
+	display: flex;
+	overflow: hidden;
+    width: fit-content;
+    border-radius: 1rem;
+    border: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+}
+
+.switchButton input {
+	position: absolute !important;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	width: 1px;
+	border: 0;
+	overflow: hidden;
+}
+
+.switchButton label {
+    display: flex;
+    justify-content: center;
+	color: rgba(0, 0, 0, 0.6);
+	font-size: 14px;
+	line-height: 1;
+	padding: 8px 16px;
+    max-width: 41px;
+	transition: all 0.1s ease-in-out;
+    /* lo de abajo es para evitar que se 
+    seleccione el texto dentro del switch */
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+    -o-user-select:none;
+}
+
+.switchButton label:hover {
+	cursor: pointer;
+}
+
+.switchButton input:checked + label {
+	background-color: #4935b9;
+	box-shadow: none;
+    color: white;
+}
+
+/* Switch Fin*/
+
+#addProductImages{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 30px 0;
+}
+
+#addProductImages input[type="file"] {
+    display: none;
+}
+
+.addImagesButton{
+    margin: 0 auto;
+    border: 1px solid black;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    width: 210px;
+}
+
+.addImagesButton i{
+    margin-right: 5px;
+}
+
+#addProductImages p,
+.addImagesButton p{
+    font-size: 19px;
+    font-weight: bold;
+}
+
+#addProductImages p:nth-child(2){
+    padding: 5px 0;
+}
+
+.imgBoxEdit{
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.productImageEdit{
+    width: 25%;
+    max-height: 250px;
+    margin:5px;
+}
+
+.productImageEdit img{
+    padding: 30px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 0.5rem;
+}
+
+.editProductSaveAbort{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.editProductSaveAbort button{
+    border-radius: 0.5rem;
+    border:1px solid black;
+    background-color: white;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 15px;
+    margin: 0 10px;
+    font-size: 19px;
+}
+
+/* Carga de Productos */
 /* vista mobile */
 
 .admin nav {
@@ -160,6 +500,24 @@ el producto a ser agregado.*/
     border-radius: 10px;
 }
 
+.imagePreviewSection{
+    margin: 0 auto;
+    grid-area: previewImageAdd;
+}
+
+#imagePreview{
+    display: flex;
+    align-items: center;
+    width: 300px;
+    height: 230px;
+}
+
+.imagePreviewSection img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 /* tablet */
 
 @media screen and (min-width: 768px){
@@ -223,8 +581,35 @@ el producto a ser agregado.*/
 
 @media screen and (min-width: 990px){
     
+    /* Listado De Productos */
+
+    .admin_Nav a {
+        font-size: 19px;
+        min-width: 155px;
+    }
+
+    .product_Available{
+        grid-template-areas:
+        'id name goTo edit delete';
+        grid-template-columns: 10% 40% 20% 20% 10%;
+    }
+    
+    .adminListProducts{
+        width: 85%;
+    }
+
+    .apHide{
+        display: block;
+    }
+    
+    .apEditGoto{
+        display: none;
+    }
+
+    /* Fin Listado De Productos */
+
     .admin nav a{
-        font-size: 21px;
+        font-size: 19px;
     }
 
     .admin .contenedor .seleccionar .cat1admin{

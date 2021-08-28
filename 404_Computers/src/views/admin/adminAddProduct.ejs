@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head.ejs') %>
+<head>
+    <script src="/javascripts/previewImage_Admin.js" defer></script>
+</head>
+<body class="background_Leaves">
+  <div class="container_Page">
+    <%- include('../partials/header.ejs') %>   
+    <main class="admin">
+        <div class="nav-admin">
+            <nav>
+                <a href="/admin/lista-productos">Lista de Productos</a>
+                <a href="/admin/lista-productos/stock">Stock</a>
+                <a href="/admin/lista-productos/ofertas">Ofertas</a>
+            </nav>
+            <div class="titulo_Admin">
+                <h2>Carga de Productos</h2>
+            </div>
+        </div>
+        <form action="/admin/agregar-producto/" method="POST" class="admin_Grid" enctype= "multipart/form-data">
+            
+            <div class="contenedor">
+                <div class="cheked">
+                    <label for="sub-category">Agregar subcategoria</label>
+                    <input type="checkbox" name="sub-category" id="sub-category">
+                </div>
+                <div class="seleccionar">
+                    <div class="cat1admin">
+                        <select name="category" id="inputCategoryProduct" class="input-select">
+                            <% categoriesData.forEach(catg => { %>
+                                <option value="<%= catg.category %>"><%= catg.categoryName %></option>
+                            <% }) %>
+                        </select>
+                        <select name="subcategory" id="inputSubCategoryProduct" class="input-select">
+                            <% subCategoriesData.forEach(scatg => { %>
+                                <option value="<%= scatg.subcategory %>"><%= scatg.subcategoryName %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+        
+                    <div class="cat2admin">
+                        <input type="text" name="name" placeholder="Nombre del Producto" class="input-select">
+                        <input type="text" name="discount" placeholder="Descuento" class="input-select">
+                    </div>
+                </div>
+            
+            </div>
+
+            <section class="infoProductAdmin">
+                <div class="descripcion-producto">
+                    <h4>Descripcion del Producto</h4>
+                    <textarea name="description" placeholder="Descripcion del Producto" id="mensaje cols="30" rows="10" ></textarea>
+                </div>
+                <div class="precio-admin">
+                    <label for="precio">Precio $</label>
+                    <input type="number" required placeholder="Ingrese el Precio" name="price" class="input-select" >
+                </div>
+            </section>
+
+            <section class="agregar-imagen">
+                <label for="archivo">Agregar archivos de Imagen</label>
+                <hr>
+                <input type="file" id="examinar">
+            </section>
+
+            <section class="imagePreviewSection">
+                <div id="imagePreview">
+                    
+                </div>
+                <p id="errorImage"></p>
+            </section>
+            <button type="submit" class="finalizar">Finalizar</button>
+        </form>
+        
+    </main>
+    <%- include('../partials/footer.ejs') %> 
+  </div>
+</body>
+</html>

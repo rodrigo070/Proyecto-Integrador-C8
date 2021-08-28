@@ -34,11 +34,10 @@ module.exports = {
         else
         {
             res.render('errorPage' , {
-                error: "El Producto al"
+                error: "El Producto al cual intenta acceder no existe o fue removido de la pagina."
             });
             console.log("el producto no existe o fue removido de la tienda");
         }
-        
     }
     ,
     categories: (req, res) => {
@@ -73,7 +72,7 @@ module.exports = {
         else
         {
             res.render('errorPage' , {
-                error: "La Categoria a la"
+                error: "La Categoria a la cual intenta acceder no existe o fue removida de la pagina."
             });
             console.log("la categoria ingresada no existe");
         }
@@ -117,7 +116,7 @@ module.exports = {
         else
         {
             res.render('errorPage', {
-                error: "La Sub Categoria a la"
+                error: "La Sub Categoria a la cual intenta acceder no existe o fue removida de la pagina."
             });
             console.log("la subcategoria ingresada no existe");
         }
