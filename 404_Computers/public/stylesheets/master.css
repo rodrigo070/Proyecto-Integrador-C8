@@ -9,7 +9,6 @@
 @import url(cart_page.css);
 @import url(register_page.css);
 @import url(login_page.css);
-@import url(admin.css);
 @import url(payments_Banner.css);
 @import url(termscond.css);
 @import url(favorites.css);
@@ -19,6 +18,10 @@
 @import url(perfil.css);
 @import url(editProfile.css);
 @import url(product_List_Page.css);
+@import url(admin.css);
+@import url(admin_list.css);
+@import url(admin_add_product.css);
+@import url(admin_edit_product.css);
 
 @font-face {
   font-family: 'Karmatic';
