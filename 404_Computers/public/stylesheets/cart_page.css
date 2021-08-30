@@ -70,19 +70,6 @@ en el celular */
 
 /*Fin de la estructura de la lista*/
 
-/*Seccion 1: Icono del producto de la lista -----------------------------------------> */
-/* EN PROCESO*/
-/* Fin Seccion 1*/
-
-/* Seccion 2 : Nombre del Producto -----------------------------------------> */
-
-/* 
-.product_And_Stock 
-        y
-.price_Discount_Total  --> Se encuentran en el MediaQuery de Celular*/
-
-/* Fin Seccion 2*/
-
 /* Seccion 3 : Quitar Agregar mas unidades */
 
 .minus_plusButton{
@@ -138,10 +125,6 @@ input[type=number] {
 
 /* Fin Seccion 3*/
 
-/* Seccion 4 : precio de la lista -----------------------------------------> */
-
-/* Fin Seccion 4*/
-
 /* Seccion 5 : caja de Descuento */
 
 .discount_Box{
@@ -156,11 +139,6 @@ input[type=number] {
 }
 
 /* Fin Seccion 5*/
-
-/*---------------------------------------------*/
-/* Seccion 6 - Precio Final*/
-/* deberia agregar una linea en medio del precio anterior*/
-/* Fin Seccion 6*/
 
 /*---------------------------------------------*/
 
