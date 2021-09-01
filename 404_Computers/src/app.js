@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended : false}));
 app.use(methodOverride('_method'));
 
-// Routes - > desde aca indicamos las rutas -> las direcciones estan declaradas en los archivos js de rutas
+// Routes
 
 //Home - vistas generales
 app.use('/', homeRouter);
