@@ -98,10 +98,9 @@ los nombres de los productos */
     font-size: 25px;
 }
 
-/* Desktop */
+/* Tablet */
 
-@media screen and (min-width: 990px){
-
+@media screen and (min-width: 768px){
     .admin_Nav a {
         font-size: 19px;
         min-width: 155px;
@@ -124,5 +123,11 @@ los nombres de los productos */
     .apEditGoto{
         display: none;
     }
+}
+
+/* Desktop */
+
+@media screen and (min-width: 990px){
+
 
 }

@@ -236,7 +236,8 @@ hr {
 .negrita{
     width: 70%;
     font-weight: bold;
-   padding: 5px;
+    padding: 5px;
+    white-space: pre-line;
 }
 .respuesta{
     width: 70%;

@@ -1,0 +1,220 @@
+/*-----------------------------------------------------------------*/
+/*----------------------- Pagina de Registro ----------------------*/
+/*-----------------------------------------------------------------*/
+
+.background_Leaves{
+    background-image: url(/images/backgrounds/background_Leaves_t.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.register_Container{
+    width: 100%;
+    text-align: center;
+    padding: 30px 20px 20px 20px;
+}
+.register_Box{
+    width: 100%;
+    margin: auto;
+    padding: 10px 0;
+    /* background-color: rgb(74, 39, 155); */
+    background-image: url("/images/backgrounds/background_v_ver.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 1rem;
+}
+
+.register_Box label{
+    padding: 0 16px;
+    display:flex;
+    align-items: flex-start;
+    color: black;
+}
+
+.register_Box input{
+    width: 90%;
+    color: black;
+    font-size: 18px;
+    text-indent: 8px;
+    outline: none;
+    border-style: none;
+    background-color: transparent;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.55);
+    border-radius: 2px;
+    box-shadow: 0 10px 20px rgba(44, 44, 44, 0.1), 0 10px 10px rgba(44, 44, 44, 0.1);
+}
+
+.register_Box h1{
+    margin-top: 5px;
+    font-size: 22px;
+}
+
+.name_Area,
+.email_Area,
+.password_Area,
+.termsAndConditions{
+    margin-bottom: 30px;
+}
+
+.termsAndConditions{
+    display: flex;
+    align-items: center;
+    text-align: start;
+    padding: 0 14px;
+}
+
+.termsAndConditions label{
+    font-size: 12px;
+}
+
+.termsAndConditions label a{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.termsAndConditions input{
+    display: flex;
+    justify-content: center;
+    transform: scale(2);
+    margin-left: 8px;
+    width: fit-content;
+}
+
+.buttonRegister button {
+    padding: 10px 25px;
+    font-size: 15px;
+    border-radius: 1rem;
+    cursor: pointer;
+    border-style: none;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(to right, #a05df8 0%, #7739c9  51%, #9900ff  100%);
+    transition: 0.5s;
+    background-size: 200% auto;
+    transition: all 0.5s cubic-bezier(.25,.8,.25,1);
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+.buttonRegister button:hover {
+    /* box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); */
+    background-position: right center;
+}
+
+
+.goToLogin{
+    margin: 20px 0;
+    font-size: 13px;
+}
+
+.goToLogin a{
+    color: black;
+    text-decoration: none;
+}
+
+.RGB_Title label{
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.RGB_Title #rgbar{
+    margin: 15px auto 20px auto;
+    height: 2px;
+}
+
+/*-----------------------------------------------------------------*/
+/*--------------------- Fin Pagina de Registro --------------------*/
+/*-----------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------*/
+/*------------------------- Media Queries -------------------------*/
+/*-----------------------------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------------*/
+/*---------------------------- Celular ----------------------------*/
+/*-----------------------------------------------------------------*/
+
+/* Celular */
+
+@media screen and (min-width: 300px){
+
+}
+
+/*-----------------------------------------------------------------*/
+/*---------------------------- Tablet -----------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 768px) and (max-width: 990px){
+    .register_Container{
+        width: 65%;
+        margin: auto;
+    }
+
+    .register_Box label{
+        padding: 0 42px;
+    }
+
+    .termsAndConditions{
+        padding: 10px 42px;
+    }
+
+    .termsAndConditions label{
+        font-size: 16px;
+        padding: 20px;
+    }
+
+    .termsAndConditions label a{
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .buttonRegister button{
+        transform: scale(1.4);
+    }
+
+    .goToLogin{
+        margin-top: 35px;
+        font-size: 16px;
+    }
+}
+
+/*-----------------------------------------------------------------*/
+/*------------------------------ PC -------------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 990px){
+    .register_Container{
+        width: 45%;
+        margin: auto;
+    }
+
+    .register_Box label{
+        padding: 0 42px;
+    }
+
+    .termsAndConditions{
+        padding: 10px 42px;
+    }
+
+    .termsAndConditions label{
+        font-size: 16px;
+        padding: 20px;
+    }
+
+    .termsAndConditions label a{
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .buttonRegister button{
+        transform: scale(1.4);
+    }
+
+    .goToLogin{
+        margin-top: 35px;
+        font-size: 16px;
+    }
+}

@@ -18,7 +18,7 @@
                 <h2>Carga de Productos</h2>
             </div>
         </div>
-        <form action="/admin" class="admin_Grid" method="POST">
+        <form action="/admin/agregar-producto/" method="POST" class="admin_Grid" enctype="multipart/form-data">
             
             <div class="contenedor">
                 <div class="cheked">
@@ -61,7 +61,7 @@
             <section class="agregar-imagen">
                 <label for="archivo">Agregar archivos de Imagen</label>
                 <hr>
-                <input type="file" id="examinar">
+                <input type="file" id="examinar" name="image" multiple>
             </section>
 
             <section class="imagePreviewSection">
@@ -72,6 +72,7 @@
             </section>
             <button type="submit" class="finalizar">Finalizar</button>
         </form>
+        
     </main>
     <%- include('../partials/footer.ejs') %> 
   </div>

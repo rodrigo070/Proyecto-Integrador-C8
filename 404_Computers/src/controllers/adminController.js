@@ -28,6 +28,7 @@ module.exports = {
     }
     ,
     admin_carga_update: (req, res) => {
+        
         let lastId = 1;
 
         productsData.forEach(product => {
@@ -38,7 +39,7 @@ module.exports = {
 
         let newProduct = {
             id: lastId + 1,
-            image: ["default.jpg"],
+            image: req.file ? [req.file.filename] : ["default.jpg"],
             name: req.body.name,
             color: req.body.color,
             price: req.body.price,
@@ -73,7 +74,7 @@ module.exports = {
             if(productToEdit.id === +req.params.id)
             {
                 productToEdit.id = productToEdit.id,
-                productToEdit.image = req.body.image ? req.body.image : productToEdit.image,
+                productToEdit.image = req.file ? [req.file.filename] : productToEdit.image,
                 productToEdit.name = req.body.name ? req.body.name : productToEdit.name,
                 productToEdit.color = req.body.color ? req.body.color : productToEdit.color,
                 productToEdit.price = req.body.price ? req.body.price : productToEdit.price,

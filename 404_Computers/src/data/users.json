@@ -16,5 +16,23 @@
         "password" : 1234,
         "category" : "admin",
         "image" : "user2.jpg"
+	},
+	{
+		"id":3,
+		"name": "Lucas",
+		"surname": "Perez",
+        "email" : "user34@gmail.com",
+        "password" : 1234,
+        "category" : "user",
+        "image" : "user2.jpg"
+	},
+	{
+		"id":4,
+		"name": "Juana",
+		"surname": "Dominguez",
+        "email" : "user26@gmail.com",
+        "password" : 1234,
+        "category" : "user",
+        "image" : "user2.jpg"
 	}
 ]
