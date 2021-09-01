@@ -1,0 +1,147 @@
+/* ************************************ */
+            /* MENU DESPLEGABLE */
+/* ************************************ */
+
+.perfil-usuario .menu-desplegable #btn-menu{
+    display: none;
+}
+
+.perfil-usuario .menu-desplegable .label-perfil{
+    display: block;
+    width: 100px;
+    padding: 10px;
+    text-align: center;
+
+}
+
+.perfil-usuario .menu-desplegable .label-perfil:hover{
+    cursor: pointer;
+}
+.perfil-usuario .menu-desplegable .menu-usuario {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    justify-content: center;
+    margin-left: -70%;  
+    transition: all 1s; 
+    width: 240px; 
+    position: absolute;
+}
+.perfil-usuario .menu-desplegable .menu-usuario ul{
+    display: flex;
+    flex-direction: column;
+
+}
+.perfil-usuario .menu-desplegable .menu-usuario li  {
+    padding: 20px;
+
+}
+
+.perfil-usuario .menu-desplegable .menu-usuario li:hover{
+    border-left: 1px solid #b035c6;
+    cursor: pointer;
+    height: 11vh;
+    background-color: #f6e5f9;
+    width: 200px;
+    
+}
+#btn-menu:checked ~  .menu-usuario {
+    margin: 0;
+}
+
+/* ************************************ */
+        /* FIN MENU DESPLEGABLE */
+/* ************************************ */
+
+
+/* ************************************ */
+        /* SECCION MIS DATOS */
+/* ************************************ */
+
+.perfil-usuario .main-conteiner-pefil .subtitulo-mis-datos{
+    padding: 20px;
+}
+
+.perfil-usuario .main-conteiner-pefil{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 50%;
+    background-color: #d3c5ee;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.perfil-usuario .main-conteiner-pefil .contenedor-flex{
+    display: flex;
+    border: 1px solid gray;
+    padding: 7px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 0px 0px violet;
+    margin-bottom: 8px;
+}
+
+.perfil-usuario .main-conteiner-pefil .contenedor-flex .indicador-value{
+    display: flex;
+    margin-left:29px ;
+}
+/* *************************** */
+    /* tarjetas */
+/* *************************** */
+
+.perfil-usuario .main-conteiner-pefil .tarjetas-contenedoras{
+    display: flex;
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 0px 0px violet;    
+}
+
+.perfil-usuario .main-conteiner-pefil .img-tarjetas {
+    width: 66px;
+    height: 66px;
+    padding: 12px;
+    border-radius: 50%;
+    border: 1px solid #aaa9a9;
+    display: flex;
+    margin-right: 36px;
+    background-color: white;
+}
+
+.perfil-usuario .main-conteiner-pefil .img-tarjetas img{
+    width: 100%;
+    height: auto;
+    margin: auto;
+    background-color: white;
+}
+
+.perfil-usuario .main-conteiner-pefil .tarjetas-contenedoras .datos-tarjetas .info-tarjeta {
+    color: #999;
+    font-size: 14px;
+}
+
+
+/* *************************** */
+    /* Fin tarjetas */
+/* *************************** */
+
+/* *************************** */
+    /* domicilio */
+/* *************************** */
+
+.perfil-usuario .main-conteiner-pefil .tarjetas-contenedoras h4  {
+    cursor: pointer;
+    padding: 10px;
+}
+
+
+/* *************************** */
+    /* Fin domicilio */
+/* *************************** */
+
+
+
+
+/* ************************************ */
+        /* FIN SECCION MIS DATOS */
+/* ************************************ */

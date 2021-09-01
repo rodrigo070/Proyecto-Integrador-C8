@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head.ejs') %>
+<body class="background_Leaves">
+  <div class="container_Page">
+    <%- include('../partials/header.ejs') %>   
+    <main>
+      <form action="" method="">
+          <section class="register_Container">
+              <div class="register_Box">
+                  <!-- <section class="title_Register">
+                      <label for="titleRegister">Completa tus Datos</label>
+                  </section> -->
+                  <section class="RGB_Title">
+                      <h1 for="titleRegister">Completa tus Datos</h1>
+                      <div id="rgbar" class=""></div>
+                  </section>
+                  <section class="name_Area">
+                      <label for="nameSurname">Nombre Completo: </label>
+                      <input type="text" name="nameSurname" id="nameSurname">
+                  </section>
+                  <section class="email_Area">
+                      <label for="emailUser">Correo Electronico: </label>
+                      <input type="email" name="emailUser" id="emailUser">
+                  </section>
+                  <section class="password_Area">
+                      <label for="passUser">Contraseña: </label>
+                      <input type="password" name="passUser" id="passUser">
+                  </section>
+                  <section class="termsAndConditions">
+                      <input type="checkbox" name="termsCond" id="termsCond">
+                      <label for="">Aceptar los&nbsp;<a href="/terminos"> Términos y Condiciones.</a></label>
+                  </section>
+                  <section class="buttonRegister">
+                      <button type="submit">Registrarme</button>
+                  </section>
+                  <section class="goToLogin">
+                      <a href="/login">¿Ya tienes una cuenta?&nbsp;<strong>Inicia Sesion Aqui.</strong></a>
+                  </section>
+              </div>
+              
+          </section>
+      </form>
+    </main>
+    <%- include('../partials/footer.ejs') %> 
+  </div>
+</body>
+</html>

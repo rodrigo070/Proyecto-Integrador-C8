@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('partials/head.ejs') %>
+<body>
+  <div class="container_Page">
+    <%- include('partials/header.ejs') %>   
+    <main>
+      <section class="productNotFound">
+          <h1>ERROR: Pagina No Existente.</h1>
+          <br>
+          <h1><%= error %></h1>
+      </section>
+    </main>
+    <%- include('partials/footer.ejs') %> 
+  </div>
+</body>
+</html>

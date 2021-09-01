@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head.ejs') %>
+<body>
+  <div class="container_Page">
+    <%- include('../partials/header.ejs') %>   
+    <main>
+      <div class="admin_Nav">
+        <nav>
+            <a href="/admin/lista-productos">Lista de Productos</a>
+            <a href="/admin/lista-productos/stock">Stock</a>
+            <a href="/admin/lista-productos/ofertas">Ofertas</a>
+        </nav>
+        <section class="editProductSection">
+            <div>Edicion del Producto N°<%= productToEdit.id %></div>
+            <form action="/admin/editar-producto/<%= productToEdit.id %>?_method=PUT" enctype= "multipart/form-data" method="POST">
+                <div class="dataEditSection">
+                    <section>
+                        <label for="inputNameProduct">Nombre del Producto:</label>
+                        <input type="text" name="name" id="inputNameProduct" value="<%= productToEdit.name %>">
+                        <div class="col2EditProduct">
+                            <article>
+                                <label for="inputCategoryProduct">Categoría:</label>
+                                <select name="category" id="inputCategoryProduct">
+                                    <% categoriesData.forEach(catg => { %>
+                                        <% if (productToEdit.category === catg.category) { %>
+                                            <option value="<%= catg.category %>" selected><%= catg.categoryName %></option>
+                                            <% } else { %>
+                                            <option value="<%= catg.category %>"><%= catg.categoryName %></option>
+                                        <% } %>
+                                    <% }) %>
+                                </select>
+                            </article>
+
+                            <article>
+                                <label for="inputSubCategoryProduct">Subcategoría:</label>
+                                <select name="subcategory" id="inputSubCategoryProduct">
+                                    <% subCategoriesData.forEach(scatg => { %>
+                                        <% if (productToEdit.subcategory === scatg.subcategory) { %>
+                                            <option value="<%= scatg.subcategory %>" selected><%= scatg.subcategoryName %></option>
+                                            <% } else { %>
+                                            <option value="<%= scatg.subcategory %>"><%= scatg.subcategoryName %></option>
+                                        <% } %>
+                                    <% }) %>
+                                </select>
+                            </article>
+                        </div>
+                        <label for="inputDescriptionProduct">Descripcion del Producto:</label>
+                        <textarea name="description" id="inputDescriptionProduct" cols="30" rows="5" class="textAreaEditProduct"><%= productToEdit.description %></textarea>
+                    
+                    </section>
+                    <section>
+                        <label>Se encuentra en Oferta?</label>
+                        <div class="switchButton">
+                            <% if (productToEdit.onSale === 1) { %>
+                                <input type="radio" id="onSaleYes" name="onSale" value=1 checked="checked">
+                                <label for="onSaleYes">Si</label>
+                                <input type="radio" id="onSaleNo" name="onSale" value=0>
+                                <label for="onSaleNo">No</label>
+                             <% } else { %>
+                                <input type="radio" id="onSaleYes" name="onSale" value=1>
+                                <label for="onSaleYes">Si</label>
+                                <input type="radio" id="onSaleNo" name="onSale" value=0 checked="checked">
+                                <label for="onSaleNo">No</label>
+                            <% } %>
+                        </div>
+                        <div class="col2EditProduct">
+                            <article>
+                                <label for="inputColorProduct">Color:</label>
+                                <input type="text" name="color" id="inputColorProduct" value="<%= productToEdit.color %>">
+                            </article>
+                            <article>
+                                <label for="inputPriceProduct">Precio:</label>
+                                <input type="number" name="price" id="inputPriceProduct" value="<%= productToEdit.price %>">
+                            </article>
+                        </div>
+
+                        <div class="col2EditProduct">
+                            <article>
+                                <label for="inputStockProduct">Cantidad de Stock:</label>
+                                <input type="number" name="stock" id="inputStockProduct" value="<%= productToEdit.stock %>">
+                            </article>
+                            <article>
+                                <label for="inputDiscountProduct">Descuento:</label>
+                                <input type="number" name="discount" id="inputDiscountProduct" value="<%= productToEdit.discount %>">
+                            </article>
+                        </div>
+
+                    </section>
+                </div>
+                <div id="addProductImages">
+                    <label class="addImagesButton">
+                        <input type="file" name="image" multiple>
+                        <p><i class="fa fa-upload" aria-hidden="true"></i> Agregar Imagenes</p>
+                    </label>
+                    <p>Imagenes del Producto</p>
+                </div>
+                <div class="imgBoxEdit">
+                    <% for( let i = 0; i < productToEdit.image.length; i++ ) { %>
+                        <section class="productImageEdit">
+                            <img src="/images/products/<%= productToEdit.image[i] %>" alt="<%= productToEdit.name %>">
+                        </section>
+                    <% } %>
+
+                    <% var fillImageBlocks = 4-(productToEdit.image.length) %> 
+                    <% if (productToEdit.image.length < 4) { %>
+                        <% for( let i = 0; i < fillImageBlocks; i++ ) { %>
+                            <section class="productImageEdit">
+                                <img src="/images/products/default.jpg" alt="Default">
+                            </section>
+                        <% } %>
+                    <% } else { %>
+                     
+                    <% } %>
+                </div>
+                <div class="editProductSaveAbort">
+                    <button type="submit">Guardar</button>
+                    <button type="reset" onclick="location.href='/admin/lista-productos'">Cancelar</button>
+                </div>
+            </form>
+        </section>
+        
+      </div>
+    </main>
+    <%- include('../partials/footer.ejs') %> 
+  </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('partials/head.ejs') %>
+<head>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDobap9_wdUSV9YOS2sgaA3ZWn3xpPbsc&callback=initMap"
+      async
+    ></script>
+    <script src="/javascripts/maps.js"></script>
+</head>
+<body>
+  <div class="container_Page">
+    <%- include('partials/header.ejs') %>   
+    <main>
+      <section class="location_Box">
+        <div id="rgbar"></div>
+          <article class="locationDetail">
+            <div id="locationInfo">
+                <pre>Pasa por Nuestro Local</pre>
+                <div><i class="fa fa-map-marker iconsContact" aria-hidden="true"></i>  Direccion : Calle Falsa 123 - CABA</div>
+                <div><i class="fa fa-phone iconsContact" aria-hidden="true"></i>  Telefono : 11-1234-5678</div>
+                <div><i class="fa fa-whatsapp iconsContact" aria-hidden="true"></i>  Whatsapp : 11-1234-5679</div>
+                
+                <div>Consultas sobre su Compra</div>
+                <div><i class="fa fa-envelope-o iconsContact" aria-hidden="true"></i> 404ComputersSA@gmail.com</div>
+
+                <div> <i class="fa fa-clock-o iconsContact" aria-hidden="true"></i> Nuestros Horarios de Atencion</div>
+                <div>Lunes a Viernes: 9hs a 20hs</div>
+                <div>Sabados y Domingos: 8hs a 21hs</div>
+            </div>
+            <div id="map"></div>
+          </article>
+          <div id="rgbar"></div>
+      </section>
+    </main>
+    <%- include('partials/footer.ejs') %> 
+  </div>
+</body>
+</html>

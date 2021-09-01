@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head.ejs') %>
+<body class="background_Leaves">
+  <div class="container_Page">
+    <%- include('../partials/header.ejs') %>   
+   
+    <main class="perfil-usuario">
+        <div class="menu-desplegable">
+            <input type="checkbox" name="" id="btn-menu">
+            <label for="btn-menu" class="label-perfil"><i class="fas fa-bars"></i></label>
+            
+            <nav class="menu-usuario">
+              <p><!-- aca se muestra lo q se seleccione por ejemplo -->Mis datos</p>
+              <ul>
+                  <li><i class="fas fa-shopping-bag"></i> Mis Compras</li>
+                  <li><i class="fas fa-store"></i> Ventas</li>
+                  <li><a href="/editar-perfil"><i class="fas fa-cog"></i> Configuraciones</a></li>
+                  <li>mas</li>
+              </ul>
+          </nav>
+        </div>
+
+        <div class="main-conteiner-pefil">
+          <h2>Mis Datos</h3><!-- primer encabezado que se ve en la vista -->
+
+          <div class="subtitulo-mis-datos">
+              Datos de cuenta
+          </div>
+
+          <div class="info">
+            <div class="contenedor-flex">
+              <div class="indicador">
+                <span>Usuario</span>
+              </div>
+              <div class="indicador-value">
+                <span><!-- Aca iría el nombre de la cuenta -->Sr. Ejemplo</span>
+              </div>
+            </div>
+            <div class="info">
+              <div class="contenedor-flex">
+                <div class="indicador">
+                  <span>E-mail</span>
+                </div>
+                <div class="indicador-value">
+                  <span><!-- Aca iría el E-mail de la cuenta -->Sr-ejemplo@gmail.com</span>
+                </div>
+              </div>
+              <div class="subtitulo-mis-datos">
+                Datos personales
+              </div>
+          <div class="info">
+            <div class="contenedor-flex">
+              <div class="indicador">
+                <span>Nombre y Apellido</span>
+              </div>
+              <div class="indicador-value">
+                <span>Señor Ejemplo<!-- Aca iría el nombre de la cuenta --></span>
+              </div>
+            </div>
+            <div class="info">
+              <div class="contenedor-flex">
+                <div class="indicador">
+                  <span>Nombre Elejido <!-- el nombre de usuario q elija el cliente --></span>
+                </div>
+                <div class="indicador-value">
+                  <span>Señor Ejemplo</span>
+                </div>
+              </div>
+          <div class="info">
+            <div class="contenedor-flex">
+              <div class="indicador">
+                <span>Documento</span>
+              </div>
+              <div class="indicador-value">
+                <span>12.345.678</span>
+              </div>
+            </div>
+            <div class="info">
+              <div class="contenedor-flex">
+                <div class="indicador">
+                  <span>Telefono</span>
+                </div>
+                <div class="indicador-value">
+                  <span>+54 11-2233-4455</span>
+                </div>
+              </div>
+            </div>
+            <div class="subtitulo-mis-datos">
+              Tarjetas
+            </div>
+            <div class="tarjetas-contenedoras">
+              <div class="img-tarjetas">
+                <img src="/images/payments_Logos/visa-debito.svg" alt="">
+              </div>
+              <div class="datos-tarjetas">
+               <p>Terminada en: 1234 </p>
+               <p class="info-tarjeta">Visa Argentina,S.A.</p>
+               <p class="info-tarjeta">Vencimiento: 10/03/2030</p>
+              </div>
+            </div>
+            <div class="tarjetas-contenedoras">
+              <div class="img-tarjetas">
+                <img src="/images/payments_Logos/mastercard.svg" alt="">
+              </div>
+              <div class="datos-tarjetas">
+               <p>Terminada en: 1234 </p>
+               <p class="info-tarjeta">MasterCard</p>
+               <p class="info-tarjeta">Vencimiento: 10/03/2030</p>
+              </div>
+            </div>
+            <div class="subtitulo-mis-datos">
+              Domicilio
+            </div>
+
+            <div class="tarjetas-contenedoras">
+              <div class="datos-tarjetas">
+                <p>Calle falsa 123 </p>
+                <p class="info-tarjeta">Buenos Aires(1655<!-- codigo postal -->), Localidad falsa</p>
+                <p class="info-tarjeta">Sr. Ejemplo - +54 11-2233-4455</p>
+               </div>
+            </div>
+            <div class="tarjetas-contenedoras">
+              <h4>Agregar otro Domicilio</h4>
+            </div>
+
+
+          </div>
+
+
+
+        </div>
+       
+
+
+    </main>
+
+    <%- include('../partials/footer.ejs') %> 
+  </div>
+</body>
+</html>

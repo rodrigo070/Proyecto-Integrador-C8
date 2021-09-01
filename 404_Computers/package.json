@@ -1,0 +1,27 @@
+{
+  "name": "404computers",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "ejs": "^2.6.2",
+    "express": "^4.16.4",
+    "method-override": "^3.0.0",
+    "multer": "^1.4.3",
+    "nodemon": "^2.0.12"
+  },
+  "description": "Proyecto Integrador Grupo 8",
+  "main": "./src/app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodrigo070/Proyecto-Integrador-C8.git"
+  },
+  "keywords": [
+    "404computers"
+  ],
+  "author": "Soledad - Rodrigo - Alexander",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rodrigo070/Proyecto-Integrador-C8/issues"
+  },
+  "homepage": "https://github.com/rodrigo070/Proyecto-Integrador-C8#readme"
+}

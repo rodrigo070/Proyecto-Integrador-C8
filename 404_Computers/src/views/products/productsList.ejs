@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head.ejs') %>
+<body class="background_Leaves">
+  <div class="container_Page">
+    <%- include('../partials/header.ejs') %>   
+    <main>
+        <section class="product_Page_Grid">
+            <section class="categories_SidePanel">
+                <div class="optionsSidePanel">
+                    <%- include('../partials/productListSidePanel.ejs') %>  
+                </div>
+            </section>
+            <section class="options_productsPage">
+                <div class="sortProducts">
+                    <form action="">
+                        <label>Ordenar Por: </label>
+                        <select name="sortBy" id="sortby">
+                            <option value="lowPrices">Menor Precio</option>
+                            <option value="highPrices">Mayor Precio</option>
+                        </select>
+                    </form>
+                </div>
+            </section>
+            <% var finalPrice = 0 %>  
+            <section class="productListView">
+                <% products_List.forEach(productToShow => { %>
+                 
+                    <article class="products_Page_Article">
+                        <a href="/productos/<%= productToShow.category %>/<%= productToShow.subcategory %>/<%=productToShow.id%>">
+                            <div class="img_Product_Page">
+                                <% if (productToShow.discount > 1) { %>
+                                    <label><%= productToShow.discount %>% OFF</label>
+                                <% } %>
+                                <img src="/images/products/<%= productToShow.image[0] %>" alt="<%= productToShow.name %>">
+                            </div>
+                            <div class="description_Article_Page">
+                                <p><%= productToShow.name %></p>
+                                <div class="prices_Product_Page">
+                                    <% if (productToShow.discount === 0) { %>
+                                        <p>$<%= productToShow.price %></p>
+                                    <% } else { %>
+                                        <p>$<%= finalPrice = productToShow.price - ((productToShow.price * productToShow.discount)/100) %></p>
+                                        <p>$<%= productToShow.price %></p>
+                                    <% } %>
+                                </div>
+                                <div class="goTo_Add_Item">
+                                    <button>Ver Producto</button>
+                                    <button>Agregar al Carrito</button>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+    
+                <% }) %>
+            </section>
+        </section>
+    </main>
+    <%- include('../partials/footer.ejs') %> 
+  </div>
+</body>
+</html>

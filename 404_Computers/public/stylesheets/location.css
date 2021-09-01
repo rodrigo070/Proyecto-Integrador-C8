@@ -1,0 +1,80 @@
+.location_Box{
+    margin: 35px auto 0 auto;
+}
+
+.locationDetail{
+    margin: 0px auto;
+    width: 100%;
+    display: grid;
+    grid-template-areas: 
+    'text1 text1'
+    'map1 map1';
+    grid-template-columns: 100%;
+    background-image: url(/images/backgrounds/background_v_ver.png);
+}
+
+#locationInfo{
+    margin: 60px auto;
+    grid-area: text1;
+    padding: 0 15px;
+}
+
+#locationInfo pre{
+    font-size: 25px;
+    font-family: 'Atari';
+    text-shadow: 1px 1px white;
+}
+
+#locationInfo div{
+    font-family: 'Atari';
+    text-align: left;
+    margin-top: 10px;
+    font-size: 20px;
+    text-shadow: 1px 1px white;
+}
+
+.iconsContact{
+    height: 18px;
+    width: 18px;
+    margin: 4px 3px 0 3px;
+}
+
+#map{
+    height: 400px;
+    grid-area: map1;
+    border-radius: 0.5rem;
+}
+
+/*-----------------------------------------------------------------*/
+/*---------------------------- Tablet -----------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 768px){
+    .location_Box{
+        margin: 50px auto 0 auto;
+    }
+
+    .locationDetail{
+        grid-template-areas: 
+        'text1 map1';
+        grid-template-columns: 40% 60%;
+    }
+
+    #locationInfo pre,
+    #locationInfo div{
+        padding-left: 10%;
+    }
+
+    #map{
+        width: 80%;
+        margin: auto;
+    }
+
+}
+
+/*-----------------------------------------------------------------*/
+/*------------------------------ PC -------------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 990px){
+}

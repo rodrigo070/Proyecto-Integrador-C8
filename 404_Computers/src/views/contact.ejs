@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('partials/head.ejs') %>
+<body>
+  <div class="container_Page">
+    <%- include('partials/header.ejs') %>   
+    <main>
+        <section class="contactPage">
+            <section class="contactContent">
+                <div class="titles">Contactanos</div>
+                <input type="text" id="nameContact" placeholder="Nombre y Apellido">
+                <input type="email" id="emailContact" name="emailContact" placeholder="Email">
+                <input type="tel" id="phoneContact" name="phoneContact" placeholder="N° De Telefono">
+                <textarea name="messageContact" id="messageContact" cols="40" rows="5" placeholder="Tu Mensaje" style="resize: none;"></textarea>
+                <button>Enviar Mensaje</button>
+            </section>
+        </section>
+
+    </main>
+    <%- include('partials/footer.ejs') %> 
+  </div>
+</body>
+</html>

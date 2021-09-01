@@ -1,0 +1,157 @@
+<header>
+    <div class="main-header">
+        <div class="logoPage">
+            <a href="/"><img src="/images/logos/panda_logo_hq.png" alt=""></a>
+        </div>  
+        
+        <!-- Menu Mobile  --> 
+        <button onclick="dropMenu(); BButton();" class="menuButtonMobile" id="burgerButton">
+            <span class="burgerLine"></span>
+            <span class="burgerLine"></span>
+            <span class="burgerLine"></span>
+        </button>
+        
+        <nav id="mobile_Nav_Bar" class="mobile_Nav_Bar_Menu">
+            
+            <div class="crear-cuenta">
+            <h2><i class="fa fa-user" aria-hidden="true"></i>¡Bienvenidx Usuarix!</h2>
+            <button type="reset" onclick="location.href='/login'">Iniciar Sesion</button>
+            <button type="reset" onclick="location.href='/registro'">Registrarse</button>
+            </div>
+            
+            <ul class="menu_Mobile">
+                <li>
+                    <a href="/carrito"><i class="icons_Mobile_Menu fa fa-shopping-cart" aria-hidden="true"></i>Carrito de Compras</a>
+                </li>
+
+                <li>
+                    <a href="/favoritos"><i class="icons_Mobile_Menu fa fa-heart"></i>Mis favoritos</a>
+                </li>
+
+                <li>
+                    <a href="/productos"><i class="icons_Mobile_Menu fa fa-circle" ></i>Productos</a>
+                </li>
+
+                <li>
+                    <a href="/historial"><i class="icons_Mobile_Menu fa fa-history"></i>Mi Historial</a>
+                </li>
+
+                <li>
+                    <a href="/ofertas"><i class="icons_Mobile_Menu fa fa-tags"></i>Ofertas</a>
+                </li>
+
+                <li>
+                    <a href="/cupones"><i class="icons_Mobile_Menu fa fa-tag"></i>Mis Cupones</a>
+                </li>
+                
+                <li>
+                    <a href="/local"><i class="icons_Mobile_Menu fa fa-location-arrow"></i>Visite Nuestro Local</a>
+                </li>
+                
+                <li>
+                    <a href="/contacto"><i class="icons_Mobile_Menu fa fa-address-book"></i>Contacto</a>
+                </li>
+                
+                <li>
+                    <a href="/404computers"><i class="icons_Mobile_Menu fa fa-users"></i>Nosotros</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Fin Menu Mobile  --> 
+
+        <!-- Buscador Mobile  -->
+        <div class="search_Icon_Button" onclick="dropSearch()">
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </div>
+
+        <div class="search_Categ_Area">
+            <form action="#" class="search_Bar_Box" id="searchBarButtonJS">
+                <div class="search_Bar">
+                    <input type="search" name="busqueda" id="" placeholder="Buscar">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+
+            <nav class="desktop_Bar_Options">
+                <ul>
+                    <li>
+                        <button>Categorias <i class="fa fa-chevron-right" ></i></button>
+                        
+                        <div class="dropdown_Categories">
+                            <div class="row_Catg">
+                                <div class="column_Catg">
+                                    <a href="/productos/hardware" class="title_Catg"><i class="fa fa-microchip" aria-hidden="true"></i> Componentes de PC</a>
+                                    <a href="/productos/hardware/memorias-ram"><i class="fa fa-window-minimize" aria-hidden="true"></i> Memorias RAM</a>
+                                    <a href="/productos/hardware/procesadores"><i class="fa fa-window-minimize" aria-hidden="true"></i> Procesadores</a>
+                                    <a href="/productos/hardware/motherboards"><i class="fa fa-window-minimize" aria-hidden="true"></i> Motherboards</a>
+                                    <a href="/productos/hardware/discos-ssd"><i class="fa fa-window-minimize" aria-hidden="true"></i> Discos SSD</a>
+                                    <a href="/productos/hardware/discos-hdd"><i class="fa fa-window-minimize" aria-hidden="true"></i> Discos HDD</a>
+                                    <a href="/productos/hardware/placas-de-video"><i class="fa fa-window-minimize" aria-hidden="true"></i> Placas de Video</a>
+                                    <a href="/productos/hardware/fuentes-psu"><i class="fa fa-window-minimize" aria-hidden="true"></i> Fuentes PSU</a>
+                                </div>
+                                <div class="column_Catg">
+                                    <a href="/productos/gaming"><i class="fa fa-gamepad" aria-hidden="true"></i> Gaming</a>
+                                    <a href="/productos/gaming/monitores"><i class="fa fa-window-minimize" aria-hidden="true"></i> Monitores</a>
+                                    <a href="/productos/gaming/teclados"><i class="fa fa-window-minimize" aria-hidden="true"></i> Teclados</a>
+                                    <a href="/productos/gaming/mouse"><i class="fa fa-window-minimize" aria-hidden="true"></i> Mouse</a>
+                                    <a href="/productos/gaming/auriculares"><i class="fa fa-window-minimize" aria-hidden="true"></i> Auriculares</a>
+                                    <a href="/productos/gaming/joysticks"><i class="fa fa-window-minimize" aria-hidden="true"></i> Joysticks</a>
+                                    <a href="/productos/gaming/consolas"><i class="fa fa-window-minimize" aria-hidden="true"></i> Consolas</a>
+                                    <a href="/productos/gaming/microfonos"><i class="fa fa-window-minimize" aria-hidden="true"></i> Microfonos</a>
+                                </div>
+                                <div class="column_Catg">
+                                    <a href="/productos/office"><i class="fa fa-briefcase" aria-hidden="true"></i> Oficina</a>
+                                    <a href="/productos/office/impresoras"><i class="fa fa-window-minimize" aria-hidden="true"></i> Impresoras</a>
+                                    <a href="/productos/office/sillas"><i class="fa fa-window-minimize" aria-hidden="true"></i> Sillas</a>
+                                    <a href="/productos/office/soportes"><i class="fa fa-window-minimize" aria-hidden="true"></i> Soportes</a>
+                                    <a href="/productos/office/webcams"><i class="fa fa-window-minimize" aria-hidden="true"></i> Webcams</a>
+                                    <a href="/productos/office/conectividad"><i class="fa fa-window-minimize" aria-hidden="true"></i> Conectividad</a>
+                                    <a href="/productos/office/accesorios"><i class="fa fa-window-minimize" aria-hidden="true"></i> Accesorios</a>
+                                    <a href="/productos/office/notebooks"><i class="fa fa-window-minimize" aria-hidden="true"></i> Notebooks</a>
+                                </div>
+                                <div class="column_Catg">
+                                    <a href="/productos/home"><i class="fa fa-home" aria-hidden="true"></i> Hogar</a>
+                                    <a href="/productos/home/smarts-tv"><i class="fa fa-window-minimize" aria-hidden="true"></i> Smart TV's</a>
+                                    <a href="/productos/home/repetidores"><i class="fa fa-window-minimize" aria-hidden="true"></i> Repetidores</a>
+                                    <a href="/productos/home/tablets"><i class="fa fa-window-minimize" aria-hidden="true"></i> Tablets</a>
+                                    <a href="/productos/home/cables"><i class="fa fa-window-minimize" aria-hidden="true"></i> Cables</a>
+                                    <a href="/productos/home/cargadores"><i class="fa fa-window-minimize" aria-hidden="true"></i> Cargadores</a>
+                                    <a href="/productos/home/parlantes"><i class="fa fa-window-minimize" aria-hidden="true"></i> Parlantes</a>
+                                    <a href="/productos/home/mochilas"><i class="fa fa-window-minimize" aria-hidden="true"></i> Mochilas</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <button type="reset" onclick="location.href='/ofertas'">Ofertas <i class="fa fa-chevron-right" ></i></button>
+                    </li>
+                    <li>
+                        <button type="reset" onclick="location.href='/admin'">Admin <i class="fa fa-user-secret" ></i></button>
+                    </li>
+                </ul>
+            </nav> 
+        </div>
+        <!-- Fin Buscador Mobile  -->
+
+        <!-------------------------->
+        <!------ Desktop Area ------>
+        <!-------------------------->
+
+
+        <div class="desktop_User_Area">
+            <div class="desktop_Profile">
+                <a href="/perfil"><i class="fa fa-user" aria-hidden="true"></i></a>
+                <a href="/carrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+            </div>  
+    
+            <div class="desktop_RegisterLogin">
+                <button type="reset" onclick="location.href='/login'">Iniciar Sesion</button>
+                <button type="reset" onclick="location.href='/registro'">Registrarse</button>
+            </div>
+        </div>
+
+
+    </div> <!--  <--- Fin contenedor Header -->
+    
+</header>

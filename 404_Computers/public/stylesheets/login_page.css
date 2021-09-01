@@ -1,0 +1,226 @@
+/*-----------------------------------------------------------------*/
+/*------------------------ Pagina de Login ------------------------*/
+/*-----------------------------------------------------------------*/
+
+span.error-message {
+    color: red;
+    display: none;
+    font-size: 0.8rem;
+    margin: 5px auto 0;
+}
+
+.login_Container{
+    width: 100%;
+    text-align: center;
+    padding: 30px 20px 20px 20px;
+}
+.login_Box{
+    width: 100%;
+    margin: auto;
+    padding: 10px 0;
+    /* background-color: rgb(74, 39, 155); */
+    background-image: url("/images/backgrounds/background_v_ver.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 1rem;
+}
+
+.login_Box label{
+    padding: 0 16px;
+    display:flex;
+    align-items: flex-start;
+    color: black;
+}
+
+.login_Box input{
+    width: 90%;
+    color: black;
+    font-size: 18px;
+    text-indent: 8px;
+    outline: none;
+    border-style: none;
+    background-color: transparent;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.55);
+    border-radius: 2px;
+    box-shadow: 0 10px 20px rgba(44, 44, 44, 0.1), 0 10px 10px rgba(44, 44, 44, 0.1);
+}
+
+.login_Box h1{
+    margin-top: 5px;
+    font-size: 22px;
+}
+
+
+.email_Area,
+.password_Area,
+.rememberMe{
+    margin-bottom: 30px;
+}
+
+.rememberMe{
+    display: flex;
+    align-items: center;
+    text-align: start;
+    padding: 0 14px;
+}
+
+.rememberMe label{
+    font-size: 12px;
+}
+
+.rememberMe label a{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.rememberMe input{
+    display: flex;
+    justify-content: center;
+    transform: scale(2);
+    margin-left: 8px;
+    width: fit-content;
+}
+
+.buttonLogin button {
+    padding: 10px 25px;
+    font-size: 15px;
+    border-radius: 1rem;
+    cursor: pointer;
+    border-style: none;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(to right, #a05df8 0%, #7739c9  51%, #9900ff  100%);
+    transition: 0.5s;
+    background-size: 200% auto;
+    transition: all 0.5s cubic-bezier(.25,.8,.25,1);
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+.buttonLogin button:hover {
+    /* box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); */
+    background-position: right center;
+}
+
+.goToForgetPassword{
+    margin: 20px 0 0 0;
+    font-size: 13px;
+}
+
+.goToForgetPassword a{
+    color: black;
+    text-decoration: none;
+}
+
+.goToRegister{
+    margin: 10px 0 20px 0;
+    font-size: 13px;
+}
+
+.goToRegister a{
+    color: black;
+    text-decoration: none;
+}
+
+.RGB_Title label{
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.RGB_Title #rgbar{
+    margin: 15px auto 20px auto;
+    height: 2px;
+}
+
+/*-----------------------------------------------------------------*/
+/*--------------------- Fin Pagina de Login--- --------------------*/
+/*-----------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------*/
+/*------------------------- Media Queries -------------------------*/
+/*-----------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------*/
+/*---------------------------- Tablet -----------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 768px) and (max-width: 990px){
+    .login_Container{
+        width: 65%;
+        margin: auto;
+    }
+
+    .login_Box label{
+        padding: 0 42px;
+    }
+
+    .rememberMe{
+        padding: 10px 42px;
+    }
+
+    .rememberMe label{
+        font-size: 16px;
+        padding: 20px;
+    }
+
+    .rememberMe label a{
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .buttonLogin button{
+        transform: scale(1.4);
+    }
+
+    .goToForgetPassword{
+        margin-top: 35px;
+        font-size: 16px;
+    }
+
+    .goToRegister{
+        font-size: 16px;
+    }
+}
+
+/*-----------------------------------------------------------------*/
+/*------------------------------ PC -------------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 990px){
+    .login_Container{
+        width: 45%;
+        margin: auto;
+    }
+
+    .login_Box label{
+        padding: 0 42px;
+    }
+
+    .rememberMe{
+        padding: 10px 42px;
+    }
+
+    .rememberMe label{
+        font-size: 16px;
+        padding: 20px;
+    }
+
+    .rememberMe label a{
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .buttonLogin button{
+        transform: scale(1.4);
+    }
+    
+    .goToForgetPassword{
+        margin-top: 35px;
+        font-size: 16px;
+    }
+
+    .goToRegister{
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head.ejs') %>
+<body class="adminBG">
+  <div class="container_Page">
+    <%- include('../partials/header.ejs') %>   
+    <main>
+        <div class="headerAdmin">
+            <i class="fa fa-user-secret" aria-hidden="true"></i>
+            <p>Bienvenido al Panel de Admin</p>
+        </div>
+        <section class="adminPanel">
+            <a href="/admin/usuarios">
+                Registro de Usuarios
+            </a>
+            <a href="/admin/lista-productos">
+                Area de Productos
+            </a>
+        </section>
+    </main>
+    <%- include('../partials/footer.ejs') %> 
+  </div>
+</body>
+</html>

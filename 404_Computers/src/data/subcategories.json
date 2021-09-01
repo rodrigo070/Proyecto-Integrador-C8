@@ -1,0 +1,170 @@
+[
+    {
+		"subcategoryID":1,
+		"subcategory":"memorias-ram",
+		"subcategoryName": "Memorias RAM",
+        "categoryID":1
+	},
+	{
+		"subcategoryID":2,
+		"subcategoryName": "Procesadores",
+		"subcategory":"procesadores",
+        "categoryID":1
+	},
+	{
+		"subcategoryID":3,
+		"subcategoryName": "Motherboards",
+		"subcategory":"motherboards",
+        "categoryID":1
+	},
+	{
+		"subcategoryID":4,
+		"subcategoryName": "Discos SSD",
+		"subcategory":"discos-ssd",
+        "categoryID":1
+	},
+    {
+		"subcategoryID":5,
+		"subcategoryName": "Discos HDD",
+		"subcategory":"discos-hdd",
+        "categoryID":1
+	},
+	{
+		"subcategoryID":6,
+		"subcategoryName": "Placas de Video",
+		"subcategory":"placas-de-video",
+        "categoryID":1
+	},
+	{
+		"subcategoryID":7,
+		"subcategoryName": "Fuentes PSU",
+		"subcategory":"fuentes-psu",
+        "categoryID":1
+	},
+	{
+		"subcategoryID":8,
+		"subcategoryName": "Monitores",
+		"subcategory":"monitores",
+        "categoryID":2
+	},
+    {
+		"subcategoryID":9,
+		"subcategoryName": "Teclados",
+		"subcategory":"teclados",
+        "categoryID":2
+	},
+	{
+		"subcategoryID":10,
+		"subcategoryName": "Mouse's",
+		"subcategory":"mouse",
+        "categoryID":2
+	},
+	{
+		"subcategoryID":11,
+		"subcategoryName": "Auriculares",
+		"subcategory":"auriculares",
+        "categoryID":2
+	},
+	{
+		"subcategoryID":12,
+		"subcategoryName": "Joysticks",
+		"subcategory":"joysticks",
+        "categoryID":2
+	},
+    {
+		"subcategoryID":13,
+		"subcategoryName": "Consolas",
+		"subcategory":"consolas",
+        "categoryID":2
+	},
+	{
+		"subcategoryID":14,
+		"subcategoryName": "Microfonos",
+		"subcategory":"microfonos",
+        "categoryID":2
+	},
+	{
+		"subcategoryID":15,
+		"subcategoryName": "Impresoras",
+		"subcategory":"impresoras",
+        "categoryID":3
+	},
+	{
+		"subcategoryID":16,
+		"subcategoryName": "Sillas",
+		"subcategory":"sillas",
+        "categoryID":3
+	},
+    {
+		"subcategoryID":17,
+		"subcategoryName": "Soportes",
+		"subcategory":"soportes",
+        "categoryID":3
+	},
+	{
+		"subcategoryID":18,
+		"subcategoryName": "Webcams",
+		"subcategory":"webcams",
+        "categoryID":3
+	},
+	{
+		"subcategoryID":19,
+		"subcategoryName": "Conectividad",
+		"subcategory":"conectividad",
+        "categoryID":3
+	},
+	{
+		"subcategoryID":20,
+		"subcategoryName": "Accesorios",
+		"subcategory":"accesorios",
+        "categoryID":3
+	},
+    {
+		"subcategoryID":21,
+		"subcategoryName": "Notebooks",
+		"subcategory":"notebooks",
+        "categoryID":3
+	},
+	{
+		"subcategoryID":22,
+		"subcategoryName": "Smarts TV's",
+		"subcategory":"smarts-tv",
+        "categoryID":4
+	},
+	{
+		"subcategoryID":23,
+		"subcategoryName": "Repetidores",
+		"subcategory":"repetidores",
+        "categoryID":4
+	},
+	{
+		"subcategoryID":24,
+		"subcategoryName": "Tablets",
+		"subcategory":"tablets",
+        "categoryID":4
+	},
+    {
+		"subcategoryID":25,
+		"subcategoryName": "Cables",
+		"subcategory":"cables",
+        "categoryID":4
+	},
+	{
+		"subcategoryID":26,
+		"subcategoryName": "Cargadores",
+		"subcategory":"cargadores",
+        "categoryID":4
+	},
+	{
+		"subcategoryID":27,
+		"subcategoryName": "Parlantes",
+		"subcategory":"parlantes",
+        "categoryID":4
+	},
+	{
+		"subcategoryID":28,
+		"subcategoryName": "Mochilas",
+		"subcategory":"mochilas",
+        "categoryID":4
+	}
+]
