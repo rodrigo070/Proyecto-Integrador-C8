@@ -19,7 +19,7 @@
 
 .adminListProducts{
     width: 100%;
-    margin: 0 auto;
+    margin: 0 auto 20px auto;
 }
 
 .product_Available{
@@ -41,6 +41,7 @@
 
 .apEditGoto{
     display: block;
+    margin: auto;
     grid-area: goTo;
 }
 
@@ -56,6 +57,7 @@
 }
 
 .apID{
+    margin: auto;
     grid-area: id;
 }
 
@@ -82,6 +84,7 @@ los nombres de los productos */
 }
 
 .apDeleteBox{
+    display: flex;
     grid-area: delete;
 }
 

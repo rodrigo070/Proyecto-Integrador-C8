@@ -37,13 +37,19 @@ module.exports = {
             }
         });
 
+        let productIMGArray = [];
+
+        req.files.forEach(image => {
+            productIMGArray.push(image.filename);
+        });
+
         let newProduct = {
             id: lastId + 1,
-            image: req.file ? [req.file.filename] : ["default.jpg"],
+            image: productIMGArray.length > 0 ? productIMGArray : ["default.jpg"],
             name: req.body.name,
             color: req.body.color,
             price: req.body.price,
-            stock: req.body.stock,
+            stock: 1,
             discount: req.body.discount,
             onSale: req.body.onSale,
             description: req.body.description,
@@ -70,11 +76,18 @@ module.exports = {
     }
     ,
     admin_editar_producto_update: (req, res) => {
+
+        let productIMGArray = [];
+        
+        req.files.forEach(image => {
+            productIMGArray.push(image.filename);
+        });
+
         productsData.forEach(productToEdit => {
             if(productToEdit.id === +req.params.id)
             {
                 productToEdit.id = productToEdit.id,
-                productToEdit.image = req.file ? [req.file.filename] : productToEdit.image,
+                productToEdit.image = productIMGArray.length > 0 ? productIMGArray : productToEdit.image,
                 productToEdit.name = req.body.name ? req.body.name : productToEdit.name,
                 productToEdit.color = req.body.color ? req.body.color : productToEdit.color,
                 productToEdit.price = req.body.price ? req.body.price : productToEdit.price,
