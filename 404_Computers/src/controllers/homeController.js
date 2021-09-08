@@ -30,18 +30,26 @@ module.exports = {
         let subCategoriesFiltered = [];
 
 		productsData.forEach(product => {
-			if(product.name.toLowerCase().includes(req.query.keywords)){
+			if(product.name.toLowerCase().includes(req.query.producto)){
 				result.push(product)
 			}
 		});
-
-		res.render('products/productsList', {
-			products_List : result,
-            products_List_Catg : categoriesData,
-            products_List_SubCatg : subCategoriesData,
-            category : categoriesData,
-            subCategoriesFiltered,
-			search: req.query.keywords
-		});
+        if(result.length != 0)
+        {
+            res.render('products/productsList', {
+                products_List : result,
+                products_List_Catg : categoriesData,
+                products_List_SubCatg : subCategoriesData,
+                category : categoriesData,
+                subCategoriesFiltered,
+                search: req.query.producto
+            });
+        }
+        else
+        {
+            res.render('errorPage', {
+                error: `Lo sentimos el Producto: ${req.query.producto} no existe o fue removido de la pagina.`
+            })
+        }
     }
 }
