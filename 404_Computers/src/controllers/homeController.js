@@ -1,4 +1,4 @@
-let { productsData } = require('../data/db');
+let { productsData,categoriesData,subCategoriesData }  = require('../data/db');
 
 //aca controlamos la vista y las funciones por defecto se
 //renderiza la vista que queremos de la carpeta views
@@ -23,5 +23,25 @@ module.exports = {
     ,
     terms: (req, res) => {
         res.render('termsAndCond');
+    }
+    ,
+    search: (req, res) => {
+        let result = [];
+        let subCategoriesFiltered = [];
+
+		productsData.forEach(product => {
+			if(product.name.toLowerCase().includes(req.query.keywords)){
+				result.push(product)
+			}
+		});
+
+		res.render('products/productsList', {
+			products_List : result,
+            products_List_Catg : categoriesData,
+            products_List_SubCatg : subCategoriesData,
+            category : categoriesData,
+            subCategoriesFiltered,
+			search: req.query.keywords
+		});
     }
 }
