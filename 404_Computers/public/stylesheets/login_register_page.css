@@ -1,5 +1,5 @@
 /*-----------------------------------------------------------------*/
-/*----------------------- Pagina de Registro ----------------------*/
+/*------------------------ Pagina de Login ------------------------*/
 /*-----------------------------------------------------------------*/
 
 .background_Leaves{
@@ -8,12 +8,12 @@
     background-size: cover;
 }
 
-.register_Container{
+.login_Reg_Container{
     width: 100%;
     text-align: center;
     padding: 30px 20px 20px 20px;
 }
-.register_Box{
+.login_Reg_Box{
     width: 100%;
     margin: auto;
     padding: 10px 0;
@@ -22,66 +22,78 @@
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 1rem;
+    position: relative;
 }
 
-.register_Box label{
-    padding: 0 16px;
+.login_Reg_Box label{
+    padding: 0 10px;
     display:flex;
     align-items: flex-start;
     color: black;
 }
 
-.register_Box input{
-    width: 90%;
-    color: black;
+.login_Reg_Box input{
+    width: 100%;
     font-size: 18px;
     text-indent: 8px;
     outline: none;
     border-style: none;
-    background-color: transparent;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.55);
-    border-radius: 2px;
-    box-shadow: 0 10px 20px rgba(44, 44, 44, 0.1), 0 10px 10px rgba(44, 44, 44, 0.1);
+    border-radius: 1rem;
+    padding: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.register_Box h1{
+.login_Reg_Box h1{
     margin-top: 5px;
-    font-size: 22px;
+    font-size: 20px;
 }
 
-.name_Area,
-.email_Area,
-.password_Area,
-.termsAndConditions{
+.email_Area_Login,
+.password_Area_Login,
+.rememberMe,
+.name_Area_Register,
+.email_Area_Register,
+.password_Area_Register,
+.termsAndConditions
+{
+    margin: 0 auto;
+    width: 80%;
     margin-bottom: 30px;
 }
 
-.termsAndConditions{
+.termsAndConditions a{
+    text-decoration: underline;
+}
+
+.termsAndConditions,
+.rememberMe{
     display: flex;
     align-items: center;
-    text-align: start;
-    padding: 0 14px;
+    text-align: left;
+    overflow:hidden;
 }
 
-.termsAndConditions label{
-    font-size: 12px;
+.termsAndConditions label,
+.rememberMe label{
+    font-size: 14px;
+    user-select: none;
 }
 
-.termsAndConditions label a{
+.termsAndConditions label a,
+.rememberMe label a{
     color: black;
-    text-decoration: none;
     cursor: pointer;
 }
 
-.termsAndConditions input{
-    display: flex;
-    justify-content: center;
-    transform: scale(2);
-    margin-left: 8px;
-    width: fit-content;
+.termsAndConditions input,
+.rememberMe input{
+    width: 25px;
+    height: 25px;
+    margin-left: 5px;
 }
 
-.buttonRegister button {
+.buttonRegister button,
+.buttonLogin button {
     padding: 10px 25px;
     font-size: 15px;
     border-radius: 1rem;
@@ -94,20 +106,58 @@
     background-size: 200% auto;
     transition: all 0.5s cubic-bezier(.25,.8,.25,1);
     -webkit-tap-highlight-color: transparent;
-  }
+}
   
-.buttonRegister button:hover {
-    /* box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); */
+.error-message{
+    color: red;
+    display: none;
+    text-align: left;
+    font-size: 16px;
+    margin-left: 5px;
+    position: absolute;
+}
+
+.buttonRegister .error-message,
+.buttonLogin .error-message{
+    margin-top: 5px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.buttonRegister button:hover,
+.buttonLogin button:hover {
     background-position: right center;
 }
 
 
-.goToLogin{
-    margin: 20px 0;
+.goToForgetPassword strong,
+.goToRegister strong,
+.goToLogin strong{
+    text-decoration: underline;
+}
+
+.goToLogin,
+.goToForgetPassword{
+    margin: 35px 0 0 0;
     font-size: 13px;
 }
 
-.goToLogin a{
+.goToLogin,
+.goToForgetPassword a{
+    color: black;
+    text-decoration: none;
+}
+
+.goToRegister{
+    margin: 10px 0 20px 0;
+    font-size: 13px;
+}
+
+.goToRegister a{
     color: black;
     text-decoration: none;
 }
@@ -124,59 +174,51 @@
 }
 
 /*-----------------------------------------------------------------*/
-/*--------------------- Fin Pagina de Registro --------------------*/
+/*--------------------- Fin Pagina de Login--- --------------------*/
 /*-----------------------------------------------------------------*/
 
 /*-----------------------------------------------------------------*/
 /*------------------------- Media Queries -------------------------*/
 /*-----------------------------------------------------------------*/
 
-
-
-/*-----------------------------------------------------------------*/
-/*---------------------------- Celular ----------------------------*/
-/*-----------------------------------------------------------------*/
-
-/* Celular */
-
-@media screen and (min-width: 300px){
-
-}
-
 /*-----------------------------------------------------------------*/
 /*---------------------------- Tablet -----------------------------*/
 /*-----------------------------------------------------------------*/
 
-@media screen and (min-width: 768px) and (max-width: 990px){
-    .register_Container{
-        width: 65%;
+@media screen and (min-width: 768px){
+    .login_Reg_Container{
+        width: 55%;
         margin: auto;
     }
 
-    .register_Box label{
-        padding: 0 42px;
-    }
-
-    .termsAndConditions{
-        padding: 10px 42px;
-    }
-
-    .termsAndConditions label{
+    .termsAndConditions label,
+    .rememberMe label{
         font-size: 16px;
-        padding: 20px;
+        padding: 20px 10px;
     }
 
-    .termsAndConditions label a{
-        text-decoration: none;
+    .termsAndConditions label a,
+    .rememberMe label a{
         cursor: pointer;
     }
 
-    .buttonRegister button{
+    .buttonRegister button,
+    .buttonLogin button{
         transform: scale(1.4);
     }
 
-    .goToLogin{
-        margin-top: 35px;
+    .buttonRegister .error-message,
+    .buttonLogin .error-message{
+        margin-top: 20px;
+    }
+
+    .goToLogin,
+    .goToForgetPassword{
+        margin-top: 50px;
+        font-size: 16px;
+    }
+
+    .goToRegister{
         font-size: 16px;
     }
 }
@@ -186,35 +228,12 @@
 /*-----------------------------------------------------------------*/
 
 @media screen and (min-width: 990px){
-    .register_Container{
-        width: 45%;
-        margin: auto;
+    .login_Reg_Container{
+        width: 35%;
     }
 
-    .register_Box label{
-        padding: 0 42px;
-    }
-
-    .termsAndConditions{
-        padding: 10px 42px;
-    }
-
-    .termsAndConditions label{
-        font-size: 16px;
-        padding: 20px;
-    }
-
-    .termsAndConditions label a{
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-    .buttonRegister button{
+    .buttonLogin button{
         transform: scale(1.4);
     }
-
-    .goToLogin{
-        margin-top: 35px;
-        font-size: 16px;
-    }
+    
 }

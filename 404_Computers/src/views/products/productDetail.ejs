@@ -32,7 +32,7 @@
                 <!-- Aca va la Grilla de Fotos del producto  -->
                 <div class="photosGalleryBox">
                     <% productToDisplay.image.forEach(element => { %>
-                        <img class="miniPhoto" src="/images/products/<%= element %>" onclick="productGridImages(this)">
+                        <img class="miniPhoto" src="/images/products/<%= element %>" onclick="productGridImages(this);">
                     <% }) %>
                 </div>
             </section>
@@ -76,9 +76,9 @@
         <div class="especificaciones">
             <hr>
             <h3 class="h3"> Especificaciones</h3>
-            <span class="negrita">
+            <pre class="negrita">
                 <%= productToDisplay.description %>
-            </span>
+            </pre>
         </div>
 
         <div class="especificaciones">

@@ -121,5 +121,14 @@ module.exports = {
             console.log("la subcategoria ingresada no existe");
         }
     }
-    
+    ,
+    offers: (req, res) => {
+        let subCategoriesFiltered = [];
+        res.render("products/productsList", {
+            products_List : productsData,
+            products_List_Catg : categoriesData,
+            products_List_SubCatg : subCategoriesData,
+            subCategoriesFiltered
+        })
+    }
 }

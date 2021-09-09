@@ -7,5 +7,6 @@ router.get('/local', controller.location);
 router.get('/404computers', controller.about);
 router.get('/contacto', controller.contact);
 router.get('/terminos', controller.terms);
+router.get('/buscar', controller.search);
 
 module.exports = router;

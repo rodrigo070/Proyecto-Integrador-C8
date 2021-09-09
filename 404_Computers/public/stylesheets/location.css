@@ -2,6 +2,10 @@
     margin: 35px auto 0 auto;
 }
 
+.locationPage{
+    background-image: url(/images/backgrounds/background_v_ver.png);
+}
+
 .locationDetail{
     margin: 0px auto;
     width: 100%;
@@ -10,13 +14,14 @@
     'text1 text1'
     'map1 map1';
     grid-template-columns: 100%;
-    background-image: url(/images/backgrounds/background_v_ver.png);
 }
 
 #locationInfo{
-    margin: 60px auto;
+    margin: 0 auto;
     grid-area: text1;
-    padding: 0 15px;
+    padding: 35px;
+    border-radius: 1rem;
+    background-color: white;
 }
 
 #locationInfo pre{
@@ -58,11 +63,6 @@
         grid-template-areas: 
         'text1 map1';
         grid-template-columns: 40% 60%;
-    }
-
-    #locationInfo pre,
-    #locationInfo div{
-        padding-left: 10%;
     }
 
     #map{

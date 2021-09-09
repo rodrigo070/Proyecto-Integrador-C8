@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended : false}));
 app.use(methodOverride('_method'));
 
-// Routes - > desde aca indicamos las rutas -> las direcciones estan declaradas en los archivos js de rutas
+// Routes
 
 //Home - vistas generales
 app.use('/', homeRouter);
@@ -32,7 +32,7 @@ app.use('/', productosRouter);
 app.use('/admin', adminRouter)
 
 app.use((req, res, next) => {
-  res.status(404).render('errorPage', {error: ""});
+  res.status(404).render('errorPage', {error: "ERROR 404: La Pagina a la cual intenta acceder no existe o fue removida del sistema."});
 })
 
 app.listen(port, () => {

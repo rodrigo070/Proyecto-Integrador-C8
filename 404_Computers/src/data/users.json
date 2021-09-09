@@ -1,20 +1,50 @@
 [
     {
 		"id":1,
-		"name": "MRuser",
-		"surname": "MRusername",
-        "email" : "user@gmail.com",
+		"name": "Usuario1",
+		"surname": "Usuario01",
+        "email" : "user01@gmail.com",
         "password" : 1234,
-        "category" : "user",
-        "image" : "user1.jpg"
+        "category" : "ROLE_USER",
+        "image" : "user_default.jpg",
+		"adress" : "",
+		"phoneNumber" : 0,
+		"dni" : 0
 	},
 	{
 		"id":2,
-		"name": "MRadmin",
-		"surname": "MRadminn",
+		"name": "Usuario2",
+		"surname": "Usuario02",
+        "email" : "user02@gmail.com",
+        "password" : 1234,
+        "category" : "ROLE_USER",
+        "image" : "user_default.jpg",
+		"adress" : "",
+		"phoneNumber" : 0,
+		"dni" : 0
+	},
+	{
+		"id":3,
+		"name": "Usuario3",
+		"surname": "Usuario03",
+        "email" : "user03@gmail.com",
+        "password" : 1234,
+        "category" : "ROLE_USER",
+        "image" : "user_default.jpg",
+		"adress" : "",
+		"phoneNumber" : 0,
+		"dni" : 0
+	},
+	{
+		"id":4,
+		"name": "ADMIN",
+		"surname": "ADMIN01",
         "email" : "admin@gmail.com",
         "password" : 1234,
-        "category" : "admin",
-        "image" : "user2.jpg"
+        "category" : "ROLE_ADMIN",
+        "image" : "user_default.jpg",
+		"adress" : "",
+		"phoneNumber" : 0,
+		"dni" : 0
 	}
 ]

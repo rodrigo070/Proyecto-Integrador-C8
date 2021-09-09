@@ -1,7 +1,6 @@
 /*Footer*/
 
 .main-footer {
-    margin-top: 1.2rem;
     padding: 10px 15px 10px 15px;
     background: linear-gradient(#343434,#000);
     display: flex;
@@ -25,7 +24,6 @@
 /*Content Text - Icons*/
 
 footer{
-    margin-top: 15px;
     position: relative;
 }
 
@@ -47,10 +45,7 @@ footer p{
 }
 
 .fb_ico:hover{
-    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: blue;
 }
 
 .inst_ico:hover{
@@ -61,17 +56,11 @@ footer p{
 }
 
 .mail_ico:hover{
-    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: skyblue;
 }
 
 .whats_ico:hover{
-    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: green;
 }
 
 .footer_Logo{
