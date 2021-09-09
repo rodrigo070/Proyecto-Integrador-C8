@@ -1,4 +1,4 @@
-let { productsData,categoriesData,subCategoriesData }  = require('../data/db');
+let { bannersData,productsData,categoriesData,subCategoriesData }  = require('../data/db');
 
 //aca controlamos la vista y las funciones por defecto se
 //renderiza la vista que queremos de la carpeta views
@@ -6,7 +6,10 @@ let { productsData,categoriesData,subCategoriesData }  = require('../data/db');
 
 module.exports = {
     home: (req, res) => {
-        res.render('home' , {productsData});
+        res.render('home' , {
+            productsData,
+            bannersData
+        });
     }
     ,
     location: (req, res) => {

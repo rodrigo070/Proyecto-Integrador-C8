@@ -131,14 +131,14 @@
     border-radius: 0.5rem;
 }
 
-.editProductSaveAbort{
+.editProductSaveCancel{
     display: flex;
     justify-content: center;
     margin: 0 auto;
     gap: 10px;
 }
 
-.editProductSaveAbort button{
+.editProductSaveCancel button{
     border-radius: 0.5rem;
     border:1px solid black;
     background-color: white;

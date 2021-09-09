@@ -3,9 +3,12 @@ let router = express.Router();
 let controller = require('../controllers/adminController.js');
 
 let uploadProductFile = require("../middlewares/uploadProductsFiles")
+let uploadBannerFile = require("../middlewares/uploadBannerFile")
 
 router.get('/', controller.admin);
 router.get('/usuarios', controller.admin_usuarios);
+router.get('/banners', controller.banners);
+router.post('/banners', uploadBannerFile.single("bannerImage") ,controller.banners_update);
 /* GET Carga de Productos */
 router.get('/agregar-producto', controller.admin_agregar);
 /* POST Recibo los Datos y los integro a la Base de Datos */
@@ -20,6 +23,10 @@ router.get('/lista-productos', controller.admin_productos);
 /* las vistas de abajo reutilizan el listado de productos */
 router.get('/lista-productos/stock', controller.admin_stock);
 router.get('/lista-productos/ofertas', controller.admin_ofertas);
+
+/* Boton de Borrar Banner */
+
+router.delete('/borrarBanner/:id', controller.borrar_banner);
 
 /* Boton de Eliminar Producto */
 router.delete('/borrarProducto/:id', controller.borrar_Producto);

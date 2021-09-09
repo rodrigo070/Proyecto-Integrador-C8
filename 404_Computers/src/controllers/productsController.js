@@ -123,9 +123,11 @@ module.exports = {
     }
     ,
     offers: (req, res) => {
+        let products = productsData.filter(product => product.discount > 0);
+
         let subCategoriesFiltered = [];
         res.render("products/productsList", {
-            products_List : productsData,
+            products_List : products,
             products_List_Catg : categoriesData,
             products_List_SubCatg : subCategoriesData,
             subCategoriesFiltered

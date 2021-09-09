@@ -1,4 +1,4 @@
-let { productsData , usersData , categoriesData , subCategoriesData , writeProductEdit} = require('../data/db');
+let { bannersData, productsData , usersData , categoriesData , subCategoriesData , writeProductEdit ,writeBannersEdit} = require('../data/db');
 //aca controlamos la vista y las funciones por defecto se
 //renderiza la vista que queremos de la carpeta views
 //por aca podemos controlar que datos queremos que muestre por pantalla
@@ -106,18 +106,65 @@ module.exports = {
     }
     ,
     admin_stock: (req, res) => {
+        let products = productsData.filter(product => product.stock > 0);
+
         res.render('admin/adminProductList',  {
-            productsData,
+            productsData: products,
             messageToDisplay : "Disponibles en Stock"
-            
         });
     }
     ,
     admin_ofertas: (req, res) => {
+
+        let products = productsData.filter(product => product.discount > 0);
+
         res.render('admin/adminProductList',  {
-            productsData,
+            productsData:products,
             messageToDisplay : "Disponibles en Oferta"
         });
+    }
+    ,
+    banners: (req, res) => {
+        
+        res.render('admin/addBanners',  {
+            productsData,
+            bannersData
+        });
+    }
+    ,
+    banners_update: (req, res) => {
+
+        let lastId = 1;
+
+        bannersData.forEach(banner => {
+            if(banner.id > lastId){
+                lastId = banner.id
+            }
+        });
+
+        let newBanner = {
+            id: lastId + 1,
+            bannerImage: req.file ? req.file.filename : "default.jpg",
+        }
+
+        bannersData.push(newBanner);
+        console.log(newBanner);
+
+        writeBannersEdit(bannersData);
+
+        res.redirect('/');
+    }
+    ,
+    borrar_banner: (req, res) => {
+        bannersData.forEach(bannerToDelete => {
+            if(bannerToDelete.id === +req.params.id){
+                let borrarBanner = bannersData.indexOf(bannerToDelete)
+                bannersData.splice(borrarBanner, 1)
+            }
+        })
+
+        writeBannersEdit(bannersData);
+        res.redirect('/admin/banners');
     }
     ,
     borrar_Producto: (req, res) => {

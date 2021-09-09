@@ -493,10 +493,19 @@ header {
     .desktop_Profile i{
         color: black;
         font-size: 25px;
+        position: relative;
     }
 
     .desktop_Profile i:nth-child(1){
         margin-right: 7px;
+    }
+
+    .user-logged-in{
+        position: absolute;
+        color: rgb(0, 255, 0);
+        right: -8px;
+        bottom: 12px;
+        transform: scale(0.6);
     }
 
     .desktop_RegisterLogin{

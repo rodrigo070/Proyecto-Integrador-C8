@@ -10,6 +10,7 @@
             <a href="/admin/lista-productos">Lista de Productos</a>
             <a href="/admin/lista-productos/stock">Stock</a>
             <a href="/admin/lista-productos/ofertas">Ofertas</a>
+            <a href="/admin/banners">Banners</a>
         </nav>
         <section class="editProductSection">
             <div>Edicion del Producto N°<%= productToEdit.id %></div>
@@ -113,7 +114,7 @@
                      
                     <% } %>
                 </div>
-                <div class="editProductSaveAbort">
+                <div class="editProductSaveCancel">
                     <button type="submit">Guardar</button>
                     <button type="reset" onclick="location.href='/admin/lista-productos'">Cancelar</button>
                 </div>
