@@ -1,17 +1,38 @@
 .product_Page_Grid{
     display: grid;
     grid-template-areas: 
-    'categorias opciones'
-    'categorias vista';
-    grid-template-columns: 15% 85%;
+    'opciones'
+    'vista';
+    grid-template-columns: 100%;
     width: 100%;
 }
 
-.categories_SidePanel{
+.modalSidePanel{
+    display: none;
+    position: fixed;
+    z-index: 16;
+    padding-top: 110px;
+    padding-left: 30px;
+    left: 0;
+    top: 0;
     width: 100%;
-    grid-area: categorias;
-    padding: 25px 25px;
-    background-color: rgba(255, 255, 255,0.7);
+    height: 100%;
+    background-color: white;
+    animation: fadeout 0.7s;
+}
+
+.closeFilterOptions{
+    position: fixed;
+    right: 25px;
+    margin-top: -20px;
+}
+
+.closeFilterOptions i{
+    font-size: 25px;
+}
+
+.categories_SidePanel{
+    display: none;
 }
 
 .categoriesSubSection{
@@ -48,10 +69,23 @@
     background-color: white;
 }
 
+.buttonFilterProducts button{
+    outline: none;
+    border-style: none;
+    border: 1px solid black;
+    border-radius: .5rem;
+    padding: 5px 15px;
+    background: white;
+}
+
 .sortProducts{
     padding: 20px 0;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-around;
+}
+
+.sortProducts form{
+    margin: auto 0;
 }
 
 .productListView{
@@ -164,4 +198,39 @@
 .goTo_Add_Item button:hover{
     background-color: #735bff;
     color: white;
+}
+
+/* Tablet */
+
+@media screen and (min-width: 768px){
+    .product_Page_Grid{
+        grid-template-areas: 
+        'categorias opciones'
+        'categorias vista';
+        grid-template-columns: 25% 75%;
+    }
+
+    .categories_SidePanel{
+        display: block;
+        grid-area: categorias;
+        width: 100%;
+        padding: 25px 25px;
+        background-color: rgba(255, 255, 255,0.7);
+    }
+
+    .buttonFilterProducts{
+        display: none !important;
+    }
+
+    .sortProducts{
+        justify-content: flex-end;
+    }
+}
+
+/* Desktop */
+
+@media screen and (min-width: 990px){
+    .product_Page_Grid{
+        grid-template-columns: 18% 82%;
+    }
 }
