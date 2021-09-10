@@ -107,24 +107,33 @@
         <div class="titulo-seccion-desktop">
             <h3>Visto Recientemente</h3>
         </div>
-        <section class="seccion-general-desktop">
+        <div class="desktopCardsBox">
+            <section class="homeProductBoxCards productListView">
 
-            <% for( let i = 0; i < 5; i++ ) { %>
-                <article class="product_Item_Recommended">
-                    <a href="/productos/<%= productsData[i].category %>/<%= productsData[i].subcategory%>/<%= productsData[i].id%>">
-                        <div class="img">
-                            <img src="/images/products/<%= productsData[i].image[0] %>" alt="">
-                        </div>
-                        <div class="descripcion-articulo">
-                            <p><%= productsData[i].name %></p>
-                            <p>$<%= productsData[i].price %></p>
-                            <p>Envio Gratis</p>
-                            <p>Hasta 12 Cuotas sin interes</p>
-                        </div>
-                    </a>
-                </article>
-            <% } %>
-        </section>
+                <% for( let i = 0; i < 5; i++ ) { %>
+                    <article class="products_Page_Article">
+                        <a href="/productos/<%= productsData[i].category %>/<%= productsData[i].subcategory %>/<%=productsData[i].id%>">
+                            <div class="img_Product_Page">
+                                <% if (productsData[i].discount > 1) { %>
+                                    <label><%= productsData[i].discount %>% OFF</label>
+                                <% } %>
+                                <img src="/images/products/<%= productsData[i].image[0] %>" alt="<%= productsData.name %>">
+                            </div>
+                            <div class="description_Article_Page homeProductCard">
+                                <p><%= productsData[i].name %></p>
+                                <div class="prices_Product_Page">
+                                    <% if (productsData[i].discount === 0) { %>
+                                        <p>$<%= productsData.price %></p>
+                                    <% } else { %>
+                                        <p>$<%= finalPrice = productsData[i].price - ((productsData[i].price * productsData[i].discount)/100) %></p>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                <% } %>
+            </section>
+        </div>
 
         <!-- barra que vimos en maximus -->
         <section class="menu-categorias-desktop">

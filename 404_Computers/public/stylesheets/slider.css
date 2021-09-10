@@ -107,14 +107,14 @@
 	min-height: 115px;
 	padding:5px;
 	border-radius: 0.5rem;
-	background-color: #5e52ff;
+	background: linear-gradient(180deg, #f0f5fde0 0%, #c2b8f98c 100%);
 	overflow: hidden;
 }
 
 .productRecommendedDescription p{
 	padding: 5px;
 	font-size: 13px;
-	color: white;
+	color: #2e2e2e;
 }
 
 .productRecommendedDescription p:nth-child(1){
