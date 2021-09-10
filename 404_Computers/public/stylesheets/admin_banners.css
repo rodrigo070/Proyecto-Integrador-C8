@@ -1,8 +1,9 @@
 .grid_banners{
     display: grid;
-    grid-template-columns: 60% 40%;
+    grid-template-columns: 100%;
     grid-template-areas: 
-    'list imageUpload';
+    'imageUpload'
+    'list';
     width: 100%;
 }
 
@@ -15,11 +16,11 @@
     display: grid;
     grid-template-areas:
         'idItem imageItem deleteItemList';
-    grid-template-columns: 15% 70% 15%;
+    grid-template-columns: 25% 50% 25%;
     width: 100%;
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    margin: 5px;
+    margin: 5px 0;
     border-radius: 1rem;
 }
 
@@ -39,7 +40,7 @@
     grid-area: list;
     width: 100%;
     margin: auto;
-    padding: 15px 30px;
+    padding: 15px 10px;
     border-radius: 1rem;
 }
 
@@ -142,14 +143,39 @@
     object-fit: contain;
 }
 
+#imagePreview{
+    width: 240px !important;
+    height: 140px !important;
+}
+
 /* Tablet */
 
 @media screen and (min-width: 768px){
-    
+    .grid_banners{
+        grid-template-columns: 60% 40%;
+        grid-template-areas: 
+        'list imageUpload';
+    }
+
+    .grid_item_list{
+        grid-template-columns: 15% 70% 15%;
+    }
+
+    .grid_list_box{
+        padding: 15px 30px;
+    }
+
+    #imagePreview{
+        width: 240px !important;
+        height: 170px !important;
+    }
 }
 
 /* Desktop */
 
 @media screen and (min-width: 990px){
-    
+    #imagePreview{
+        width: 300px !important;
+        height: 230px !important;
+    }
 }

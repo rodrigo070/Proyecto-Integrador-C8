@@ -190,7 +190,8 @@ header {
     top: 73px; 
     right: 0; 
     bottom: 0; 
-    left: 0; 
+    left: -10px; 
+    box-sizing: content-box;
     background-color: white;
     animation: mobileFade 0.8s;
 }
@@ -203,6 +204,7 @@ header {
 
 .menu_Mobile li {
     padding: 10px 0;
+    padding-left: 10px;
 }
 
 .menu_Mobile a,
