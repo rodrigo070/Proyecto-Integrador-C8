@@ -32,11 +32,12 @@ module.exports = {
         let result = [];
         let subCategoriesFiltered = [];
 
-		productsData.forEach(product => {
-			if(product.name.toLowerCase().includes(req.query.producto)){
-				result.push(product)
-			}
-		});
+        productsData.forEach(product => {
+            if(product.name.toLowerCase().includes(req.query.producto)){
+                result.push(product)
+            }
+        });
+        
         if(result.length != 0)
         {
             res.render('products/productsList', {
