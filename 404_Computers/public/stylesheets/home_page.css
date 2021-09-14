@@ -154,7 +154,7 @@ con texto incluido*/
     display: none;
     margin: 0px auto -3px auto;
     background-color: rgb(129 67 228);
-    width: 25%;
+    width: 30%;
     border-radius: 1rem 1rem 0.3rem 0.3rem;
     color: white;
 }
@@ -168,7 +168,8 @@ con texto incluido*/
 }
 
 .homeProductBoxCards{
-    grid-template-columns: repeat(5, minmax(240px, 1fr)) !important;
+    grid-template-columns: repeat(auto-fill, 240px) !important;
+    justify-content: center;
 }
 
 .homeProductCard{
@@ -240,30 +241,24 @@ en desarrollo
     }
 
     .home_Container .crear-cuenta{
-        background-color: #8080805f;
-        display: flex;
-        flex-direction: column;
-        padding: 20px;
-        border-radius: 20px;
-        width: 90%;
-        margin: 0 auto;
-        margin-bottom: 45px;
         text-align: center;
     }
     .home_Container .crear-cuenta button{
-        margin: 11px;
-        width: 200px;
-        height: 39px;
-        padding: 5px;
-        border: none;
-        border-radius: 20px;
-        outline: none;
-        font-size: 16px;
         margin:15px auto;
     }
 
     .home_Container .seccion-general{
         display: none;
+    }
+
+    .home_Container .titulo-seccion-desktop{
+        display: block;
+    }
+    .home_Container .titulo-seccion-desktop h3{
+        padding: 10px;
+        position: relative;
+        display: block;
+        text-align: center;
     }
 
     .home_Container .crear-cuenta{
@@ -369,15 +364,6 @@ en desarrollo
 
 
     /* secion general desktop */
-    .home_Container .titulo-seccion-desktop{
-        display: block;
-    }
-    .home_Container .titulo-seccion-desktop h3{
-        padding: 10px;
-        position: relative;
-        display: block;
-        text-align: center;
-    }
 
     .home_Container .seccion-general-desktop{
         display: flex;
@@ -444,5 +430,9 @@ en desarrollo
         padding: 10px;
         width: 100%;
         cursor: pointer;
+    }
+
+    .home_Container .titulo-seccion-desktop h3{
+        width: 25%;
     }
 }

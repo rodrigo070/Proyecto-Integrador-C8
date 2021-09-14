@@ -7,7 +7,8 @@ module.exports = {
             products_List : productsData,
             products_List_Catg : categoriesData,
             products_List_SubCatg : subCategoriesData,
-            subCategoriesFiltered
+            subCategoriesFiltered,
+            title : 'Productos - '
         });
 
     }
@@ -66,7 +67,8 @@ module.exports = {
                 products_List:product,
                 category,
                 subCategoriesFiltered,
-                products_List_Catg : categoriesData
+                products_List_Catg : categoriesData,
+                title : category.categoryName+' - '
             });
         }
         else
@@ -99,18 +101,19 @@ module.exports = {
         });
 
         if(category !== undefined && subCategory !== undefined) {
-            product = productsData.filter(product => {
+            let product = productsData.filter(product => {
                 if(product.category === categoryId && product.subcategory === subCategoryId){
                     return product;
                 }
             });
-        
+
             res.render('products/productsList', {
                 products_List:product,
                 category,
                 subCategory,
                 subCategoriesFiltered,
-                products_List_Catg : categoriesData
+                products_List_Catg : categoriesData,
+                title : subCategory.subcategoryName+' - '
             });
         }
         else
@@ -130,7 +133,8 @@ module.exports = {
             products_List : products,
             products_List_Catg : categoriesData,
             products_List_SubCatg : subCategoriesData,
-            subCategoriesFiltered
+            subCategoriesFiltered,
+            title : 'Ofertas - '
         })
     }
 }

@@ -148,11 +148,12 @@
     grid-template-rows: 32% 23% 45%;
     text-align: left;
     background-image: linear-gradient(180deg, #f0f5fde0 0%, #c2b8f98c 100%);
-    height: 190px;
+    height: 200px;
     width: 100%;
     padding: 10px 25px;
     font-size: 18px;
     border-radius: 0 0 0.5rem 0.5rem;
+    color: #353535;
 }
 
 .prices_Product_Page{
@@ -168,12 +169,13 @@
     margin-right: 10px;
     -webkit-text-decoration-line: none; /* Safari */
     text-decoration-line: none; 
-    color: black;
+    color: #353535;
 }
 
 .goTo_Add_Item{
     width: 100%;
     text-align: center;
+    margin: 5px 0;
 }
 
 .goTo_Add_Item button{
@@ -224,6 +226,7 @@
 
     .sortProducts{
         justify-content: flex-end;
+        padding-right: 35px;
     }
 
 }

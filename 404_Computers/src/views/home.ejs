@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-<%- include('partials/head.ejs') %>
+<%- include('partials/head.ejs', {title: ''}) %>
 <head>
     <script src="/javascripts/carousel.js" defer></script>
 </head>
@@ -110,7 +110,7 @@
         <div class="desktopCardsBox">
             <section class="homeProductBoxCards productListView">
 
-                <% for( let i = 0; i < 5; i++ ) { %>
+                <% for( let i = 0; i < 6; i++ ) { %>
                     <article class="products_Page_Article">
                         <a href="/productos/<%= productsData[i].category %>/<%= productsData[i].subcategory %>/<%=productsData[i].id%>">
                             <div class="img_Product_Page">
