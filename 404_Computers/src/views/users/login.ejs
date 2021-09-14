@@ -14,11 +14,15 @@
                 </section>
                 <section class="email_Area_Login">
                     <input type="email" name="email" id="emailUser" placeholder="Ingrese su E-mail: ">
-                    <span class="error-message">Debe ingresar su email</span>
+                    <% if (locals.errors && errors.email) { %>
+                        <small class="error-message"><%= errors.email.msg %> </small>
+                    <% } %>
                 </section>
                 <section class="password_Area_Login">
                     <input type="password" name="password" id="passUser" placeholder="Ingrese su Contraseña: ">
-                    <span class="error-message">Debe ingresar su contraseña</span>
+                    <% if (locals.errors && errors.pass) { %>
+                        <small class="error-message"><%= errors.pass.msg %> </small>
+                    <% } %>
                 </section>
                 <section class="rememberMe">
                     <input type="checkbox" name="rememberDevice" id="recordar">
@@ -26,7 +30,6 @@
                 </section>
                 <section class="buttonLogin">
                     <button type="submit">Iniciar Sesion</button>
-                    <span class="error-message">Credenciales inválidas</span>
                 </section>
                 <section class="goToForgetPassword">
                     <a href="/restablecer_contrasena">¿Olvidaste tu contraseña?&nbsp;<strong>Hace Click Aqui.</strong></a>

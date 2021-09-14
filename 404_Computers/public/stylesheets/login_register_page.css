@@ -110,7 +110,7 @@
   
 .error-message{
     color: red;
-    display: none;
+    display: block;
     text-align: left;
     font-size: 16px;
     margin-left: 5px;

@@ -5,32 +5,53 @@
   <div class="container_Page">
     <%- include('../partials/header.ejs') %>   
     <main>
-      <form action="" method="">
+      <form action="/registro" method="POST">
           <section class="login_Reg_Container">
               <div class="login_Reg_Box">
-                  <section class="RGB_Title">
-                      <h1 for="titleRegister">Completa tus Datos</h1>
-                      <div id="rgbar" class=""></div>
-                  </section>
-                  <section class="name_Area_Register">
-                      <input type="text" name="nameSurname" id="nameSurname" placeholder="Nombre Completo: ">
-                  </section>
-                  <section class="email_Area_Register">
-                      <input type="email" name="emailUser" id="emailUser" placeholder="Correo Electronico:">
-                  </section>
-                  <section class="password_Area_Register">
-                      <input type="password" name="passUser" id="passUser" placeholder="Contraseña:">
-                  </section>
-                  <section class="termsAndConditions">
-                      <input type="checkbox" name="termsCond" id="termsCond">
-                      <label for="termsCond">Aceptar los&nbsp;<a href="/terminos"> Términos y Condiciones.</a></label>
-                  </section>
-                  <section class="buttonRegister">
-                      <button type="submit">Registrarme</button>
-                  </section>
-                  <section class="goToLogin">
-                      <a href="/login">¿Ya tienes una cuenta?&nbsp;<strong>Inicia Sesion Aqui.</strong></a>
-                  </section>
+                <section class="RGB_Title">
+                    <h1 for="titleRegister">Completa tus Datos</h1>
+                    <div id="rgbar" class=""></div>
+                </section>
+                <section class="name_Area_Register">
+                    <input type="text" name="name" id="name" placeholder="Nombre: ">
+                    <% if (locals.errors && errors.name) { %>
+                        <small class="error-message"><%= errors.name.msg %> </small>
+                    <% } %>
+                </section>
+                <section class="name_Area_Register">
+                    <input type="text" name="surname" id="surname" placeholder="Apellido: ">
+                    <% if (locals.errors && errors.surname) { %>
+                        <small class="error-message"><%= errors.surname.msg %> </small>
+                    <% } %>
+                </section>
+                <section class="email_Area_Register">
+                    <input type="email" name="email" id="email" placeholder="Correo Electronico:">
+                    <% if (locals.errors && errors.email) { %>
+                        <small class="error-message"><%= errors.email.msg %> </small>
+                    <% } %>
+                </section>
+                <section class="password_Area_Register">
+                    <input type="password" name="pass" id="pass" placeholder="Contraseña:">
+                    <% if (locals.errors && errors.pass) { %>
+                        <small class="error-message"><%= errors.pass.msg %> </small>
+                    <% } %>
+                </section>
+                <section class="password_Area_Register">
+                    <input type="password" name="passCheck" id="passCheck" placeholder="Contraseña:">
+                    <% if (locals.errors && errors.passCheck) { %>
+                        <small class="error-message"><%= errors.passCheck.msg %> </small>
+                    <% } %>
+                </section>
+                <section class="termsAndConditions">
+                    <input type="checkbox" name="termsCond" id="termsCond">
+                    <label for="termsCond">Aceptar los&nbsp;<a href="/terminos"> Términos y Condiciones.</a></label>
+                </section>
+                <section class="buttonRegister">
+                    <button type="submit">Registrarme</button>
+                </section>
+                <section class="goToLogin">
+                    <a href="/login">¿Ya tienes una cuenta?&nbsp;<strong>Inicia Sesion Aqui.</strong></a>
+                </section>
               </div>
               
           </section>

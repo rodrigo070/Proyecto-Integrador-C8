@@ -1,50 +1,62 @@
 [
-    {
-		"id":1,
-		"name": "Usuario1",
-		"surname": "Usuario01",
-        "email" : "user01@gmail.com",
-        "password" : 1234,
-        "category" : "ROLE_USER",
-        "image" : "user_default.jpg",
-		"adress" : "",
-		"phoneNumber" : 0,
-		"dni" : 0
-	},
-	{
-		"id":2,
-		"name": "Usuario2",
-		"surname": "Usuario02",
-        "email" : "user02@gmail.com",
-        "password" : 1234,
-        "category" : "ROLE_USER",
-        "image" : "user_default.jpg",
-		"adress" : "",
-		"phoneNumber" : 0,
-		"dni" : 0
-	},
-	{
-		"id":3,
-		"name": "Usuario3",
-		"surname": "Usuario03",
-        "email" : "user03@gmail.com",
-        "password" : 1234,
-        "category" : "ROLE_USER",
-        "image" : "user_default.jpg",
-		"adress" : "",
-		"phoneNumber" : 0,
-		"dni" : 0
-	},
-	{
-		"id":4,
-		"name": "ADMIN",
-		"surname": "ADMIN01",
-        "email" : "admin@gmail.com",
-        "password" : 1234,
-        "category" : "ROLE_ADMIN",
-        "image" : "user_default.jpg",
-		"adress" : "",
-		"phoneNumber" : 0,
-		"dni" : 0
-	}
+  {
+    "id": 1,
+    "name": "Usuario1",
+    "surname": "Usuario01",
+    "email": "user01@gmail.com",
+    "password": 1234,
+    "rol": "ROLE_USER",
+    "image": "user_default.jpg",
+    "address": "",
+    "phoneNumber": 0,
+    "dni": 0
+  },
+  {
+    "id": 2,
+    "name": "Usuario2",
+    "surname": "Usuario02",
+    "email": "user02@gmail.com",
+    "password": 1234,
+    "rol": "ROLE_USER",
+    "image": "user_default.jpg",
+    "address": "",
+    "phoneNumber": 0,
+    "dni": 0
+  },
+  {
+    "id": 3,
+    "name": "Usuario3",
+    "surname": "Usuario03",
+    "email": "user03@gmail.com",
+    "password": 1234,
+    "rol": "ROLE_USER",
+    "image": "user_default.jpg",
+    "address": "",
+    "phoneNumber": 0,
+    "dni": 0
+  },
+  {
+    "id": 4,
+    "name": "ADMIN",
+    "surname": "ADMIN01",
+    "email": "admin@gmail.com",
+    "password": 1234,
+    "rol": "ROLE_ADMIN",
+    "image": "user_default.jpg",
+    "address": "",
+    "phoneNumber": 0,
+    "dni": 0
+  },
+  {
+    "id": 5,
+    "name": "fsdfsdfsdf",
+    "surname": "fpdlsfpsdlfp",
+    "email": "fdsplfpsdfpl@gmail.com",
+    "pass": "$2b$12$jcpUCoN8n7WrYVaPoz46y.Xj/200gSGG6gd6CxMPl8A0dE/b3CIcm",
+    "rol": "ROL_USER",
+    "image": "user_default.jpg",
+    "address": "",
+    "phoneNumber": 0,
+    "dni": 0
+  }
 ]
