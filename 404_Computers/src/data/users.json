@@ -46,17 +46,5 @@
     "address": "",
     "phoneNumber": 0,
     "dni": 0
-  },
-  {
-    "id": 5,
-    "name": "fsdfsdfsdf",
-    "surname": "fpdlsfpsdlfp",
-    "email": "fdsplfpsdfpl@gmail.com",
-    "pass": "$2b$12$jcpUCoN8n7WrYVaPoz46y.Xj/200gSGG6gd6CxMPl8A0dE/b3CIcm",
-    "rol": "ROL_USER",
-    "image": "user_default.jpg",
-    "address": "",
-    "phoneNumber": 0,
-    "dni": 0
   }
 ]

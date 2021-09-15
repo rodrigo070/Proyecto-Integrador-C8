@@ -2,6 +2,14 @@
 /*------------------------ Pagina de Login ------------------------*/
 /*-----------------------------------------------------------------*/
 
+.titleLogin p{
+    font-size: 28px;
+    text-align: left;
+    grid-area: contentLogin;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
 .background_Leaves{
     background-image: url(/images/backgrounds/background_Leaves_t.png);
     background-repeat: no-repeat;
@@ -9,24 +17,28 @@
 }
 
 .login_Reg_Container{
-    width: 100%;
-    text-align: center;
-    padding: 30px 20px 20px 20px;
-}
-.login_Reg_Box{
-    width: 100%;
-    margin: auto;
-    padding: 10px 0;
-    /* background-color: rgb(74, 39, 155); */
+    display: grid;
+    grid-template-areas: 'space0 contentLogin space1';
+    grid-template-columns: 10% 80% 10%;
     background-image: url("/images/backgrounds/background_v_ver.png");
     background-repeat: no-repeat;
     background-size: cover;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    width: 100%;
+    text-align: center;
+    margin: 30px auto;
     border-radius: 1rem;
+    padding: 25px 0;
+}
+
+.login_Reg_Box{
+    width: 100%;
     position: relative;
+    grid-area: contentLogin;
 }
 
 .login_Reg_Box label{
-    padding: 0 10px;
+    padding: 20px 10px;
     display:flex;
     align-items: flex-start;
     color: black;
@@ -40,12 +52,6 @@
     border-style: none;
     border-radius: 1rem;
     padding: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-.login_Reg_Box h1{
-    margin-top: 5px;
-    font-size: 20px;
 }
 
 .email_Area_Login,
@@ -57,7 +63,7 @@
 .termsAndConditions
 {
     margin: 0 auto;
-    width: 80%;
+    width: 100%;
     margin-bottom: 30px;
 }
 
@@ -70,14 +76,22 @@
     display: flex;
     align-items: center;
     text-align: left;
-    overflow:hidden;
+    position: relative;
+    margin-bottom: 20px;
 }
 
-.termsAndConditions label,
-.rememberMe label{
-    font-size: 14px;
+.goToRegister pre,
+.goToForgetPassword pre,
+.rememberMe pre,
+.goToLogin pre,
+.termsAndConditions pre{
+    white-space: pre-line;
+    color: #3d3d3d;
+    line-height: 20px;
+    font-size: 15px;
     user-select: none;
 }
+
 
 .termsAndConditions label a,
 .rememberMe label a{
@@ -92,10 +106,16 @@
     margin-left: 5px;
 }
 
+.buttonLogin,
+.buttonRegister{
+    margin-bottom: 30px;
+}
+
 .buttonRegister button,
 .buttonLogin button {
+    width: 80%;
     padding: 10px 25px;
-    font-size: 15px;
+    font-size: 20px;
     border-radius: 1rem;
     cursor: pointer;
     border-style: none;
@@ -142,8 +162,9 @@
 
 .goToLogin,
 .goToForgetPassword{
-    margin: 35px 0 0 0;
-    font-size: 13px;
+    width: 80%;
+    font-size: 14px;
+    margin: 0 auto;
 }
 
 .goToLogin,
@@ -162,17 +183,6 @@
     text-decoration: none;
 }
 
-.RGB_Title label{
-    display: flex;
-    justify-content: center;
-    font-size: 18px;
-}
-
-.RGB_Title #rgbar{
-    margin: 15px auto 20px auto;
-    height: 2px;
-}
-
 /*-----------------------------------------------------------------*/
 /*--------------------- Fin Pagina de Login--- --------------------*/
 /*-----------------------------------------------------------------*/
@@ -188,7 +198,6 @@
 @media screen and (min-width: 768px){
     .login_Reg_Container{
         width: 55%;
-        margin: auto;
     }
 
     .termsAndConditions label,
@@ -203,8 +212,8 @@
     }
 
     .buttonRegister button,
-    .buttonLogin button{
-        transform: scale(1.4);
+    .buttonLogin button {
+        width: 60%;
     }
 
     .buttonRegister .error-message,
@@ -213,11 +222,7 @@
     }
 
     .goToLogin,
-    .goToForgetPassword{
-        margin-top: 50px;
-        font-size: 16px;
-    }
-
+    .goToForgetPassword,
     .goToRegister{
         font-size: 16px;
     }
@@ -232,8 +237,9 @@
         width: 35%;
     }
 
-    .buttonLogin button{
-        transform: scale(1.4);
+    .buttonRegister button,
+    .buttonLogin button {
+        width: 55%;
     }
     
 }
