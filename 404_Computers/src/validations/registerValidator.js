@@ -4,17 +4,17 @@ const { usersData } = require('../data/db')
 module.exports = [
     check('name')
     .notEmpty()
-    .withMessage('Debe Ingresar un Nombre'),
+    .withMessage('Debe ingresar su Nombre.'),
 
     check('surname')
     .notEmpty()
-    .withMessage('Debe Ingresar un Apellido'),
+    .withMessage('Debe ingresar su Apellido.'),
 
     check('email')
     .notEmpty()
-    .withMessage('Debes escribir un email').bail()
+    .withMessage('Debe ingresar su E-mail.').bail()
     .isEmail()
-    .withMessage('Debes escribir un email válido'),
+    .withMessage('Debe ingresar un E-mail válido.'),
 
     body('email')
     .custom(value => {
@@ -26,19 +26,19 @@ module.exports = [
             return false
         }
     })
-    .withMessage("Email ya registrado"),
+    .withMessage("el Email ingresado ya esta registrado."),
 
     check('pass')
     .notEmpty()
-    .withMessage('Debes escribir tu contraseña')
+    .withMessage('Debe escribir una Contraseña.')
     .isLength({
         min: 6,
         max: 12
     })
-    .withMessage('La contraseña debe tener entre 6 y 12 caracteres'),
+    .withMessage('La Contraseña debe tener entre 6 y 12 caracteres.'),
 
     body('passCheck')
     .custom((value, {req}) => value !== req.body.pass ? false : true)
-    .withMessage('Las contraseñas no coinciden'),
+    .withMessage('Las Contraseñas no coinciden.'),
 
 ]

@@ -3,11 +3,14 @@
 /*-----------------------------------------------------------------*/
 
 .titleLogin p{
-    font-size: 28px;
+    font-size: 30px;
     text-align: left;
     grid-area: contentLogin;
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
+    color: white;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .background_Leaves{
@@ -20,15 +23,18 @@
     display: grid;
     grid-template-areas: 'space0 contentLogin space1';
     grid-template-columns: 10% 80% 10%;
+    background-color: #7e46ffd4;
     background-image: url("/images/backgrounds/background_v_ver.png");
     background-repeat: no-repeat;
     background-size: cover;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    width: 100%;
+    max-width: 400px;
+    width: 95%;
     text-align: center;
     margin: 30px auto;
     border-radius: 1rem;
     padding: 25px 0;
+    mix-blend-mode: multiply;
 }
 
 .login_Reg_Box{
@@ -80,22 +86,21 @@
     margin-bottom: 20px;
 }
 
-.goToRegister pre,
 .goToForgetPassword pre,
 .rememberMe pre,
-.goToLogin pre,
 .termsAndConditions pre{
     white-space: pre-line;
-    color: #3d3d3d;
+    /* color: #3d3d3d; */
+    color: white;
     line-height: 20px;
     font-size: 15px;
     user-select: none;
 }
 
 
-.termsAndConditions label a,
-.rememberMe label a{
-    color: black;
+.termsAndConditions a,
+.rememberMe a{
+    color: white;
     cursor: pointer;
 }
 
@@ -106,26 +111,42 @@
     margin-left: 5px;
 }
 
-.buttonLogin,
-.buttonRegister{
+.buttonsLoginRegister button {
+    padding: 10px 10px;
+    margin-top: 0;
     margin-bottom: 30px;
-}
-
-.buttonRegister button,
-.buttonLogin button {
-    width: 80%;
-    padding: 10px 25px;
-    font-size: 20px;
+    max-width: 150px;
+    font-size: 16px;
     border-radius: 1rem;
     cursor: pointer;
     border-style: none;
     text-decoration: none;
     color: rgb(255, 255, 255);
-    background-image: linear-gradient(to right, #a05df8 0%, #7739c9  51%, #9900ff  100%);
+    background-image: linear-gradient(to right, #9c4eff 0%, #685fff  51%, #9650ff  100%);
     transition: 0.5s;
     background-size: 200% auto;
     transition: all 0.5s cubic-bezier(.25,.8,.25,1);
     -webkit-tap-highlight-color: transparent;
+    border: 2px solid transparent;
+}
+
+.buttonsLoginRegister button:nth-child(1){
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.buttonsLoginRegister button:nth-child(2){
+    margin-right: 0;
+    margin-left: auto;
+    background-image: linear-gradient(to right, #9c4eff 0%, #685fff  51%, #9650ff  100%);
+}
+
+.buttonsLoginRegister button:hover{
+    border: 2px solid rgba(255,255,255, 0.3);
+}
+
+.buttonsLoginRegister{
+    display: flex;
 }
   
 .error-message{
@@ -137,8 +158,7 @@
     position: absolute;
 }
 
-.buttonRegister .error-message,
-.buttonLogin .error-message{
+.buttonsLoginRegister .error-message{
     margin-top: 5px;
     position: absolute;
     margin-left: auto;
@@ -148,37 +168,20 @@
     text-align: center;
 }
 
-.buttonRegister button:hover,
-.buttonLogin button:hover {
+.buttonsLoginRegister button:hover {
     background-position: right center;
 }
 
-
-.goToForgetPassword strong,
-.goToRegister strong,
-.goToLogin strong{
+.goToForgetPassword strong{
     text-decoration: underline;
 }
 
-.goToLogin,
 .goToForgetPassword{
-    width: 80%;
     font-size: 14px;
     margin: 0 auto;
 }
 
-.goToLogin,
 .goToForgetPassword a{
-    color: black;
-    text-decoration: none;
-}
-
-.goToRegister{
-    margin: 10px 0 20px 0;
-    font-size: 13px;
-}
-
-.goToRegister a{
     color: black;
     text-decoration: none;
 }
@@ -196,8 +199,9 @@
 /*-----------------------------------------------------------------*/
 
 @media screen and (min-width: 768px){
+
     .login_Reg_Container{
-        width: 55%;
+        width: 100%;
     }
 
     .termsAndConditions label,
@@ -211,21 +215,11 @@
         cursor: pointer;
     }
 
-    .buttonRegister button,
-    .buttonLogin button {
-        width: 60%;
+    .buttonsLoginRegister button {
+        padding: 10px 15px;
+        font-size: 20px;
     }
 
-    .buttonRegister .error-message,
-    .buttonLogin .error-message{
-        margin-top: 20px;
-    }
-
-    .goToLogin,
-    .goToForgetPassword,
-    .goToRegister{
-        font-size: 16px;
-    }
 }
 
 /*-----------------------------------------------------------------*/
@@ -233,13 +227,5 @@
 /*-----------------------------------------------------------------*/
 
 @media screen and (min-width: 990px){
-    .login_Reg_Container{
-        width: 35%;
-    }
 
-    .buttonRegister button,
-    .buttonLogin button {
-        width: 55%;
-    }
-    
 }
