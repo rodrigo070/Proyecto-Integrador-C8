@@ -67,3 +67,19 @@ function dropSubCategoryMenu (id) {
 function closeWindow () {
     document.querySelector(".active").classList.remove("active")
 }
+
+/* Boton para el Carrito de Compras */
+
+function openPaymentSection(event, payOption) {
+    var i, tabcontent, buttonOption;
+    tabcontent = document.getElementsByClassName("tabContent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    buttonOption = document.getElementsByClassName("buttonSelected");
+    for (i = 0; i < buttonOption.length; i++) {
+        buttonOption[i].className = buttonOption[i].className.replace(" active", "");
+    }
+    document.getElementById(payOption).style.display = "grid";
+    event.currentTarget.className += " active";
+}

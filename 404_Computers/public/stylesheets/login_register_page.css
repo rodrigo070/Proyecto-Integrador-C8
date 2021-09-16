@@ -23,7 +23,7 @@
     display: grid;
     grid-template-areas: 'space0 contentLogin space1';
     grid-template-columns: 10% 80% 10%;
-    background-color: #7e46ffd4;
+    background-color: #9161ffd4;
     background-image: url("/images/backgrounds/background_v_ver.png");
     background-repeat: no-repeat;
     background-size: cover;
