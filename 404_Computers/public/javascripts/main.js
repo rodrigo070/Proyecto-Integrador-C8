@@ -95,5 +95,14 @@ function shippingCost(){
 
     let finalCost = cpCode * cost;
 
+    if(finalCost < 600)
+    {
+        finalCost = 720;
+    }
+    else if(finalCost > 2300)
+    {
+        finalCost = 1900;
+    }
+
     fieldToReplace.innerHTML = "$"+finalCost;
 }
