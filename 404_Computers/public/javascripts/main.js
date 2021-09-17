@@ -83,3 +83,17 @@ function openPaymentSection(event, payOption) {
     document.getElementById(payOption).style.display = "grid";
     event.currentTarget.className += " active";
 }
+
+/* Calcular Costo de Envio */
+
+function shippingCost(){
+    let cpCode = parseInt(document.getElementById("cpcode").value);
+
+    let fieldToReplace = document.getElementById("shippingCost");
+
+    let cost = 0.400;
+
+    let finalCost = cpCode * cost;
+
+    fieldToReplace.innerHTML = "$"+finalCost;
+}
