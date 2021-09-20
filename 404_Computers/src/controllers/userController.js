@@ -2,6 +2,8 @@ let {productsData, usersData , writeUserEdit} = require('../data/db');
 const { validationResult } = require('express-validator');
 let bcrypt = require("bcrypt");
 
+const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
 /* al adaptarlo es necesario poner el user/ para que encuentre la carpeta con el archivo ejs */
 
 module.exports = {
@@ -95,7 +97,8 @@ module.exports = {
     favorites: (req, res) => {
         res.render('users/favorites' , {
             productsData,
-            session: req.session
+            session: req.session,
+            toThousand
         });
     }
     ,
@@ -114,7 +117,8 @@ module.exports = {
     cart: (req, res) => {
         res.render('users/cart' , {
             productsData,
-            session: req.session
+            session: req.session,
+            toThousand
         });
     },
     logout: (req, res) => {
