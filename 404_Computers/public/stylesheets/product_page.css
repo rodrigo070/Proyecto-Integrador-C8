@@ -231,47 +231,6 @@ hr {
 /*-----------------------------------------------------------------*/
 
 /*-----------------------------------------------------------------*/
-/*----------------- Mensaje de ERROR ERRORPAGE --------------------*/
-/*-----------------------------------------------------------------*/
-
-.productNotFound{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
-    align-items: center;
-    margin: 25px auto;
-    width: 100%;
-}
-
-.productNotFound p:nth-child(1){
-    font-size: 80px;
-}
-
-.productNotFound p:nth-child(2){
-    font-size: 26px;
-}
-
-.productNotFound img{
-    margin-top: 15px;
-    width: 250px;
-    height: 300px;
-    z-index: 112;
-}
-
-.productNotFound span{
-    width: 250px;
-    border:none;
-    box-shadow: 0 3px 25px 3px rgb(0 0 0);
-}
-
-/*-----------------------------------------------------------------*/
-/*-------------------- Fin Mensaje de ERROR -----------------------*/
-/*-----------------------------------------------------------------*/
-
-
-
-/*-----------------------------------------------------------------*/
 /*------------------------- Media Queries -------------------------*/
 /*-----------------------------------------------------------------*/
 
