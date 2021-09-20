@@ -47,10 +47,10 @@
                             <div class="description_Article_Page">
                                 <p><%= productToShow.name %></p>
                                 <div class="prices_Product_Page">
-                                    <% if (productToShow.discount === 0) { %>
+                                    <% if (productToShow.discount > 0) { %>
+                                        <p>$<%= toThousand(finalPrice = productToShow.price - ((productToShow.price * productToShow.discount)/100)) %></p>
                                         <p>$<%= toThousand(productToShow.price) %></p>
                                     <% } else { %>
-                                        <p>$<%= toThousand(finalPrice = productToShow.price - ((productToShow.price * productToShow.discount)/100)) %></p>
                                         <p>$<%= toThousand(productToShow.price) %></p>
                                     <% } %>
                                 </div>
