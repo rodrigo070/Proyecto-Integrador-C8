@@ -11,7 +11,9 @@
     "express-validator": "^6.12.1",
     "method-override": "^3.0.0",
     "multer": "^1.4.3",
-    "nodemon": "^2.0.12"
+    "mysql2": "^2.3.0",
+    "nodemon": "^2.0.12",
+    "sequelize": "^6.6.5"
   },
   "description": "Proyecto Integrador Grupo 8",
   "main": "./src/app.js",
