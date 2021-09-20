@@ -50,5 +50,5 @@ app.use((req, res, next) => {
 })
 
 app.listen(port, () => {
-  console.log(`Servidor Corriendo en el Puerto = ${port}\ -> https://localhost:${port}`);
+  console.log(`Servidor Corriendo en el Puerto = ${port}\ -> http://localhost:${port}`);
 });
