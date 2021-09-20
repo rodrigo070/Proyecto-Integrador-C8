@@ -1,5 +1,6 @@
 /* Botones de Stock de Carrito */
-/* Code By  */
+/* Code By  Stackfindover */
+
 function increaseCount(a, b) {
   var input = b.previousElementSibling;
   var value = parseInt(input.value, 10);
@@ -26,6 +27,12 @@ let burger = document.getElementById("burgerButton");
 
 function BButton() {
     burger.classList.toggle("is-active");
+}
+
+function userPanel(){
+    let panel = document.getElementById('userPanel');
+
+    panel.classList.toggle("panel_Active");
 }
 
 function dropMenu(){
@@ -87,7 +94,7 @@ function openPaymentSection(event, payOption) {
 /* Calcular Costo de Envio */
 
 function shippingCost(){
-    let cpCode = parseInt(document.getElementById("cpcode").value);
+    let cpCode =document.getElementById("cpcode").value;
 
     let fieldToReplace = document.getElementById("shippingCost");
 
@@ -95,14 +102,21 @@ function shippingCost(){
 
     let finalCost = cpCode * cost;
 
-    if(finalCost < 600)
+    if(cpCode > 0 && cpCode.length > 3)
     {
-        finalCost = 720;
+        if(finalCost < 600)
+        {
+            finalCost = 720;
+        }
+        else if(finalCost > 2300)
+        {
+            finalCost = 1900;
+        }
+    
+        fieldToReplace.innerHTML = "$"+finalCost;
     }
-    else if(finalCost > 2300)
+    else
     {
-        finalCost = 1900;
+        fieldToReplace.innerHTML = "$";
     }
-
-    fieldToReplace.innerHTML = "$"+finalCost;
 }

@@ -90,7 +90,6 @@
 .rememberMe pre,
 .termsAndConditions pre{
     white-space: pre-line;
-    /* color: #3d3d3d; */
     color: white;
     line-height: 20px;
     font-size: 15px;
@@ -150,7 +149,7 @@
 }
   
 .error-message{
-    color: red;
+    color: white;
     display: block;
     text-align: left;
     font-size: 16px;

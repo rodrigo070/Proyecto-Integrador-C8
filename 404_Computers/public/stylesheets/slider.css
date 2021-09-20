@@ -113,7 +113,7 @@
 
 .productRecommendedDescription p{
 	padding: 5px;
-	font-size: 13px;
+	font-size: 16px;
 	color: #2e2e2e;
 }
 
@@ -126,7 +126,7 @@
 
 .productRecommendedDescription p:nth-child(2){
 	padding: 0 5px 5px 5px;
-	font-size: 16px;
+	font-size: 21px;
 	margin-bottom: 5px;
 }
 

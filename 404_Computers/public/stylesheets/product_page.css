@@ -11,6 +11,17 @@ abajo de todo antes de los media queries*/
 
 /* Caja De la Pagina de Detalle de Producto */
 
+.breadcrumbs_Pages{
+    width: 95%;
+    margin: 10px auto;
+    user-select: none;
+    font-size: 14px;
+}
+
+.breadcrumbs_Pages a{
+    margin: 0 5px;
+}
+
 .productDetailContainer{
     display: grid;
     grid-template-areas: 'photoSection'
@@ -270,6 +281,12 @@ hr {
 /*-----------------------------------------------------------------*/
 
 @media screen and (min-width: 768px){
+
+    .breadcrumbs_Pages{
+        width: 90%;
+        font-size: 16px;
+    }
+
     .productDetailContainer{
         grid-template-areas: 'photoSection prices'
         'detail detail';

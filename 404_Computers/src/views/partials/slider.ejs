@@ -10,7 +10,11 @@
                         <img src="/images/products/<%= element.image[0] %>">
                         <div class="productRecommendedDescription">
                             <p><%= element.name %></p>
-                            <p>$<%= element.price %></p>
+                            <% if (element.discount === 0) { %>
+                                <p>$<%= toThousand(element.price) %></p>
+                            <% } else { %>
+                                <p>$<%= toThousand(element.price - ((element.price * element.discount)/100)) %></p>
+                            <% } %>
                             <button>Ver Producto</button>
                         </div>
                     </a>

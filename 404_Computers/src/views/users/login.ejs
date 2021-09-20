@@ -5,7 +5,7 @@
   <div class="container_Page">
     <%- include('../partials/header.ejs') %>   
     <main>
-      <form action="" method="">
+      <form action="/login" method="POST">
         <section class="login_Reg_Container">
             <div class="login_Reg_Box">
                 <section class="titleLogin">
@@ -14,13 +14,13 @@
                 <section class="email_Area_Login">
                     <input type="email" name="email" id="emailUser" placeholder="Ingrese su E-mail: ">
                     <% if (locals.errors && errors.email) { %>
-                        <small class="error-message"><%= errors.email.msg %> </small>
+                        <small class="error-message"><%= errors.email.msg %></small>
                     <% } %>
                 </section>
                 <section class="password_Area_Login">
-                    <input type="password" name="password" id="passUser" placeholder="Ingrese su Contraseña: ">
+                    <input type="password" name="pass" id="passUser" placeholder="Ingrese su Contraseña: ">
                     <% if (locals.errors && errors.pass) { %>
-                        <small class="error-message"><%= errors.pass.msg %> </small>
+                        <small class="error-message"><%= errors.pass.msg %></small>
                     <% } %>
                 </section>
                 <section class="rememberMe">
@@ -34,9 +34,6 @@
                 <section class="goToForgetPassword">
                     <a href="/restablecer_contrasena"><pre>¿Olvidaste tu contraseña? <strong>Hace Click Aqui.</strong></pre></a>
                 </section>
-                <!-- <section class="goToRegister">
-                    <a href="/registro"><pre>¿Aún no tiene cuenta? <strong>Registrate Aqui.</strong></pre></a>
-                </section> -->
             </div>
             
         </section>

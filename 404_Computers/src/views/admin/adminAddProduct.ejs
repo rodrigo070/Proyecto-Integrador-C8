@@ -33,15 +33,25 @@
                                 <option value="<%= catg.category %>"><%= catg.categoryName %></option>
                             <% }) %>
                         </select>
+                        <% if (locals.errors && errors.category) { %>
+                            <small class="error-message"><%= errors.category.msg %> </small>
+                        <% } %>
                         <select name="subcategory" id="inputSubCategoryProduct" class="input-select">
                             <% subCategoriesData.forEach(scatg => { %>
                                 <option value="<%= scatg.subcategory %>"><%= scatg.subcategoryName %></option>
                             <% }) %>
                         </select>
+                        <% if (locals.errors && errors.subcategory) { %>
+                            <small class="error-message"><%= errors.subcategory.msg %> </small>
+                        <% } %>
                     </div>
         
                     <div class="cat2admin">
                         <input type="text" name="name" placeholder="Nombre del Producto" class="input-select">
+                        <% if (locals.errors && errors.name) { %>
+                            <small class="error-message"><%= errors.name.msg %> </small>
+                        <% } %>
+
                         <input type="text" name="discount" placeholder="Descuento" class="input-select">
                     </div>
                 </div>
@@ -56,6 +66,9 @@
                 <div class="precio-admin">
                     <label for="precio">Precio $</label>
                     <input type="number" required placeholder="Ingrese el Precio" name="price" class="input-select" >
+                    <% if (locals.errors && errors.price) { %>
+                        <small class="error-message"><%= errors.price.msg %> </small>
+                    <% } %>
                 </div>
             </section>
 
@@ -63,6 +76,9 @@
                 <label for="archivo">Agregar archivos de Imagen</label>
                 <hr>
                 <input type="file" id="examinar" name="image" multiple accept=".jpg, .png, .webp, .jpeg, .bmp">
+                <% if (locals.errors && errors.image) { %>
+                    <small class="error-message"><%= errors.image.msg %> </small>
+                <% } %>
             </section>
 
             <section class="imagePreviewSection">

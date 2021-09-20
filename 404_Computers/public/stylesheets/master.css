@@ -22,6 +22,9 @@
 @import url(admin_add_product.css);
 @import url(admin_edit_product.css);
 @import url(admin_banners.css);
+@import url(admin_user_list.css);
+@import url(admin_list.css);
+@import url(admin_edit_user.css);
 
 @font-face {
   font-family: 'Karmatic';

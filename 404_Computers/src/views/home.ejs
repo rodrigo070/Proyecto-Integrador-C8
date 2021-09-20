@@ -44,7 +44,7 @@
                     </div>
                     <div class="descripcion-articulo">
                         <p><%= productsData[i].name %></p>
-                        <h1>$<%= productsData[i].price %></h1>
+                        <h1>$<%= toThousand(productsData[i].price) %></h1>
                         <p>Envio Gratis</p>
                         <p>Hasta 12 Cuotas sin interes</p>
                     </div>
@@ -84,7 +84,7 @@
                         </div>
                         <div class="descripcion-articulo">
                             <p><%= productsData[i].name %></p>
-                            <h1>$<%= productsData[i].price %></h1>
+                            <h1>$<%= toThousand(productsData[i].price) %></h1>
                             <p>Envio Gratis</p>
                             <p>Hasta 12 Cuotas sin interes</p>
                         </div>
@@ -123,9 +123,9 @@
                                 <p><%= productsData[i].name %></p>
                                 <div class="prices_Product_Page">
                                     <% if (productsData[i].discount === 0) { %>
-                                        <p>$<%= productsData.price %></p>
+                                        <p>$<%= toThousand(productsData.price) %></p>
                                     <% } else { %>
-                                        <p>$<%= finalPrice = productsData[i].price - ((productsData[i].price * productsData[i].discount)/100) %></p>
+                                        <p>$<%= toThousand(finalPrice = productsData[i].price - ((productsData[i].price * productsData[i].discount)/100)) %></p>
                                     <% } %>
                                 </div>
                             </div>

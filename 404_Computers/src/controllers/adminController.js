@@ -1,21 +1,35 @@
-let { bannersData, productsData , usersData , categoriesData , subCategoriesData , writeProductEdit ,writeBannersEdit} = require('../data/db');
-//aca controlamos la vista y las funciones por defecto se
-//renderiza la vista que queremos de la carpeta views
-//por aca podemos controlar que datos queremos que muestre por pantalla
+let { bannersData, productsData , usersData , categoriesData , subCategoriesData , writeProductEdit ,writeBannersEdit, writeUserEdit} = require('../data/db');
+const { validationResult } = require('express-validator');
 
 module.exports = {
     admin: (req, res) => {
-        res.render('admin/adminPanel');
+        res.render('admin/adminPanel',{
+            session: req.session
+        });
     }
     ,
     admin_usuarios: (req, res) => {
-        res.render('admin/adminUsersList',  {usersData});
+        res.render('admin/adminUsersList',  {
+            usersData,
+            session: req.session
+        });
+    }
+    ,
+    admin_detalle_usuario: (req, res) => {
+        let userID = +req.params.id;
+        let user = usersData.find(userToFind => userToFind.id === userID);
+
+        res.render('admin/adminEditUser',  {
+            user,
+            session: req.session
+        });
     }
     ,
     admin_productos: (req, res) => {
         res.render('admin/adminProductList',  {
             productsData,
-            messageToDisplay : "Disponibles"
+            messageToDisplay : "Disponibles",
+            session: req.session
         });
     }
     ,
@@ -23,46 +37,63 @@ module.exports = {
         res.render('admin/adminAddProduct',  {
             productsData,
             categoriesData,
-            subCategoriesData
+            subCategoriesData,
+            session: req.session
         });
     }
     ,
     admin_carga_update: (req, res) => {
         
-        let lastId = 1;
+        let errors = validationResult(req)
 
-        productsData.forEach(product => {
-            if(product.id > lastId){
-                lastId = product.id
+        if(errors.isEmpty()){
+
+            let lastId = 1;
+
+            productsData.forEach(product => {
+                if(product.id > lastId){
+                    lastId = product.id
+                }
+            });
+
+            let productIMGArray = [];
+
+            req.files.forEach(image => {
+                productIMGArray.push(image.filename);
+            });
+
+            let newProduct = {
+                id: lastId + 1,
+                image: productIMGArray.length > 0 ? productIMGArray : ["default.jpg"],
+                name: req.body.name,
+                color: req.body.color,
+                price: req.body.price,
+                stock: 1,
+                discount: req.body.discount,
+                onSale: req.body.onSale,
+                description: req.body.description,
+                category: req.body.category,
+                subcategory: req.body.subcategory
             }
-        });
 
-        let productIMGArray = [];
+            productsData.push(newProduct);
+            writeProductEdit(productsData);
 
-        req.files.forEach(image => {
-            productIMGArray.push(image.filename);
-        });
-
-        let newProduct = {
-            id: lastId + 1,
-            image: productIMGArray.length > 0 ? productIMGArray : ["default.jpg"],
-            name: req.body.name,
-            color: req.body.color,
-            price: req.body.price,
-            stock: 1,
-            discount: req.body.discount,
-            onSale: req.body.onSale,
-            description: req.body.description,
-            category: req.body.category,
-            subcategory: req.body.subcategory
+            res.redirect('/admin/lista-productos');
         }
-
-        productsData.push(newProduct);
-        writeProductEdit(productsData);
-
-        res.redirect('/admin/lista-productos');
-    }
-    ,
+        else
+        {
+            console.log("ERROR al Agregar Producto");
+            res.render("admin/adminAddProduct", {
+                productsData,
+                categoriesData,
+                subCategoriesData,
+                errors: errors.mapped(),
+                old: req.body,
+                session: req.session
+            })
+        }
+    },
     admin_editar_producto: (req, res) => {
 
         let productToEditID = +req.params.id;
@@ -72,6 +103,7 @@ module.exports = {
             productToEdit,
             categoriesData,
             subCategoriesData,
+            session: req.session
         });
     }
     ,
@@ -110,7 +142,8 @@ module.exports = {
 
         res.render('admin/adminProductList',  {
             productsData: products,
-            messageToDisplay : "Disponibles en Stock"
+            messageToDisplay : "Disponibles en Stock",
+            session: req.session
         });
     }
     ,
@@ -120,7 +153,8 @@ module.exports = {
 
         res.render('admin/adminProductList',  {
             productsData:products,
-            messageToDisplay : "Disponibles en Oferta"
+            messageToDisplay : "Disponibles en Oferta",
+            session: req.session
         });
     }
     ,
@@ -128,7 +162,8 @@ module.exports = {
         
         res.render('admin/addBanners',  {
             productsData,
-            bannersData
+            bannersData,
+            session: req.session
         });
     }
     ,
@@ -177,5 +212,17 @@ module.exports = {
 
         writeProductEdit(productsData);
         res.redirect('/admin/lista-productos');
+    }
+    ,
+    borrar_usuario: (req, res) => {
+        usersData.forEach(userToDelete => {
+            if(userToDelete.id === +req.params.id){
+                let deleteUser = usersData.indexOf(userToDelete)
+                usersData.splice(deleteUser, 1)
+            }
+        })
+
+        writeUserEdit(usersData);
+        res.redirect('/admin/usuarios');
     }
 }

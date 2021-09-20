@@ -1,19 +1,24 @@
 let express = require('express');
-let router = express.Router()
-let controller = require('../controllers/userController.js')
-let registerValidator = require("../validations/registerValidator")
+let router = express.Router();
+let controller = require('../controllers/userController');
+let loginValidator = require('../validations/loginValidator');
+let registerValidator = require('../validations/registerValidator');
+let userSessionCheck = require('../middlewares/userSessionCheck');
+let userLog = require('../middlewares/userLog');
 
-router.get('/login', controller.login);
+router.get('/login', userLog, controller.login);
+router.post('/login', loginValidator, controller.processLogin);
+router.get('/logout', userSessionCheck, controller.logout);
 
-router.get('/registro', controller.register);
-router.post('/registro',registerValidator, controller.processRegister);
+router.get('/registro', userLog, controller.register);
+router.post('/registro', registerValidator, controller.processRegister);
 
-router.get('/favoritos', controller.favorites);
+router.get('/favoritos', userSessionCheck, controller.favorites);
 
-router.get('/editar-perfil', controller.editProfile);
+router.get('/editar-perfil', userSessionCheck, controller.editProfile);
 
-router.get('/perfil', controller.profile);
+router.get('/perfil', userSessionCheck, controller.profile);
 
-router.get('/carrito', controller.cart);
+router.get('/carrito', userSessionCheck, controller.cart);
 
 module.exports = router;

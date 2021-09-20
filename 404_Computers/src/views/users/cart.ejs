@@ -10,19 +10,19 @@
             <section class="list_Products_Box">
                 <!-- Header de la lista de productos -->
                 <section class="nav_Product_Box sec_Grid">
-                    <div>-</div>
+                    <div></div>
                     <div>Producto</div>
                     <div>Cantidad</div>
                     <div>Precio</div>
                     <div>Descuento</div>
                     <div>Precio Final</div>
-                    <div>-</div>
+                    <div></div>
                 </section>
                 <!-- Caja de los productos que se agregan a la lista -->
                 <% for( let i = 0; i < 2; i++ ) { %>
                     <section class="item_Product_Box sec_Grid">
                         <section class="icon_Plist">
-                            <i class="fa fa-microchip " aria-hidden="true"></i>
+                            <i class="fa fa-minus" aria-hidden="true"></i>
                         </section>
                         <section>
                             <p><%= productsData[i].name %></p>
@@ -39,7 +39,7 @@
                             </div>
                         </section>
                         <section>
-                            <p>$<%= productsData[i].price %></p>
+                            <p>$<%= toThousand(productsData[i].price) %></p>
                         </section>
                         <section>
                             <div class="discount_Tag_Plist">
@@ -47,7 +47,7 @@
                             </div>
                         </section>
                         <section>
-                            <p>$<%= productsData[i].price - productsData[i].price * productsData[i].discount / 100 %></p>
+                            <p>$<%= toThousand(productsData[i].price - productsData[i].price * productsData[i].discount / 100) %></p>
                         </section>
                         <section>
                             <button class="delete_Plist">

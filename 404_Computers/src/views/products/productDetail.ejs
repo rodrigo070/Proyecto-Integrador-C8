@@ -2,13 +2,20 @@
 <html lang="es">
 <%- include('../partials/head.ejs' , {title : productToDisplay.name+' - ' }) %>
 <head>
-    <script src="/javascripts/productPhotos.js" defer></script>
+    <script src="/javascripts/productPage.js" defer></script>
 </head>
 <body>
   <div class="container_Page">
     <%- include('../partials/header.ejs') %>   
     <main>
-
+        <div class="breadcrumbs_Pages">
+            <a href="/productos">Volver al Listado</a>
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <a href="/productos/<%= productToDisplay.category %>"><%= categoryLink.categoryName %></a>
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <a href="/productos/<%= productToDisplay.category %>/<%= productToDisplay.subcategory %>"><%= subcategoryLink.subcategoryName %></a>    
+        </div>
+        
         <!-- The Modal -->
         <div id="myModal" class="modal">
 
@@ -28,7 +35,7 @@
                 <!-- Aca va la Grilla de Fotos del producto  -->
                 <div class="photosGalleryBox">
                     <% productToDisplay.image.forEach(element => { %>
-                        <img class="miniPhoto" src="/images/products/<%= element %>" onclick="productGridImages(this);">
+                        <img class="miniPhoto" src="/images/products/<%= element %>" onmouseover="productGridImages(this);">
                     <% }) %>
                 </div>
             </section>
@@ -37,11 +44,11 @@
                 <div class="priceNameProductPage">
                     <p><%= productToDisplay.name %></p>
                     <% if (productToDisplay.discount > 0) { %>
-                        <p>$<%= productToDisplay.price - productToDisplay.price * productToDisplay.discount / 100 %></p>
-                        <p> Precio Lista $<%= productToDisplay.price %></p>
+                        <p>$<%= toThousand(productToDisplay.price - productToDisplay.price * productToDisplay.discount / 100) %></p>
+                        <p> Precio Lista $<%= toThousand(productToDisplay.price) %></p>
                         <p> <%= productToDisplay.discount %> % OFF</p>    
                     <% } else { %>
-                        <p>$<%= productToDisplay.price %></p>
+                        <p>$<%= toThousand(productToDisplay.price) %></p>
                     <% } %>
                 </div>
 
@@ -54,8 +61,8 @@
                 </div>
 
                 <div class="productPageButton">
-                    <button type="submit" title="Comprar">Agregar al Carrito <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
-                    <button type="button"> Agregar a Favoritos <i class="fa fa-heart"></i></button>
+                    <button title="Comprar">Agregar al Carrito <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+                    <button title="Agregar a Favoritos" onclick="fav();"> Agregar a Favoritos <i id="favBtn" class="fa fa-heart-o"></i></button>
                 </div>
 
                 <div class="socialIconsShare">

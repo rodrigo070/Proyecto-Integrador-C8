@@ -1,5 +1,7 @@
 let { productsData,categoriesData,subCategoriesData } = require('../data/db');
 
+const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
 module.exports = {
     productsList: (req, res) => {
         let subCategoriesFiltered = [];
@@ -8,7 +10,9 @@ module.exports = {
             products_List_Catg : categoriesData,
             products_List_SubCatg : subCategoriesData,
             subCategoriesFiltered,
-            title : 'Productos - '
+            title : 'Productos - ',
+            session: req.session,
+            toThousand
         });
 
     }
@@ -22,20 +26,28 @@ module.exports = {
         coincidan con los datos de la base de datos en caso de
         que no coincida devuelvo por consola un mensaje de error
         */
-       
+
+        let categoryLink = categoriesData.find(catg_Name => catg_Name.category === productCatg);
+        let subcategoryLink = subCategoriesData.find(subcatg_Name => subcatg_Name.subcategory === productSubCatg);
+
         let productToDisplay = productsData.find(productToDisplay => productToDisplay.id === productID && productToDisplay.category === productCatg && productToDisplay.subcategory === productSubCatg);
         
         if(productToDisplay !== undefined)
         {
             res.render('products/productDetail' , {
                 productToDisplay,
-                productsData
+                productsData,
+                categoryLink,
+                subcategoryLink,
+                session: req.session,
+                toThousand
             });
         }
         else
         {
             res.render('errorPage' , {
-                error: "El Producto al cual intenta acceder no existe o fue removido de la pagina."
+                error: "El Producto al cual intenta acceder no existe o fue removido de la pagina.",
+                session: req.session
             });
             console.log("el producto no existe o fue removido de la tienda");
         }
@@ -68,13 +80,16 @@ module.exports = {
                 category,
                 subCategoriesFiltered,
                 products_List_Catg : categoriesData,
-                title : category.categoryName+' - '
+                title : category.categoryName+' - ',
+                session: req.session,
+                toThousand
             });
         }
         else
         {
             res.render('errorPage' , {
-                error: "La Categoria a la cual intenta acceder no existe o fue removida de la pagina."
+                error: "La Categoria a la cual intenta acceder no existe o fue removida de la pagina.",
+                session: req.session
             });
             console.log("la categoria ingresada no existe");
         }
@@ -113,13 +128,16 @@ module.exports = {
                 subCategory,
                 subCategoriesFiltered,
                 products_List_Catg : categoriesData,
-                title : subCategory.subcategoryName+' - '
+                title : subCategory.subcategoryName+' - ',
+                session: req.session,
+                toThousand
             });
         }
         else
         {
             res.render('errorPage', {
-                error: "La Sub Categoria a la cual intenta acceder no existe o fue removida de la pagina."
+                error: "La Sub Categoria a la cual intenta acceder no existe o fue removida de la pagina.",
+                session: req.session
             });
             console.log("la subcategoria ingresada no existe");
         }
@@ -134,7 +152,9 @@ module.exports = {
             products_List_Catg : categoriesData,
             products_List_SubCatg : subCategoriesData,
             subCategoriesFiltered,
-            title : 'Ofertas - '
+            title : 'Ofertas - ',
+            session: req.session,
+            toThousand
         })
     }
 }
