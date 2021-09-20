@@ -1,17 +1,5 @@
 [
   {
-    "id": 1,
-    "name": "ADMIN",
-    "surname": "ADMIN01",
-    "email": "admin@gmail.com",
-    "password": 123456,
-    "rol": "ROLE_ADMIN",
-    "image": "user_default.jpg",
-    "address": "",
-    "phoneNumber": 0,
-    "dni": 0
-  },
-  {
     "id": 2,
     "name": "Alexander",
     "surname": "Mamani",
@@ -29,7 +17,19 @@
     "surname": "normal",
     "email": "normal@gmail.com",
     "pass": "$2b$12$SX56PJjz5SnWNHl9SV5M1e2.bhx7hUojB6yTNRTK.k9B7a09hVsWu",
-    "rol": "ROL_USER",
+    "rol": "ROLE_USER",
+    "image": "user_default.jpg",
+    "address": "",
+    "phoneNumber": 0,
+    "dni": 0
+  },
+  {
+    "id": 4,
+    "name": "Admin",
+    "surname": "Admin",
+    "email": "admin@gmail.com",
+    "pass": "$2b$12$3hU.vDq37Ku6oxztN7YDnu1bMSGbojJGanEPWiOhtE2ipbk5k51bO",
+    "rol": "ROLE_ADMIN",
     "image": "user_default.jpg",
     "address": "",
     "phoneNumber": 0,

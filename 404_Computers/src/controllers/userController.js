@@ -68,7 +68,7 @@ module.exports = {
                 surname,
                 email,
                 pass : bcrypt.hashSync(pass, 12),
-                rol: "ROL_USER",
+                rol: "ROLE_USER",
                 image: "user_default.jpg",
                 address: "",
                 phoneNumber: 0,
