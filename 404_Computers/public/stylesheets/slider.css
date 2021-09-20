@@ -104,7 +104,7 @@
 
 .productRecommendedDescription{
 	position: relative;
-	min-height: 115px;
+	min-height: 130px;
 	padding:5px;
 	border-radius: 0 0 0.5rem 0.5rem;
 	background: linear-gradient(180deg, #f0f5fde0 0%, #c2b8f98c 100%);
