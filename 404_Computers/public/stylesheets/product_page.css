@@ -2,16 +2,44 @@
 /*--------------------- Detalle del Producto ----------------------*/
 /*-----------------------------------------------------------------*/
 
-/* esta invertido debido a un problema que tuve 
-con las clases que no funcionan si dejo las clases del area de
-fotos en las primeras lineas por lo que movi esa seccion 
-abajo de todo antes de los media queries*/
+/* Section 2 -> detalle de precio , medios de pago etc*/
+
+/* Caja De la Pagina de Detalle de Producto */
+
+.productDetailContainer{
+    display: grid;
+    grid-template-areas:
+    'title'
+    'photoSection'
+    'prices'
+    'detail';
+    grid-template-columns: 100%;
+    width: 95%;
+    padding: 20px 0;
+    margin: 0 auto;
+}
+
+.breadcrumbs_Pages{
+    width: 95%;
+    margin: 10px auto;
+    user-select: none;
+    font-size: 14px;
+    grid-area: title;
+}
+
+.breadcrumbs_Pages a{
+    margin: 0 5px;
+}
 
 /* Seccion de Foto del Producto */
 
 .productPhoto{
     grid-area: photoSection;
     width: 100%;
+}
+
+#expandedImg{
+    cursor: zoom-in; width: 100%; height: 420px; object-fit: scale-down;
 }
 
 .photosGalleryBox{
@@ -25,6 +53,7 @@ abajo de todo antes de los media queries*/
     opacity: 0.8;
     height: 150px;
     object-fit: contain;
+    padding-right: 10px;
 }
 
 .miniPhoto:hover{
@@ -32,47 +61,22 @@ abajo de todo antes de los media queries*/
     opacity: 1;
 }
 
-.miniPhoto:nth-child(1),
-.miniPhoto:nth-child(2),
-.miniPhoto:nth-child(3){
-    padding-right: 10px;
-};
-
-/* Section 2 -> detalle de precio , medios de pago etc*/
-
-/* Caja De la Pagina de Detalle de Producto */
-
-.breadcrumbs_Pages{
-    width: 95%;
-    margin: 10px auto;
-    user-select: none;
-    font-size: 14px;
+.miniPhoto:last-child{
+    padding-right: 0px;
 }
 
-.breadcrumbs_Pages a{
-    margin: 0 5px;
-}
 
-.productDetailContainer{
-    display: grid;
-    grid-template-areas: 'photoSection'
-    'prices'
-    'detail';
-    grid-template-columns: 100%;
-    width: 95%;
-    padding: 30px 0;
-    margin: 0 auto;
-}
+/* Seccion Precio */
 
 .productPagePriceBox{
     display: flex;
+    grid-area: prices;
     flex-direction: column;
     align-items: center;
     text-align: center;
     margin: 0 auto;
     width: 100%;
     padding: 20px 0;
-    grid-area: prices;
     border-radius: 1rem;
     border: 1px solid rgba(0, 0, 0, 0.3);
     color:#353535;
@@ -134,7 +138,6 @@ abajo de todo antes de los media queries*/
     color: rgb(97, 41, 252);
 }
 
-
 .productPageButton{
     display: flex;
     flex-direction: column;
@@ -182,7 +185,6 @@ abajo de todo antes de los media queries*/
     padding: 5px;
 }
 
-
 /* Especificaciones del Producto */
 
 .descriptionProduct{
@@ -202,14 +204,6 @@ abajo de todo antes de los media queries*/
     width: 100%;
 }
 
-hr {
-    background: linear-gradient(90deg, rgb(219, 5, 69), rgb(199, 180, 9));
-    height: 2px;
-    margin-bottom: 3rem;
-    width: 100%;
-    border: none;
-}
-
 .specs_DescriptionProduct{
     font-weight: bold;
     white-space: pre-line;
@@ -225,6 +219,9 @@ hr {
     font-size: 18px;
     margin: 0 auto;
 }
+
+
+
 
 /*-----------------------------------------------------------------*/
 /*------------------- Fin Detalle de Producto ---------------------*/
@@ -247,7 +244,9 @@ hr {
     }
 
     .productDetailContainer{
-        grid-template-areas: 'photoSection prices'
+        grid-template-areas:
+        'title title'
+        'photoSection prices'
         'detail detail';
         grid-template-columns: 50% 50%;
     }
