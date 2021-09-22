@@ -120,3 +120,19 @@ function shippingCost(){
         fieldToReplace.innerHTML = "$";
     }
 }
+
+
+function showPassword(passSection, eyeBTN) {
+    let button = document.getElementById(passSection);
+    let icon = document.getElementById(eyeBTN);
+    
+    if (button.type === "password") {
+        button.type = "text";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+    } else {
+        button.type = "password";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+    }
+}

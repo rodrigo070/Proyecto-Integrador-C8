@@ -22,5 +22,17 @@
     "address": "",
     "phoneNumber": 0,
     "dni": 0
+  },
+  {
+    "id": 5,
+    "name": "usuario",
+    "surname": "prueba",
+    "email": "prueba@gmail.com",
+    "pass": "$2b$12$xYSj8hlAsHyLf7Ni1UhWfOGccj2yGKfN99xu6TTS1DjceCNJ/wtOe",
+    "rol": "ROLE_USER",
+    "image": "user_default.jpg",
+    "address": "",
+    "phoneNumber": 0,
+    "dni": 0
   }
 ]

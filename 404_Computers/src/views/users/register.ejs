@@ -34,12 +34,14 @@
                     <% if (locals.errors && errors.pass) { %>
                         <small class="error-message"><%= errors.pass.msg %> </small>
                     <% } %>
+                    <i class="fa fa-eye-slash" id="eyeBTNP1" aria-hidden="true" onclick="showPassword(`pass`,`eyeBTNP1`);"></i>                     
                 </section>
                 <section class="password_Area_Register">
                     <input type="password" name="passCheck" id="passCheck" placeholder="Confirmar Contraseña:">
                     <% if (locals.errors && errors.passCheck) { %>
                         <small class="error-message"><%= errors.passCheck.msg %> </small>
                     <% } %>
+                    <i class="fa fa-eye-slash" id="eyeBTNP2" aria-hidden="true" onclick="showPassword(`passCheck`,`eyeBTNP2`);"></i>                     
                 </section>
                 <section class="buttonsLoginRegister">
                     <button type="submit">Crear Cuenta</button>

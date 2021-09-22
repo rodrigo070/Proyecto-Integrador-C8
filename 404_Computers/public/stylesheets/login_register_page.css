@@ -71,6 +71,13 @@
     margin: 0 auto;
     width: 100%;
     margin-bottom: 30px;
+    position: relative;
+}
+
+.password_Area_Register i{
+    position: absolute;
+    right: 20px;
+    top: 10px;
 }
 
 .termsAndConditions a{
