@@ -34,5 +34,17 @@
     "address": "",
     "phoneNumber": 0,
     "dni": 0
+  },
+  {
+    "id": 5,
+    "name": "Rodrigo",
+    "surname": "Quiroga",
+    "email": "thomas@mail.com",
+    "pass": "$2b$12$yxGuR5mttZaIuSdz8jhvqeLnlcNU45/h15Buu13t4nSjJk2rBhGXO",
+    "rol": "ROLE_USER",
+    "image": "user_default.jpg",
+    "address": "",
+    "phoneNumber": 0,
+    "dni": ""
   }
 ]

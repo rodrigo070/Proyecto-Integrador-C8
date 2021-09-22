@@ -26,10 +26,7 @@ app.use(session({
   secret: "404Computers",
   resave: false,
   saveUninitialized: true,
-  cookie: {
-    maxAge: 4000000
-  }
-}));
+ }));
 
 // Routes
 
