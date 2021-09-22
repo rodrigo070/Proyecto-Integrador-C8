@@ -11,8 +11,22 @@ module.exports = {
         res.render('users/login',{
             session: req.session
         });
-    }
-    ,
+    },
+    editProfile: (req, res) => {
+        res.render('users/editProfile',{
+            session: req.session
+        });
+    },
+    
+    profile: (req, res) => {
+        let users = usersData.find(user => user.id === +req.params.id)
+        
+        
+        res.render('users/profile',{
+            users,
+            session: req.session
+        });
+    },
     processLogin: (req, res) => {
 		let errors = validationResult(req);
 
@@ -33,9 +47,12 @@ module.exports = {
                 dni: user.dni
 
 			}
+            if(req.body.remember){
+                res.cookie("user404", req.session.user, {expires: new Date(Date.now() + 900000),})
+            }
 
 			res.locals.user = req.session.user
-			res.redirect('/perfil')
+			res.redirect(`/perfil/${user.id}`) /* Cambie esto para que redireccione con la ruta parametrizada */
 		}
 		else
 		{	
@@ -74,7 +91,7 @@ module.exports = {
                 image: "user_default.jpg",
                 address: "",
                 phoneNumber: 0,
-                dni: 0,
+                dni: "",
             }
             console.log(newUser)
             usersData.push(newUser)
@@ -102,18 +119,7 @@ module.exports = {
         });
     }
     ,
-    editProfile: (req, res) => {
-        res.render('users/editProfile',{
-            session: req.session
-        });
-    }
-    ,
-    profile: (req, res) => {
-        res.render('users/profile',{
-            session: req.session
-        });
-    }
-    ,
+    
     cart: (req, res) => {
         res.render('users/cart' , {
             productsData,

@@ -17,7 +17,8 @@ router.get('/favoritos', userSessionCheck, controller.favorites);
 
 router.get('/editar-perfil', userSessionCheck, controller.editProfile);
 
-router.get('/perfil', userSessionCheck, controller.profile);
+/* router.get('/perfil', userSessionCheck, controller.profile); */
+router.get('/perfil/:id', userSessionCheck, controller.profile);/* cambie la ruta para que en perfil nos muestre los datos del usuario que venga por id */
 
 router.get('/carrito', userSessionCheck, controller.cart);
 
