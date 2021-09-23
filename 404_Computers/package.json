@@ -2,6 +2,9 @@
   "name": "404computers",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "start": "node ./src/app"
+  },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.5",
@@ -16,8 +19,11 @@
     "nodemon": "^2.0.13",
     "sequelize": "^6.6.5"
   },
+  "engines":{
+    "node":"14.17.1",
+    "npm":"6.14.13"
+  },
   "description": "Proyecto Integrador Grupo 8",
-  "main": "./src/app.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rodrigo070/Proyecto-Integrador-C8.git"
