@@ -47,8 +47,8 @@ module.exports = {
                 dni: user.dni
 
 			}
-            if(req.body.remember){
-                res.cookie("user404", req.session.user, {expires: new Date(Date.now() + 900000),})
+            if(req.body.rememberDevice){
+                res.cookie("user404", req.session.user, {expires: new Date(Date.now() + 900000),httpOnly : true})
             }
 
 			res.locals.user = req.session.user

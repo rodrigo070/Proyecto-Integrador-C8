@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 const session = require('express-session');
+const localsCheck = require('./middlewares/localsCheck');
 const port = 3001;
 
 // Routers - > maneja lo que se va a hacer en la vista (EJS "HTML")
@@ -25,8 +26,9 @@ app.use(cookieParser());
 app.use(session({
   secret: "404Computers",
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: true
  }));
+ app.use(localsCheck);
 
 // Routes
 
