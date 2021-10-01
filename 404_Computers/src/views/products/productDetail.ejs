@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-<%- include('../partials/head.ejs' , {title : productToDisplay.name+' - ' }) %>
+<%- include('../partials/head.ejs' , {title : product.name+' - ' }) %>
 <head>
     <script src="/javascripts/productPage.js" defer></script>
 </head>
@@ -24,32 +24,33 @@
             <div class="breadcrumbs_Pages">
                 <a href="/productos">Volver al Listado</a>
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
-                <a href="/productos/<%= productToDisplay.category %>"><%= categoryLink.categoryName %></a>
+                <a href="/productos/<%= product.Category.categorylink %>"><%= product.Category.category %></a>
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
-                <a href="/productos/<%= productToDisplay.category %>/<%= productToDisplay.subcategory %>"><%= subcategoryLink.subcategoryName %></a>    
+                <a href="/productos/<%= product.Category.categorylink %>/<%= product.Subcategory.subcategorylink %>"><%= product.Subcategory.subcategory %></a>    
             </div>
         
 
             <section class="productPhoto">
                 <!-- Aca va la imagen Principal  -->
-                <img src="/images/products/<%= productToDisplay.image[0] %>" id="expandedImg" class="imageModal">
+                <img src="/images/products/<%= product.image0 %>" id="expandedImg" class="imageModal">
                 <!-- Aca va la Grilla de Fotos del producto  -->
                 <div class="photosGalleryBox">
-                    <% productToDisplay.image.forEach(element => { %>
-                        <img class="miniPhoto" src="/images/products/<%= element %>" onmouseover="productGridImages(this);">
-                    <% }) %>
+                    <img class="miniPhoto" src="/images/products/<%= product.image0 %>" onmouseover="productGridImages(this);">
+                    <img class="miniPhoto" src="/images/products/<%= product.image1 %>" onmouseover="productGridImages(this);">
+                    <img class="miniPhoto" src="/images/products/<%= product.image2 %>" onmouseover="productGridImages(this);">
+                    <img class="miniPhoto" src="/images/products/<%= product.image3 %>" onmouseover="productGridImages(this);">
                 </div>
             </section>
     
             <section class="productPagePriceBox">
                 <div class="priceNameProductPage">
-                    <p><%= productToDisplay.name %></p>
-                    <% if (productToDisplay.discount > 0) { %>
-                        <p>$<%= toThousand(productToDisplay.price - productToDisplay.price * productToDisplay.discount / 100) %></p>
-                        <p> Precio Lista $<%= toThousand(productToDisplay.price) %></p>
-                        <p> <%= productToDisplay.discount %> % OFF</p>    
+                    <p><%= product.name %></p>
+                    <% if (product.discount > 0) { %>
+                        <p>$<%= toThousand(product.price - product.price * product.discount / 100) %></p>
+                        <p> Precio Lista $<%= toThousand(product.price) %></p>
+                        <p> <%= product.discount %> % OFF</p>    
                     <% } else { %>
-                        <p>$<%= toThousand(productToDisplay.price) %></p>
+                        <p>$<%= toThousand(product.price) %></p>
                     <% } %>
                 </div>
 
@@ -76,7 +77,7 @@
             <section class="descriptionProduct">
                 <p class="specs_Title">Especificaciones</p>
                 <pre class="specs_DescriptionProduct">
-                    <%= productToDisplay.description %>
+                    <%= product.description %>
                 </pre>
                 <p class="specs_Title">Preguntas Frecuentes</p>
                 <ul class="questionAnswerProduct">
@@ -91,7 +92,7 @@
                 </ul>
             </section>
         </section>
-        <%- include('../partials/slider.ejs') %>  
+        <%- include('../partials/slider.ejs') %> 
     </main>
     <%- include('../partials/footer.ejs') %> 
   </div>

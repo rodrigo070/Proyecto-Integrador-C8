@@ -2,16 +2,16 @@
     <section class="categoriesSubSection">
         <a href="/productos" style="margin-bottom: 10px;">Ver Todos los Productos</a>
         <p>Categorias:</p>
-        <% products_List_Catg.forEach(categoriesList => { %>
-            <a href="/productos/<%= categoriesList.category %>"><%= categoriesList.categoryName %></a>
+        <% categories.forEach(category => { %>
+            <a href="/productos/<%= category.categorylink %>"><%= category.category %></a>
         <% }) %>
     </section>
     <br>
     <section class="categoriesSubSection">
         <% if (subCategoriesFiltered != 0) { %>
             <p>Sub Categorias:</p>
-            <% subCategoriesFiltered.forEach(subCategoriesList => { %>
-                <a href="/productos/<%= category.category %>/<%= subCategoriesList.subcategory %>"><%= subCategoriesList.subcategoryName %></a>
+            <% subcategories.forEach(subCategoriesList => { %>
+                <a href="/productos/<%= linkOfCategory %>/<%= subCategoriesList.subcategorylink %>"><%= subCategoriesList.subcategory %></a>
             <% }) %>
         <% } %>
     </section>

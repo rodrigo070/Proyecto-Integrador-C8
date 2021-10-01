@@ -1,16 +1,13 @@
 .user_Edit_Box{
     background-color: white;
     width: 90%;
-    margin: 20px auto;
+    margin: 30px auto;
 }
 
 .user_Edit_Grid{
-    display: grid;
-    grid-template-areas: 
-    'col1 col2';
-    grid-template-columns: 45% 45%;
-    grid-template-rows: 70% 30%;
-    column-gap: 10%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .user_Col_1,
@@ -77,6 +74,7 @@
     border: 1px solid rgba(0,0,0, 0.3);
     border-radius: 0.5rem;
     cursor: pointer;
+    margin: 25px 0;
 }
 
 .user_Edit_Box input{
@@ -120,4 +118,25 @@
     padding: 5px 10px;
     font-size: 16px;
     cursor: pointer;
+}
+
+/* Tablet */
+
+@media screen and (min-width: 768px){
+    .user_Edit_Grid{
+        display: grid;
+        grid-template-areas: 
+        'col1 col2';
+        grid-template-columns: 45% 45%;
+        grid-template-rows: 70% 30%;
+        row-gap: 0;
+        column-gap: 10%;
+    }
+
+}
+
+/* Desktop */
+
+@media screen and (min-width: 990px){
+    
 }

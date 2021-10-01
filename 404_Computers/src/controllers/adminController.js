@@ -25,6 +25,28 @@ module.exports = {
         });
     }
     ,
+    admin_detalle_usuario_editar: (req, res) => {
+
+        usersData.forEach(userToEdit => {
+            if(userToEdit.id === +req.params.id)
+            {
+                userToEdit.id = userToEdit.id,
+                userToEdit.name = req.body.name ? req.body.name : userToEdit.name,
+                userToEdit.surname = req.body.surname ? req.body.surname : userToEdit.surname,
+                userToEdit.address = req.body.address ? req.body.address : userToEdit.address,
+                userToEdit.dni = req.body.dni ? req.body.dni : userToEdit.dni,
+                userToEdit.rol = req.body.rol ? req.body.rol : userToEdit.rol,
+                userToEdit.email = req.body.email ? req.body.email : userToEdit.email,
+                userToEdit.phoneNumber = req.body.phoneNumber ? req.body.phoneNumber : userToEdit.phoneNumber,
+                userToEdit.image = userToEdit.image
+            }
+        });
+
+        writeUserEdit(usersData)
+
+        res.redirect('/admin/usuarios')
+    }
+    ,
     admin_productos: (req, res) => {
         res.render('admin/adminProductList',  {
             productsData,

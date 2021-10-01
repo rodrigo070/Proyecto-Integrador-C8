@@ -34,24 +34,25 @@
             </section>
             <% var finalPrice = 0 %>  
             <section class="productListView">
-                <% products_List.forEach(productToShow => { %>
-                 
+
+                <% products.forEach(product => { %>
                     <article class="products_Page_Article">
-                        <a href="/productos/<%= productToShow.category %>/<%= productToShow.subcategory %>/<%=productToShow.id%>">
+
+                        <a href="/productos/<%= product.Category.categorylink %>/<%= product.Subcategory.subcategorylink %>/<%=product.id%>">
                             <div class="img_Product_Page">
-                                <% if (productToShow.discount > 1) { %>
-                                    <label><%= productToShow.discount %>% OFF</label>
+                                <% if (product.discount > 1) { %>
+                                    <label><%= product.discount %>% OFF</label>
                                 <% } %>
-                                <img src="/images/products/<%= productToShow.image[0] %>" alt="<%= productToShow.name %>">
+                                <img src="/images/products/<%= product.image0 %>" alt="<%= product.name %>">
                             </div>
                             <div class="description_Article_Page">
-                                <p><%= productToShow.name %></p>
+                                <p><%= product.name %></p>
                                 <div class="prices_Product_Page">
-                                    <% if (productToShow.discount > 0) { %>
-                                        <p>$<%= toThousand(finalPrice = productToShow.price - ((productToShow.price * productToShow.discount)/100)) %></p>
-                                        <p>$<%= toThousand(productToShow.price) %></p>
+                                    <% if (product.discount > 0) { %>
+                                        <p>$<%= toThousand(finalPrice = product.price - ((product.price * product.discount)/100)) %></p>
+                                        <p>$<%= toThousand(product.price) %></p>
                                     <% } else { %>
-                                        <p>$<%= toThousand(productToShow.price) %></p>
+                                        <p>$<%= toThousand(product.price) %></p>
                                     <% } %>
                                 </div>
                                 <div class="goTo_Add_Item">

@@ -4,8 +4,8 @@ const controller = require('../controllers/adminController.js');
 const adminSessionCheck = require('../middlewares/adminSessionCheck');
 const productCheck = require('../validations/productCreateValidator');
 
-const uploadProductFile = require("../middlewares/uploadProductsFiles")
-const uploadBannerFile = require("../middlewares/uploadBannerFile")
+const uploadProductFile = require("../middlewares/uploadProductsFiles");
+const uploadBannerFile = require("../middlewares/uploadBannerFile");
 
 router.get('/', adminSessionCheck, controller.admin);
 router.get('/usuarios', adminSessionCheck, controller.admin_usuarios);
@@ -25,6 +25,8 @@ router.put('/editar-producto/:id', uploadProductFile.array("image", 4) , control
 /* GET Edicion de Usuarios */
 router.get('/editar-usuario/:id', adminSessionCheck, controller.admin_detalle_usuario);
 /* PUT recibo los datos modificados y aplico la actualizacion */
+router.put('/editar-usuario/:id', controller.admin_detalle_usuario_editar);
+
 
 router.get('/lista-productos', adminSessionCheck, controller.admin_productos);
 /* las vistas de abajo reutilizan el listado de productos */

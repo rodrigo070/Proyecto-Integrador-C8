@@ -2,10 +2,9 @@
 <html lang="es">
 <%- include('../partials/head.ejs' ,{title: 'Editar Usuario - '}) %>
 <body>
-  <div class="container_Page">
-    <%- include('../partials/header.ejs') %>   
+  <div class="container_Page"> 
     <main>
-        <section class="user_Edit_Box user_Edit_Grid">
+        <form action="/admin/editar-usuario/<%= user.id %>?_method=PUT" method="POST" class="user_Edit_Box user_Edit_Grid">
             <section class="user_Col_1">
                 <p>Datos Personales</p>
 
@@ -40,10 +39,6 @@
             </section>
             <section class="user_Col_2">
 
-                <form id="deleteUser" action="/admin/borrarUsuario/<%- user.id %>?_method=DELETE" method="POST">
-                    <button type="submit" title="Borrar"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                </form>
-
                 <p>Datos de Contacto</p>
 
                 <section class="user_Edit_Grid">
@@ -62,13 +57,12 @@
             </section>
 
             <section class="saveChangesAdmin">
-                <button type="submit">Guardar Cambios</button>
-                <button type="reset" onclick="location.href='/admin/usuarios'">Cancelar</button>
+                <button type="submit" title="Guardar Cambios">Guardar Cambios</button>
+                <button type="reset" onclick="location.href='/admin/usuarios'" title="Cancelar">Cancelar</button>
             </section>
 
-        </section>
+        </form>
     </main>
-    <%- include('../partials/footer.ejs') %> 
   </div>
 </body>
 </html>
