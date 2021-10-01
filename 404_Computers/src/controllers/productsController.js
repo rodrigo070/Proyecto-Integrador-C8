@@ -76,12 +76,14 @@ module.exports = {
 
             let filterThisCategory = 0;
             let title;
+            let validateCategory;
 
             categories.forEach(catg => {
                 if(req.params.category === catg.categorylink)
                 {
                     filterThisCategory = catg.id;
                     title = catg.category;
+                    validateCategory = catg.categorylink;
                 }
             });
         
@@ -92,28 +94,42 @@ module.exports = {
                 }
             })
             .then(products=>{
-
                 Subcategory.findAll({
                     where : {
                         categoryid : filterThisCategory
                     }
                 })
                 .then(subcategories => {
-
-                    res.render('products/productsList', {
-                        products,
-                        categories,
-                        title : title+" - ",
-                        linkOfCategory : req.params.category,
-                        subCategoriesFiltered : 1,
-                        subcategories,
-                        session: req.session,
-                        toThousand
-                    });
+                    if(req.params.category === validateCategory)
+                    {
+                        res.render('products/productsList', {
+                            products,
+                            categories,
+                            title : title+" - ",
+                            linkOfCategory : req.params.category,
+                            subCategoriesFiltered : 1,
+                            subcategories,
+                            session: req.session,
+                            toThousand
+                        });
+                    }
+                    else
+                    {
+                        res.render('errorPage' , {
+                            error: "La Categoria a la cual intenta acceder no existe o fue removida de la pagina.",
+                            session: req.session
+                        });
+                    }
 
                 })
+                .catch(error => {
+                    console.log("Tenemos un ERROR: "+error);
+                });
     
             })
+            .catch(error => {
+                console.log("Tenemos un ERROR: "+error);
+            });
 
         })
         .catch(error => {
