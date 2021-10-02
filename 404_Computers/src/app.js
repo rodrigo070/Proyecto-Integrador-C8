@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
+const session = require('express-session');
+const localsCheck = require('./middlewares/localsCheck');
 const port = 3001;
 
 // Routers - > maneja lo que se va a hacer en la vista (EJS "HTML")
@@ -19,6 +22,13 @@ app.use(express.static('./public'));
 app.use(express.json());
 app.use(express.urlencoded({extended : false}));
 app.use(methodOverride('_method'));
+app.use(cookieParser());
+app.use(session({
+  secret: "404Computers",
+  resave: false,
+  saveUninitialized: true
+ }));
+ app.use(localsCheck);
 
 // Routes
 
@@ -32,9 +42,12 @@ app.use('/', productosRouter);
 app.use('/admin', adminRouter)
 
 app.use((req, res, next) => {
-  res.status(404).render('errorPage', {error: "ERROR 404: La Pagina a la cual intenta acceder no existe o fue removida del sistema."});
+  res.status(404).render('errorPage', {
+    error: "ERROR 404: La Pagina a la cual intenta acceder no existe o fue removida del sistema.",
+    session: req.session
+  });
 })
 
-app.listen(port, () => {
-  console.log(`Servidor Corriendo en el Puerto = ${port}\ -> https://localhost:${port}`);
+app.listen(process.env.PORT || port, () => {
+  console.log(`Servidor Corriendo en el Puerto = ${port}\ -> http://localhost:${port}`);
 });

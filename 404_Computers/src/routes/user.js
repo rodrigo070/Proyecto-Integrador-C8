@@ -1,17 +1,38 @@
-let express = require('express');
-let router = express.Router()
-let controller = require('../controllers/userController.js')
+const express = require('express');
+const router = express.Router();
+const controller = require('../controllers/userController');
+const loginValidator = require('../validations/loginValidator');
+const registerValidator = require('../validations/registerValidator');
+const userSessionCheck = require('../middlewares/userSessionCheck');
+const userLog = require('../middlewares/userLog');
+const profileCheck = require('../middlewares/profileCheck');
+const uploadProfilePicFile = require("../middlewares/uploadProfilePicFile");
 
-router.get('/login', controller.login);
+/* Router de Login y Logout */
+router.get('/login', userLog, controller.login);
+router.post('/login', loginValidator, controller.processLogin);
+router.get('/logout', userSessionCheck, controller.logout);
 
-router.get('/registro', controller.register);
+/* Router de Registro */
 
-router.get('/favoritos', controller.favorites);
+router.get('/registro', userLog, controller.register);
+router.post('/registro', registerValidator, controller.processRegister);
 
-router.get('/editar-perfil', controller.editProfile);
+/* Routers de Favoritos */
 
-router.get('/perfil', controller.profile);
+router.get('/favoritos', userSessionCheck, controller.favorites);
 
-router.get('/carrito', controller.cart);
+/* Routers de Edicion de Perfil */
+
+router.get('/editar-perfil', userSessionCheck, controller.editProfile);
+
+/* Routers de Perfil de Usuario */
+router.get('/perfil/:id', userSessionCheck,profileCheck ,controller.profile);/* cambie la ruta para que en perfil nos muestre los datos del usuario que venga por id */
+
+/* Routers de Carrito de Compras */
+
+router.get('/carrito', userSessionCheck, controller.cart);
+
+
 
 module.exports = router;

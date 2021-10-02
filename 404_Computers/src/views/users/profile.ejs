@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-<%- include('../partials/head.ejs') %>
+<%- include('../partials/head.ejs' ,{title: 'Perfil - '}) %>
 <body class="background_Leaves">
   <div class="container_Page">
     <%- include('../partials/header.ejs') %>   
@@ -34,7 +34,7 @@
                 <span>Usuario</span>
               </div>
               <div class="indicador-value">
-                <span><!-- Aca iría el nombre de la cuenta -->Sr. Ejemplo</span>
+                <span><%= users.name %> </span>
               </div>
             </div>
             <div class="info">
@@ -43,7 +43,7 @@
                   <span>E-mail</span>
                 </div>
                 <div class="indicador-value">
-                  <span><!-- Aca iría el E-mail de la cuenta -->Sr-ejemplo@gmail.com</span>
+                  <span><%= users.email %></span>
                 </div>
               </div>
               <div class="subtitulo-mis-datos">
@@ -52,28 +52,20 @@
           <div class="info">
             <div class="contenedor-flex">
               <div class="indicador">
-                <span>Nombre y Apellido</span>
+                <span>Nombre y Apellido:</span>
               </div>
               <div class="indicador-value">
-                <span>Señor Ejemplo<!-- Aca iría el nombre de la cuenta --></span>
+                <span><%= users.name %> <%= users.surname %><!-- Aca iría el nombre de la cuenta --></span>
               </div>
             </div>
-            <div class="info">
-              <div class="contenedor-flex">
-                <div class="indicador">
-                  <span>Nombre Elejido <!-- el nombre de usuario q elija el cliente --></span>
-                </div>
-                <div class="indicador-value">
-                  <span>Señor Ejemplo</span>
-                </div>
-              </div>
+            
           <div class="info">
             <div class="contenedor-flex">
               <div class="indicador">
-                <span>Documento</span>
+                <span>Documento:</span>
               </div>
               <div class="indicador-value">
-                <span>12.345.678</span>
+                <span><%= users.dni ? users.dni : "------" %></span>
               </div>
             </div>
             <div class="info">
@@ -82,7 +74,7 @@
                   <span>Telefono</span>
                 </div>
                 <div class="indicador-value">
-                  <span>+54 11-2233-4455</span>
+                  <span><%= users.phoneNumber ? users.phoneNumber : "------" %></span>
                 </div>
               </div>
             </div>
@@ -115,9 +107,9 @@
 
             <div class="tarjetas-contenedoras">
               <div class="datos-tarjetas">
-                <p>Calle falsa 123 </p>
+                <p><%= users.address ? users.address : "Direccion" %> </p>
                 <p class="info-tarjeta">Buenos Aires(1655<!-- codigo postal -->), Localidad falsa</p>
-                <p class="info-tarjeta">Sr. Ejemplo - +54 11-2233-4455</p>
+                <p class="info-tarjeta"><%= users.name %> <%= users.surname %> - +54 <%= users.phoneNumber ? users.phoneNumber : "------" %> </p><!-- lo de +54 no se si dejarlo o no por ahora lo dejo mas adelante lo hablamos -->
                </div>
             </div>
             <div class="tarjetas-contenedoras">

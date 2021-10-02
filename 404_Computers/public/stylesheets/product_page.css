@@ -2,47 +2,45 @@
 /*--------------------- Detalle del Producto ----------------------*/
 /*-----------------------------------------------------------------*/
 
-.iconDetailProduct{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color:#1000ff17;
-    border-radius: 1rem;
-    width: 80%;
-    padding:10px 10px 5px 10px;
-    margin: 20px 0 20px 0;
+/* Section 2 -> detalle de precio , medios de pago etc*/
+
+/* Caja De la Pagina de Detalle de Producto */
+
+.productDetailContainer{
+    display: grid;
+    grid-template-areas:
+    'title'
+    'photoSection'
+    'prices'
+    'detail';
+    grid-template-columns: 100%;
+    width: 95%;
+    padding: 20px 0;
+    margin: 0 auto;
 }
 
-.iconDetailProduct label{
-    display: flex;
-    align-self: flex-start;
+.breadcrumbs_Pages{
+    width: 95%;
+    margin: 10px auto;
+    user-select: none;
+    font-size: 14px;
+    grid-area: title;
 }
 
-.iconDetailProduct i{
-    height: 30px;
-    width: 30px;
-    margin: 4px 3px 0 3px;
-    text-align: center;
-}
-
-/*Section 1 - > Fotos del producto */
-
-.titulo h1{
-    text-align: center;
+.breadcrumbs_Pages i{
+    margin: 0 5px;
 }
 
 /* Seccion de Foto del Producto */
-/* le agrego un ancho a la caja de fotos de producto y detalle de medios de pago */
-
-.productPhotoContainer {
-    width: 100%;
-}
 
 .productPhoto{
+    grid-area: photoSection;
     width: 100%;
 }
 
-/* Seccion 1 Fotos del Producto */
+#expandedImg{
+    cursor: zoom-in; width: 100%; height: 420px; object-fit: scale-down;
+}
 
 .photosGalleryBox{
     display: flex;
@@ -50,14 +48,12 @@
     width: 100%;
 }
 
-/*esto representa cada cuadro de las fotos le puse un padding para 
-separarlas de arriba y abajo*/
-
-.miniPhoto {
+.miniPhoto{
     width: 25%;
     opacity: 0.8;
     height: 150px;
     object-fit: contain;
+    padding-right: 10px;
 }
 
 .miniPhoto:hover{
@@ -65,230 +61,171 @@ separarlas de arriba y abajo*/
     opacity: 1;
 }
 
-
-.miniPhoto:nth-child(1),
-.miniPhoto:nth-child(2),
-.miniPhoto:nth-child(3){
-    padding-right: 10px;
-};
-
-/* solo un puntero para cuando se apunta a las imagenes del producto
-y activo la opacidad para resaltar la imagen elegida */
+.miniPhoto:last-child{
+    padding-right: 0px;
+}
 
 
+/* Seccion Precio */
 
-/* Fin Seccion de Foto del Producto*/
-
-.encabezado {
+.productPagePriceBox{
     display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.encabezado h1.titulo {
-   font-weight:bold;
-    text-align: justify;
-    text-transform: uppercase;
-    
-    padding: 20px;
-   font-size: 20px;
-}
-
-.imagenCentral {
-    width: 80%;
-    margin: auto;
-    padding-bottom: 30px;
-    box-shadow: 0 0 5px 0 rgba 0, 0, 0, 1;
-    transition: all 300ms;
-     
-}
-
-.imagenes2{
-    display: flex;
-    width: 100%;
-    margin-top: 30px;
-}
-
-.item{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.item2{
-    width: 80%;
-    border: 2px solid rgba(0, 0, 0, 0.3);
-    border-radius: 0.5rem;
-    margin-bottom: 20px;
-    /* width: 45px;
-    height: 50px;
-    margin: 5px; */
-}
-
-/* Section 2 -> detalle de precio , medios de pago etc*/
-
-.subtitulos{
-    display: flex;
+    grid-area: prices;
     flex-direction: column;
     align-items: center;
-}
-
-.subtitulosBG{
-    width: 85%;
-    margin: 25px auto 0 auto;
-    padding: 25px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #bfb5ff57;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    padding: 20px 0;
     border-radius: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    color:#353535;
 }
 
-.precio{
+.priceNameProductPage p:nth-child(1){
+    text-align: center;
+    font-size: 25px;
+}
+
+.priceNameProductPage p:nth-child(2){
     font-size: 45px;
     font-weight:bold;
+    margin: 10px 0;
 }
 
-.precioEspecial{
-    font-size:20px ;
-    text-transform: uppercase;
-    display: flex;
-    justify-content: center;
-    flex-wrap:wrap;
-    width: 100%;
-    margin:10px;
-}
-.precioLista{
-    display: flex;
-    justify-content: center;
-    flex-wrap:wrap;
-    
-
-}
-
-.descuento{
+.priceNameProductPage p:nth-child(4){
     margin:10px;
     padding: 10px;
     font-size: 18px;
-    background-color: #1000ff17;
+    background-color: red;
     border-radius: 30px;
     width: 102px;
     margin: 10px auto;
     text-align: center;
+    color: white;
 }
 
-.buy_Section{
+.iconDetailProduct{
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    border-radius: 1rem;
+    padding:10px;
+    margin: 10px 0;
+}
+
+.iconDetailProduct img{
+    height: 30px;
+    margin-bottom: 5px;
+    margin-left: 4px;
+}
+
+.iconDetailProduct label{
+    display: flex;
+    align-self: flex-start;
+    font-size: 20px;
+}
+
+.iconDetailProduct label:nth-child(4){
+    color: #1dff6c;
+}
+
+.iconDetailProduct i{
+    height: 30px;
+    width: 30px;
+    margin: 4px 3px 0 3px;
     text-align: center;
+    color: rgb(97, 41, 252);
+}
+
+.productPageButton{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
     width: 100%;
 }
 
-.buy_Section input{
-    width: 50%;
-    height: 60px;
+.productPageButton button{
+    width: 230px;
     font-size: 20px;
     border-radius: 1rem;
+    padding: 10px 0;
+    color: white;
+    outline: none;
+    border-style: none;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    cursor: pointer;
 }
 
-.redes{
-    display: flex;
-    justify-content: center;
-    margin: 15px auto 15px auto;
+.productPageButton button:nth-child(1){
+    background-color: #1dff6c;
 }
-.redes i {
+
+.productPageButton button:nth-child(1):hover{
+    transition: 1s ease;
+    background-color: #1dcf5c;
+}
+
+.productPageButton button:nth-child(2){
+    background-color: rgb(87, 30, 245);
+}
+
+.productPageButton button:nth-child(2):hover{
+    transition: 1s ease;
+    background-color: rgb(71, 25, 197);
+}
+
+.socialIconsShare{
+    margin: 15px auto;
+}
+
+.socialIconsShare i{
     font-size: 23px;
     padding: 5px;
 }
 
-.favorite_Section{
-    text-align: center;
-    width: 100%;
-}
-
-.favorite_Section button{
-    width: 50%;
-    height: 40px;
-    border-radius: 1rem;
-}
-
 /* Especificaciones del Producto */
 
-.especificaciones{
-    width: 100%;
+.descriptionProduct{
+    grid-area: detail;
+    width: 90%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 20px;
+    padding: 20px 0;
     align-content: center;
-}
-.especificaciones .h3{
-    padding-bottom: 10px;
-      
+    font-size: 22px;
+    margin: 0 auto;
 }
 
-hr {
-    background: linear-gradient(90deg, rgb(219, 5, 69), rgb(199, 180, 9));
-    height: 2px;
-    margin-bottom: 3rem;
+.specs_Title{
+    font-size: 25px;
+    border-bottom: 1px solid black;
     width: 100%;
-    border: none;
 }
 
-.negrita{
-    width: 70%;
+.specs_DescriptionProduct{
     font-weight: bold;
-    padding: 5px;
     white-space: pre-line;
+    margin: 0 auto;
+    padding: 20px;
 }
-.respuesta{
-    width: 70%;
-    font-size: 15px;
-    padding: 5px;
+
+.questionAnswerProduct{
+    padding: 20px 0;
 }
+
+.questionAnswerProduct li{
+    font-size: 18px;
+    margin: 0 auto;
+}
+
+
+
 
 /*-----------------------------------------------------------------*/
 /*------------------- Fin Detalle de Producto ---------------------*/
 /*-----------------------------------------------------------------*/
-
-/*-----------------------------------------------------------------*/
-/*----------------- Mensaje de ERROR ERRORPAGE --------------------*/
-/*-----------------------------------------------------------------*/
-
-.productNotFound{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
-    align-items: center;
-    margin: 25px auto;
-    width: 100%;
-}
-
-.productNotFound p:nth-child(1){
-    font-size: 80px;
-}
-
-.productNotFound p:nth-child(2){
-    font-size: 26px;
-}
-
-.productNotFound img{
-    margin-top: 15px;
-    width: 250px;
-    height: 300px;
-    z-index: 112;
-}
-
-.productNotFound span{
-    width: 250px;
-    border:none;
-    box-shadow: 0 3px 25px 3px rgb(0 0 0);
-}
-
-/*-----------------------------------------------------------------*/
-/*-------------------- Fin Mensaje de ERROR -----------------------*/
-/*-----------------------------------------------------------------*/
-
-
 
 /*-----------------------------------------------------------------*/
 /*------------------------- Media Queries -------------------------*/
@@ -300,16 +237,21 @@ hr {
 /*-----------------------------------------------------------------*/
 
 @media screen and (min-width: 768px){
-    .subtitulos{
-        font-size: 20px;
-        width: 50%;
-    }
-    .especificaciones{
-        align-content: center;
+
+    .breadcrumbs_Pages{
+        font-size: 16px;
     }
 
-    .iconDetailProduct{
-        width: 80%;
+    .productDetailContainer{
+        grid-template-areas:
+        'title title'
+        'photoSection prices'
+        'detail detail';
+        grid-template-columns: 50% 50%;
+    }
+
+    .productPagePriceBox{
+        width: 95%;
     }
 }
 
@@ -318,17 +260,9 @@ hr {
 /*-----------------------------------------------------------------*/
 
 @media screen and (min-width: 990px){
-    .productPhoto{
-        width: 50%;
-        float:left;
+
+    .productPagePriceBox{
+        width: 85%;
     }
 
-    .subtitulos{
-        font-size: 20px;
-        width: 50%;
-    }
-
-    .iconDetailProduct{
-        width: 70%;
-    }
 }

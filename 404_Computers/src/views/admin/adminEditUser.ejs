@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head.ejs' ,{title: 'Editar Usuario - '}) %>
+<body>
+  <div class="container_Page"> 
+    <main>
+        <form action="/admin/editar-usuario/<%= user.id %>?_method=PUT" method="POST" class="user_Edit_Box user_Edit_Grid">
+            <section class="user_Col_1">
+                <p>Datos Personales</p>
+
+                <label for="name">Nombre:</label>
+                <input type="text" name="name" id="name" value="<%= user.name %>">
+    
+                <label for="surname">Apellido:</label>
+                <input type="text" name="surname" id="surname" value="<%= user.surname %>">
+    
+                <label for="address">Domicilio:</label>
+                <input type="text" name="address" id="address" value="<%= user.address %>">
+
+                <section class="user_Edit_Grid noRows">
+                    <div class="user_Col_1 noBorder_PD">
+                        <label for="dni">DNI:</label>
+                        <input type="number" name="dni" id="dni" value="<%= user.dni %>">
+                    </div>
+                    <div class="user_Col_2 flex_col noBorder_PD">
+                        <label for="rol">Rol:</label>
+                        <select name="rol" id="rol">
+                            <% if (user.rol === "ROLE_ADMIN") { %>
+                                <option value="ROLE_ADMIN" selected>Admin</option>
+                                <option value="ROLE_USER">Usuario</option>
+                            <% } else { %>
+                                <option value="ROLE_ADMIN">Admin</option>
+                                <option value="ROLE_USER" selected>Usuario</option>
+                            <% } %>
+                        </select>
+                    </div>
+                </section>
+
+            </section>
+            <section class="user_Col_2">
+
+                <p>Datos de Contacto</p>
+
+                <section class="user_Edit_Grid">
+                    <div class="user_Col_1 noBorder_PD">
+                        <label for="email">e-Mail:</label>
+                        <input type="email" name="email" id="email" value="<%= user.email %>">
+                    
+                        <label for="phoneNumber">Telefono:</label>
+                        <input type="number" name="phoneNumber" id="phoneNumber" value="<%= user.phoneNumber %>">
+                    </div>
+                    <div class="user_Col_2 flex_col noBorder_PD">
+                        <label for="photoUserEdit">Foto:</label>
+                        <img id="photoUserEdit" src="/images/users/<%= user.image %>" alt="">
+                    </div>
+                </section>
+            </section>
+
+            <section class="saveChangesAdmin">
+                <button type="submit" title="Guardar Cambios">Guardar Cambios</button>
+                <button type="reset" onclick="location.href='/admin/usuarios'" title="Cancelar">Cancelar</button>
+            </section>
+
+        </form>
+    </main>
+  </div>
+</body>
+</html>

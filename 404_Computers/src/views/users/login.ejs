@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
-<%- include('../partials/head.ejs') %>
+<%- include('../partials/head.ejs' ,{title: 'Iniciar Sesion - '}) %>
 <body class="background_Leaves">
   <div class="container_Page">
     <%- include('../partials/header.ejs') %>   
     <main>
-      <form action="" method="">
+      <form action="/login" method="POST">
         <section class="login_Reg_Container">
             <div class="login_Reg_Box">
-                <section class="RGB_Title">
-                    <h1 for="titleLogin">Bienvenido a 404 Computers!</h1>
-                    <div id="rgbar" class=""></div>
+                <section class="titleLogin">
+                    <p>Bienvenido!</p>
                 </section>
                 <section class="email_Area_Login">
                     <input type="email" name="email" id="emailUser" placeholder="Ingrese su E-mail: ">
-                    <span class="error-message">Debe ingresar su email</span>
+                    <% if (locals.errors && errors.email) { %>
+                        <small class="error-message"><%= errors.email.msg %></small>
+                    <% } %>
                 </section>
                 <section class="password_Area_Login">
-                    <input type="password" name="password" id="passUser" placeholder="Ingrese su Contraseña: ">
-                    <span class="error-message">Debe ingresar su contraseña</span>
+                    <input type="password" name="pass" id="passUser" placeholder="Ingrese su Contraseña: ">
+                    <% if (locals.errors && errors.pass) { %>
+                        <small class="error-message"><%= errors.pass.msg %></small>
+                    <% } %>
                 </section>
                 <section class="rememberMe">
                     <input type="checkbox" name="rememberDevice" id="recordar">
-                    <label for="recordar">Recordarme en este Dispositivo.</a></label>
+                    <label for="recordar"><pre>Recordarme</pre></a></label>
                 </section>
-                <section class="buttonLogin">
+                <section class="buttonsLoginRegister">
                     <button type="submit">Iniciar Sesion</button>
-                    <span class="error-message">Credenciales inválidas</span>
+                    <button type="reset" onclick="location.href='/registro'">Crear Cuenta</button>
                 </section>
                 <section class="goToForgetPassword">
-                    <a href="/restablecer_contrasena">¿Olvidaste tu contraseña?&nbsp;<strong>Hace Click Aqui.</strong></a>
-                </section>
-                <section class="goToRegister">
-                    <a href="/registro">¿Aún no tiene cuenta?&nbsp;<strong>Registrate Aqui.</strong></a>
+                    <a href="/restablecer_contrasena"><pre>¿Olvidaste tu contraseña? <strong>Hace Click Aqui.</strong></pre></a>
                 </section>
             </div>
             

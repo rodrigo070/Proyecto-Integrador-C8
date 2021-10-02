@@ -2,15 +2,28 @@
   "name": "404computers",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "start": "node ./src/app"
+  },
   "dependencies": {
-    "ejs": "^2.6.2",
-    "express": "^4.16.4",
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.5",
+    "ejs": "^2.7.4",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "express-validator": "^6.12.1",
+    "install": "^0.13.0",
     "method-override": "^3.0.0",
     "multer": "^1.4.3",
-    "nodemon": "^2.0.12"
+    "mysql2": "^2.3.0",
+    "nodemon": "^2.0.13",
+    "sequelize": "^6.6.5"
+  },
+  "engines": {
+    "node": "14.17.6",
+    "npm": "7.24.1"
   },
   "description": "Proyecto Integrador Grupo 8",
-  "main": "./src/app.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rodrigo070/Proyecto-Integrador-C8.git"

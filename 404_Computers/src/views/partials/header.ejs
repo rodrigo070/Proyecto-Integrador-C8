@@ -12,50 +12,64 @@
         </button>
         
         <nav id="mobile_Nav_Bar" class="mobile_Nav_Bar_Menu">
+
+            <% if (typeof session.user != "undefined") { %>
+                <div class="crear-cuenta">
+                    <h2><i class="fa fa-user" aria-hidden="true"></i>¡Bienvenidx Usuarix!</h2>
+                </div>
+
+                <ul class="menu_Mobile">
+                    <% if (typeof session.user != "undefined") { %>
+                        <% if (session.user.rol === "ROLE_ADMIN") { %>
+                            <li>
+                                <a href="/admin"><i class="icons_Mobile_Menu fa fa-user-secret" aria-hidden="true"></i>Panel de Admin</a>
+                            </li>
+                        <% } %>
+                    <% } %>
+                    <li>
+                        <a href="/carrito"><i class="icons_Mobile_Menu fa fa-shopping-cart" aria-hidden="true"></i>Carrito de Compras</a>
+                    </li>
+    
+                    <li>
+                        <a href="/favoritos"><i class="icons_Mobile_Menu fa fa-heart"></i>Mis favoritos</a>
+                    </li>
+    
+                    <li>
+                        <a href="/productos"><i class="icons_Mobile_Menu fa fa-circle" ></i>Productos</a>
+                    </li>
+    
+                    <li>
+                        <a href="/historial"><i class="icons_Mobile_Menu fa fa-history"></i>Mi Historial</a>
+                    </li>
+    
+                    <li>
+                        <a href="/ofertas"><i class="icons_Mobile_Menu fa fa-percent"></i>Ofertas</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/local"><i class="icons_Mobile_Menu fa fa-location-arrow"></i>Visite Nuestro Local</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contacto"><i class="icons_Mobile_Menu fa fa-address-book"></i>Contacto</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/404computers"><i class="icons_Mobile_Menu fa fa-users"></i>Nosotros</a>
+                    </li>
+                    <li>
+                        <a href="/logout"><i class="icons_Mobile_Menu fa fa-sign-out"></i>Salir</a>
+                    </li>
+                </ul>
+            <% } else { %>
+                <div class="crear-cuenta">
+                    <h2>Bienvenido a</h2>
+                    <h2>404 Computers</h2>
+                    <button type="reset" onclick="location.href='/login'">Iniciar Sesion</button>
+                    <button type="reset" onclick="location.href='/registro'">Registrarse</button>
+                </div>
+            <% } %>
             
-            <div class="crear-cuenta">
-            <h2><i class="fa fa-user" aria-hidden="true"></i>¡Bienvenidx Usuarix!</h2>
-            <button type="reset" onclick="location.href='/login'">Iniciar Sesion</button>
-            <button type="reset" onclick="location.href='/registro'">Registrarse</button>
-            </div>
-            
-            <ul class="menu_Mobile">
-                <li>
-                    <a href="/carrito"><i class="icons_Mobile_Menu fa fa-shopping-cart" aria-hidden="true"></i>Carrito de Compras</a>
-                </li>
-
-                <li>
-                    <a href="/favoritos"><i class="icons_Mobile_Menu fa fa-heart"></i>Mis favoritos</a>
-                </li>
-
-                <li>
-                    <a href="/productos"><i class="icons_Mobile_Menu fa fa-circle" ></i>Productos</a>
-                </li>
-
-                <li>
-                    <a href="/historial"><i class="icons_Mobile_Menu fa fa-history"></i>Mi Historial</a>
-                </li>
-
-                <li>
-                    <a href="/ofertas"><i class="icons_Mobile_Menu fa fa-tags"></i>Ofertas</a>
-                </li>
-
-                <li>
-                    <a href="/cupones"><i class="icons_Mobile_Menu fa fa-tag"></i>Mis Cupones</a>
-                </li>
-                
-                <li>
-                    <a href="/local"><i class="icons_Mobile_Menu fa fa-location-arrow"></i>Visite Nuestro Local</a>
-                </li>
-                
-                <li>
-                    <a href="/contacto"><i class="icons_Mobile_Menu fa fa-address-book"></i>Contacto</a>
-                </li>
-                
-                <li>
-                    <a href="/404computers"><i class="icons_Mobile_Menu fa fa-users"></i>Nosotros</a>
-                </li>
-            </ul>
         </nav>
         <!-- Fin Menu Mobile  --> 
 
@@ -124,11 +138,15 @@
                     </li>
 
                     <li>
-                        <button type="reset" onclick="location.href='/ofertas'">Ofertas <i class="fa fa-chevron-right" ></i></button>
+                        <button type="reset" onclick="location.href='/ofertas'">Ofertas <i class="fa fa-percent" ></i></button>
                     </li>
-                    <li>
-                        <button type="reset" onclick="location.href='/admin'">Admin <i class="fa fa-user-secret" ></i></button>
-                    </li>
+                    <% if (typeof session.user != "undefined") { %>
+                        <% if (session.user.rol === "ROLE_ADMIN") { %>
+                            <li>
+                                <button type="reset" onclick="location.href='/admin'">Admin <i class="fa fa-user-secret" ></i></button>
+                            </li>
+                        <% } %>
+                    <% } %>
                 </ul>
             </nav> 
         </div>
@@ -140,18 +158,31 @@
 
 
         <div class="desktop_User_Area">
-            <div class="desktop_Profile">
-                <a href="/perfil"><i class="fa fa-user" aria-hidden="true"></i></a>
-                <a href="/carrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
-            </div>  
+
+            <% if (typeof session.user != "undefined") { %>
+                <div class="desktop_Profile">
+                    <a href="/carrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+
+                    <i class="fa fa-user" aria-hidden="true" onclick="userPanel();">
+                        <span class="user-logged-in">●</span>
+                    </i>
     
-            <div class="desktop_RegisterLogin">
-                <button type="reset" onclick="location.href='/login'">Iniciar Sesion</button>
-                <button type="reset" onclick="location.href='/registro'">Registrarse</button>
-            </div>
+                    <div id="userPanel">
+                        <a href="/perfil/<%= session.user.id %>"><i class="fa fa-user" aria-hidden="true"></i>Ver Perfil</a>
+                        <a href="/editar-perfil"><i class="fa fa-cog" aria-hidden="true"></i>Editar Perfil</a>
+                        <a href="/favoritos"><i class="fa fa-heart" aria-hidden="true"></i> Mis Favoritos</a>
+                        <a href="/historial"><i class="fa fa-history" aria-hidden="true"></i>Mi Historial</a>
+                        <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i>Salir</a>
+                    </div>
+                </div>
+            <% } else { %>
+                <div class="desktop_RegisterLogin">
+                    <button type="reset" onclick="location.href='/login'">Iniciar Sesion</button>
+                    <button type="reset" onclick="location.href='/registro'">Registrarse</button>
+                </div>
+            <% } %> 
         </div>
 
 
     </div> <!--  <--- Fin contenedor Header -->
-    
 </header>

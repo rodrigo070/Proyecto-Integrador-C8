@@ -1,13 +1,40 @@
 <!DOCTYPE html>
 <html lang="es">
-<%- include('../partials/head.ejs') %>
-<body class="adminBG">
-  <div class="container_Page">
-    <%- include('../partials/header.ejs') %>   
+<%- include('../partials/head.ejs' ,{title: 'Lista de Usuarios - '}) %>
+<body>
+  <div class="container_Page"> 
     <main>
-        
+
+      <section class="user_List_Container">
+        <a href="/admin">Volver al Menu Principal</a>
+  
+        <section class="titles">
+            <p>Registro de Usuarios</p>
+        </section>
+        <section class="user_List_Box">
+          <nav class="admin_List_Titles adm_Grid_List">
+            <p>ID</p>
+            <p>Nombre</p>
+            <p>Apellido</p>
+            <p>E-Mail</p>
+            <p>Editar</p>
+            <p>Eliminar</p>
+          </nav>
+          <% usersData.forEach(usuario => { %>
+          <section class="admin_List_PG adm_Grid_List">
+                <p><%= usuario.id %></p>
+                <p><%= usuario.name %></p>
+                <p><%= usuario.surname %></p>
+                <p><%= usuario.email %></p>
+                <a href="/admin/editar-usuario/<%= usuario.id %>" title="Editar Usuario"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                <form class="btnDeleteUser" action="/admin/borrarUsuario/<%- usuario.id %>?_method=DELETE" method="POST">
+                  <button type="submit" title="Borrar Usuario"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                </form>
+          </section>
+          <% }) %>
+        </section>
+      </section>
     </main>
-    <%- include('../partials/footer.ejs') %> 
   </div>
 </body>
 </html>

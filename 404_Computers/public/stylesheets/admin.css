@@ -38,6 +38,7 @@
     cursor: pointer;
     text-align: center;
     transition: .3s ease;
+    border: 1px solid transparent;
 }
 
 .adminPanel a:hover{
