@@ -7,11 +7,11 @@ module.exports = [
     .isLength({ min: 5 })
     .withMessage("Ingrese más de 5 caracteres."),
 
-    check("category")
+    check("categoryid")
     .notEmpty()
     .withMessage("Debe elegir una categoría."),
 
-    check('subcategory')
+    check('subcategoryid')
     .notEmpty()
     .withMessage('Debe elegir una subcategoría.'),
 

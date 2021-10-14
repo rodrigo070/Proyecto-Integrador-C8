@@ -23,9 +23,9 @@
                         <input type="number" name="dni" id="dni" value="<%= user.dni %>">
                     </div>
                     <div class="user_Col_2 flex_col noBorder_PD">
-                        <label for="rol">Rol:</label>
-                        <select name="rol" id="rol">
-                            <% if (user.rol === "ROLE_ADMIN") { %>
+                        <label for="role">Rol:</label>
+                        <select name="role" id="role">
+                            <% if (user.role === "ROLE_ADMIN") { %>
                                 <option value="ROLE_ADMIN" selected>Admin</option>
                                 <option value="ROLE_USER">Usuario</option>
                             <% } else { %>

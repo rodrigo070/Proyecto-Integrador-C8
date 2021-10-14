@@ -3,7 +3,7 @@
         <a href="/productos" style="margin-bottom: 10px;">Ver Todos los Productos</a>
         <p>Categorias:</p>
         <% categories.forEach(category => { %>
-            <a href="/productos/<%= category.categorylink %>"><%= category.category %></a>
+            <a href="/productos/<%= category.category_Link %>"><%= category.category_Name %></a>
         <% }) %>
     </section>
     <br>
@@ -11,7 +11,7 @@
         <% if (subCategoriesFiltered != 0) { %>
             <p>Sub Categorias:</p>
             <% subcategories.forEach(subCategoriesList => { %>
-                <a href="/productos/<%= linkOfCategory %>/<%= subCategoriesList.subcategorylink %>"><%= subCategoriesList.subcategory %></a>
+                <a href="/productos/<%= linkOfCategory %>/<%= subCategoriesList.subcategory_Link %>"><%= subCategoriesList.subcategory_Name %></a>
             <% }) %>
         <% } %>
     </section>

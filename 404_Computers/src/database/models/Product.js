@@ -2,41 +2,57 @@ module.exports = (sequelize,DataTypes) => {
     let alias = 'Product';
     let cols = {
         id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER.UNSIGNED,
             primaryKey: true,
             autoIncrement: true,
             allowNull : false
+        },
+        name: { 
+            type : DataTypes.STRING,
+            allowNull : false
+        },
+        color: { 
+            type : DataTypes.STRING
+        },
+        price : { 
+            type : DataTypes.DECIMAL,
+            allowNull : false
+        },
+        stock : { 
+            type : DataTypes.INTEGER
+        },
+        discount : { 
+            type : DataTypes.INTEGER
+        },
+        onSale : { 
+            type : DataTypes.BOOLEAN
+        },
+        description: { 
+            type : DataTypes.TEXT
+        },
+        product_Category : { 
+            type : DataTypes.INTEGER
+        },
+        product_Subcategory : { 
+            type : DataTypes.INTEGER
         }
-        ,
-        image0: DataTypes.STRING,
-        image1: DataTypes.STRING,
-        image2: DataTypes.STRING,
-        image3: DataTypes.STRING,
-        name: DataTypes.STRING,
-        color: DataTypes.STRING,
-        price : DataTypes.DECIMAL,
-        stock : DataTypes.INTEGER,
-        discount : DataTypes.INTEGER,
-        onsale : DataTypes.BOOLEAN,
-        description: DataTypes.TEXT,
-        categoryid : DataTypes.INTEGER,
-        subcategoryid : DataTypes.INTEGER
     }
     let config = {
+        tableName: "products",
         timestamps: false
     }
     const Product = sequelize.define(alias, cols , config);
     Product.associate = function(models){
         Product.belongsTo(models.Category, {
             as : 'Category',
-            foreignKey: 'categoryid',
+            foreignKey: 'product_Category',
             sourceKey: 'id',
             timestamps: false
         })
 
         Product.belongsTo(models.Subcategory, {
             as : 'Subcategory',
-            foreignKey: 'subcategoryid',
+            foreignKey: 'product_Subcategory',
             sourceKey: 'id',
             timestamps: false
         })

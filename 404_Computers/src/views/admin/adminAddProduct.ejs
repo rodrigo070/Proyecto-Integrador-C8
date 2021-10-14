@@ -27,21 +27,21 @@
                 </div>
                 <div class="seleccionar">
                     <div class="cat1admin">
-                        <select name="category" id="inputCategoryProduct" class="input-select">
+                        <select name="categoryid" id="inputCategoryProduct" class="input-select">
                             <% categoriesData.forEach(catg => { %>
-                                <option value="<%= catg.category %>"><%= catg.categoryName %></option>
+                                <option value="<%= catg.id %>"><%= catg.category %></option>
                             <% }) %>
                         </select>
-                        <% if (locals.errors && errors.category) { %>
-                            <small class="error-message"><%= errors.category.msg %> </small>
+                        <% if (locals.errors && errors.categoryid) { %>
+                            <small class="error-message"><%= errors.categoryid.msg %> </small>
                         <% } %>
-                        <select name="subcategory" id="inputSubCategoryProduct" class="input-select">
+                        <select name="subcategoryid" id="inputSubCategoryProduct" class="input-select">
                             <% subCategoriesData.forEach(scatg => { %>
-                                <option value="<%= scatg.subcategory %>"><%= scatg.subcategoryName %></option>
+                                <option value="<%= scatg.id %>"><%= scatg.subcategory %></option>
                             <% }) %>
                         </select>
-                        <% if (locals.errors && errors.subcategory) { %>
-                            <small class="error-message"><%= errors.subcategory.msg %> </small>
+                        <% if (locals.errors && errors.subcategoryid) { %>
+                            <small class="error-message"><%= errors.subcategoryid.msg %> </small>
                         <% } %>
                     </div>
         

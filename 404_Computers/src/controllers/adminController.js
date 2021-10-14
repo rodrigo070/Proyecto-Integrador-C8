@@ -1,5 +1,9 @@
-let { bannersData, productsData , usersData , categoriesData , subCategoriesData , writeProductEdit ,writeBannersEdit, writeUserEdit} = require('../data/db');
 const { validationResult } = require('express-validator');
+const db = require('../database/models');
+const User = db.User;
+const Product = db.Product;
+const Category = db.Category;
+const Subcategory = db.Subcategory;
 
 module.exports = {
     admin: (req, res) => {
@@ -9,59 +13,84 @@ module.exports = {
     }
     ,
     admin_usuarios: (req, res) => {
-        res.render('admin/adminUsersList',  {
-            usersData,
-            session: req.session
-        });
+        User.findAll()
+        .then(usersData => {
+            res.render('admin/adminUsersList',  {
+                usersData,
+                session: req.session
+            });
+        })
+        .catch((err) => console.log("ERROR en Admin_Usuarios: "+err));
     }
     ,
     admin_detalle_usuario: (req, res) => {
-        let userID = +req.params.id;
-        let user = usersData.find(userToFind => userToFind.id === userID);
-
-        res.render('admin/adminEditUser',  {
-            user,
-            session: req.session
-        });
+        User.findOne({
+            where : {
+                id : req.params.id
+            }
+        })
+        .then(user => {
+            res.render('admin/adminEditUser',  {
+                user,
+                session: req.session
+            });
+        })
+        .catch((err) => console.log("ERROR en Detalle Usuario: "+err));
     }
     ,
     admin_detalle_usuario_editar: (req, res) => {
 
-        usersData.forEach(userToEdit => {
-            if(userToEdit.id === +req.params.id)
-            {
-                userToEdit.id = userToEdit.id,
-                userToEdit.name = req.body.name ? req.body.name : userToEdit.name,
-                userToEdit.surname = req.body.surname ? req.body.surname : userToEdit.surname,
-                userToEdit.address = req.body.address ? req.body.address : userToEdit.address,
-                userToEdit.dni = req.body.dni ? req.body.dni : userToEdit.dni,
-                userToEdit.rol = req.body.rol ? req.body.rol : userToEdit.rol,
-                userToEdit.email = req.body.email ? req.body.email : userToEdit.email,
-                userToEdit.phoneNumber = req.body.phoneNumber ? req.body.phoneNumber : userToEdit.phoneNumber,
-                userToEdit.image = userToEdit.image
+        let { name, surname, address, dni, role ,email, phone, image } = req.body;
+
+        User.update({
+            name,
+            surname,
+            address,
+            dni,
+            role,
+            email,
+            phone,
+            image
+        },
+        {
+            where : {
+                id : req.params.id
             }
-        });
-
-        writeUserEdit(usersData)
-
-        res.redirect('/admin/usuarios')
+        })
+        .then(() => {
+            res.redirect('/admin/usuarios')
+        })
+        .catch((err) => console.log("ERROR Editando Usuario: "+err));
     }
     ,
     admin_productos: (req, res) => {
-        res.render('admin/adminProductList',  {
-            productsData,
-            messageToDisplay : "Disponibles",
-            session: req.session
-        });
+
+        Product.findAll()
+        .then(productsData => {
+            res.render('admin/adminProductList',  {
+                productsData,
+                messageToDisplay : "Disponibles",
+                session: req.session
+            });
+        })
+        .catch((err) => console.log("ERROR Lista Productos Admin: "+err));
+
     }
     ,
     admin_agregar: (req, res) => {
-        res.render('admin/adminAddProduct',  {
-            productsData,
-            categoriesData,
-            subCategoriesData,
-            session: req.session
-        });
+
+        let categoriesData = Category.findAll()
+        let subCategoriesData = Subcategory.findAll()
+
+        Promise.all([categoriesData, subCategoriesData])
+        .then(([categoriesData, subCategoriesData]) => {
+            res.render('admin/adminAddProduct',  {
+                categoriesData,
+                subCategoriesData,
+                session: req.session
+            });
+        })
+        .catch((err) => console.log("ERROR Vista Agregar Producto: "+err));
     }
     ,
     admin_carga_update: (req, res) => {
@@ -70,63 +99,63 @@ module.exports = {
 
         if(errors.isEmpty()){
 
-            let lastId = 1;
+            let { image, name, color, price, stock ,discount, onsale, description , categoryid , subcategoryid} = req.body;
 
-            productsData.forEach(product => {
-                if(product.id > lastId){
-                    lastId = product.id
-                }
-            });
-
-            let productIMGArray = [];
-
-            req.files.forEach(image => {
-                productIMGArray.push(image.filename);
-            });
-
-            let newProduct = {
-                id: lastId + 1,
-                image: productIMGArray.length > 0 ? productIMGArray : ["default.jpg"],
-                name: req.body.name,
-                color: req.body.color,
-                price: req.body.price,
-                stock: 1,
-                discount: req.body.discount,
-                onSale: req.body.onSale,
-                description: req.body.description,
-                category: req.body.category,
-                subcategory: req.body.subcategory
-            }
-
-            productsData.push(newProduct);
-            writeProductEdit(productsData);
-
-            res.redirect('/admin/lista-productos');
+            Product.create({
+                image,
+                name,
+                color,
+                price,
+                stock,
+                discount,
+                onsale,
+                description,
+                categoryid,
+                subcategoryid
+            })
+            .then(() => {
+                res.redirect('/admin/lista-productos');
+            })
+            .catch((err) => console.log("ERROR Agregando Producto: "+err));
         }
         else
         {
-            console.log("ERROR al Agregar Producto");
-            res.render("admin/adminAddProduct", {
-                productsData,
-                categoriesData,
-                subCategoriesData,
-                errors: errors.mapped(),
-                old: req.body,
-                session: req.session
+            let categoriesData = Category.findAll()
+            let subCategoriesData = Subcategory.findAll()
+            Promise.all([categoriesData, subCategoriesData])
+            .then(([categoriesData, subCategoriesData])=> {
+                console.log("ERROR al Agregar Producto");
+                res.render("admin/adminAddProduct", {
+                    categoriesData,
+                    subCategoriesData,
+                    errors: errors.mapped(),
+                    old: req.body,
+                    session: req.session
+                })
             })
         }
     },
     admin_editar_producto: (req, res) => {
 
-        let productToEditID = +req.params.id;
-        let productToEdit = productsData.find(productToEditFind => productToEditFind.id === productToEditID);
+        let productToEdit = Product.findOne({
+            where : {
+                id : req.params.id
+            }
+        })
 
-        res.render('admin/adminEditProduct',  {
-            productToEdit,
-            categoriesData,
-            subCategoriesData,
-            session: req.session
-        });
+        let categoriesData = Category.findAll()
+        let subCategoriesData = Subcategory.findAll()
+
+        Promise.all([productToEdit, categoriesData, subCategoriesData])
+        .then( ([productToEdit, categoriesData, subCategoriesData]) => {
+            res.render('admin/adminEditProduct',  {
+                productToEdit,
+                categoriesData,
+                subCategoriesData,
+                session: req.session
+            });
+        })
+        .catch((err) => console.log("ERROR Editando Producto: "+err));
     }
     ,
     admin_editar_producto_update: (req, res) => {

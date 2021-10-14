@@ -2,16 +2,23 @@ module.exports = (sequelize,DataTypes) => {
     let alias = 'Category';
     let cols = {
         id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER.UNSIGNED,
             primaryKey: true,
             autoIncrement: true,
             allowNull : false
         },
-        category: DataTypes.STRING,
-        categorylink: DataTypes.STRING,
+        category_Name: {
+            type : DataTypes.STRING,
+            allowNull : false
+        },
+        category_Link: {
+            type : DataTypes.STRING,
+            allowNull : false
+        }
     }
 
     let config = {
+        tableName: "categories",
         timestamps: false
     }
 
@@ -25,7 +32,7 @@ module.exports = (sequelize,DataTypes) => {
         ,
         Category.hasMany(models.Product, {
             as : 'ProductCatg',
-            foreignKey : 'categoryid',
+            foreignKey : 'product_Category',
             timestamps : false
         })
     }
