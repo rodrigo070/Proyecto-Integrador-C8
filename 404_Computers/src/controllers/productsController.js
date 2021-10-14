@@ -3,8 +3,7 @@ const db = require('../database/models');
 const Product = db.Product; 
 const Category = db.Category;
 const Subcategory = db.Subcategory;
-const Sequelize = db.sequelize;
-const Op  = Sequelize.Op;
+const { Op } = require('sequelize');
 
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
@@ -13,7 +12,7 @@ module.exports = {
 
         const categories = Category.findAll()
         const products = Product.findAll({
-            include : ["Category","Subcategory"]
+            include : ["image","Category","Subcategory"]
         })
         Promise.all([products,categories])
         .then(([products,categories]) =>{
@@ -35,14 +34,14 @@ module.exports = {
     product_Detail: (req, res) => {
 
         let sliderProducts = Product.findAll({
-            include :  ["Category","Subcategory"]
+            include :  ["image","Category","Subcategory"]
         })
 
         let product = Product.findOne({
                 where : {
                     id : req.params.id
                 },
-                include : ["Category","Subcategory"]
+                include : ["image","Category","Subcategory"]
             }
         )
 
@@ -66,7 +65,7 @@ module.exports = {
             }
         })
         .catch(error => {
-            console.log("Tenemos un ERROR: "+error);
+            console.log("Tenemos un ERROR al mostrar Producto: "+error);
         });
     }
     ,
@@ -82,7 +81,7 @@ module.exports = {
             let categories = Category.findAll()
 
             let products = Product.findAll({
-                include :  ["Category","Subcategory"],
+                include :  ["image","Category","Subcategory"],
                 where : {
                     product_Category : categoryPage.id
                 }
@@ -122,72 +121,88 @@ module.exports = {
     }
     ,
     subCategories: (req, res) => {
-        let categoryId = req.params.category;
-        let subCategoryId = req.params.subcategory;
-        let subCategoriesFiltered = []; 
 
-        let category = categoriesData.find(category => {
-            return category.category === categoryId;
-        });
-
-        let subCategory = subCategoriesData.find(subcategory => {
-            return subcategory.subcategory === subCategoryId;
-        });
-
-        subCategoriesFiltered = subCategoriesData.filter(subCatg => {
-            if(subCatg.categoryID === category.categoryID)
-            {
-                return subCategoriesFiltered;
+        Subcategory.findOne({
+            where : {
+                subcategory_Link : req.params.subcategory
             }
-        });
+        })
+        .then(subcategoryPage => {
 
-        if(category !== undefined && subCategory !== undefined) {
-            let product = productsData.filter(product => {
-                if(product.category === categoryId && product.subcategory === subCategoryId){
-                    return product;
+            let categories = Category.findAll()
+
+            let products = Product.findAll({
+                include :  ["image","Category","Subcategory"],
+                where : {
+                    product_Subcategory : subcategoryPage.id
                 }
+            })
+
+            let subcategories = Subcategory.findAll({
+                where : {
+                    category_Id : subcategoryPage.category_Id
+                }
+            })
+
+            Promise.all([subcategoryPage,categories, products,subcategories])
+            .then(([subcategoryPage,categories, products,subcategories]) => {
+                
+                res.render('products/productsList', {
+                    products,
+                    categories,
+                    title : subcategoryPage.subcategory_Name+" - ",
+                    linkOfCategory : req.params.category,
+                    subCategoriesFiltered : 1,
+                    subcategories,
+                    session: req.session,
+                    toThousand
+                });
+            })
+            .catch(error => {
+                console.log("Tenemos un ERROR: "+error);
             });
 
-            res.render('products/productsList', {
-                products_List:product,
-                category,
-                subCategory,
-                subCategoriesFiltered,
-                products_List_Catg : categoriesData,
-                title : subCategory.subcategoryName+' - ',
-                session: req.session,
-                toThousand
-            });
-        }
-        else
-        {
-            res.render('errorPage', {
+        })
+        .catch(error => {
+            res.render('errorPage' , {
                 error: "La Sub Categoria a la cual intenta acceder no existe o fue removida de la pagina.",
                 session: req.session
             });
-            console.log("la subcategoria ingresada no existe");
-        }
+        });
+
     }
     ,
     offers: (req, res) => {
-        let products = productsData.filter(product => product.discount > 0);
-
-        let subCategoriesFiltered = [];
-        res.render("products/productsList", {
-            products_List : products,
-            products_List_Catg : categoriesData,
-            products_List_SubCatg : subCategoriesData,
-            subCategoriesFiltered,
-            title : 'Ofertas - ',
-            session: req.session,
-            toThousand
+        
+        const categories = Category.findAll()
+        const products = Product.findAll({
+            where : {
+                discount : {
+                    [Op.gt]: 0, 
+                }
+            },
+            include : ["image","Category","Subcategory"]
         })
+        Promise.all([products,categories])
+        .then(([products,categories]) =>{
+            res.render('products/productsList' , {
+                products,
+                categories,
+                subCategoriesFiltered : 0,
+                title : 'Ofertas - ',
+                session: req.session,
+                toThousand
+            });
+        })
+        .catch(error => {
+            console.log("Tenemos un ERROR: "+error);
+        });
     }
     ,
     order_low: (req, res) => {
         const categories = Category.findAll()
         const products = Product.findAll({
-            include : ["Category","Subcategory"],
+            include : ["image","Category","Subcategory"],
             order: [
                 ["price", "ASC"]
             ]
@@ -198,7 +213,7 @@ module.exports = {
                 products,
                 categories,
                 subCategoriesFiltered : 0,
-                title : 'Ordenado - ',
+                title : 'Menor A Mayor - ',
                 session: req.session,
                 toThousand
             });
@@ -211,7 +226,7 @@ module.exports = {
     order_high: (req, res) => {
         const categories = Category.findAll()
         const products = Product.findAll({
-            include : ["Category","Subcategory"],
+            include : ["image","Category","Subcategory"],
             order: [
                 ["price", "DESC"]
             ]
@@ -222,7 +237,7 @@ module.exports = {
                 products,
                 categories,
                 subCategoriesFiltered : 0,
-                title : 'Ordenado - ',
+                title : 'Mayor a Menor - ',
                 session: req.session,
                 toThousand
             });

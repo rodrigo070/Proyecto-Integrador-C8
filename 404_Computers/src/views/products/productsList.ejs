@@ -44,7 +44,7 @@
                                 <% if (product.discount > 1) { %>
                                     <label><%= product.discount %>% OFF</label>
                                 <% } %>
-                                <img src="/images/products/<%= product.image0 %>" alt="<%= product.name %>">
+                                <img src="/images/products/<%= product.image[0]?.image_Route %>" alt="<%= product.name %>">
                             </div>
                             <div class="description_Article_Page">
                                 <p><%= product.name %></p>

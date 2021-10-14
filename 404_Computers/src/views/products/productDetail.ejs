@@ -32,13 +32,12 @@
 
             <section class="productPhoto">
                 <!-- Aca va la imagen Principal  -->
-                <img src="/images/products/<%= product.image0 %>" id="expandedImg" class="imageModal">
+                <img src="/images/products/<%= product.image[0]?.image_Route %>" id="expandedImg" class="imageModal">
                 <!-- Aca va la Grilla de Fotos del producto  -->
                 <div class="photosGalleryBox">
-                    <img class="miniPhoto" src="/images/products/<%= product.image0 %>" onmouseover="productGridImages(this);">
-                    <img class="miniPhoto" src="/images/products/<%= product.image1 %>" onmouseover="productGridImages(this);">
-                    <img class="miniPhoto" src="/images/products/<%= product.image2 %>" onmouseover="productGridImages(this);">
-                    <img class="miniPhoto" src="/images/products/<%= product.image3 %>" onmouseover="productGridImages(this);">
+                    <% product.image.forEach(imageGallery => { %>
+                        <img class="miniPhoto" src="/images/products/<%= imageGallery.image_Route %>" onmouseover="productGridImages(this);">
+                    <% }) %>
                 </div>
             </section>
     

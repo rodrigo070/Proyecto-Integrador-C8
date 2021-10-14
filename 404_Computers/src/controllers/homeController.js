@@ -1,18 +1,31 @@
-let { bannersData,productsData,categoriesData,subCategoriesData }  = require('../data/db');
+const db = require('../database/models');
+const Product = db.Product; 
+const Category = db.Category;
+const Subcategory = db.Subcategory;
+const Banner = db.Banner;
+const { Op } = require('sequelize');
 
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
-//aca controlamos la vista y las funciones por defecto se
-//renderiza la vista que queremos de la carpeta views
-//por aca podemos controlar que datos queremos que muestre por pantalla
-
 module.exports = {
     home: (req, res) => {
-        res.render('home' , {
-            productsData,
-            bannersData,
-            session: req.session,
-            toThousand
+        
+        const bannersData = Banner.findAll()
+        const productsData = Product.findAll({
+            include : ["image","Category","Subcategory"]
+        })
+        Promise.all([productsData,bannersData])
+        .then(([productsData,bannersData]) =>{
+            res.render('home' , {
+                productsData,
+                bannersData,
+                sliderProducts : productsData,
+                session: req.session,
+                toThousand
+            });
+        })
+        .catch(error => {
+            console.log("Tenemos un ERROR: "+error);
         });
     }
     ,
@@ -41,35 +54,45 @@ module.exports = {
     }
     ,
     search: (req, res) => {
-        let result = [];
-        let subCategoriesFiltered = [];
 
-        productsData.forEach(product => {
-            if(product.name.toLowerCase().includes(req.query.producto)){
-                result.push(product)
+        const categories = Category.findAll()
+        const products = Product.findAll({
+            include : ["image","Category","Subcategory"]
+        })
+        Promise.all([products,categories])
+        .then(([products,categories]) =>{
+
+            let result = [];
+
+            products.forEach(product => {
+                if(product.name.toLowerCase().includes(req.query.producto)){
+                    result.push(product)
+                }
+            });
+
+            if(result.length != 0)
+            {
+                res.render('products/productsList' , {
+                    products : result,
+                    categories,
+                    subCategoriesFiltered : 0,
+                    search: req.query.producto,
+                    title: req.query.producto+' - ',
+                    session: req.session,
+                    toThousand
+                });
             }
+            else
+            {
+                res.render('errorPage', {
+                    error: `Lo sentimos el Producto: ${req.query.producto} no existe o fue removido de la pagina.`,
+                    session: req.session
+                })
+            }
+        })
+        .catch(error => {
+            console.log("Tenemos un ERROR: "+error);
         });
         
-        if(result.length != 0)
-        {
-            res.render('products/productsList', {
-                products_List : result,
-                products_List_Catg : categoriesData,
-                products_List_SubCatg : subCategoriesData,
-                category : categoriesData,
-                subCategoriesFiltered,
-                search: req.query.producto,
-                session: req.session,
-                title: req.query.producto+' - ',
-                toThousand
-            });
-        }
-        else
-        {
-            res.render('errorPage', {
-                error: `Lo sentimos el Producto: ${req.query.producto} no existe o fue removido de la pagina.`,
-                session: req.session
-            })
-        }
     }
 }

@@ -112,20 +112,20 @@
 
                 <% for( let i = 0; i < 6; i++ ) { %>
                     <article class="products_Page_Article">
-                        <a href="/productos/<%= productsData[i].category %>/<%= productsData[i].subcategory %>/<%=productsData[i].id%>">
+                        <a href="/productos/<%= productsData[i].Category.category_Link %>/<%= productsData[i].Subcategory.subcategory_Link %>/<%=productsData[i].id%>">
                             <div class="img_Product_Page">
                                 <% if (productsData[i].discount > 1) { %>
                                     <label><%= productsData[i].discount %>% OFF</label>
                                 <% } %>
-                                <img src="/images/products/<%= productsData[i].image[0] %>" alt="<%= productsData.name %>">
+                                <img src="/images/products/<%= productsData[i].image[0]?.image_Route %>" alt="<%= productsData.name %>">
                             </div>
                             <div class="description_Article_Page homeProductCard">
                                 <p><%= productsData[i].name %></p>
                                 <div class="prices_Product_Page">
                                     <% if (productsData[i].discount === 0) { %>
-                                        <p>$<%= toThousand(productsData.price) %></p>
+                                        <p>$<%= toThousand(productsData[i].price) %></p>
                                     <% } else { %>
-                                        <p>$<%= toThousand(finalPrice = productsData[i].price - ((productsData[i].price * productsData[i].discount)/100)) %></p>
+                                        <p>$<%= toThousand(productsData[i].price - ((productsData[i].price * productsData[i].discount)/100)) %></p>
                                     <% } %>
                                 </div>
                             </div>

@@ -14,20 +14,20 @@ module.exports = function(sequelize, DataTypes){
         product_Id: {
             type: DataTypes.INTEGER,
             allowNull: false
-        },
+        }
     }
 
     let config = {
-        tableName: "products_Images",
+        tableName: "product_images",
         timestamps: false
     }
 
     const ProductImage = sequelize.define(alias, cols, config)
 
-    ProductImage.associate = models => {
+    ProductImage.associate = function(models) {
 
         ProductImage.belongsTo(models.Product, {
-            as: "Product",
+            as: "Products",
             foreignKey: "product_Id"
         })
 
