@@ -38,9 +38,6 @@ module.exports = (sequelize,DataTypes) => {
         dni : {
             type: DataTypes.INTEGER
         },
-        historyproducts : {
-            type: DataTypes.INTEGER
-        },
         favorites : {
             type: DataTypes.STRING
         },
