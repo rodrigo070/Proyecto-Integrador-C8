@@ -46,17 +46,23 @@ module.exports = {
                     email:req.body.email
                 }
             })
+            
+
+
+
          .then(user=>{
              req.session.user ={
                 id: user.id,
                 name: user.name,
                 surname: user.surname,
                 email: user.email,
-                rol: user.rol,
+                role: user.role,
                 image: user.image,
                 address: user.address,
                 phone: user.phone,
                 dni: user.dni,
+                favorites: user.favorites,
+                cartproducts: user.cartproducts
              };
            
                 res.cookie("user404", req.session.user, 
@@ -64,8 +70,8 @@ module.exports = {
                     httpOnly : true})
             
             res.locals.user = req.session.user
-			//res.redirect(`/perfil/${user.id}`) 
-            res.redirect('/') 
+			res.redirect(`/perfil/${user.id}`) 
+           // res.redirect('/') 
             .catch((err) => console.log(err));
          })     
         

@@ -34,7 +34,7 @@
                 <span>Usuario</span>
               </div>
               <div class="indicador-value">
-                <span><%= users.name %> </span>
+                <span><%= user.name %> </span>
               </div>
             </div>
             <div class="info">
@@ -43,7 +43,7 @@
                   <span>E-mail</span>
                 </div>
                 <div class="indicador-value">
-                  <span><%= users.email %></span>
+                  <span><%= user.email %></span>
                 </div>
               </div>
               <div class="subtitulo-mis-datos">
@@ -55,7 +55,7 @@
                 <span>Nombre y Apellido:</span>
               </div>
               <div class="indicador-value">
-                <span><%= users.name %> <%= users.surname %><!-- Aca iría el nombre de la cuenta --></span>
+                <span><%= user.name %> <%= user.surname %><!-- Aca iría el nombre de la cuenta --></span>
               </div>
             </div>
             
@@ -65,7 +65,7 @@
                 <span>Documento:</span>
               </div>
               <div class="indicador-value">
-                <span><%= users.dni ? users.dni : "------" %></span>
+                <span><%= user.dni ? user.dni : "------" %></span>
               </div>
             </div>
             <div class="info">
@@ -74,7 +74,7 @@
                   <span>Telefono</span>
                 </div>
                 <div class="indicador-value">
-                  <span><%= users.phone ? users.phone : "------" %></span>
+                  <span><%= user.phone ? user.phone : "------" %></span>
                 </div>
               </div>
             </div>
@@ -107,9 +107,9 @@
 
             <div class="tarjetas-contenedoras">
               <div class="datos-tarjetas">
-                <p><%= users.address ? users.address : "Direccion" %> </p>
+                <p><%= user.address ? user.address : "Direccion" %> </p>
                 <p class="info-tarjeta">Buenos Aires(1655<!-- codigo postal -->), Localidad falsa</p>
-                <p class="info-tarjeta"><%= users.name %> <%= users.surname %> - +54 <%= users.phoneNumber ? users.phoneNumber : "------" %> </p><!-- lo de +54 no se si dejarlo o no por ahora lo dejo mas adelante lo hablamos -->
+                <p class="info-tarjeta"><%= user.name %> <%= user.surname %> - +54 <%= user.phoneNumber ? user.phoneNumber : "------" %> </p><!-- lo de +54 no se si dejarlo o no por ahora lo dejo mas adelante lo hablamos -->
                </div>
             </div>
             <div class="tarjetas-contenedoras">
