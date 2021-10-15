@@ -15,20 +15,53 @@ module.exports = {
     },
     editProfile: (req, res) => {
 
-        db.User.findByPk(req.session.user.id, {
-            include: [{ association: "historyProducts" }],
-          }).then((user) => {
+        db.User.findByPk(req.session.user.id).then((user) => {
             res.render("users/editProfile", {
               user,
               session: req.session,
             });
           });
         },
+        updateProfile: (req, res) => {
+                            let errors = validationResult(req);
+            if (errors.isEmpty()) {
+              let {name, surname,address,phone,dni } = req.body;
+              db.User.update({
+                name,
+                surname,
+                address,
+                phone,
+                dni
+              }, {
+                where: {
+                  id: req.params.id
+                }
+              })
+              .then(() => {
+                db.User.create({
+                   surname,address,phone,dni,
+                  userId: req.params.id
+                  
+                }) 
+                .then(() => {
+                  res.redirect('users/profile')
+                })
+              })
+             
+        
+     
+            } else {
+              res.render("editar-perfil", {
+                errors: errors.mapped(),
+                old: req.body,
+                session: req.session,
+              });
+            }
+        
+    },
     profile: (req, res) => {
        // let users = usersData.find(user => user.id === +req.params.id)
-        db.User.findByPk(req.session.user.id,{
-            include: [{ association: "historyProducts"}],
-        }).then((user)=>{
+        db.User.findByPk(req.session.user.id).then((user)=>{
           
         res.render('users/profile',{
             user,
@@ -36,6 +69,7 @@ module.exports = {
         });
         })
     },
+
     processLogin: (req, res) => {
 		let errors = validationResult(req);
 
@@ -72,7 +106,7 @@ module.exports = {
             res.locals.user = req.session.user
 			res.redirect(`/perfil/${user.id}`) 
            // res.redirect('/') 
-            .catch((err) => console.log(err));
+          //  .catch((err) => console.log(err));
          })     
         
 
@@ -102,7 +136,7 @@ module.exports = {
 		}
 		else
 		{	
-			console.log("hola")
+			
 			res.render('users/login', {
 				errors: errors.mapped(),
 				session: req.session

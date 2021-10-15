@@ -25,7 +25,7 @@ router.get('/favoritos', userSessionCheck, controller.favorites);
 /* Routers de Edicion de Perfil */
 
 router.get('/editar-perfil', userSessionCheck, controller.editProfile);
-
+router.put('/perfil/:id' , controller.updateProfile)
 /* Routers de Perfil de Usuario */
 router.get('/perfil/:id', userSessionCheck,profileCheck ,controller.profile);/* cambie la ruta para que en perfil nos muestre los datos del usuario que venga por id */
 

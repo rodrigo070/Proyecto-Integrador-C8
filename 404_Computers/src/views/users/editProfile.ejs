@@ -8,39 +8,51 @@
     <div class="form-container">
         <h2>Editar mi perfil</h2>
         <hr>
-            <form action="" method="">
-                <div class="profile-box">
-                    <h4 class="profile-subtitle">Avatar</h4>
-                    <div class="avatar">
-                        
-                    </div>
-                    <div class="input-file-container">
-                        <input type="file" name="" id="">
-                    </div>
-                </div>
+        <form action="/profile/editprofile/<%=user.id %>?_method=PUT" method="POST"
+            enctype="multipart/form-data">
+                
                 <div class="profile-form">
                     
                     <div class="profile-box">
                         <h4 class="profile-subtitle">Datos personales</h4>
-                            <div class="input-container">
-                                <input class="input-style" type="email" name="email" placeholder="Ingrese su email" ><!-- value="user.email@mail.com" readonly -->
+                        
+                        <div class="input-container">
+                            <input class="input-style" type="text" name="name" placeholder="nombre"
+                            value="<%= user.name ? user.name : "" %>">
+                            <% if (locals.errors && errors.name) { %>
+                                <small class="error-message"><%= errors.name.msg %></small>
+                            <% } %>
+
+                        </div>
+
+                        <div class="input-container">
+                            <input class="input-style" type="text" name="surname" placeholder="Apellido"value="<%= user.surname ? user.surname : "" %>">
+                            <% if (locals.errors && errors.surname) { %>
+                                <small class="error-message"><%= errors.surname.msg %></small>
+                            <% } %>
+                            
+                        </div>
+                        <div class="input-container">
+                                <input class="input-style" type="email" name="email" placeholder="Ingrese su email" readonly value="<%= user.email %>">
+                                <% if (locals.errors && errors.email) { %>
+                                    <small class="error-message"><%= errors.email.msg %></small>
+                                <% } %>
                             </div>
+                            
+                         
                             <div class="input-container">
-                                <input class="input-style" type="text" name="name" placeholder="Nombre">
-                            </div>
-                            <div class="input-container">
-                                <input class="input-style" type="text" name="lastname" placeholder="Apellido">
-                            </div>
-                            <div class="input-container">
-                                <input class="input-style" type="number" name="dni" placeholder="DNI">
+                                <input class="input-style" type="number" name="dni" placeholder="DNI"><%= user.dni ? user.dni : "" %>
                             </div>
                     </div>
                     <div class="profile-box">
                         <h4 class="profile-subtitle">Datos de contacto</h4>
                         <div class="input-container">
-                            <input class="input-style" type="tel" name="tel" placeholder="Teléfono">
+                            <input class="input-style" type="tel" name="phone" placeholder="Teléfono"value="<%= user.phone ? user.phone : "" %>">
+                            <% if (locals.errors && errors.phone) { %>
+                                <small class="error-message"><%= errors.phone.msg %></small>
+                            <% } %>
                         </div>
-                        <div class="input-container">
+                      <div class="input-container">
                            <select name="provincia" class="input-select">
                                <option value="" hidden selected>Elija una provincia</option>
                                <option value="laRioja">La Rioja</option>
@@ -61,7 +73,10 @@
                             </select>
                         </div>
                         <div class="input-container">
-                            <input class="input-style" type="text" name="domicilio" placeholder="Direccion">
+                            <input class="input-style" type="text" name="address" placeholder="Direccion"value="<%= user.address ? user.address : "" %>">
+                            <% if (locals.errors && errors.address) { %>
+                                <small class="error-message"><%= errors.address.msg %></small>
+                            <% } %>
                         </div>
                     </div>
                 </div> 
