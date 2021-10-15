@@ -1,21 +1,11 @@
 <!-- CAROUSEL -->
 <section class="carousel-container">
-                      
-    <div class="slides fade">
-        <img src="/images/banners/benqbanner.png" alt="">
-    </div>
     
-    <div class="slides fade">
-        <img src="/images/banners/lenovobanner.jpg" alt="">
-    </div>
-    
-    <div class="slides fade">
-        <img src="/images/banners/logitechbanner.jpg" alt="">
-    </div>
-    
-    <div class="slides fade">
-        <img src="/images/banners/macbookbanner.png" alt="">
-    </div>
+    <% bannersData.forEach(banner => { %>
+        <div class="slides fade">
+            <img src="/images/banners/<%= banner.bannerImage %> " alt="">
+        </div>
+    <% }) %>
 
     <!-- Next and previous buttons -->
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -23,10 +13,9 @@
     
     <!-- The dots/circles -->
     <div class="dots">
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-        <span class="dot" onclick="currentSlide(4)"></span>
+        <% bannersData.forEach(banner => { %>
+            <span class="dot" onclick="currentSlide(`<%= banner.id %>`)"></span>
+        <% }) %>
     </div>
 </section>
 <!-- END CAROUSEL -->

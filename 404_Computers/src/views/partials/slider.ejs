@@ -3,14 +3,18 @@
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
     </div>
     <div class="sliderProducts">
-        <% productsData.forEach(element => { %>
-            <% if (element.onSale === 1) { %>
+        <% sliderProducts.forEach(productSlider => { %>
+            <% if (productSlider.onsale) { %>
                 <div class="productRecommended">
-                    <a href="/productos/<%= element.category %>/<%= element.subcategory %>/<%= element.id %>">
-                        <img src="/images/products/<%= element.image[0] %>">
+                    <a href="/productos/<%= productSlider.Category.categorylink %>/<%= productSlider.Subcategory.subcategorylink %>/<%= productSlider.id %>">
+                        <img src="/images/products/<%= productSlider.image0 %>">
                         <div class="productRecommendedDescription">
-                            <p><%= element.name %></p>
-                            <p>$<%= element.price %></p>
+                            <p><%= productSlider.name %></p>
+                            <% if (productSlider.discount === 0) { %>
+                                <p>$<%= toThousand(productSlider.price) %></p>
+                            <% } else { %>
+                                <p>$<%= toThousand(productSlider.price - ((productSlider.price * productSlider.discount)/100)) %></p>
+                            <% } %>
                             <button>Ver Producto</button>
                         </div>
                     </a>

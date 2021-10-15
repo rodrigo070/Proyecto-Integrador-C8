@@ -42,3 +42,14 @@ span.onclick = function() {
   modal.style.display = "none";
   document.body.style.overflowY = "visible";
 } 
+
+function fav() {
+  var icon = document.getElementById("favBtn");
+    if (icon.classList.contains("fa-heart-o")) {
+      icon.classList.remove("fa-heart-o");
+      icon.classList.add("fa-heart");
+    } else {
+      icon.classList.remove("fa-heart");
+      icon.classList.add("fa-heart-o");
+    }
+  }

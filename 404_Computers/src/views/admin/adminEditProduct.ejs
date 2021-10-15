@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
-<%- include('../partials/head.ejs') %>
+<%- include('../partials/head.ejs' ,{title: 'Edicion de Producto - '}) %>
 <body>
-  <div class="container_Page">
-    <%- include('../partials/header.ejs') %>   
+  <div class="container_Page">  
     <main>
       <div class="admin_Nav">
         <nav>
             <a href="/admin/lista-productos">Lista de Productos</a>
             <a href="/admin/lista-productos/stock">Stock</a>
             <a href="/admin/lista-productos/ofertas">Ofertas</a>
+            <a href="/admin/banners">Banners</a>
         </nav>
         <section class="editProductSection">
             <div>Edicion del Producto N°<%= productToEdit.id %></div>
@@ -77,7 +77,7 @@
 
                         <div class="col2EditProduct">
                             <article>
-                                <label for="inputStockProduct">Cantidad de Stock:</label>
+                                <label for="inputStockProduct">Stock:</label>
                                 <input type="number" name="stock" id="inputStockProduct" value="<%= productToEdit.stock %>">
                             </article>
                             <article>
@@ -90,7 +90,7 @@
                 </div>
                 <div id="addProductImages">
                     <label class="addImagesButton">
-                        <input type="file" name="image">
+                        <input type="file" name="image" multiple accept=".jpg, .png, .webp, .jpeg, .bmp">
                         <p><i class="fa fa-upload" aria-hidden="true"></i> Agregar Imagenes</p>
                     </label>
                     <p>Imagenes del Producto</p>
@@ -113,7 +113,7 @@
                      
                     <% } %>
                 </div>
-                <div class="editProductSaveAbort">
+                <div class="editProductSaveCancel">
                     <button type="submit">Guardar</button>
                     <button type="reset" onclick="location.href='/admin/lista-productos'">Cancelar</button>
                 </div>
@@ -122,7 +122,6 @@
         
       </div>
     </main>
-    <%- include('../partials/footer.ejs') %> 
   </div>
 </body>
 </html>

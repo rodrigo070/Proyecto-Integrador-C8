@@ -1,97 +1,98 @@
 <!DOCTYPE html>
 <html lang="es">
-<%- include('../partials/head.ejs') %>
+<%- include('../partials/head.ejs' , {title : product.name+' - ' }) %>
 <head>
-    <script src="/javascripts/productPhotos.js" defer></script>
+    <script src="/javascripts/productPage.js" defer></script>
 </head>
 <body>
   <div class="container_Page">
     <%- include('../partials/header.ejs') %>   
     <main>
-        <div class="titulo">
-            <h1><%= productToDisplay.name %></h1>
-            <hr>
-        </div>
-
         <!-- The Modal -->
         <div id="myModal" class="modal">
+    
+            <!-- The Close Button -->
+            <span class="close">&times;</span>
 
-        <!-- The Close Button -->
-        <span class="close">&times;</span>
-
-        <!-- Modal Content (The Image) -->
-        <img class="modal-content" id="img01">
+            <!-- Modal Content (The Image) -->
+            <img class="modal-content" id="img01">
 
         </div> 
 
-        <div class="productPhotoContainer">
+        <section class="productDetailContainer">
+
+            <div class="breadcrumbs_Pages">
+                <a href="/productos">Volver al Listado</a>
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                <a href="/productos/<%= product.Category.categorylink %>"><%= product.Category.category %></a>
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                <a href="/productos/<%= product.Category.categorylink %>/<%= product.Subcategory.subcategorylink %>"><%= product.Subcategory.subcategory %></a>    
+            </div>
+        
 
             <section class="productPhoto">
                 <!-- Aca va la imagen Principal  -->
-                <img src="/images/products/<%= productToDisplay.image[0] %>" alt="" id="expandedImg" class="imageModal" style="cursor: zoom-in; width: 100%; height: 420px; object-fit: scale-down;">
+                <img src="/images/products/<%= product.image0 %>" id="expandedImg" class="imageModal">
                 <!-- Aca va la Grilla de Fotos del producto  -->
                 <div class="photosGalleryBox">
-                    <% productToDisplay.image.forEach(element => { %>
-                        <img class="miniPhoto" src="/images/products/<%= element %>" onclick="productGridImages(this);">
-                    <% }) %>
+                    <img class="miniPhoto" src="/images/products/<%= product.image0 %>" onmouseover="productGridImages(this);">
+                    <img class="miniPhoto" src="/images/products/<%= product.image1 %>" onmouseover="productGridImages(this);">
+                    <img class="miniPhoto" src="/images/products/<%= product.image2 %>" onmouseover="productGridImages(this);">
+                    <img class="miniPhoto" src="/images/products/<%= product.image3 %>" onmouseover="productGridImages(this);">
                 </div>
             </section>
     
-            <section class="subtitulos">
-
-                <div class="subtitulosBG">
-                    <h1 class="precio"> $<%= productToDisplay.price %></h1>
-                    <p class="precioEspecial"> PRECIO ESPECIAL</p>
-                    <p class="descuento"> <%= productToDisplay.discount %> % OFF</p>
-                    <p class="precioLista"> Precio Lista $<%= productToDisplay.priceList %></p>
-
-                    <section class="iconDetailProduct">
-                        <label><i class="fas fa-money-check"></i>12 Cuotas sin interés</label>
-                        <label><i class="fas fa-store-alt"></i>Retirar en local gratis</label>
-                        <label><i class="fas fa-shipping-fast"></i>Envios a todo el país</label>
-                        <label><i class="far fa-check-circle"></i>En stock</label>
-                        <label><i class="fas fa-award"></i>Garantía 12 Meses</label>
-                    </section>
-
-                    <div class="buy_Section">
-                        <input class="input-style" type="button" value="COMPRAR" title="COMPRAR" class="comprar">
-                    </div>
-
-                    <div class="redes">
-                        <i class="fab fa-facebook"></i>
-                        <i class="fab fa-twitter"></i>
-                        <i class="fab fa-instagram"></i>
-                    </div>
-
-                    <div class="favorite_Section">
-                        <button class="input-style" type="button"> Agregar a Favoritos <i class="far fa-heart"></i></button>
-                    </div>
+            <section class="productPagePriceBox">
+                <div class="priceNameProductPage">
+                    <p><%= product.name %></p>
+                    <% if (product.discount > 0) { %>
+                        <p>$<%= toThousand(product.price - product.price * product.discount / 100) %></p>
+                        <p> Precio Lista $<%= toThousand(product.price) %></p>
+                        <p> <%= product.discount %> % OFF</p>    
+                    <% } else { %>
+                        <p>$<%= toThousand(product.price) %></p>
+                    <% } %>
                 </div>
 
+                <div class="iconDetailProduct">
+                    <img src="/images/payments_Logos/ahora1218.svg" alt="Ahora 12 y 18 Cuotas Sin Interes">
+                    <label><i class="fas fa-store-alt"></i>Retirar en local gratis</label>
+                    <label><i class="fas fa-shipping-fast"></i>Envios a todo el país</label>
+                    <label><i class="far fa-check-circle"></i>En stock</label>
+                    <label><i class="fas fa-award"></i>Garantía 12 Meses</label>
+                </div>
+
+                <div class="productPageButton">
+                    <button title="Comprar">Agregar al Carrito <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+                    <button title="Agregar a Favoritos" onclick="fav();"> Agregar a Favoritos <i id="favBtn" class="fa fa-heart-o"></i></button>
+                </div>
+
+                <div class="socialIconsShare">
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                </div>
             </section>
 
-        </div>
-    
-    
-        <div class="especificaciones">
-            <hr>
-            <h3 class="h3"> Especificaciones</h3>
-            <span class="negrita">
-                <%= productToDisplay.description %>
-            </span>
-        </div>
-
-        <div class="especificaciones">
-            <hr>
-            <h3> Preguntas Frecuentes</h3>
-            <span class="negrita">¿Viene con windows? </span>
-            <span class=" respuesta">viene con windows 10 instalado</span>
-            <span class="negrita">¿Cuánto tarda en llegar ?</span>
-            <span class=" respuesta">En la sección envios, seleccionando la zona podrás ver el tiempo estimado</span>
-            <span class="negrita">¿Viene con perifericos?</span>
-            <span class=" respuesta">Este modelo no los trae</span>
-        </div>
-        <%- include('../partials/slider.ejs') %>  
+            <section class="descriptionProduct">
+                <p class="specs_Title">Especificaciones</p>
+                <pre class="specs_DescriptionProduct">
+                    <%= product.description %>
+                </pre>
+                <p class="specs_Title">Preguntas Frecuentes</p>
+                <ul class="questionAnswerProduct">
+                    <li>¿Cuanto Demora el Envio?</li>
+                    <li>- Entre 3-5 dias habiles.</li>
+                    <br>
+                    <li>¿Que medios de pago aceptan?</li>
+                    <li>- En nuestra pagina principal puede ver los medios de pago que aceptamos.</li>
+                    <br>
+                    <li>¿Tiene garantia?</li>
+                    <li>- La garantia en nuestros productos es de 12 meses.</li>
+                </ul>
+            </section>
+        </section>
+        <%- include('../partials/slider.ejs') %> 
     </main>
     <%- include('../partials/footer.ejs') %> 
   </div>

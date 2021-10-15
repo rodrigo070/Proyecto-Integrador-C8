@@ -1,116 +1,149 @@
 <!DOCTYPE html>
 <html lang="es">
-<%- include('../partials/head.ejs') %>
+<%- include('../partials/head.ejs' ,{title: 'Carrito - '}) %>
 <body>
   <div class="container_Page">
     <%- include('../partials/header.ejs') %>   
     <main>
         <div id="rgbar"></div>
-        <div class="cartBox">
+        <div class="cart_Page_Box">
             <section class="list_Products_Box">
                 <!-- Header de la lista de productos -->
-                <div class="titlesGrid">
-                    <pre>  </pre>
-                    <div for="" >Producto</div>
-                    <div for="" class="titlesDesktop">Cantidad</div>
-                    <div for="" class="titlesDesktop">Precio de Lista</div>
-                    <div for="" class="titlesDesktop">Descuento</div>
-                    <div for="" >Precio Final</div>
-                    <pre>  </pre>
-                </div>
+                <section class="nav_Product_Box sec_Grid">
+                    <div></div>
+                    <div>Producto</div>
+                    <div>Cantidad</div>
+                    <div>Precio</div>
+                    <div>Descuento</div>
+                    <div>Precio Final</div>
+                    <div></div>
+                </section>
                 <!-- Caja de los productos que se agregan a la lista -->
-                <section class="container_products">
-                    <!-- Inicio caja del producto -->
-                    
-                    <!-- por el momento la caja no es funcional solo
-                    muestro 3 productos de la base de datos y aplico 
-                    los descuentos y precio final en esta vista -->
-                    <% var num = 100 %>
-                    <% var preciosAcum = [] %>
-                    <% var precioTotal = 0 %>  
-                    <% for( let i = 0; i < 4; i++ ) { %>
-                    <article class="product_Box">
-                        <!-- icono del producto -->
-                        <i class="fa fa-microchip" aria-hidden="true"></i>
-                        <!-- caja del producto y stock -->
-                        <div class="product_And_Stock">
-                            <!-- nombre del producto -->
-                            <label for=""><%= productsData[i].name %></label>
-                            <!-- boton de stock -->
+                <% for( let i = 0; i < 2; i++ ) { %>
+                    <section class="item_Product_Box sec_Grid">
+                        <section class="icon_Plist">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                        </section>
+                        <section>
+                            <p><%= productsData[i].name %></p>
+                        </section>
+                        <section>
                             <div class="minus_plusButton">
-                                <button class="buttonIcon" onclick="decreaseCount(event, this)">
+                                <button onclick="decreaseCount(event, this)">
                                     <i class="fa fa-minus-circle" aria-hidden="true"></i>
                                 </button>
-                                <input type="number" id="stockProduct" value="1">
-                                <button class="buttonIcon" onclick="increaseCount(event, this)">
+                                <input type="number" value="1">
+                                <button onclick="increaseCount(event, this)">
                                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                 </button>
                             </div>
-                        </div>
-                        <!-- caja del precio de lista , descuento y precio final -->
-                        <div class="price_Discount_Total">
-                            <div class="price_List">
-                                <label for="">$<%= productsData[i].price %></label>
+                        </section>
+                        <section>
+                            <p>$<%= toThousand(productsData[i].price) %></p>
+                        </section>
+                        <section>
+                            <div class="discount_Tag_Plist">
+                                <%= productsData[i].discount %>% OFF
                             </div>
-                            <div class="discount_Box">
-                                <p><%= productsData[i].discount %>% OFF</p>
-                            </div>
-                            <div class="final_Price_List">
-                               <label for="">$<%= preciosAcum[i] = productsData[i].price - ((productsData[i].price * productsData[i].discount)/num)%></label> 
-                                <% precioTotal = precioTotal + preciosAcum[i] %> 
-                            </div>
-                        </div>
-                        <!-- icono del boton eliminar producto -->
-                        <button class="buttonIconTrash">
-                            <i class="fa fa-trash-o" aria-hidden="true"></i>
-                        </button>
-                    </article>
-                    <% } %>
-                    <!-- Fin caja del producto -->
+                        </section>
+                        <section>
+                            <p>$<%= toThousand(productsData[i].price - productsData[i].price * productsData[i].discount / 100) %></p>
+                        </section>
+                        <section>
+                            <button class="delete_Plist">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            </button>
+                        </section>
+                    </section>
+                <% } %>
+                
+                <section class="totalPrice">
+                    <p>Precio Total: $</p>
                 </section>
-            <section class="totalPrice">
-                <p>Precio Total: </p>
-                <p>$<%= precioTotal %></p>
-            </section>
             </section>
             <!-- Seccion 2 -->
             <div class="payment_Area">
-                <div class="title_Section2">
-                    <label for="" class="titlePayments">Detalle de su compra</label>
-                    <span class="line_Titles"></span>
-                </div>
+                <!-- <div class="titlePayments">
+                    Detalle de tu Compra
+                </div> -->
                 
                 <section class="shippingSection">
-                    <p>Calcular Envio</p>
-                    <span class="line_Titles"></span>
+                    <div>
+                        Calcular Envio
+                    </div>
                     <div class="gridShipping">
+                        <label for="cpcode">Codigo Postal:</label>
                         <section class="cp_Input">
-                            <label>Codigo Postal:</label>
-                            <input type="number" value="" placeholder="Ej: 1823">
+                            <input type="number" id="cpcode" placeholder="Ej: 1823">
+                            <button onclick="shippingCost()" value="">Calcular</button>
                         </section>
-                        <section class="cost_Area">
-                            <label>Costo:</label>
-                            <label>$0</label>
-                        </section>
+                        <label>Costo:</label>
+                        <div id="shippingCost">$</div>
                     </div>
                 </section>
     
-                <section class="paymentOptions">
-                    <label for="" class="titlePayments">Medios de Pago</label>
-                    <span class="line_Titles"></span>
-                    <div class="payments_list">
-                        <label><input type="radio" name="medioDePago" id="efectivo" value="efectivo" checked><i class="fa fa-usd iconPayment" aria-hidden="true"></i>Efectivo</label>
-                        <label><input type="radio" name="medioDePago" id="debito" value="debito"><i class="fa fa-credit-card iconPayment" aria-hidden="true"></i>Tarjeta de Debito</label>
-                        <label><input type="radio" name="medioDePago" id="credito" value="credito"><i class="fa fa-credit-card iconPayment" aria-hidden="true"></i>Tarjeta de Credito</label>
-                        <label><input type="radio" name="medioDePago" id="billetera" value="billetera"><i class="fa fa-handshake-o iconPayment" aria-hidden="true"></i>MercadoPago</label>
+                <section class="paymentSection">
+                    <div class="titlePayments">
+                        Medios de Pago
                     </div>
-                    
-                    <section class="finalPrices">
-                        <label><input type="radio" name="precioFinal" value="precioLocal" checked>Total S/Envio: $<%= precioTotal %></label>
-                        <label><input type="radio" name="precioFinal" value="precioEnvio">Total + Envio: $<%= precioTotal %></label>
-                    </section>
+                    <div class="payments_list">
+                        <section class="payments_Options">
+                            <button class="buttonSelected" onclick="openPaymentSection(event, 'cashTab')">
+                                <i class="fa fa-money iconPayment" aria-hidden="true"></i>
+                                Efectivo
+                            </button>
+                            <button class="buttonSelected" onclick="openPaymentSection(event, 'cardTab')">
+                                <i class="fa fa-credit-card iconPayment" aria-hidden="true"></i>
+                                Tarjeta
+                            </button>
+                            <button class="buttonSelected" onclick="openPaymentSection(event, 'mpTab')">
+                                <i class="fa fa-handshake-o iconPayment" aria-hidden="true"></i>
+                                MercadoPago
+                            </button>
+                        </section>
+                        <section class="cardpaySection tabContent" id="cardTab">
+                            <p>Recorda que una vez abonado deberas esperar la confirmacion por E-Mail.</p>
+                            <input type="text" placeholder="Nombre del Titular">
+                            <input type="number" placeholder="Numero de la Tarjeta">
+                            <div>
+                                <select name="yearCard" id="">
+                                    <option value="2021">2021</option> 
+                                    <option value="2022">2022</option>
+                                    <option value="2023">2023</option> 
+                                    <option value="2024">2024</option> 
+                                    <option value="2025">2025</option> 
+                                    <option value="2026">2026</option> 
+                                </select>
+
+                                <select name="monthCard" id="">
+                                    <option value="01">Enero</option> 
+                                    <option value="02">Febrero</option> 
+                                    <option value="03">Marzo</option> 
+                                    <option value="04">Abril</option> 
+                                    <option value="05">Mayo</option> 
+                                    <option value="06">Junio</option> 
+                                    <option value="07">Julio</option> 
+                                    <option value="08">Agosto</option> 
+                                    <option value="09">Septiembre</option> 
+                                    <option value="10">Octubre</option> 
+                                    <option value="11">Noviembre</option> 
+                                    <option value="12">Diciembre</option> 
+                                </select>
+
+                                <input type="number" placeholder="CVV" >
+                            </div>
+                        </section>
+                        <section class="cashSection tabContent" id="cashTab">
+                            <p>Podes Retirarlo y Pagar en efectivo en nuestro local de Lunes a Sabados de 8hs a 22hs.</p>
+                            <button>Confirmar</button>
+                        </section>
+                        <section class="mpSection tabContent" id="mpTab">
+                            <p>Ahora podes abonar con Mercadopago : Seras redirigido a un link de MercadoPago al hacer click en el boton de abajo.</p>
+                            <button>Pagar con MercadoPago</button>
+                        </section>
+                    </div>
                 </section>
-                <section class="buyButton">
+                <section class="buySection">
                     <button>Comprar</button>
                 </section>
             </div>

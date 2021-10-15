@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-<%- include('partials/head.ejs') %>
+<%- include('partials/head.ejs' ,{title: 'Local - '}) %>
 <head>
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDobap9_wdUSV9YOS2sgaA3ZWn3xpPbsc&callback=initMap"
@@ -11,9 +11,8 @@
 <body>
   <div class="container_Page">
     <%- include('partials/header.ejs') %>   
-    <main>
+    <main class="locationPage">
       <section class="location_Box">
-        <div id="rgbar"></div>
           <article class="locationDetail">
             <div id="locationInfo">
                 <pre>Pasa por Nuestro Local</pre>
@@ -30,7 +29,6 @@
             </div>
             <div id="map"></div>
           </article>
-          <div id="rgbar"></div>
       </section>
     </main>
     <%- include('partials/footer.ejs') %> 

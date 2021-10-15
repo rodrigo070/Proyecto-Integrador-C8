@@ -86,14 +86,14 @@
 }
 .sliderProducts{
     width:90%;
-    margin:0px auto;
+    margin:0px auto 20px auto;
 }
 
 .productRecommended img{
 	background-color: white;
 	box-shadow: 0 0 10px rgba(0,0,0,0.1) inset;
 	padding: 10px;
-	border-radius: 0.5rem;
+	border-radius: 0.5rem 0.5rem 0 0;
 	height: 140px;
 	width: 100%;
 	transition: 0.3s ease-in;
@@ -104,17 +104,17 @@
 
 .productRecommendedDescription{
 	position: relative;
-	min-height: 115px;
+	min-height: 130px;
 	padding:5px;
-	border-radius: 0.5rem;
-	background-color: #5e52ff;
+	border-radius: 0 0 0.5rem 0.5rem;
+	background: linear-gradient(180deg, #f0f5fde0 0%, #c2b8f98c 100%);
 	overflow: hidden;
 }
 
 .productRecommendedDescription p{
 	padding: 5px;
-	font-size: 13px;
-	color: white;
+	font-size: 16px;
+	color: #2e2e2e;
 }
 
 .productRecommendedDescription p:nth-child(1){
@@ -126,7 +126,7 @@
 
 .productRecommendedDescription p:nth-child(2){
 	padding: 0 5px 5px 5px;
-	font-size: 16px;
+	font-size: 21px;
 	margin-bottom: 5px;
 }
 
@@ -139,6 +139,7 @@
 	padding: 7px 10px;
 	cursor: pointer;
 	transition: 0.3s ease-in;
+	width: 75%;
 }
 
 .productRecommendedDescription button:hover{

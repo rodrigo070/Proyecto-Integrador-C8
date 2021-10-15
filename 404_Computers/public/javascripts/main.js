@@ -1,5 +1,6 @@
 /* Botones de Stock de Carrito */
-/* Code By  */
+/* Code By  Stackfindover */
+
 function increaseCount(a, b) {
   var input = b.previousElementSibling;
   var value = parseInt(input.value, 10);
@@ -26,6 +27,12 @@ let burger = document.getElementById("burgerButton");
 
 function BButton() {
     burger.classList.toggle("is-active");
+}
+
+function userPanel(){
+    let panel = document.getElementById('userPanel');
+
+    panel.classList.toggle("panel_Active");
 }
 
 function dropMenu(){
@@ -66,4 +73,66 @@ function dropSubCategoryMenu (id) {
 
 function closeWindow () {
     document.querySelector(".active").classList.remove("active")
+}
+
+/* Boton para el Carrito de Compras */
+
+function openPaymentSection(event, payOption) {
+    var i, tabcontent, buttonOption;
+    tabcontent = document.getElementsByClassName("tabContent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    buttonOption = document.getElementsByClassName("buttonSelected");
+    for (i = 0; i < buttonOption.length; i++) {
+        buttonOption[i].className = buttonOption[i].className.replace(" active", "");
+    }
+    document.getElementById(payOption).style.display = "grid";
+    event.currentTarget.className += " active";
+}
+
+/* Calcular Costo de Envio */
+
+function shippingCost(){
+    let cpCode =document.getElementById("cpcode").value;
+
+    let fieldToReplace = document.getElementById("shippingCost");
+
+    let cost = 0.400;
+
+    let finalCost = cpCode * cost;
+
+    if(cpCode > 0 && cpCode.length > 3)
+    {
+        if(finalCost < 600)
+        {
+            finalCost = 720;
+        }
+        else if(finalCost > 2300)
+        {
+            finalCost = 1900;
+        }
+    
+        fieldToReplace.innerHTML = "$"+finalCost;
+    }
+    else
+    {
+        fieldToReplace.innerHTML = "$";
+    }
+}
+
+
+function showPassword(passSection, eyeBTN) {
+    let button = document.getElementById(passSection);
+    let icon = document.getElementById(eyeBTN);
+    
+    if (button.type === "password") {
+        button.type = "text";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+    } else {
+        button.type = "password";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+    }
 }

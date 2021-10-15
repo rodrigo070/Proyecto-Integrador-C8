@@ -1,18 +1,25 @@
-let express = require('express');
-let router = express.Router()
-let controller = require('../controllers/productsController.js')
+const express = require('express');
+const router = express.Router()
+const controller = require('../controllers/productsController.js')
 
+/* Router de todos los Productos Disponibles */
 
-//vista de todos los productos disponibles productsList
 router.get('/productos', controller.productsList);
 
-//vista de todos los productos disponibles segun la categoria categories
+/* Router de todos los Productos disponibles en Oferta */
+
+router.get('/ofertas', controller.offers);
+
+/* Router de todos los Productos disponibles segun la Categoria */
+
 router.get('/productos/:category', controller.categories);
 
-//vista de todos los productos disponibles segun la categoria y Sub-Categoria subCategories
+/* Router de todos los Productos disponibles segun la Categoria y Sub-Categoria */
+
 router.get('/productos/:category/:subcategory', controller.subCategories);
 
-//vista de un producto especifico
+/* Router del detalle de Producto */
+
 router.get('/productos/:category/:subcategory/:id', controller.product_Detail);
 
 

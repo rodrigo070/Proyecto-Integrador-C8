@@ -2,27 +2,33 @@
     margin: 35px auto 0 auto;
 }
 
+.locationPage{
+    background-image: url(/images/backgrounds/background_v_ver.png);
+}
+
 .locationDetail{
-    margin: 0px auto;
+    margin: 10px auto;
     width: 100%;
     display: grid;
     grid-template-areas: 
     'text1 text1'
     'map1 map1';
     grid-template-columns: 100%;
-    background-image: url(/images/backgrounds/background_v_ver.png);
 }
 
 #locationInfo{
-    margin: 60px auto;
+    margin: 10px auto;
     grid-area: text1;
-    padding: 0 15px;
+    padding: 16px;
+    border-radius: 1rem;
+    background-color: #5600ffcf;
+    width: 95%;
+    color: white;
 }
 
 #locationInfo pre{
     font-size: 25px;
     font-family: 'Atari';
-    text-shadow: 1px 1px white;
 }
 
 #locationInfo div{
@@ -30,7 +36,6 @@
     text-align: left;
     margin-top: 10px;
     font-size: 20px;
-    text-shadow: 1px 1px white;
 }
 
 .iconsContact{
@@ -43,6 +48,8 @@
     height: 400px;
     grid-area: map1;
     border-radius: 0.5rem;
+    width: 95%;
+    margin: 0 auto;
 }
 
 /*-----------------------------------------------------------------*/
@@ -51,7 +58,8 @@
 
 @media screen and (min-width: 768px){
     .location_Box{
-        margin: 50px auto 0 auto;
+        margin: 25px auto;
+        transform: translateY(10%);
     }
 
     .locationDetail{
@@ -60,13 +68,8 @@
         grid-template-columns: 40% 60%;
     }
 
-    #locationInfo pre,
-    #locationInfo div{
-        padding-left: 10%;
-    }
-
     #map{
-        width: 80%;
+        width: 95%;
         margin: auto;
     }
 
@@ -77,4 +80,7 @@
 /*-----------------------------------------------------------------*/
 
 @media screen and (min-width: 990px){
+    #locationInfo {
+        padding: 35px 60px;
+    }
 }

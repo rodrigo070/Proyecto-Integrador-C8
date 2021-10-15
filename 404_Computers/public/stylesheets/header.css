@@ -1,4 +1,5 @@
 
+
 /*-------------------------------------------------------------------*/
 /* Extras */
 /*-------------------------------------------------------------------*/
@@ -36,6 +37,7 @@
 }
 
 /* Fin Barra RGB */
+
 :root{
     --searchBarColor : white;
     --mainHeaderColor : white;
@@ -103,6 +105,7 @@ header {
 
 /* Fin Boton Hamburguesa */
 
+
 /* Seccion Mobile Header */
 
 .main-header {
@@ -154,14 +157,14 @@ header {
 
 .crear-cuenta button{
     margin: 10px 5px;
-    width: 100px;
+    width: 120px;
     padding: 6px 0px;
     outline: none;
     border-style: none;
     background-color: var(--mainHeaderColor);
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 0.8rem;
-    font-size: 13px;
+    font-size: 16px;
 }
 .crear-cuenta h2{
     color: black;
@@ -190,24 +193,26 @@ header {
     top: 73px; 
     right: 0; 
     bottom: 0; 
-    left: 0; 
+    left: -10px; 
+    box-sizing: content-box;
     background-color: white;
     animation: mobileFade 0.8s;
 }
 
 .menu_Mobile .icons_Mobile_Menu{
-    height: 30px;
     width: 25px;
-    margin: 4px 3px 0 3px;
+    margin-right: 10px;
 }
 
 .menu_Mobile li {
     padding: 10px 0;
+    padding-left: 10px;
 }
 
 .menu_Mobile a,
 .menu_Mobile i{
     color: black;
+    text-align: center;
 }
 
 /* Barra de Busqueda */
@@ -487,20 +492,32 @@ header {
     }
 
     .desktop_Profile{
-        width: 30%;
+        width: 100%;
+        position: relative;
     }
 
     .desktop_Profile i{
         color: black;
         font-size: 25px;
+        position: relative;
+        user-select: none;
+        cursor: pointer;
     }
 
     .desktop_Profile i:nth-child(1){
         margin-right: 7px;
     }
 
+    .user-logged-in{
+        position: absolute;
+        color: rgb(0, 255, 0);
+        right: -8px;
+        bottom: 12px;
+        transform: scale(0.6);
+    }
+
     .desktop_RegisterLogin{
-        width: 70%;
+        width: 100%;
     }
 
     .desktop_RegisterLogin button{
@@ -527,6 +544,38 @@ header {
         color: var(--mainHeaderColor);
     }
 
+    #userPanel{
+        display: none;
+        animation: fadeout 0.7s;
+        flex-direction: column;
+        padding: 10px 25px;
+        background-color: white;
+        gap: 15px;
+        width: max-content;
+        height: fit-content;
+        position: absolute;
+        box-shadow: 0 2px 2px rgb(55 0 255 / 10%), 0 5px 5px rgb(55 0 255 / 10%);
+        border-radius: 0.3rem;
+        left: 0;
+        right: 0;
+        margin: 10px auto 0 auto;
+    }
+
+    #userPanel a{
+        display: flex;
+    }
+
+    #userPanel i{
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+        margin-right: 5px;
+        width: 22px;
+    }
+
+    .panel_Active{
+        display: flex !important;
+    }
 }
 
 /*-----------------------------------------------------------------*/
@@ -552,10 +601,6 @@ header {
 
     .search_Categ_Area{
         width: 50%;
-    }
-
-    .desktop_Profile{
-        width: 35%;
     }
 
     .desktop_Bar_Options ul{

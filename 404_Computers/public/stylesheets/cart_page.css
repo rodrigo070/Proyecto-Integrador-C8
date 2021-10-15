@@ -2,102 +2,188 @@
 /*---------------------- Carrito de Compras -----------------------*/
 /*-----------------------------------------------------------------*/
 
-.cartBox{
+/* Caja de toda la pagina */
+
+.cart_Page_Box{
+    display: grid;
+    grid-template-areas: 
+    'cartList'
+    'cartPayment';
+    grid-template-columns: 100%;
     margin:auto;
     width: 95%;
 }
 
 /* Caja de la seccion de lista de productos */
 .list_Products_Box{
-    background-color: #7c73ff1c;
-    background-image: url("/images/backgrounds/leaves_gray.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    box-shadow: black;
-    height: auto;
+    grid-area: cartList;
     width: 100%;
-    align-items: center;
+    height: fit-content;
+    margin: 10px auto;
+    padding: 15px;
+    background-color: #f1f0ff;
     border-radius: 1rem;
-    margin-top: 10px;
 }
 
-/* Header de los titulos de producto para celular  */
-.titlesGrid{
+/* Grid para el nav de la caja y la caja con los items del carrito */
+
+.sec_Grid{
+    grid-template-areas:
+    'dot1 product discount dot2'
+    'dot1 quantity finalprice dot2';
+    grid-template-columns: 10% 40% 40% 10%;
+}
+
+/* Header con el nombre de las columnas */
+
+.nav_Product_Box{
     display: grid;
-    grid-template-columns: 10% 35% 50% 5%;
-    text-align: center;
-    align-items: center;
-    margin:auto;
-    height: 40px;
-    border-bottom: 1px solid black;
-}
-
-/* Oculto los titulos Cantidad - Precio de lista y Descuento
-en el celular */
-.titlesDesktop {
-    display: none;
-}
-
-.container_products{
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.product_Box{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    vertical-align: middle;
-}
-
-/* Producto y Boton de Stocfk*/
-
-.list_Products_Box .product_And_Stock label,
-.list_Products_Box .price_Discount_Total label{
     width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
     text-align: center;
+    padding-bottom: 10px;
 }
 
-.list_Products_Box .minus_plusButton{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    text-align: center;
+.nav_Product_Box div:nth-child(1){
+    grid-area: dot1;
+    width: 100%;
 }
 
-/*Fin de la estructura de la lista*/
+.nav_Product_Box div:nth-child(2){
+    grid-area: product;
+    width: 100%;
+}
 
-/* Seccion 3 : Quitar Agregar mas unidades */
+.nav_Product_Box div:nth-child(3){
+    display: none;
+    width: 100%;
+}
+
+.nav_Product_Box div:nth-child(4){
+    display: none;
+    width: 100%;
+}
+
+.nav_Product_Box div:nth-child(5){
+    display: none;
+    width: 100%;
+}
+
+.nav_Product_Box div:nth-child(6){
+    grid-area: discount;
+    width: 100%;
+}
+
+.nav_Product_Box div:nth-child(7){
+    grid-area: dot2;
+    width: 100%;
+}
+
+/* Caja del Producto que se agrego al carrito */
+
+.item_Product_Box{
+    display: grid;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.item_Product_Box:nth-of-type(even){
+    background-color: #e1dff9;
+    border-radius: 0.5rem;
+}
+
+.item_Product_Box section{
+    margin: auto;
+}
+
+.item_Product_Box section:nth-child(1){
+    grid-area: dot1;
+    width: 100%;
+}
+
+.item_Product_Box section:nth-child(2){
+    grid-area: product;
+    width: 100%;
+}
+
+.item_Product_Box section:nth-child(3){
+    grid-area: quantity;
+    width: 100%;
+}
+
+.item_Product_Box section:nth-child(4){
+    display: none;
+    grid-area: price;
+    width: 100%;
+}
+
+.item_Product_Box section:nth-child(5){
+    grid-area: discount;
+    width: 100%;
+}
+
+.item_Product_Box section:nth-child(6){
+    grid-area: finalprice;
+    width: 100%;
+}
+
+.item_Product_Box section:nth-child(7){
+    grid-area: dot2;
+    width: 100%;
+}
+
+/* Seccion 1 - Icono de Producto */
+
+.icon_Plist{
+    font-size: 20px;
+}
+
+/* Seccion 3 - Boton de Cantidad de Stock*/
 
 .minus_plusButton{
-    display: flex;
-    align-items: center;
-    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
     background-color: white;
     border-radius: 1rem;
-    width: 90px;
-    margin-top: 5px;
+    padding: 4px 0;
+    overflow: hidden;
+    max-width: 85px;
+    margin: 0 auto;
 }
 
 .minus_plusButton button{
     cursor: pointer;
+    outline: none;
+    border-style: none;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+.minus_plusButton button:nth-child(1){
+    grid-column: 1;
+    width: 100%;
+}
+
+.minus_plusButton button:nth-child(2){
+    grid-column: 3;
+    width: 100%;
 }
 
 .minus_plusButton input{
-    width: 40%;
-    text-align:center;
-    align-items: center;
+    grid-column: 2;
     font-size: 15px;
+    text-align: center;
+    width: 100%;
     outline: none;
     border-style: none;
+    -webkit-appearance: none;
 }
 
-/* Lo de abajo saca las flechas de incremento y decremento dentro del input de stock */
-
-/* Chrome, Safari, Edge, Opera */
+.minus_plusButton i{
+    font-size: 18px;
+}
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -105,62 +191,38 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
+/* Seccion 5 - Tag De Descuento */
+
+.discount_Tag_Plist{
+    background-color: red;
+    width: fit-content;
+    margin: auto;
+    padding: 4px 6px;
+    border-radius: 0.6rem;
+    color: white;
 }
 
-/*************************************************************************/
+/* Seccion 7 - Borrar Producto */
 
-/*Boton de eliminar - agregar y sacar */
-
-.buttonIcon,
-.buttonIconTrash{
-    display: inline-flex;
+.delete_Plist{
     outline: none;
     border-style: none;
-    background:transparent;
-    font-size: 25px;
-}
-
-/* Fin Seccion 3*/
-
-/* Seccion 5 : caja de Descuento */
-
-.discount_Box{
-    display: flex;
-    justify-content: center;
-    width: 80px;
-    height: 50px;
-    border-radius: 0.4rem;
-    background-color: white;
-    margin-bottom: 5px;
-    height: 25px;
-}
-
-/* Fin Seccion 5*/
-
-/*---------------------------------------------*/
-
-/* Seccion 7 : Borrar Producto de la lista*/
-
-.buttonIconTrash:hover{
+    background: transparent;
     cursor: pointer;
+    font-size: 22px;
+}
+
+.delete_Plist:hover{
     color: red;
 }
-
-/* Fin Seccion 7*/
-
 
 /*Seccion Precio Final*/
 
 .totalPrice {
-    display: flex;
     height: 35px;
-    align-items: center;
     margin-top: 40px;
-    justify-content: center;
     border-top: 1px solid black;
+    text-align: center;
 }
 
 /*---------------------------------------------------------------------------------------------------------------------------------------*/
@@ -169,359 +231,309 @@ input[type=number] {
 
 .payment_Area{
     background-color: #7c73ff1c;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    display: grid;
+    grid-template-areas: 
+    'shippingArea'
+    'paymentArea'
+    'buyArea';
+    grid-template-columns: 100%;
     width: 100%;
     margin-top: 10px;
     border-radius: 1rem;
     padding:15px;
+    grid-area: cartPayment;
+    gap: 10px;
 }
 
-.title_Section2{
-    text-align: center;
-    width: 100%;
-}
 
 .titlePayments{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-/*arreglar esto*/
-.line_Titles{
-    display: flex;
-    border-bottom: 1px solid black;
+    grid-area: titleArea;
     width: 100%;
-    margin-bottom: 10px;
 }
 
 /****************************************************************/
 
 .shippingSection{
-    width: 90%;
-    background-color: #7970ff17;
-    padding:10px;
+    grid-area: shippingArea;
+    width: 100%;
+    background-color: #1000ff17;
+    padding:20px;
     border-radius: 1rem;
-    height: 100%;
 }
 
-.shippingSection p{
+.shippingSection div:nth-child(1){
+    text-align: center;
     font-size: 20px;
     margin-bottom: 5px;
 }
 
 .gridShipping{
-    display: grid;
-    grid-template-columns: 60% 45%;
-}
-
-.cp_Input input{
-    min-width: 70px;
-    height: 40px;
-    outline: none;
-    border-style: none;
-    border-radius: 0.5rem;
-    margin-top: 5px;
-}
-
-.cost_Area{
     display: flex;
     flex-direction: column;
 }
 
-.cost_Area label:nth-child(2){
-    margin-top: 10px;
+.gridShipping label{
+    width:95%;
+    margin: 0 auto;
 }
 
-
-.gridShipping input{
+.cp_Input{
+    display: flex;
+    justify-content: space-between;
     text-align: center;
-    align-items: center;
-    width: 60%;
-    font-size: 16px;
 }
+
+.cp_Input input{
+    width: 100%;
+    text-align: center;
+}
+
+.cp_Input button{
+    background: royalblue;
+    color: white;
+    cursor: pointer;
+}
+
+.cp_Input input,
+.cp_Input button{
+    padding: 10px;
+    font-size: 17px;
+    border-radius: 0.5rem;
+    outline: none;
+    border-style: none;
+    margin: 5px 0;
+    width: 45%;
+}
+
+.gridShipping div{
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 0.5rem;
+    margin: 5px 0;
+    width: 45%;
+}
+
+
 
 /****************************************************************/
 
-.paymentOptions{
+.paymentSection{
+    grid-area: paymentArea;
     background-color: #7970ff17;
-    width: 90%;
-    margin-top: 20px;
+    width: 100%;
     border-radius: 1rem;
     padding:15px;
 }
 
 .payments_list{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     background-color:#1000ff17;
     border-radius: 1rem;
     width: 100%;
     padding:10px 10px 5px 10px;
-    margin: 20px 0 20px 0;
-}
-
-.payments_list label {
-    display: flex;
-    justify-content: flex-start;
-    width:184px;
+    margin: 10px 0;
 }
 
 .iconPayment{
-    height: 30px;
-    width: 30px;
-    margin: 4px 3px 0 3px;
+    margin: 4px 2px;
+    text-align: center;
 }
 
-.payments_list input[type="radio"]{
-    margin: 6px 0 0 0;
+.payments_Options{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    width: 100%;
+    gap: 10px;
+}
+
+.payments_Options button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    border-style: none;
+    background-color: #e6e4ff;
+    width: 100%;
+    height: 60px;
+    border-radius: 0.5rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.payments_Options button.active{
+    background-color: #bab6ff;
+}
+
+.tabContent{
+    height: 350px;
+}
+
+/* Tarjeta */
+
+.cardpaySection{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+}
+
+.cardpaySection input{
+    width: 100%;
+    font-size: 17px;
+    text-indent: 8px;
+    outline: none;
+    border-style: none;
+    border-radius: 0.5rem;
+    padding: 5px;
+}
+
+.cardpaySection select{
+    border-radius: 0.5rem;
+    outline: none;
+    border-style: none;
+    padding: 5px;
+}
+
+.cardpaySection div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.cardpaySection div input{
+    width: 33%;
+}
+
+/* Efectivo */
+
+.mpSection,
+.cashSection{
+    padding: 20px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.mpSection button,
+.cashSection button{
+    margin: 0 auto;
+    padding: 17px;
+    min-width: 140px;
+    height: fit-content;
+    font-size: 17px;
+    outline: none;
+    border-style: none;
+    background-color: royalblue;
+    color: white;
+    border-radius: 0.7rem;
+    cursor: pointer;
+}
+
+#cardTab,
+#cashTab,
+#mpTab{
+    display: none;
 }
 
 /****************************************************************/
 
-.finalPrices {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    border-radius: 1rem;
-    padding: 10px;
-    background-color:#1000ff17;
-}
-
-.finalPrices label{
-    display: flex;
-    justify-content: flex-start;
-    width:184px;
-}
-
-.finalPrices input[type="radio"]{
-    margin: 6px 5px 0 0;
-}
-
-.buyButton {
+.buySection {
+    grid-area: buyArea;
     background-color: #1000ff17;
-    height: 120px;
     border-radius: 1rem;
     display: flex;
     justify-content: center;
-    width: 90%;
-    margin-top: 20px;
+    width: 100%;
+    height: 100%;
+    padding: 25px;
     align-items: center;
 }
 
-.buyButton button{
+.buySection button{
     background-color: #1dff6c;
-    display: flex;
-    justify-content: center;
-    padding: 15px 40px;
+    padding: 18px 25px;
     font-size: 25px;
-    border-radius: 15px;
-    align-items: center;
-    height: 60%;
-    border-style:hidden;
+    border-radius: 1rem;
+    border-style: none;
     cursor: pointer;
 }
 
-/*-----------------------------------------------------------------*/
-/*-------------------- Fin Carrito de compra ----------------------*/
-/*-----------------------------------------------------------------*/
 
 /*-----------------------------------------------------------------*/
 /*------------------------- Media Queries -------------------------*/
 /*-----------------------------------------------------------------*/
 
 
-
-/*-----------------------------------------------------------------*/
-/*---------------------------- Celular ----------------------------*/
-/*-----------------------------------------------------------------*/
-
-/* Celular */
-
-@media screen and (min-width: 300px){
-    /*Uso esta clase para juntar las secciones en 2
-    1- Producto y Stock
-    2- Descuento y Precio Final y oculto el precio de lista*/
-    .product_And_Stock,
-    .price_Discount_Total{
-        margin-top: 5px;
-        width: 35%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 5px;
-    }
-
-    /*Oculto el precio de lista y solo muestro
-    la etiqueta de descuento con el precio final */
-    .price_List{
-        display: none;
-    }
-}
-
 /*-----------------------------------------------------------------*/
 /*---------------------------- Tablet -----------------------------*/
 /*-----------------------------------------------------------------*/
 
 @media screen and (min-width: 768px){
-    .cartBox{
-        margin: 0;
-        padding: 0;
-        width: 100%;
+    .sec_Grid{
+        grid-template-areas: 'dot1 product quantity price discount finalprice dot2';
+        grid-template-columns: 5% 24% 16% 18% 14% 18% 5%;
     }
 
-    /* Caja que contiene la lista entera */
-    .list_Products_Box{
-        width: 90%;
-        padding: 0 15px;
-        margin: 20px auto 0 auto;
+    .nav_Product_Box div:nth-child(3){
+        display: block;
+        grid-area: quantity;
     }
 
-    .product_Box{
-        height: 40px;
-        margin: 10px 0;
+    .nav_Product_Box div:nth-child(4){
+        display: block;
+        grid-area: price;
     }
 
-    /* Le asigno un ancho a cada columna de la lista */
-    .list_Products_Box .product_And_Stock label,
-    .list_Products_Box .price_Discount_Total label
-    {
-        margin:auto;
-        width: 18%;
+    .nav_Product_Box div:nth-child(5){
+        display: block;
+        grid-area: discount;
     }
 
-    /* Muestro las secciones de la lista del producto separadas */
-    .titlesDesktop{
-        display: grid;
+    .nav_Product_Box div:nth-child(6){
+        grid-area: finalprice;
     }
 
-    .titlesGrid{
-        height: 50px;
-        grid-template-columns: 4% 20% 16% 20% 15% 20% 5%;
+    .item_Product_Box section:nth-child(4){
+        display: block;
     }
 
-    /* Cambio el tipo de lista de vertical(mobile) a horizontal */
-    .product_And_Stock,
-    .price_Discount_Total{
-        display: contents;
-        flex-direction: row;
-    }
-    /**/
-
-    /* Alineo el boton de stock con la lista (por defecto lo baje
-    del mobile para que quede con espacio debajo del titulo del producto)*/
-    .minus_plusButton{
-        margin-top: 0;
-    }
-
-    /* Saco el margen inferior de la etiqueta de descuento */
-    .discount_Box{
-        margin-bottom: 0;
-    }
-
-    /* Remarco el precio de lista y lo muestro en pantalla */
-    .price_List{
-        text-decoration: line-through;
-        display: contents;
-    }
-
-    /* Muestro el precio final (no le puse display none pero se ve que 
-    se necesita aclarar el display sino no toma
-    el ancho que le di anteriormente en los labels */
-    .final_Price_List{
-        display: contents;
-    }
-
-    /*Seccion 2 -> Detalle de su Compra*/
-    /* Al aplicar float en la caja anterior esta se mostrara del lado derecho
-    de la pantalla */
-
-    /* Caja que contiene los medios de pago, envio y boton de comprar */
     .payment_Area{
-        display: grid;
-        grid-template-areas:
-        'titleSection titleSection'
-        'paymentSection paymentSection'
-        'shippingSection buyButton';
-        width: 90%;
-        padding: 5px 20px 20px 20px;
-        margin-right: auto;
+        grid-template-areas: 
+        'titleArea titleArea'
+        'paymentArea paymentArea'
+        'shippingArea buyArea';
+        grid-template-columns: 50% 50%;
+    }
+
+    .payments_Options{
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    .payments_Options button{
+        width: 30%;
+    }
+
+    .cardpaySection div{
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    .tabContent{
+        height: 250px;
+    }
+
+    .buySection {
+        width: 85%;
         margin-left: auto;
-        margin-top: 20px;
-    }
-
-    .titlePayments{
-        margin-bottom: 0px;
-    }
-
-    /* Le asigno al titulo las dos primeras columnas */
-    .payment_Area .title_Section2{
-        width: 100%;
-        grid-area: titleSection;
-    }
-
-    .payment_Area .title_Section2 label{
-        margin-bottom: 5px;
-    }
-
-    /* Lista de medios de pagos le sigue finalprices*/
-    .payments_list{
-        width: 55%;
-        margin: 20px auto 20px auto;
-        font-size: 18px;
-    }
-
-    .iconPayment{
-        margin: 4px 3px 0 3px;
-    }
-
-    /* Precios con y sin envio debajo de paymentlist*/
-    .finalPrices{
-        width: 55%;
-        margin: 0 auto 0 auto;
-    }
-
-    /* Seccion de envio le asigno esa area y un ancho a ocupar */
-    .shippingSection{
-        margin-top: 10px;
-        width: 90%;
-        font-size: 20px;
-        grid-area: shippingSection;
-    }
-
-    .gridShipping input{
-        font-size: 18px;
-    }
-
-    /* Seccion de pagos le asigno esa area y el ancho total de la caja */
-    .payment_Area .paymentOptions{
-        width: 100%;
-        padding:5px 10px 10px 10px;
-        margin-bottom: 10px;
-        grid-area: paymentSection; 
-    }
-
-    /* Seccion del boton de compra */
-
-    .buyButton{
-        margin-top: 10px;
-        width: 100%;
-        height: 100%;
-    }
-
-    .buyButton button{
-        grid-area: buyButton;
-        width: 80%;
-        height: 60%;
-        text-align: center;
-        align-items: center;
-        margin:auto;
+        margin-right: 0;
     }
 }
 
@@ -530,157 +542,28 @@ input[type=number] {
 /*-----------------------------------------------------------------*/
 
 @media screen and (min-width: 990px){
-    #rgbar{
-        height: 5px;
+    .cart_Page_Box{
+        grid-template-areas: 'cartList cartPayment';
+        grid-template-columns: 62% 38%;
     }
 
-    /* Caja que contiene la lista entera */
     .list_Products_Box{
-        float: left;
-        width: 58%;
-        padding: 0 20px 0 20px;
-        margin-right: 2%;
-        margin-top: 0;
-        margin-bottom: 20px;
+        width: 95%;
+        margin: 10px auto 0 0;
     }
 
-    .product_Box{
-        height: 40px;
-        margin: 10px 0;
-    }
-
-    /* Le asigno un ancho a cada columna de la lista */
-    .list_Products_Box .product_And_Stock label,
-    .list_Products_Box .price_Discount_Total label
-    {
-        margin:auto;
-        width: 18%;
-    }
-
-    /* Muestro las secciones de la lista del producto separadas */
-    .titlesDesktop{
-        display: grid;
-    }
-
-    .titlesGrid{
-        height: 50px;
-        grid-template-columns: 4% 20% 16% 20% 15% 20% 5%;
-    }
-
-    /* Cambio el tipo de lista de vertical(mobile) a horizontal */
-    .product_And_Stock,
-    .price_Discount_Total{
-        display: contents;
-        flex-direction: row;
-    }
-    /**/
-
-    /* Alineo el boton de stock con la lista (por defecto lo baje
-    del mobile para que quede con espacio debajo del titulo del producto)*/
-    .minus_plusButton{
-        margin-top: 0;
-    }
-
-    /* Saco el margen inferior de la etiqueta de descuento */
-    .discount_Box{
-        margin-bottom: 0;
-    }
-
-    /* Remarco el precio de lista y lo muestro en pantalla */
-    .price_List{
-        text-decoration: line-through;
-        display: contents;
-    }
-
-    /* Muestro el precio final (no le puse display none pero se ve que 
-    se necesita aclarar el display sino no toma
-    el ancho que le di anteriormente en los labels */
-    .final_Price_List{
-        display: contents;
-    }
-
-    /*Seccion 2 -> Detalle de su Compra*/
-    /* Al aplicar float en la caja anterior esta se mostrara del lado derecho
-    de la pantalla */
-
-    /* Caja que contiene los medios de pago, envio y boton de comprar */
     .payment_Area{
-        display: grid;
-        grid-template-areas:
-        'titleSection titleSection'
-        'paymentSection paymentSection'
-        'shippingSection buyButton';
-        width: 40%;
-        padding: 5px 20px 20px 20px;
-        margin-right: auto;
+        grid-template-areas: 
+        'titleArea'
+        'paymentArea'
+        'shippingArea'
+        'buyArea';
+        grid-template-columns: 100%;
+    }
+
+    .buySection {
+        width: 100%;
         margin-left: auto;
-    }
-
-    .titlePayments{
-        margin-bottom: 0px;
-    }
-
-    /* Le asigno al titulo las dos primeras columnas */
-    .payment_Area .title_Section2{
-        width: 100%;
-        grid-area: titleSection;
-    }
-
-    .payment_Area .title_Section2 label{
-        margin-bottom: 5px;
-    }
-
-    /* Lista de medios de pagos le sigue finalprices*/
-    .payments_list{
-        width: 65%;
-        margin: 20px auto 20px auto;
-        font-size: 18px;
-    }
-
-    .iconPayment{
-        margin: 4px 3px 0 3px;
-    }
-
-    /* Precios con y sin envio debajo de paymentlist*/
-    .finalPrices{
-        width: 65%;
-        margin: 0 auto 0 auto;
-    }
-
-    /* Seccion de envio le asigno esa area y un ancho a ocupar */
-    .shippingSection{
-        margin-top: 10px;
-        width: 90%;
-        font-size: 20px;
-        grid-area: shippingSection;
-    }
-
-    .gridShipping input{
-        font-size: 18px;
-    }
-
-    /* Seccion de pagos le asigno esa area y el ancho total de la caja */
-    .payment_Area .paymentOptions{
-        width: 100%;
-        padding:5px 10px 10px 10px;
-        margin-bottom: 10px;
-        grid-area: paymentSection; 
-    }
-
-    /* Seccion del boton de compra */
-
-    .buyButton{
-        margin-top: 10px;
-        width: 100%;
-        height: 100%;
-    }
-
-    .buyButton button{
-        grid-area: buyButton;
-        width: 80%;
-        height: 50%;
-        text-align: center;
-        align-items: center;
-        margin:auto;
+        margin-right: auto;
     }
 }
