@@ -38,14 +38,8 @@ module.exports = {
                 }
               })
               .then(() => {
-                db.User.create({
-                   surname,address,phone,dni,
-                  userId: req.params.id
-                  
-                }) 
-                .then(() => {
-                  res.redirect('users/profile')
-                })
+              
+                res.redirect('/editar-perfil')
               })
              
         

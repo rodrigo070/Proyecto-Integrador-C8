@@ -8,9 +8,7 @@
     <div class="form-container">
         <h2>Editar mi perfil</h2>
         <hr>
-        <form action="/profile/editprofile/<%=user.id %>?_method=PUT" method="POST"
-            enctype="multipart/form-data">
-                
+      <form action="/perfil/<%=user.id %>?_method=PUT" method="POST"
                 <div class="profile-form">
                     
                     <div class="profile-box">
@@ -41,7 +39,8 @@
                             
                          
                             <div class="input-container">
-                                <input class="input-style" type="number" name="dni" placeholder="DNI"><%= user.dni ? user.dni : "" %>
+                                <input class="input-style" type="number" name="dni" placeholder="DNI"value=<%= user.dni ? user.dni : "" %>
+                                
                             </div>
                     </div>
                     <div class="profile-box">
