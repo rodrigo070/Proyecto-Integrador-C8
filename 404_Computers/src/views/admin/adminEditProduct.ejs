@@ -12,47 +12,47 @@
             <a href="/admin/banners">Banners</a>
         </nav>
         <section class="editProductSection">
-            <div>Edicion del Producto N°<%= productToEdit.id %></div>
-            <form action="/admin/editar-producto/<%= productToEdit.id %>?_method=PUT" enctype= "multipart/form-data" method="POST">
+            <div>Edicion del Producto: <%= product.name %></div>
+            <form action="/admin/editar-producto/<%= product.id %>?_method=PUT" enctype= "multipart/form-data" method="POST">
                 <div class="dataEditSection">
                     <section>
                         <label for="inputNameProduct">Nombre del Producto:</label>
-                        <input type="text" name="name" id="inputNameProduct" value="<%= productToEdit.name %>">
+                        <input type="text" name="name" id="inputNameProduct" value="<%= product.name %>">
                         <div class="col2EditProduct">
                             <article>
                                 <label for="inputCategoryProduct">Categoría:</label>
-                                <select name="category" id="inputCategoryProduct">
-                                    <% categoriesData.forEach(catg => { %>
-                                        <% if (productToEdit.category === catg.category) { %>
-                                            <option value="<%= catg.category %>" selected><%= catg.categoryName %></option>
+                                <select name="category_Name" id="inputCategoryProduct">
+                                    <% categoriesPromise.forEach(category => { %>
+                                        <% if ( category.category_Name === category.id) { %>
+                                            <option value="<%= category.id %>" selected ><%= category.category_Name %></option>
                                             <% } else { %>
-                                            <option value="<%= catg.category %>"><%= catg.categoryName %></option>
+                                            <option value="<%= category.id %>"><%= category.category_Name %></option>
                                         <% } %>
-                                    <% }) %>
+                                    <% }) %>                
                                 </select>
                             </article>
 
                             <article>
                                 <label for="inputSubCategoryProduct">Subcategoría:</label>
                                 <select name="subcategory" id="inputSubCategoryProduct">
-                                    <% subCategoriesData.forEach(scatg => { %>
-                                        <% if (productToEdit.subcategory === scatg.subcategory) { %>
-                                            <option value="<%= scatg.subcategory %>" selected><%= scatg.subcategoryName %></option>
+                                    <% subcategoriesPromise.forEach(subcategory => { %>
+                                        <% if (product.subcategory_Name === subcategory.id) { %>
+                                            <option value="<%= subcategory.id %>" selected><%= subcategory.subcategory_Name %></option>
                                             <% } else { %>
-                                            <option value="<%= scatg.subcategory %>"><%= scatg.subcategoryName %></option>
+                                            <option value="<%= subcategory.id %>"><%= subcategory.subcategory_Name %></option>
                                         <% } %>
                                     <% }) %>
                                 </select>
                             </article>
                         </div>
                         <label for="inputDescriptionProduct">Descripcion del Producto:</label>
-                        <textarea name="description" id="inputDescriptionProduct" cols="30" rows="5" class="textAreaEditProduct"><%= productToEdit.description %></textarea>
+                        <textarea name="description" id="inputDescriptionProduct" cols="30" rows="5" class="textAreaEditProduct"><%= product.description %></textarea>
                     
                     </section>
                     <section>
                         <label>Se encuentra en Oferta?</label>
                         <div class="switchButton">
-                            <% if (productToEdit.onSale === 1) { %>
+                            <% if (product.onSale === 1) { %>
                                 <input type="radio" id="onSaleYes" name="onSale" value=1 checked="checked">
                                 <label for="onSaleYes">Si</label>
                                 <input type="radio" id="onSaleNo" name="onSale" value=0>
@@ -67,22 +67,22 @@
                         <div class="col2EditProduct">
                             <article>
                                 <label for="inputColorProduct">Color:</label>
-                                <input type="text" name="color" id="inputColorProduct" value="<%= productToEdit.color %>">
+                                <input type="text" name="color" id="inputColorProduct" value="<%= product.color %>">
                             </article>
                             <article>
                                 <label for="inputPriceProduct">Precio:</label>
-                                <input type="number" name="price" id="inputPriceProduct" value="<%= productToEdit.price %>">
+                                <input type="number" name="price" id="inputPriceProduct" value="<%= product.price %>">
                             </article>
                         </div>
 
                         <div class="col2EditProduct">
                             <article>
                                 <label for="inputStockProduct">Stock:</label>
-                                <input type="number" name="stock" id="inputStockProduct" value="<%= productToEdit.stock %>">
+                                <input type="number" name="stock" id="inputStockProduct" value="<%= product.stock %>">
                             </article>
                             <article>
                                 <label for="inputDiscountProduct">Descuento:</label>
-                                <input type="number" name="discount" id="inputDiscountProduct" value="<%= productToEdit.discount %>">
+                                <input type="number" name="discount" id="inputDiscountProduct" value="<%= product.discount %>">
                             </article>
                         </div>
 
@@ -96,17 +96,19 @@
                     <p>Imagenes del Producto</p>
                 </div>
                 <div class="imgBoxEdit">
-                    <% for( let i = 0; i < productToEdit.image.length; i++ ) { %>
+                    <% product.images.forEach(image => { %>
                         <section class="productImageEdit">
-                            <img src="/images/products/<%= productToEdit.image[i] %>" alt="<%= productToEdit.name %>">
+                            <img src="/images/products/<%= image.image_Route %>" alt="Default">
                         </section>
-                    <% } %>
+                    <% }) %>
+                        
+                   
 
-                    <% var fillImageBlocks = 4-(productToEdit.image.length) %> 
-                    <% if (productToEdit.image.length < 4) { %>
+                    <% let fillImageBlocks = 4-(product.images.length) %> 
+                    <% if (product.images.length < 4) { %>
                         <% for( let i = 0; i < fillImageBlocks; i++ ) { %>
                             <section class="productImageEdit">
-                                <img src="/images/products/default.jpg" alt="Default">
+                                <img src="/images/products/<%= product.images[i] %>" alt="Default">
                             </section>
                         <% } %>
                     <% } else { %>

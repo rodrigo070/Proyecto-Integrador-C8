@@ -1,5 +1,7 @@
-let { bannersData, productsData , usersData , categoriesData , subCategoriesData , writeProductEdit ,writeBannersEdit, writeUserEdit} = require('../data/db');
+/* let { bannersData, productsData , usersData , categoriesData , subCategoriesData , writeProductEdit ,writeBannersEdit, writeUserEdit} = require('../data/db'); */
 const { validationResult } = require('express-validator');
+const db = require("../database/models");
+const { Op, where } = require('sequelize')
 
 module.exports = {
     admin: (req, res) => {
@@ -45,120 +47,173 @@ module.exports = {
         writeUserEdit(usersData)
 
         res.redirect('/admin/usuarios')
-    }
-    ,
+    },
     admin_productos: (req, res) => {
-        res.render('admin/adminProductList',  {
-            productsData,
-            messageToDisplay : "Disponibles",
-            session: req.session
-        });
-    }
-    ,
+        db.Product.findAll()
+        .then(products => {
+            res.render('admin/adminProductList', {
+                products,
+                session: req.session
+            })
+        }).catch((err) => console.log(err))
+    },
+    
+    
     admin_agregar: (req, res) => {
-        res.render('admin/adminAddProduct',  {
-            productsData,
-            categoriesData,
-            subCategoriesData,
-            session: req.session
-        });
+        let categoriesPromise = db.Category.findAll();
+        let subcategoriesPromise = db.Subcategory.findAll();
+        /* let product = db.Product.findAll() */
+    
+        Promise.all([categoriesPromise, subcategoriesPromise])
+          .then(([categoriesPromise, subcategoriesPromise]) => {
+            /* return res.json({categoriesPromise, subcategoriesPromise}) */
+            res.render("admin/adminAddProduct", {
+              categoriesPromise,
+              subcategoriesPromise,
+              session: req.session,
+            });
+          })
+          .catch((err) => console.log(err));
     }
     ,
-    admin_carga_update: (req, res) => {
-        
-        let errors = validationResult(req)
-
-        if(errors.isEmpty()){
-
-            let lastId = 1;
-
-            productsData.forEach(product => {
-                if(product.id > lastId){
-                    lastId = product.id
-                }
-            });
-
-            let productIMGArray = [];
-
-            req.files.forEach(image => {
-                productIMGArray.push(image.filename);
-            });
-
-            let newProduct = {
-                id: lastId + 1,
-                image: productIMGArray.length > 0 ? productIMGArray : ["default.jpg"],
-                name: req.body.name,
-                color: req.body.color,
-                price: req.body.price,
-                stock: 1,
-                discount: req.body.discount,
-                onSale: req.body.onSale,
-                description: req.body.description,
-                category: req.body.category,
-                subcategory: req.body.subcategory
-            }
-
-            productsData.push(newProduct);
-            writeProductEdit(productsData);
-
-            res.redirect('/admin/lista-productos');
+    admin_carga_update: (req, res) => {/* funciona */
+        let errors = validationResult(req);
+        if (req.fileValidatorError) {
+          let image = {
+            param: "image",
+            msg: req.fileValidatorError,
+          };
+          errors.push(image);
         }
-        else
-        {
+    
+        if (errors.isEmpty()) {
+    
+          let arrayImages = [];
+          if (req.files) {
+            req.files.forEach((image) => {
+              arrayImages.push(image.filename);
+            });
+          }
+    
+          let { name, price, discount, category, subcategory, description,}=req.body;
+         /*  return res.json(req.body) */
+          db.Product.create({
+            name,
+            price,
+            discount,
+            description,
+            category,
+            subcategory
+          }).then(product => {
+            
+            if (arrayImages.length > 0) {
+                let images = arrayImages.map(image => {
+                    return {
+                        image_Route: image,
+                        product_Id: product.id
+                    }
+                })
+                db.Product_images.bulkCreate(images)
+                .then(() => res.redirect('admin/adminProductList'))
+                .catch(err => console.log(err))
+            }else {
+                db.Product_images.create({
+                    image_Route: "default-image.png",
+                    product_Id: product.id
+                })
+                .then(() => res.redirect('admin/adminProductList'))
+                .catch(err => console.log(err))
+            }
+        }).catch(err => console.log(err))
+          
+        }else{
             console.log("ERROR al Agregar Producto");
             res.render("admin/adminAddProduct", {
-                productsData,
-                categoriesData,
-                subCategoriesData,
+                categories,
+                subcategories,
                 errors: errors.mapped(),
                 old: req.body,
                 session: req.session
             })
         }
     },
-    admin_editar_producto: (req, res) => {
-
-        let productToEditID = +req.params.id;
-        let productToEdit = productsData.find(productToEditFind => productToEditFind.id === productToEditID);
-
-        res.render('admin/adminEditProduct',  {
-            productToEdit,
-            categoriesData,
-            subCategoriesData,
+    admin_editar_producto: (req, res) => { /* no edita las imagenes ni tampoco las sube a la base de datos */
+        let categoriesPromise = db.Category.findAll();
+        let subcategoriesPromise = db.Subcategory.findAll();
+        let product = db.Product.findByPk(req.params.id, {
+            include: [{ association: "images" }],
+        })
+        Promise.all([categoriesPromise,subcategoriesPromise,product])
+        .then(([categoriesPromise,subcategoriesPromise,product])=>{
+            /* return res.json({categoriesPromise, subcategoriesPromise, product}) */
+            res.render('admin/adminEditProduct',{
+            categoriesPromise,
+            subcategoriesPromise,
+            product,
+            old: req.body,
             session: req.session
-        });
-    }
-    ,
-    admin_editar_producto_update: (req, res) => {
+            
+        })}).catch(err => console.log(err)) 
+    },
+    admin_editar_producto_update: (req, res) => {/* Todavia No edita las imagenes ni tampoco las agrega a la base de datos */
+        let errors = validationResult(req);
 
-        let productIMGArray = [];
+        if (errors.isEmpty()) {
+    
+          
+        let product = db.Product.findByPk(req.params.id, {
+            include: [{ association: "images" }],
+        })
+    
+          let {
+            name,
+            color,
+            price,
+            stock,
+            discount,
+            onsale,
+            description,
+            category,
+            subcategory
+          } = req.body;
+    
+          db.Product.update({
+            name,
+            color,
+            price,
+            stock,
+            discount,
+            onsale,
+            description,
+            category,
+            subcategory},
+            { where: { id: req.params.id } })
+            .then(() => {
+              res.redirect('/admin/lista-productos')
+            })
+            .catch(error => console.log(error))
+    
+    
+        } else {
+          let categoriesPromise = db.Categorie.findAll();
+          let subcategoriesPromise = db.Subcategorie.findAll();
+      
+          Promise.all([categoriesPromise, subcategoriesPromise])
+            .then(([categories, subcategories]) => {
+              db.Product.findByPk(+req.params.id)
+                .then(product => {
+                  res.render("admin/adminEditProduct", {
+                    categories,
+                    subcategories,
+                    product,
+                    errors: errors.mapped(),
+                    old: req.body,     
+                  });
+                })})
+                .catch((err) => console.log(err));
         
-        req.files.forEach(image => {
-            productIMGArray.push(image.filename);
-        });
-
-        productsData.forEach(productToEdit => {
-            if(productToEdit.id === +req.params.id)
-            {
-                productToEdit.id = productToEdit.id,
-                productToEdit.image = productIMGArray.length > 0 ? productIMGArray : productToEdit.image,
-                productToEdit.name = req.body.name ? req.body.name : productToEdit.name,
-                productToEdit.color = req.body.color ? req.body.color : productToEdit.color,
-                productToEdit.price = req.body.price ? req.body.price : productToEdit.price,
-                productToEdit.stock = req.body.stock ? req.body.stock : productToEdit.stock,
-                productToEdit.discount = req.body.discount ? req.body.discount : productToEdit.discount,
-                productToEdit.onSale = req.body.onSale ? req.body.onSale : productToEdit.onSale,
-                productToEdit.description = req.body.description ? req.body.description : productToEdit.description,
-                productToEdit.category = req.body.category ? req.body.category : productToEdit.category,
-                productToEdit.subcategory = req.body.subcategory ? req.body.subcategory : productToEdit.subcategory
-            }
-        });
-
-        writeProductEdit(productsData)
-
-        res.redirect('/admin/lista-productos')
-    }
-    ,
+        }
+    },
     admin_stock: (req, res) => {
         let products = productsData.filter(product => product.stock > 0);
 
@@ -224,16 +279,21 @@ module.exports = {
         res.redirect('/admin/banners');
     }
     ,
-    borrar_Producto: (req, res) => {
-        productsData.forEach(productToDelete => {
-            if(productToDelete.id === +req.params.id){
-                let sucursalAEliminar = productsData.indexOf(productToDelete)
-                productsData.splice(sucursalAEliminar, 1)
+    borrar_Producto: (req, res) => {/* todavia no anda  */
+        db.Product_image.destroy({
+            where: {
+              productId: req.params.id 
             }
-        })
+          }).then(() => {
+            db.Product.destroy({
+              where: {
+                id: req.params.id
+              }
+            })
+          }).then(() => {
+            res.redirect("/admin/lista-productos")
+          }).catch(error => console.log(error))
 
-        writeProductEdit(productsData);
-        res.redirect('/admin/lista-productos');
     }
     ,
     borrar_usuario: (req, res) => {

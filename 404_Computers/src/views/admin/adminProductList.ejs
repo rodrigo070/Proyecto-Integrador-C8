@@ -14,7 +14,7 @@
         </nav>
       </div>
       <section class="adminListProducts">
-        <div class="titles">Productos <%= messageToDisplay %> </div>
+        <!-- <div class="titles">Productos <%= /* messageToDisplay */ %> </div> -->
         <article class="product_Available">
           <div class="apID">
             ID
@@ -35,7 +35,7 @@
             Borrar
           </div>
         </article>
-        <% productsData.forEach(productAvailable => { %>
+        <% products.forEach(productAvailable => { %>
           <article class="product_Available">
             <div class="apID"><%=productAvailable.id %></div>
             <div class="apName"><%=productAvailable.name %></div>

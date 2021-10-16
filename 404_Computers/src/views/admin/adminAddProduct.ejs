@@ -28,16 +28,16 @@
                 <div class="seleccionar">
                     <div class="cat1admin">
                         <select name="category" id="inputCategoryProduct" class="input-select">
-                            <% categoriesData.forEach(catg => { %>
-                                <option value="<%= catg.category %>"><%= catg.categoryName %></option>
+                            <% categoriesPromise.forEach(category => { %>
+                                <option value="<%= category.id %>"><%= category.category_Name %> </option>
                             <% }) %>
                         </select>
                         <% if (locals.errors && errors.category) { %>
                             <small class="error-message"><%= errors.category.msg %> </small>
                         <% } %>
                         <select name="subcategory" id="inputSubCategoryProduct" class="input-select">
-                            <% subCategoriesData.forEach(scatg => { %>
-                                <option value="<%= scatg.subcategory %>"><%= scatg.subcategoryName %></option>
+                            <% subcategoriesPromise.forEach(subcategory => { %>
+                                <option value="<%= subcategory.id %>"><%= subcategory.subcategory_Name %></option>
                             <% }) %>
                         </select>
                         <% if (locals.errors && errors.subcategory) { %>
