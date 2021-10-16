@@ -40,7 +40,7 @@
             <article class="product_Item_Recommended">
                 <a href="/productos/<%= productsData[i].category %>/<%= productsData[i].subcategory%>/<%= productsData[i].id%>">
                     <div class="img">
-                        <img src="/images/products/<%= productsData[i].image[0] %>" alt="">
+                        <img src="/images/products/<%= productsData[i].images[0].image_Route %>" alt="">
                     </div>
                     <div class="descripcion-articulo">
                         <p><%= productsData[i].name %></p>
@@ -80,7 +80,7 @@
                 <article class="product_Item_Recommended">
                     <a href="/productos/<%= productsData[i].category %>/<%= productsData[i].subcategory%>/<%= productsData[i].id%>">
                         <div class="img">
-                            <img src="/images/products/<%= productsData[i].image[0] %>" alt="">
+                            <img src="/images/products/<%= productsData[i].images[0].image_Route %>" alt="">
                         </div>
                         <div class="descripcion-articulo">
                             <p><%= productsData[i].name %></p>
@@ -117,7 +117,7 @@
                                 <% if (productsData[i].discount > 1) { %>
                                     <label><%= productsData[i].discount %>% OFF</label>
                                 <% } %>
-                                <img src="/images/products/<%= productsData[i].image[0]?.image_Route %>" alt="<%= productsData.name %>">
+                                <img src="/images/products/<%= productsData[i].images[0]?.image_Route %>" alt="<%= productsData.name %>">
                             </div>
                             <div class="description_Article_Page homeProductCard">
                                 <p><%= productsData[i].name %></p>

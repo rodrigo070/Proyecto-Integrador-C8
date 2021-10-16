@@ -25,7 +25,7 @@
                 <% bannersData.forEach(banner => { %>
                     <section class="grid_item_list">
                         <div class="grid_Id_List">#<%= banner.id %> </div>
-                        <div class="grid_Image_List"><img src="/images/banners/<%= banner.bannerImage %>" alt=""></div>
+                        <div class="grid_Image_List"><img src="/images/banners/<%= banner.image_Route %>" alt=""></div>
                         <form class="grid_Delete_List" action="/admin/borrarBanner/<%= banner.id  %>?_method=DELETE" method="POST">
                             <button type="submit" class="grid_Delete_List"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         </form>
@@ -35,7 +35,7 @@
             <form action="/admin/banners/" method="POST" enctype="multipart/form-data">
                 <section class="boxImageButtonAdd">
                     <label class="buttonToAddImage">
-                        <input type="file" id="examinar" name="bannerImage" multiple accept=".jpg, .png, .webp, .jpeg, .bmp">
+                        <input type="file" id="examinar" name="image_Route" accept=".jpg, .png, .webp, .jpeg, .bmp">
                         <p><i class="fa fa-upload" aria-hidden="true"></i> Agregar Banner</p>
                     </label>
                     <div id="imagePreview">

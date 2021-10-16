@@ -44,13 +44,13 @@
                                 <% if (product.discount > 1) { %>
                                     <label><%= product.discount %>% OFF</label>
                                 <% } %>
-                                <img src="/images/products/<%= product.image[0]?.image_Route %>" alt="<%= product.name %>">
+                                <img src="/images/products/<%= product.images[0]?.image_Route %>" alt="<%= product.name %>">
                             </div>
                             <div class="description_Article_Page">
                                 <p><%= product.name %></p>
                                 <div class="prices_Product_Page">
-                                    <% if (product.discount > 0) { %>
-                                        <p>$<%= toThousand(finalPrice = product.price - ((product.price * product.discount)/100)) %></p>
+                                    <% if (product.discount > 1) { %>
+                                        <p>$<%= toThousand(product.finalPrice) %></p>
                                         <p>$<%= toThousand(product.price) %></p>
                                     <% } else { %>
                                         <p>$<%= toThousand(product.price) %></p>

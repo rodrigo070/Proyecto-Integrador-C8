@@ -6,6 +6,7 @@
     <%- include('../partials/header.ejs') %>   
     <main>
         <div id="rgbar"></div>
+        <% if (productsData.length > 0) { %>
         <div class="cart_Page_Box">
             <section class="list_Products_Box">
                 <!-- Header de la lista de productos -->
@@ -19,13 +20,15 @@
                     <div></div>
                 </section>
                 <!-- Caja de los productos que se agregan a la lista -->
-                <% for( let i = 0; i < 2; i++ ) { %>
+
+                <% productsData.forEach(productsData => { %>
+                    
                     <section class="item_Product_Box sec_Grid">
                         <section class="icon_Plist">
                             <i class="fa fa-minus" aria-hidden="true"></i>
                         </section>
                         <section>
-                            <p><%= productsData[i].name %></p>
+                            <p><%= productsData.name %></p>
                         </section>
                         <section>
                             <div class="minus_plusButton">
@@ -39,15 +42,19 @@
                             </div>
                         </section>
                         <section>
-                            <p>$<%= toThousand(productsData[i].price) %></p>
+                            <p>$<%= toThousand(productsData.price) %></p>
                         </section>
                         <section>
-                            <div class="discount_Tag_Plist">
-                                <%= productsData[i].discount %>% OFF
-                            </div>
+                            <% if (productsData.discount) { %>
+                                <div class="discount_Tag_Plist">
+                                    <%= productsData.discount %>% OFF
+                                </div>
+                            <% } else { %>
+                                
+                            <% } %>
                         </section>
                         <section>
-                            <p>$<%= toThousand(productsData[i].price - productsData[i].price * productsData[i].discount / 100) %></p>
+                            <p>$<%= toThousand(productsData.finalPrice) %></p>
                         </section>
                         <section>
                             <button class="delete_Plist">
@@ -55,10 +62,13 @@
                             </button>
                         </section>
                     </section>
-                <% } %>
-                
+                    <% }) %>
                 <section class="totalPrice">
-                    <p>Precio Total: $</p>
+                    <% let total = 0  %> 
+                    <% for( let i = 0; i < productsData.length; i++ ) { %>
+                        <% total = total + Number(productsData[i].finalPrice) %> 
+                    <% } %>
+                    <p>Precio Total: $ <%= total %> </p>
                 </section>
             </section>
             <!-- Seccion 2 -->
@@ -148,6 +158,15 @@
                 </section>
             </div>
         </div>
+
+        <% } else { %>
+                 
+        <div class="empty_Cart">
+            <p>Tu Carrito esta Vacio</p>
+        </div>
+
+        <% } %>
+
         <%- include('../partials/slider.ejs') %>  
     </main>
     <%- include('../partials/footer.ejs') %> 

@@ -18,6 +18,9 @@ module.exports = (sequelize,DataTypes) => {
             type : DataTypes.DECIMAL,
             allowNull : false
         },
+        finalPrice : { 
+            type : DataTypes.DECIMAL
+        },
         stock : { 
             type : DataTypes.INTEGER
         },
@@ -58,7 +61,7 @@ module.exports = (sequelize,DataTypes) => {
         })
 
         Product.hasMany(models.ProductImage, {
-            as: "image",
+            as: "images",
             foreignKey: "product_Id"
         })
     }

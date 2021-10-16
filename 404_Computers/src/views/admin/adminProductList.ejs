@@ -39,7 +39,7 @@
           <article class="product_Available">
             <div class="apID"><%=productAvailable.id %></div>
             <div class="apName"><%=productAvailable.name %></div>
-            <div class="apGoTo"><a href="/productos/<%= productAvailable.category %>/<%= productAvailable.subcategory %>/<%= productAvailable.id %>"><i class="fa fa-eye" aria-hidden="true"></i></a></div>
+            <div class="apGoTo"><a href="/productos/<%= productAvailable.Category.category_Link %>/<%= productAvailable.Subcategory.subcategory_Link %>/<%= productAvailable.id %>"><i class="fa fa-eye" aria-hidden="true"></i></a></div>
             <div class="apEdit"><a href="/admin/editar-producto/<%=productAvailable.id %>"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>
             <form class="apDeleteBox" action="/admin/borrarProducto/<%- productAvailable.id %>?_method=DELETE" method="POST">
               <button type="submit" class="apDelete"><i class="fa fa-trash" aria-hidden="true"></i></button>

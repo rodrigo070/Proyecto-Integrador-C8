@@ -1,5 +1,5 @@
-const { compareSync } = require('bcrypt');
 const db = require('../database/models');
+const User = db.User; 
 const Product = db.Product; 
 const Category = db.Category;
 const Subcategory = db.Subcategory;
@@ -12,10 +12,11 @@ module.exports = {
 
         const categories = Category.findAll()
         const products = Product.findAll({
-            include : ["image","Category","Subcategory"]
+            include : ["images","Category","Subcategory"]
         })
         Promise.all([products,categories])
         .then(([products,categories]) =>{
+
             res.render('products/productsList' , {
                 products,
                 categories,
@@ -34,14 +35,14 @@ module.exports = {
     product_Detail: (req, res) => {
 
         let sliderProducts = Product.findAll({
-            include :  ["image","Category","Subcategory"]
+            include :  ["images","Category","Subcategory"]
         })
 
         let product = Product.findOne({
                 where : {
                     id : req.params.id
                 },
-                include : ["image","Category","Subcategory"]
+                include : ["images","Category","Subcategory"]
             }
         )
 
@@ -49,12 +50,42 @@ module.exports = {
         .then(([sliderProducts , product]) => {
             if(req.params.category === product.Category.category_Link && req.params.subcategory === product.Subcategory.subcategory_Link)
             {
-                res.render('products/productDetail' , {
-                    product,
-                    sliderProducts,
-                    session: req.session,
-                    toThousand
-                })
+                if(req.session.user)
+                {
+                    User.findOne({
+                        where : {
+                            id : req.session.user.id
+                        },
+                        include: [{ association: "favorites"}] 
+                    })
+                    .then(user => {
+                        let favoriteItem = -1;
+
+                        for (let i = 0; i < user.favorites.length; i++) {
+                            if (user.favorites[i].favorite_Product === product.id) {
+                                favoriteItem = 1
+                            }
+                        }
+
+                        res.render('products/productDetail' , {
+                            product,
+                            sliderProducts,
+                            favoriteItem,
+                            session: req.session,
+                            toThousand
+                        })
+                    })
+                }
+                else
+                {
+                    res.render('products/productDetail' , {
+                        product,
+                        sliderProducts,
+                        favoriteItem : -1,
+                        session: req.session,
+                        toThousand
+                    })
+                }
             }
             else
             {
@@ -81,7 +112,7 @@ module.exports = {
             let categories = Category.findAll()
 
             let products = Product.findAll({
-                include :  ["image","Category","Subcategory"],
+                include :  ["images","Category","Subcategory"],
                 where : {
                     product_Category : categoryPage.id
                 }
@@ -112,7 +143,7 @@ module.exports = {
             });
                 
         })
-        .catch(error => {
+        .catch(() => {
             res.render('errorPage' , {
                 error: "La Categoria a la cual intenta acceder no existe o fue removida de la pagina.",
                 session: req.session
@@ -132,7 +163,7 @@ module.exports = {
             let categories = Category.findAll()
 
             let products = Product.findAll({
-                include :  ["image","Category","Subcategory"],
+                include :  ["images","Category","Subcategory"],
                 where : {
                     product_Subcategory : subcategoryPage.id
                 }
@@ -181,7 +212,7 @@ module.exports = {
                     [Op.gt]: 0, 
                 }
             },
-            include : ["image","Category","Subcategory"]
+            include : ["images","Category","Subcategory"]
         })
         Promise.all([products,categories])
         .then(([products,categories]) =>{
@@ -202,13 +233,14 @@ module.exports = {
     order_low: (req, res) => {
         const categories = Category.findAll()
         const products = Product.findAll({
-            include : ["image","Category","Subcategory"],
+            include : ["images","Category","Subcategory"],
             order: [
-                ["price", "ASC"]
+                ["finalPrice", "ASC"]
             ]
         })
         Promise.all([products,categories])
         .then(([products,categories]) =>{
+
             res.render('products/productsList' , {
                 products,
                 categories,
@@ -226,13 +258,14 @@ module.exports = {
     order_high: (req, res) => {
         const categories = Category.findAll()
         const products = Product.findAll({
-            include : ["image","Category","Subcategory"],
+            include : ["images","Category","Subcategory"],
             order: [
-                ["price", "DESC"]
+                ["finalPrice", "DESC"]
             ]
         })
         Promise.all([products,categories])
         .then(([products,categories]) =>{
+
             res.render('products/productsList' , {
                 products,
                 categories,

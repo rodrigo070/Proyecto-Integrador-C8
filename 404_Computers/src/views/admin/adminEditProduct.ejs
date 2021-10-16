@@ -21,12 +21,12 @@
                         <div class="col2EditProduct">
                             <article>
                                 <label for="inputCategoryProduct">Categoría:</label>
-                                <select name="category" id="inputCategoryProduct">
+                                <select name="product_Category" id="inputCategoryProduct">
                                     <% categoriesData.forEach(catg => { %>
-                                        <% if (productToEdit.category === catg.category) { %>
-                                            <option value="<%= catg.category %>" selected><%= catg.categoryName %></option>
+                                        <% if (productToEdit.product_Category === catg.id) { %>
+                                            <option value="<%= catg.id %>" selected><%= catg.category_Name %></option>
                                             <% } else { %>
-                                            <option value="<%= catg.category %>"><%= catg.categoryName %></option>
+                                            <option value="<%= catg.id %>"><%= catg.category_Name %></option>
                                         <% } %>
                                     <% }) %>
                                 </select>
@@ -34,12 +34,12 @@
 
                             <article>
                                 <label for="inputSubCategoryProduct">Subcategoría:</label>
-                                <select name="subcategory" id="inputSubCategoryProduct">
+                                <select name="product_Subcategory" id="inputSubCategoryProduct">
                                     <% subCategoriesData.forEach(scatg => { %>
-                                        <% if (productToEdit.subcategory === scatg.subcategory) { %>
-                                            <option value="<%= scatg.subcategory %>" selected><%= scatg.subcategoryName %></option>
+                                        <% if (productToEdit.product_Subcategory === scatg.id) { %>
+                                            <option value="<%= scatg.id %>" selected><%= scatg.subcategory_Name %></option>
                                             <% } else { %>
-                                            <option value="<%= scatg.subcategory %>"><%= scatg.subcategoryName %></option>
+                                            <option value="<%= scatg.id %>"><%= scatg.subcategory_Name %></option>
                                         <% } %>
                                     <% }) %>
                                 </select>
@@ -52,7 +52,7 @@
                     <section>
                         <label>Se encuentra en Oferta?</label>
                         <div class="switchButton">
-                            <% if (productToEdit.onSale === 1) { %>
+                            <% if (productToEdit.onSale) { %>
                                 <input type="radio" id="onSaleYes" name="onSale" value=1 checked="checked">
                                 <label for="onSaleYes">Si</label>
                                 <input type="radio" id="onSaleNo" name="onSale" value=0>
@@ -90,20 +90,20 @@
                 </div>
                 <div id="addProductImages">
                     <label class="addImagesButton">
-                        <input type="file" name="image" multiple accept=".jpg, .png, .webp, .jpeg, .bmp">
+                        <input type="file" name="image_Route" multiple accept=".jpg, .png, .webp, .jpeg, .bmp">
                         <p><i class="fa fa-upload" aria-hidden="true"></i> Agregar Imagenes</p>
                     </label>
                     <p>Imagenes del Producto</p>
                 </div>
                 <div class="imgBoxEdit">
-                    <% for( let i = 0; i < productToEdit.image.length; i++ ) { %>
+                    <% for( let i = 0; i < productToEdit.images.length; i++ ) { %>
                         <section class="productImageEdit">
-                            <img src="/images/products/<%= productToEdit.image[i] %>" alt="<%= productToEdit.name %>">
+                            <img src="/images/products/<%= productToEdit.images[i].image_Route %>" alt="<%= productToEdit.name %>">
                         </section>
                     <% } %>
 
-                    <% var fillImageBlocks = 4-(productToEdit.image.length) %> 
-                    <% if (productToEdit.image.length < 4) { %>
+                    <% var fillImageBlocks = 4-(productToEdit.images.length) %> 
+                    <% if (productToEdit.images.length < 4) { %>
                         <% for( let i = 0; i < fillImageBlocks; i++ ) { %>
                             <section class="productImageEdit">
                                 <img src="/images/products/default.jpg" alt="Default">

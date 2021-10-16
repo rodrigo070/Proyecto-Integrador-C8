@@ -20,7 +20,7 @@
 
                 <ul class="menu_Mobile">
                     <% if (typeof session.user != "undefined") { %>
-                        <% if (session.user.rol === "ROLE_ADMIN") { %>
+                        <% if (session.user.role === "ROLE_ADMIN") { %>
                             <li>
                                 <a href="/admin"><i class="icons_Mobile_Menu fa fa-user-secret" aria-hidden="true"></i>Panel de Admin</a>
                             </li>
@@ -141,7 +141,7 @@
                         <button type="reset" onclick="location.href='/ofertas'">Ofertas <i class="fa fa-percent" ></i></button>
                     </li>
                     <% if (typeof session.user != "undefined") { %>
-                        <% if (session.user.rol === "ROLE_ADMIN") { %>
+                        <% if (session.user.role === "ROLE_ADMIN") { %>
                             <li>
                                 <button type="reset" onclick="location.href='/admin'">Admin <i class="fa fa-user-secret" ></i></button>
                             </li>

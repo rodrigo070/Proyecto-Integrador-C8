@@ -32,10 +32,10 @@
 
             <section class="productPhoto">
                 <!-- Aca va la imagen Principal  -->
-                <img src="/images/products/<%= product.image[0]?.image_Route %>" id="expandedImg" class="imageModal">
+                <img src="/images/products/<%= product.images[0]?.image_Route %>" id="expandedImg" class="imageModal">
                 <!-- Aca va la Grilla de Fotos del producto  -->
                 <div class="photosGalleryBox">
-                    <% product.image.forEach(imageGallery => { %>
+                    <% product.images.forEach(imageGallery => { %>
                         <img class="miniPhoto" src="/images/products/<%= imageGallery.image_Route %>" onmouseover="productGridImages(this);">
                     <% }) %>
                 </div>
@@ -45,7 +45,7 @@
                 <div class="priceNameProductPage">
                     <p><%= product.name %></p>
                     <% if (product.discount > 0) { %>
-                        <p>$<%= toThousand(product.price - product.price * product.discount / 100) %></p>
+                        <p>$<%= toThousand(product.finalPrice) %></p>
                         <p> Precio Lista $<%= toThousand(product.price) %></p>
                         <p> <%= product.discount %> % OFF</p>    
                     <% } else { %>
@@ -63,7 +63,12 @@
 
                 <div class="productPageButton">
                     <button title="Comprar">Agregar al Carrito <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
-                    <button title="Agregar a Favoritos" onclick="fav();"> Agregar a Favoritos <i id="favBtn" class="fa fa-heart-o"></i></button>
+                    <% if (favoriteItem != -1) { %>
+                        <button title="Agregar a Favoritos" onclick="fav();"> Agregar a Favoritos <i id="favBtn" class="fa fa-heart"></i></button>
+                    <% } else { %>
+                        <button title="Agregar a Favoritos" onclick="fav();"> Agregar a Favoritos <i id="favBtn" class="fa fa-heart-o"></i></button>
+                    <% } %>
+                     
                 </div>
 
                 <div class="socialIconsShare">

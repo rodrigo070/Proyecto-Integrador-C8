@@ -27,21 +27,21 @@
                 </div>
                 <div class="seleccionar">
                     <div class="cat1admin">
-                        <select name="categoryid" id="inputCategoryProduct" class="input-select">
+                        <select name="product_Category" id="inputCategoryProduct" class="input-select">
                             <% categoriesData.forEach(catg => { %>
-                                <option value="<%= catg.id %>"><%= catg.category %></option>
+                                <option value="<%= catg.id %>"><%= catg.category_Name %></option>
                             <% }) %>
                         </select>
-                        <% if (locals.errors && errors.categoryid) { %>
-                            <small class="error-message"><%= errors.categoryid.msg %> </small>
+                        <% if (locals.errors && errors.product_Category) { %>
+                            <small class="error-message"><%= errors.product_Category.msg %> </small>
                         <% } %>
-                        <select name="subcategoryid" id="inputSubCategoryProduct" class="input-select">
+                        <select name="product_Subcategory" id="inputSubCategoryProduct" class="input-select">
                             <% subCategoriesData.forEach(scatg => { %>
-                                <option value="<%= scatg.id %>"><%= scatg.subcategory %></option>
+                                <option value="<%= scatg.id %>"><%= scatg.subcategory_Name %></option>
                             <% }) %>
                         </select>
-                        <% if (locals.errors && errors.subcategoryid) { %>
-                            <small class="error-message"><%= errors.subcategoryid.msg %> </small>
+                        <% if (locals.errors && errors.product_Subcategory) { %>
+                            <small class="error-message"><%= errors.product_Subcategory.msg %> </small>
                         <% } %>
                     </div>
         
@@ -60,7 +60,7 @@
             <section class="infoProductAdmin">
                 <div class="descripcion-producto">
                     <h4>Descripcion del Producto</h4>
-                    <textarea name="description" placeholder="Descripcion del Producto" id="mensaje cols="30" rows="10" ></textarea>
+                    <textarea name="description" placeholder="Descripcion del Producto" id="mensaje" cols="30" rows="10" ></textarea>
                 </div>
                 <div class="precio-admin">
                     <label for="precio">Precio $</label>
@@ -74,9 +74,9 @@
             <section class="agregar-imagen">
                 <label for="archivo">Agregar archivos de Imagen</label>
                 <hr>
-                <input type="file" id="examinar" name="image" multiple accept=".jpg, .png, .webp, .jpeg, .bmp">
-                <% if (locals.errors && errors.image) { %>
-                    <small class="error-message"><%= errors.image.msg %> </small>
+                <input type="file" id="examinar" name="image_Route" multiple accept=".jpg, .png, .webp, .jpeg, .bmp">
+                <% if (locals.errors && errors.image_Route) { %>
+                    <small class="error-message"><%= errors.image_Route.msg %> </small>
                 <% } %>
             </section>
 

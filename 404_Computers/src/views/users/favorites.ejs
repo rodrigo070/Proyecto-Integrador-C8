@@ -7,15 +7,15 @@
     <main>
       <section class="favoritesSection">
         <div class="titles">Tus Favoritos</div>
-        <% for( let i = 0; i < productsData.length; i++ ) { %>
+        <% productsData.forEach(favoriteProduct => { %>
           <article class="favoriteProduct">
             <input type="checkbox" name="selectFavorite" id="selectFavorite">
-            <div class="favoritePicture"><img src="/images/products/<%=productsData[i].image[0] %>" alt=""></div>
-            <div class="favoriteName"><%= productsData[i].name %></div>
-            <div class="favoritePrice">$<%= toThousand(productsData[i].price) %></div>
+            <div class="favoritePicture"><img src="/images/products/<%=favoriteProduct.images[0]?.image_Route %>" alt=""></div>
+            <div class="favoriteName"><a href="/productos/<%= favoriteProduct.Category.category_Link %>/<%= favoriteProduct.Subcategory.subcategory_Link %>/<%= favoriteProduct.id %>"><%= favoriteProduct.name %></a></div>
+            <div class="favoritePrice">$<%= toThousand(favoriteProduct.price) %></div>
             <button class="favoriteDelete"><i class="fa fa-trash" aria-hidden="true"></i></button>
           </article>
-        <% } %>
+        <% }) %>
       </section>
     </main>
     <%- include('../partials/footer.ejs') %> 

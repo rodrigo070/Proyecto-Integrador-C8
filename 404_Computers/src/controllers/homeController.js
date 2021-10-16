@@ -1,7 +1,6 @@
 const db = require('../database/models');
 const Product = db.Product; 
 const Category = db.Category;
-const Subcategory = db.Subcategory;
 const Banner = db.Banner;
 const { Op } = require('sequelize');
 
@@ -12,7 +11,7 @@ module.exports = {
         
         const bannersData = Banner.findAll()
         const productsData = Product.findAll({
-            include : ["image","Category","Subcategory"]
+            include : ["images","Category","Subcategory"]
         })
         Promise.all([productsData,bannersData])
         .then(([productsData,bannersData]) =>{
@@ -57,7 +56,7 @@ module.exports = {
 
         const categories = Category.findAll()
         const products = Product.findAll({
-            include : ["image","Category","Subcategory"]
+            include : ["images","Category","Subcategory"]
         })
         Promise.all([products,categories])
         .then(([products,categories]) =>{

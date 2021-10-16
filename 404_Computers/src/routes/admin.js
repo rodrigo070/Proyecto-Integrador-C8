@@ -10,17 +10,17 @@ const uploadBannerFile = require("../middlewares/uploadBannerFile");
 router.get('/', adminSessionCheck, controller.admin);
 router.get('/usuarios', adminSessionCheck, controller.admin_usuarios);
 router.get('/banners', adminSessionCheck, controller.banners);
-router.post('/banners', uploadBannerFile.single("bannerImage") ,controller.banners_update);
+router.post('/banners', uploadBannerFile.single("image_Route") ,controller.banners_update);
 
 /* GET Carga de Productos */
 router.get('/agregar-producto', adminSessionCheck, controller.admin_agregar);
 /* POST Recibo los Datos y los integro a la Base de Datos */
-router.post('/agregar-producto', uploadProductFile.array("image", 4) , productCheck, controller.admin_carga_update);
+router.post('/agregar-producto', uploadProductFile.array("image_Route", 4) , productCheck, controller.admin_carga_update);
 
 /* GET Edicion de Producto */
 router.get('/editar-producto/:id', adminSessionCheck, controller.admin_editar_producto);
 /* PUT recibo los datos modificados y aplico la actualizacion */
-router.put('/editar-producto/:id', uploadProductFile.array("image", 4) , controller.admin_editar_producto_update);
+router.put('/editar-producto/:id', uploadProductFile.array("image_Route", 4) , controller.admin_editar_producto_update);
 
 /* GET Edicion de Usuarios */
 router.get('/editar-usuario/:id', adminSessionCheck, controller.admin_detalle_usuario);

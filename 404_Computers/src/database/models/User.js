@@ -37,12 +37,6 @@ module.exports = (sequelize,DataTypes) => {
         },
         dni : {
             type: DataTypes.INTEGER
-        },
-        favorites : {
-            type: DataTypes.STRING
-        },
-        cartproducts : {
-            type: DataTypes.STRING
         }
     }
 
@@ -52,6 +46,21 @@ module.exports = (sequelize,DataTypes) => {
     }
 
     const User = sequelize.define(alias, cols , config);
+
+    User.associate = models =>  {
+        User.hasMany(models.History, {
+            as: "historyProducts",
+            foreignKey:"user_ID"
+        })
+        User.hasMany(models.CartProduct, {
+            as: "cartProducts",
+            foreignKey:"user_ID" 
+        })
+        User.hasMany(models.Favorite, {
+            as: "favorites",
+            foreignKey:"user_ID" 
+        })
+    }
 
     return User;
 }

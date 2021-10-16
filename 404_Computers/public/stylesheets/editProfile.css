@@ -31,12 +31,20 @@
 }
 
 .profile .avatar {
-    width: 10rem;
-    height: 10rem;
+    width: 150px;
+    height: 150px;
     background-color: thistle;
     border-radius: 50%;
     margin-bottom: 1rem;
+    overflow: hidden;
+    border: 1px solid #d379dd;
 }
+
+.profile .avatar img{
+    width: 100%;
+    height: 100%;
+}
+
 .profile .input-select{
     outline: none;
     border: 2px solid #d379dd;
