@@ -2,6 +2,7 @@
 const { validationResult } = require('express-validator');
 const db = require("../database/models");
 const { Op, where } = require('sequelize')
+const {eliminarImagen} = require("../data/db")
 
 module.exports = {
     admin: (req, res) => {
@@ -279,23 +280,36 @@ module.exports = {
         res.redirect('/admin/banners');
     }
     ,
-    borrar_Producto: (req, res) => {/* todavia no anda  */
-        db.Product_image.destroy({
-            where: {
-              productId: req.params.id 
+    borrar_Producto: (req, res) => {
+        db.Product.findByPk(req.params.id, {
+          include: [
+            {
+              association: "images",
+            },
+          ],
+        })
+          .then((product) => {
+            for (let i = 0; i < product.images.length; i++) {
+              eliminarImagen(product.images[i].image_Route);
             }
-          }).then(() => {
-            db.Product.destroy({
-              where: {
-                id: req.params.id
-              }
-            })
-          }).then(() => {
+          })
+        .catch((err) => console.log(err))
+        .then(() => {
+            db.Product.findByPk(req.params.id)
+            .then((product) => {
+                db.Product_images.destroy({ where: { product_Id: product.id } })
+                .then(() => {
+                    db.Product.destroy({ where: { id: +req.params.id } });
+                }).catch((err) => {
+                    console.log(err);
+                });
+            }).catch((err) => console.log(err));
+          }).catch((err) => console.log(err))
+        .then(() => {
             res.redirect("/admin/lista-productos")
-          }).catch(error => console.log(error))
-
-    }
-    ,
+        }).catch(error => console.log(error))
+      },
+    
     borrar_usuario: (req, res) => {
         usersData.forEach(userToDelete => {
             if(userToDelete.id === +req.params.id){
