@@ -5,15 +5,15 @@
   <div class="container_Page">
     <%- include('../partials/header.ejs') %>   
     <main>
-      <section class="favoritesSection">
+      <section class="favHisSection">
         <div class="titles">Tus Favoritos</div>
         <% productsData.forEach(favoriteProduct => { %>
-          <article class="favoriteProduct">
-            <input type="checkbox" name="selectFavorite" id="selectFavorite">
-            <div class="favoritePicture"><img src="/images/products/<%=favoriteProduct.images[0]?.image_Route %>" alt=""></div>
-            <div class="favoriteName"><a href="/productos/<%= favoriteProduct.Category.category_Link %>/<%= favoriteProduct.Subcategory.subcategory_Link %>/<%= favoriteProduct.id %>"><%= favoriteProduct.name %></a></div>
-            <div class="favoritePrice">$<%= toThousand(favoriteProduct.price) %></div>
-            <button class="favoriteDelete"><i class="fa fa-trash" aria-hidden="true"></i></button>
+          <article class="favHisProduct">
+            <input type="checkbox" name="selectFavorite" id="selectFavHis">
+            <div class="favHisPicture"><img src="/images/products/<%=favoriteProduct.images[0]?.image_Route %>" alt=""></div>
+            <div class="favHisName"><a href="/productos/<%= favoriteProduct.Category.category_Link %>/<%= favoriteProduct.Subcategory.subcategory_Link %>/<%= favoriteProduct.id %>"><%= favoriteProduct.name %></a></div>
+            <div class="favHisPrice">$<%= toThousand(favoriteProduct.price) %></div>
+            <button class="favHisDelete"><i class="fa fa-trash" aria-hidden="true"></i></button>
           </article>
         <% }) %>
       </section>

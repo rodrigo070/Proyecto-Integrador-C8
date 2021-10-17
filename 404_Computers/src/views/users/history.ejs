@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head.ejs' ,{title: 'Historial - '}) %>
+<body>
+  <div class="container_Page">
+    <%- include('../partials/header.ejs') %>   
+    <main>
+      <section class="favHisSection">
+        <div class="titles">Tu Historial</div>
+        <% productsData.forEach(historyProduct => { %>
+          <article class="favHisProduct">
+            <input type="checkbox" name="selectFavorite" id="selectFavHis">
+            <div class="favHisPicture"><img src="/images/products/<%=historyProduct.images[0]?.image_Route %>" alt=""></div>
+            <div class="favHisName"><a href="/productos/<%= historyProduct.Category.category_Link %>/<%= historyProduct.Subcategory.subcategory_Link %>/<%= historyProduct.id %>"><%= historyProduct.name %></a></div>
+            <div class="favHisPrice">$<%= toThousand(historyProduct.price) %></div>
+            <form class="favHisDeleteForm" action="/delHistoryProduct/<%- historyProduct.id %>?_method=DELETE" method="POST">
+                <button class="favHisDelete" type="submit" title="Borrar Producto"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </form>
+          </article>
+        <% }) %>
+      </section>
+    </main>
+    <%- include('../partials/footer.ejs') %> 
+  </div>
+</body>
+</html>

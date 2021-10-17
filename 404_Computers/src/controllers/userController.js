@@ -3,6 +3,7 @@ let bcrypt = require("bcrypt");
 const db = require('../database/models');
 const User = db.User;
 const Product = db.Product;
+const History = db.History;
 
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
@@ -193,7 +194,52 @@ module.exports = {
         
     }
     ,
-    
+    history: (req, res) => {
+        User.findOne({
+            where : {
+                id : req.session.user.id
+            },
+            include: [{ association: "historyProducts"}] 
+        })
+        .then(user => {
+
+            Product.findAll({
+                include : ["images","Category","Subcategory"]
+            })
+            .then(productsData => {
+                let result = []
+                productsData.forEach(historyData => {
+                    for (let i = 0; i < user.historyProducts.length; i++) {
+                        if (user.historyProducts[i].product_ID === historyData.id) {
+                            result.push(historyData)
+                        }
+                    }
+                });
+
+                res.render("users/history" , {
+                    productsData : result,
+                    session: req.session,
+                    toThousand
+                })
+            })
+        })
+    }
+    ,
+    delHistoryProduct: (req, res) => {
+        History.destroy({
+            where : {
+                product_ID : req.params.id
+            }
+        })
+        .then(()=> {
+            res.redirect('/historial');
+        })
+        .catch(errr => {
+            console.log("ERROR AL BORRAR PRODUCTO DEL HISTORIAL : "+errr);
+            res.redirect('/historial');
+        })
+    }
+    ,
     cart: (req, res) => {
 
         User.findOne({

@@ -22,6 +22,12 @@ router.post('/registro', registerValidator, controller.processRegister);
 
 router.get('/favoritos', userSessionCheck, controller.favorites);
 
+/* Routers de Historial */
+
+router.get('/historial', userSessionCheck, controller.history);
+
+router.delete('/delHistoryProduct/:id', controller.delHistoryProduct);
+
 /* Routers de Edicion de Perfil */
 
 router.get('/editar-perfil', userSessionCheck, controller.editProfile);

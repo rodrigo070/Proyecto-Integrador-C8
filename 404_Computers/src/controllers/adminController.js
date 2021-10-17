@@ -1,5 +1,6 @@
 const { validationResult } = require('express-validator');
 const db = require('../database/models');
+const {eliminarImagen} = require("../database/config/product_config")
 const User = db.User;
 const Product = db.Product;
 const Category = db.Category;
@@ -363,23 +364,39 @@ module.exports = {
     }
     ,
     borrar_Producto: (req, res) => {
-        Product_Images.destroy({
-            where: {
-                product_Id : req.params.id
+        Product.findByPk(req.params.id, {
+            include: [{
+                association: "images",
+            }, ],
+        })
+        .then((product) => {
+            for (let i = 0; i < product.images.length; i++) {
+                eliminarImagen(product.images[i].image_Route);
             }
         })
-        Product.destroy({
-            where: {
-                id: req.params.id
-            }
-        })
-        .then(()=> {
-            res.redirect('/admin/lista-productos');
-        })
-        .catch(errr => {
-            console.log("ERROR AL BORRAR PRODUCTO : "+errr+"-----------------------------------");
-            res.redirect('/admin/lista-productos');
-        })
+        .catch((err) => console.log(err))
+        .then(() => {
+            Product.findByPk(req.params.id)
+            .then((product) => {
+                Product_Images.destroy({
+                        where: {
+                            product_Id: product.id
+                        }
+                    })
+                    .then(() => {
+                        Product.destroy({
+                            where: {
+                                id: +req.params.id
+                            }
+                        });
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+            }).catch((err) => console.log(err));
+        }).catch((err) => console.log(err))
+        .then(() => {
+            res.redirect("/admin/lista-productos")
+        }).catch(error => console.log(error))
     }
     ,
     borrar_usuario: (req, res) => {

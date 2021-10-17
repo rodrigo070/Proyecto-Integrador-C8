@@ -3,6 +3,7 @@ const User = db.User;
 const Product = db.Product; 
 const Category = db.Category;
 const Subcategory = db.Subcategory;
+const History = db.History;
 const { Op } = require('sequelize');
 
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -56,9 +57,33 @@ module.exports = {
                         where : {
                             id : req.session.user.id
                         },
-                        include: [{ association: "favorites"}] 
+                        include: ["favorites","historyProducts"] 
                     })
                     .then(user => {
+                        
+                        History.findOne({
+                            where : {
+                                product_ID : req.params.id,
+                                user_ID : user.id
+                            }
+                        })
+                        .then(productFound => {
+                            if(!productFound)
+                            {
+                                History.create(
+                                    {
+                                        user_ID : user.id,
+                                        product_ID : product.id
+                                    },
+                                    {
+                                        where: {
+                                            id: user.id,
+                                        }
+                                    }
+                                )
+                            }
+                        })
+
                         let favoriteItem = -1;
 
                         for (let i = 0; i < user.favorites.length; i++) {
