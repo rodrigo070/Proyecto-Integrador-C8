@@ -4,6 +4,8 @@ const db = require('../database/models');
 const User = db.User;
 const Product = db.Product;
 const History = db.History;
+const Cart = db.CartProduct;
+const Favorite = db.Favorite;
 
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
@@ -228,7 +230,8 @@ module.exports = {
     delHistoryProduct: (req, res) => {
         History.destroy({
             where : {
-                product_ID : req.params.id
+                product_ID : req.params.id,
+                user_ID : req.session.user.id
             }
         })
         .then(()=> {
@@ -274,6 +277,38 @@ module.exports = {
         })
         
     },
+    cart_delete: (req, res) => {
+        Cart.destroy({
+            where : {
+                cart_Product : req.params.id,
+                user_ID : req.session.user.id
+            }
+        })
+        .then(()=> {
+            res.redirect('/carrito');
+        })
+        .catch(errr => {
+            console.log("ERROR AL BORRAR PRODUCTO DEL CARRITO : "+errr);
+            res.redirect('/carrito');
+        })
+    }
+    ,
+    favorite_delete_user: (req, res) => {
+        Favorite.destroy({
+            where : {
+                favorite_Product : req.params.id,
+                user_ID : req.session.user.id
+            }
+        })
+        .then(()=> {
+            res.redirect('/favoritos');
+        })
+        .catch(errr => {
+            console.log("ERROR AL BORRAR PRODUCTO DE Favoritos : "+errr);
+            res.redirect('/favoritos');
+        })
+    }
+    ,
     logout: (req, res) => {
         req.session.destroy()
         if(req.cookies.user404){

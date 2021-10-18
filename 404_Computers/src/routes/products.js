@@ -14,6 +14,14 @@ router.get('/productos/menor', controller.order_low);
 
 router.get('/productos/mayor', controller.order_high);
 
+/* Router de Agregar Producto a Carrito */
+
+router.post('/agregar-carrito/:id', controller.cart_add);
+
+/* Router de Agregar Producto a Favoritos */
+
+router.post('/agregar-favorito/:id', controller.favorite_add);
+
 /* Router de todos los Productos disponibles en Oferta */
 
 router.get('/ofertas', controller.offers);
@@ -30,5 +38,6 @@ router.get('/productos/:category/:subcategory', controller.subCategories);
 
 router.get('/productos/:category/:subcategory/:id', controller.product_Detail);
 
+router.delete('/borrar-favorito/:id', controller.favorite_delete);
 
 module.exports = router;

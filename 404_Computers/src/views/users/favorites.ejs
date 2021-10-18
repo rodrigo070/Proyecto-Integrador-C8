@@ -13,7 +13,9 @@
             <div class="favHisPicture"><img src="/images/products/<%=favoriteProduct.images[0]?.image_Route %>" alt=""></div>
             <div class="favHisName"><a href="/productos/<%= favoriteProduct.Category.category_Link %>/<%= favoriteProduct.Subcategory.subcategory_Link %>/<%= favoriteProduct.id %>"><%= favoriteProduct.name %></a></div>
             <div class="favHisPrice">$<%= toThousand(favoriteProduct.price) %></div>
-            <button class="favHisDelete"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            <form class="favHisDeleteForm" action="/borrar-favorito-user/<%- favoriteProduct.id %>?_method=DELETE" method="POST">
+              <button class="favHisDelete" type="submit" title="Borrar Producto"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </form>
           </article>
         <% }) %>
       </section>

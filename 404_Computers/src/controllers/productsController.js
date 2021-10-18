@@ -4,6 +4,8 @@ const Product = db.Product;
 const Category = db.Category;
 const Subcategory = db.Subcategory;
 const History = db.History;
+const Cart = db.CartProduct;
+const Favorite = db.Favorite;
 const { Op } = require('sequelize');
 
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -47,8 +49,15 @@ module.exports = {
             }
         )
 
-        Promise.all([sliderProducts , product])
-        .then(([sliderProducts , product]) => {
+        let favoriteItem = Favorite.findOne({
+            where : {
+                favorite_Product : req.params.id,
+                user_ID : req.session.user.id
+            }
+        })
+
+        Promise.all([sliderProducts , product , favoriteItem])
+        .then(([sliderProducts , product , favoriteItem]) => {
             if(req.params.category === product.Category.category_Link && req.params.subcategory === product.Subcategory.subcategory_Link)
             {
                 if(req.session.user)
@@ -83,14 +92,6 @@ module.exports = {
                                 )
                             }
                         })
-
-                        let favoriteItem = -1;
-
-                        for (let i = 0; i < user.favorites.length; i++) {
-                            if (user.favorites[i].favorite_Product === product.id) {
-                                favoriteItem = 1
-                            }
-                        }
 
                         res.render('products/productDetail' , {
                             product,
@@ -303,5 +304,88 @@ module.exports = {
         .catch(error => {
             console.log("Tenemos un ERROR: "+error);
         });
+    }
+    ,
+    cart_add: (req, res) => {
+
+        Cart.findOne({
+            where : {
+                user_ID : req.session.user.id,
+                cart_Product : req.params.id
+            }
+        })
+        .then(productFound => {
+            if(!productFound)
+            {
+                Cart.create(
+                    {
+                        user_ID : req.session.user.id,
+                        cart_Product : req.params.id
+                    }
+                )
+                .then(()=> {
+                    res.redirect("/carrito");
+                })
+                .catch(errr => {
+                    console.log("ERROR Al Agregar a Carrito");
+                })
+            }
+            else
+            {
+                res.redirect("/carrito");
+            }
+        })
+        .catch(errr => {
+            console.log("ERROR Al Buscar en el Carrito");
+        })
+    }
+    ,
+    favorite_add: (req, res) => {
+        Favorite.findOne({
+            where : {
+                user_ID : req.session.user.id,
+                favorite_Product : req.params.id
+            }
+        })
+        .then(productFound => {
+            if(!productFound)
+            {
+                Favorite.create(
+                    {
+                        user_ID : req.session.user.id,
+                        favorite_Product : req.params.id
+                    }
+                )
+                .then(()=> {
+                    res.redirect("/favoritos");
+                })
+                .catch(errr => {
+                    console.log("ERROR Al Agregar a Favoritos");
+                })
+            }
+            else
+            {
+                res.redirect("/favoritos");
+            }
+        })
+        .catch(errr => {
+            console.log("ERROR Al Buscar en Favoritos");
+        })
+    }
+    ,
+    favorite_delete: (req, res) => {
+        Favorite.destroy({
+            where : {
+                favorite_Product : req.params.id,
+                user_ID : req.session.user.id
+            }
+        })
+        .then(()=> {
+            res.redirect('/favoritos');
+        })
+        .catch(errr => {
+            console.log("ERROR AL BORRAR PRODUCTO DE Favoritos : "+errr);
+            res.redirect('/favoritos');
+        })
     }
 }

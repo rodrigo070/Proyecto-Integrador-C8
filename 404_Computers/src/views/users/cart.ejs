@@ -57,9 +57,9 @@
                             <p>$<%= toThousand(productsData.finalPrice) %></p>
                         </section>
                         <section>
-                            <button class="delete_Plist">
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                            </button>
+                            <form class="delete_Plist" action="/cart_delete/<%- productsData.id %>?_method=DELETE" method="POST">
+                                <button class="delete_Plist" type="submit" title="Borrar Producto"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            </form>
                         </section>
                     </section>
                     <% }) %>

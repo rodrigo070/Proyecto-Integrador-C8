@@ -22,6 +22,8 @@ router.post('/registro', registerValidator, controller.processRegister);
 
 router.get('/favoritos', userSessionCheck, controller.favorites);
 
+router.delete('/borrar-favorito-user/:id', controller.favorite_delete_user);
+
 /* Routers de Historial */
 
 router.get('/historial', userSessionCheck, controller.history);
@@ -41,6 +43,6 @@ router.get('/perfil/:id', userSessionCheck,profileCheck ,controller.profile);/* 
 
 router.get('/carrito', userSessionCheck, controller.cart);
 
-
+router.delete('/cart_delete/:id', controller.cart_delete);
 
 module.exports = router;

@@ -62,11 +62,26 @@
                 </div>
 
                 <div class="productPageButton">
-                    <button title="Comprar">Agregar al Carrito <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
-                    <% if (favoriteItem != -1) { %>
-                        <button title="Agregar a Favoritos" onclick="fav();"> Agregar a Favoritos <i id="favBtn" class="fa fa-heart"></i></button>
+                     
+                    <% if (typeof session.user != "undefined") { %>
+                        <form action="/agregar-carrito/<%= product.id %>" method="POST">
+                            <button class="buyButton" title="Comprar" type="submit">Agregar al Carrito <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+                        </form>
                     <% } else { %>
-                        <button title="Agregar a Favoritos" onclick="fav();"> Agregar a Favoritos <i id="favBtn" class="fa fa-heart-o"></i></button>
+                        <button class="buyButton" title="Comprar" onclick="location.href='/login'">Agregar al Carrito <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+                    <% } %>
+                    <% if (typeof session.user != "undefined") { %>
+                        <% if (!favoriteItem) { %>
+                            <form action="/agregar-favorito/<%= product.id %>" method="POST">
+                                <button class="favButton" title="Agregar a Favoritos" type="submit" onclick="fav();"> Agregar a Favoritos <i id="favBtn" class="fa fa-heart-o"></i></button>
+                            </form>
+                        <% } else { %>
+                            <form action="/borrar-favorito/<%= product.id %>?_method=DELETE" method="POST">
+                                <button class="favButtonDel" title="Agregar a Favoritos" type="submit" onclick="fav();"> Borrar de Favoritos <i id="favBtn" class="fa fa-heart"></i></button>                            
+                            </form>
+                        <% } %>
+                    <% } else { %>
+                        <button class="favButton" title="Agregar a Favoritos" onclick="fav();"> Favoritos <i id="favBtn" class="fa fa-heart"></i></button>                            
                     <% } %>
                      
                 </div>
