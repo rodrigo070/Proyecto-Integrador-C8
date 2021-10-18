@@ -2,26 +2,61 @@ const db = require('../database/models');
 const Product = db.Product; 
 const Category = db.Category;
 const Banner = db.Banner;
+const User = db.User;
 const { Op } = require('sequelize');
 
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 module.exports = {
     home: (req, res) => {
-        
         const bannersData = Banner.findAll()
         const productsData = Product.findAll({
             include : ["images","Category","Subcategory"]
         })
         Promise.all([productsData,bannersData])
         .then(([productsData,bannersData]) =>{
-            res.render('home' , {
-                productsData,
-                bannersData,
-                sliderProducts : productsData,
-                session: req.session,
-                toThousand
-            });
+            
+            if(req.session.user)
+            {
+                User.findOne({
+                    where : {
+                        id : req.session.user.id
+                    },
+                    include: [{ association: "historyProducts"}] 
+                })
+                .then(user => {
+
+                    let productsHistory = []
+
+                    productsData.forEach(historyData => {
+                        for (let i = 0; i < user.historyProducts.length; i++) {
+                            if (user.historyProducts[i].product_ID === historyData.id) {
+                                productsHistory.push(historyData)
+                            }
+                        }
+                    });
+
+                    res.render('home' , {
+                        productsData,
+                        bannersData,
+                        userData : productsHistory,
+                        sliderProducts : productsData,
+                        session: req.session,
+                        toThousand
+                    });
+                })
+            }
+            else
+            {
+                res.render('home' , {
+                    productsData,
+                    bannersData,
+                    userData : undefined,
+                    sliderProducts : productsData,
+                    session: req.session,
+                    toThousand
+                });
+            }
         })
         .catch(error => {
             console.log("Tenemos un ERROR: "+error);

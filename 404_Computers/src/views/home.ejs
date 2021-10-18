@@ -11,24 +11,26 @@
     <%- include('partials/carousel.ejs') %>   
 
         <!-- SECCION MOBILE: Visto Recientemente -->
-        <section class="seccion-general">
-            <a href="/productos/3/21/1">
-                <div class="titulo-articulo"> 
-                    <h3> Visto Recientemente </h3>
+        <% if (typeof session.user != "undefined") { %>
+            <section class="seccion-general">
+                <a href="/productos/<%= userData[userData.length-1].Category.category_Link %>/<%= userData[userData.length-1].Subcategory.subcategory_Link %>/<%=userData[userData.length-1].id%>">
+                    <div class="titulo-articulo"> 
+                        <h3> Visto Recientemente </h3>
+                    </div>
+                    <div>
+                        <img src="/images/products/<%= userData[userData.length-1].images[0]?.image_Route %>" alt="<%= userData[userData.length-1].name %>">
+                    </div>
+                    <div class="descripcion-articulo">
+                        <p><%= userData[userData.length-1].name %></p>
+                        <h1>$<%= toThousand(userData[userData.length-1].finalPrice) %></h1>
+                    </div>
+                </a>
+                <hr>
+                <div class="ver-historial-de-busqueda">
+                    <a href="/historial"><h3>Ver Historial de Busqueda</h3></a>
                 </div>
-                <div>
-                    <img src="/images/products/notebook_C.jpg" alt=""> <!-- imagen que se muestra en el articulo -->
-                </div>
-                <div class="descripcion-articulo">
-                    <p>Notebook Lenovo 14P</p>
-                    <h1> $ 58.000 </h1>
-                </div>
-            </a>
-            <hr>
-            <div class="ver-historial-de-busqueda">
-                <h3>Ver Historial de Busqueda</h3>
-            </div>
-        </section>
+            </section>
+        <% } %>
 
         <!-- SECCION MOBILE :ARTICULOS QUE PUEDEN INTERESARTE -->
         <section class="seccion-general">
@@ -104,36 +106,38 @@
         <!-- SLIDER DE MARCAS (INTEL, GIGABYTE ETC)  -->
         <%- include('partials/sliderBrands.ejs') %>   
 
-        <div class="titulo-seccion-desktop">
-            <h3>Visto Recientemente</h3>
-        </div>
-        <div class="desktopCardsBox">
-            <section class="homeProductBoxCards productListView">
-
-                <% for( let i = 0; i < 6; i++ ) { %>
-                    <article class="products_Page_Article">
-                        <a href="/productos/<%= productsData[i].Category.category_Link %>/<%= productsData[i].Subcategory.subcategory_Link %>/<%=productsData[i].id%>">
-                            <div class="img_Product_Page">
-                                <% if (productsData[i].discount > 1) { %>
-                                    <label><%= productsData[i].discount %>% OFF</label>
-                                <% } %>
-                                <img src="/images/products/<%= productsData[i].images[0]?.image_Route %>" alt="<%= productsData.name %>">
-                            </div>
-                            <div class="description_Article_Page homeProductCard">
-                                <p><%= productsData[i].name %></p>
-                                <div class="prices_Product_Page">
-                                    <% if (productsData[i].discount === 0) { %>
-                                        <p>$<%= toThousand(productsData[i].price) %></p>
-                                    <% } else { %>
-                                        <p>$<%= toThousand(productsData[i].price - ((productsData[i].price * productsData[i].discount)/100)) %></p>
+        <% if (typeof session.user != "undefined") { %>
+            <div class="titulo-seccion-desktop">
+                <h3>Visto Recientemente</h3>
+            </div>
+            <div class="desktopCardsBox">
+                <section class="homeProductBoxCards productListView">
+    
+                    <% for( let i = 0; i < userData.length; i++ ) { %>
+                        <article class="products_Page_Article">
+                            <a href="/productos/<%= userData[i].Category.category_Link %>/<%= userData[i].Subcategory.subcategory_Link %>/<%=userData[i].id%>">
+                                <div class="img_Product_Page">
+                                    <% if (userData[i].discount > 1) { %>
+                                        <label><%= userData[i].discount %>% OFF</label>
                                     <% } %>
+                                    <img src="/images/products/<%= userData[i].images[0]?.image_Route %>" alt="<%= userData.name %>">
                                 </div>
-                            </div>
-                        </a>
-                    </article>
-                <% } %>
-            </section>
-        </div>
+                                <div class="description_Article_Page homeProductCard">
+                                    <p><%= userData[i].name %></p>
+                                    <div class="prices_Product_Page">
+                                        <% if (userData[i].discount === 0) { %>
+                                            <p>$<%= toThousand(userData[i].price) %></p>
+                                        <% } else { %>
+                                            <p>$<%= toThousand(userData[i].finalPrice) %></p>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    <% } %>
+                </section>
+            </div>
+        <% } %>
 
         <!-- barra que vimos en maximus -->
         <section class="menu-categorias-desktop">
