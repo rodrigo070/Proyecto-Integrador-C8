@@ -87,3 +87,25 @@ ______________________
 ____________________
  - Reuniones aunque no estemos en Sprint
 ______________________
+
+ ## Sprint 6
+______________
+_______________________
+### Seguir Haciendo
+- Organizarnos para mejorar y terminar la pagina
+- Ayudarnos en caso de tener alguna complicacion con el proyecto
+- Cumplir con los objetivos del Sprint.
+______________________
+
+### Hacer mas 
+______________________
+- trabajar en equipo en las ramas de github
+- reuniones por zoom para organizacion
+- dar un reporte diario del progreso que llevamos cada uno con las tareas asignadas
+______________________
+
+
+### Empezar a hacer
+____________________
+ - Reuniones cortas almenos 2 a la semana
+______________________
