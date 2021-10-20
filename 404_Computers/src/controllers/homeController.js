@@ -51,7 +51,7 @@ module.exports = {
                 res.render('home' , {
                     productsData,
                     bannersData,
-                    userData : undefined,
+                    userData : [],
                     sliderProducts : productsData,
                     session: req.session,
                     toThousand

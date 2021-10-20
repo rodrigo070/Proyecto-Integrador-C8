@@ -68,3 +68,22 @@ ____________________
  - Respetar los dias pactados para las reuniones
  
  
+ ## Sprint 5
+______________
+_______________________
+### Seguir Haciendo
+- Reuniones de zoom para organización y distribucion de tareas.
+- Cumplir con los objetivos del Sprint.
+______________________
+
+### Hacer mas 
+______________________
+- trabajar en equipo en las ramas de github
+- reuniones por zoom para organizacion  
+______________________
+
+
+### Empezar a hacer
+____________________
+ - Reuniones aunque no estemos en Sprint
+______________________

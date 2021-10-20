@@ -49,12 +49,13 @@ module.exports = {
             }
         )
 
-        let favoriteItem = Favorite.findOne({
+
+        let favoriteItem = req.session.user? Favorite.findOne({
             where : {
                 favorite_Product : req.params.id,
                 user_ID : req.session.user.id
             }
-        })
+        }) : []
 
         Promise.all([sliderProducts , product , favoriteItem])
         .then(([sliderProducts , product , favoriteItem]) => {
