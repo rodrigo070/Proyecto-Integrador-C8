@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('partials/head.ejs', {title: 'Arrepentimiento de Compra - '}) %>
+<head>
+    <script src="/javascripts/carousel.js" defer></script>
+</head>
+<body>
+  <div class="container_Page">
+    <%- include('partials/header.ejs') %>   
+    <main>
+      <section class="contactPage">
+        <section class="contactContent">
+            <div class="titles">Completa el Formulario</div>
+            <input type="text" id="nameContact" placeholder="Nombre y Apellido">
+            <input type="email" id="emailContact" name="emailContact" placeholder="Email">
+            <input type="tel" id="phoneContact" name="phoneContact" placeholder="N° De Telefono">
+            <input type="number" id="extraContact" name="purchaseContact" placeholder="N° De Compra">
+            <textarea name="messageContact" id="messageContact" cols="40" rows="5" placeholder="Tu Mensaje" style="resize: none;"></textarea>
+            <button>Enviar Mensaje</button>
+        </section>
+      </section>
+    </main>
+    <%- include('partials/footer.ejs') %> 
+  </div>
+</body>
+</html>

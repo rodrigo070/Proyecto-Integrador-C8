@@ -31,6 +31,7 @@
                 </div>
             </section>
         <% } %>
+         
 
         <!-- SECCION MOBILE :ARTICULOS QUE PUEDEN INTERESARTE -->
         <section class="seccion-general">
@@ -106,7 +107,7 @@
         <!-- SLIDER DE MARCAS (INTEL, GIGABYTE ETC)  -->
         <%- include('partials/sliderBrands.ejs') %>   
 
-        <% if (typeof session.user != "undefined") { %>
+        <% if (typeof session.user != "undefined" && userData.length > 0) { %>
             <div class="titulo-seccion-desktop">
                 <h3>Visto Recientemente</h3>
             </div>

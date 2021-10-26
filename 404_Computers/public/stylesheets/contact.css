@@ -39,24 +39,31 @@
     width: 50%;
     font-size: 18px;
     margin: 20px auto 0 auto;
+    cursor: pointer;
+}
+
+#nameContact,
+#emailContact,
+#phoneContact,
+#extraContact{
+    height: 40px;
+    margin: auto 0;
 }
 
 #nameContact{
-    height: 40px;
     grid-area: top1;
-    margin: auto 0;
 }
 
 #emailContact{
-    height: 40px;
     grid-area: top2;
-    margin: auto 0;
 }
 
 #phoneContact{
-    height: 40px;
     grid-area: middle1;
-    margin: auto 0;
+}
+
+#extraContact{
+    grid-area: middle2;
 }
 
 #messageContact{
@@ -69,6 +76,7 @@
 #nameContact,
 #emailContact,
 #phoneContact,
+#extraContact,
 #messageContact{
     border-radius: 1rem;
     border-style: none;
@@ -93,6 +101,7 @@
 
     .contactContent button{
         width: 45%;
+        font-size: 22px;
     }
 }
 

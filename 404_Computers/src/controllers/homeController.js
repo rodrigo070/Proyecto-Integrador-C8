@@ -87,6 +87,30 @@ module.exports = {
         });
     }
     ,
+    privacy: (req, res) => {
+        res.render('privacy',{
+            session: req.session
+        });
+    }
+    ,
+    purchaseRegret: (req, res) => {
+        res.render('purchaseRegret',{
+            session: req.session
+        });
+    }
+    ,
+    resell: (req, res) => {
+        res.render('resell',{
+            session: req.session
+        });
+    }
+    ,
+    questions: (req, res) => {
+        res.render('frequentQA',{
+            session: req.session
+        });
+    }
+    ,
     search: (req, res) => {
 
         const categories = Category.findAll()
