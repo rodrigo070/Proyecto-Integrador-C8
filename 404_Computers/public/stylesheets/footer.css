@@ -58,6 +58,7 @@ footer p{
 
 .footer_Logo{
     height: 4rem;
+    display: block;
     /* width: 110px;
     display: flex;
     justify-content: center;

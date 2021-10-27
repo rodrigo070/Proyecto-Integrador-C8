@@ -6,89 +6,81 @@
 </head>
 <body class="background_Leaves">
   <div class="container_Page">
+    <%- include('../partials/adminHeader.ejs') %>
     <main class="admin">
-        <div class="nav-admin">
-            <nav>
-                <a href="/admin/lista-productos">Lista de Productos</a>
-                <a href="/admin/lista-productos/stock">Stock</a>
-                <a href="/admin/lista-productos/ofertas">Ofertas</a>
-                <a href="/admin/banners">Banners</a>
-            </nav>
-            <div class="titulo_Admin">
-                <h2>Carga de Productos</h2>
-            </div>
-        </div>
-        <form action="/admin/agregar-producto/" method="POST" class="admin_Grid" enctype="multipart/form-data">
+        <section class="adminContainer">
+            <%- include('../partials/adminSidePanel.ejs') %>
+            <form action="/admin/agregar-producto/" method="POST" class="admin_Grid" enctype="multipart/form-data">
+                
+                <div class="contenedor">
+                    <div class="cheked">
+                        <label for="sub-category">Agregar subcategoria</label>
+                        <input type="checkbox" name="sub-category" id="sub-category">
+                    </div>
+                    <div class="seleccionar">
+                        <div class="cat1admin">
+                            <select name="product_Category" id="inputCategoryProduct" class="input-select">
+                                <% categoriesData.forEach(catg => { %>
+                                    <option value="<%= catg.id %>"><%= catg.category_Name %></option>
+                                <% }) %>
+                            </select>
+                            <% if (locals.errors && errors.product_Category) { %>
+                                <small class="error-message"><%= errors.product_Category.msg %> </small>
+                            <% } %>
+                            <select name="product_Subcategory" id="inputSubCategoryProduct" class="input-select">
+                                <% subCategoriesData.forEach(scatg => { %>
+                                    <option value="<%= scatg.id %>"><%= scatg.subcategory_Name %></option>
+                                <% }) %>
+                            </select>
+                            <% if (locals.errors && errors.product_Subcategory) { %>
+                                <small class="error-message"><%= errors.product_Subcategory.msg %> </small>
+                            <% } %>
+                        </div>
             
-            <div class="contenedor">
-                <div class="cheked">
-                    <label for="sub-category">Agregar subcategoria</label>
-                    <input type="checkbox" name="sub-category" id="sub-category">
+                        <div class="cat2admin">
+                            <input type="text" name="name" placeholder="Nombre del Producto" class="input-select">
+                            <% if (locals.errors && errors.name) { %>
+                                <small class="error-message"><%= errors.name.msg %> </small>
+                            <% } %>
+    
+                            <input type="text" name="discount" placeholder="Descuento" class="input-select">
+                        </div>
+                    </div>
+                
                 </div>
-                <div class="seleccionar">
-                    <div class="cat1admin">
-                        <select name="product_Category" id="inputCategoryProduct" class="input-select">
-                            <% categoriesData.forEach(catg => { %>
-                                <option value="<%= catg.id %>"><%= catg.category_Name %></option>
-                            <% }) %>
-                        </select>
-                        <% if (locals.errors && errors.product_Category) { %>
-                            <small class="error-message"><%= errors.product_Category.msg %> </small>
-                        <% } %>
-                        <select name="product_Subcategory" id="inputSubCategoryProduct" class="input-select">
-                            <% subCategoriesData.forEach(scatg => { %>
-                                <option value="<%= scatg.id %>"><%= scatg.subcategory_Name %></option>
-                            <% }) %>
-                        </select>
-                        <% if (locals.errors && errors.product_Subcategory) { %>
-                            <small class="error-message"><%= errors.product_Subcategory.msg %> </small>
+    
+                <section class="infoProductAdmin">
+                    <div class="descripcion-producto">
+                        <h4>Descripcion del Producto</h4>
+                        <textarea name="description" placeholder="Descripcion del Producto" id="mensaje" cols="30" rows="10" ></textarea>
+                    </div>
+                    <div class="precio-admin">
+                        <label for="precio">Precio $</label>
+                        <input type="number" required placeholder="Ingrese el Precio" name="price" class="input-select" >
+                        <% if (locals.errors && errors.price) { %>
+                            <small class="error-message"><%= errors.price.msg %> </small>
                         <% } %>
                     </div>
-        
-                    <div class="cat2admin">
-                        <input type="text" name="name" placeholder="Nombre del Producto" class="input-select">
-                        <% if (locals.errors && errors.name) { %>
-                            <small class="error-message"><%= errors.name.msg %> </small>
-                        <% } %>
-
-                        <input type="text" name="discount" placeholder="Descuento" class="input-select">
-                    </div>
-                </div>
-            
-            </div>
-
-            <section class="infoProductAdmin">
-                <div class="descripcion-producto">
-                    <h4>Descripcion del Producto</h4>
-                    <textarea name="description" placeholder="Descripcion del Producto" id="mensaje" cols="30" rows="10" ></textarea>
-                </div>
-                <div class="precio-admin">
-                    <label for="precio">Precio $</label>
-                    <input type="number" required placeholder="Ingrese el Precio" name="price" class="input-select" >
-                    <% if (locals.errors && errors.price) { %>
-                        <small class="error-message"><%= errors.price.msg %> </small>
+                </section>
+    
+                <section class="agregar-imagen">
+                    <label for="archivo">Agregar archivos de Imagen</label>
+                    <hr>
+                    <input type="file" id="examinar" name="image_Route" multiple accept=".jpg, .png, .webp, .jpeg, .bmp">
+                    <% if (locals.errors && errors.image_Route) { %>
+                        <small class="error-message"><%= errors.image_Route.msg %> </small>
                     <% } %>
-                </div>
-            </section>
-
-            <section class="agregar-imagen">
-                <label for="archivo">Agregar archivos de Imagen</label>
-                <hr>
-                <input type="file" id="examinar" name="image_Route" multiple accept=".jpg, .png, .webp, .jpeg, .bmp">
-                <% if (locals.errors && errors.image_Route) { %>
-                    <small class="error-message"><%= errors.image_Route.msg %> </small>
-                <% } %>
-            </section>
-
-            <section class="imagePreviewSection">
-                <div id="imagePreview">
-                    
-                </div>
-                <p id="errorImage"></p>
-            </section>
-            <button type="submit" class="finalizar">Finalizar</button>
-        </form>
-        
+                </section>
+    
+                <section class="imagePreviewSection">
+                    <div id="imagePreview">
+                        
+                    </div>
+                    <p id="errorImage"></p>
+                </section>
+                <button type="submit" class="finalizar">Finalizar</button>
+            </form>
+        </section>        
     </main>
   </div>
 </body>

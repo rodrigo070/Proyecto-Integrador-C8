@@ -1,38 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
-<%- include('../partials/head.ejs' ,{title: 'Bienvenido - '}) %>
+<%- include('../partials/head.ejs' ,{title: 'Panel Admin - '}) %>
 <body>
   <div class="container_Page">
+    <%- include('../partials/adminHeader.ejs') %>
     <main>
-        <nav class="navBarAdmin">
-            <button onclick="leftPanel(); BButton();" class="menuButtonMobile deskMode" id="burgerButton">
-                <span class="burgerLine"></span>
-                <span class="burgerLine"></span>
-                <span class="burgerLine"></span>
-            </button>
-
-            <form action="/buscar" method="GET" class="search_Bar_Box" id="searchBarButtonJS">
-                <div class="search_Bar">
-                    <input type="search" name="producto" id="" placeholder="Buscar">
-                    <button type="submit"><i class="fa fa-search"></i></button>
-                </div>
-            </form>
-            <a href="/">Logo</a>
-        </nav>
         <section class="adminContainer">
-            <section class="leftPanelAdmin">
-                <p>Productos</p>
-                <a href="/admin/lista-productos">Lista de Productos</a>
-                <a href="/admin/agregar-producto">Agregar Producto</a>
-                <a href="/admin/stock">Stock</a>
-                <a href="/admin/ofertas">Ofertas</a>
-                <a href="/admin/banners">Banners</a>
-                <p>Usuarios</p>
-                <a href="/admin/usuarios">Lista de Usuarios</a>
-            </section>
+            <%- include('../partials/adminSidePanel.ejs') %>
             <section class="AdminContent">
                 <section class="adminListProducts">
-                    <div class="titles">Productos <%= messageToDisplay %> </div>
                     <article class="product_Available">
                       <div class="apID">
                         ID
@@ -59,7 +35,7 @@
                         <div class="apName"><%=productAvailable.name %></div>
                         <div class="apGoTo"><a href="/productos/<%= productAvailable.Category.category_Link %>/<%= productAvailable.Subcategory.subcategory_Link %>/<%= productAvailable.id %>"><i class="fa fa-eye" aria-hidden="true"></i></a></div>
                         <div class="apEdit"><a href="/admin/editar-producto/<%=productAvailable.id %>"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>
-                        <form class="apDeleteBox" action="/admin/borrarProducto/<%- productAvailable.id %>?_method=DELETE" method="POST">
+                        <form class="apDeleteBox" action="/admin/borrarProducto/<%- productAvailable.id %>?_method=DELETE" method="POST" onclick="return confirm('Estas Seguro de que queres Borrarlo?');">
                           <button type="submit" class="apDelete"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         </form>
                       </article>
@@ -69,6 +45,5 @@
         </section>
     </main>
   </div>
-  <script src="/javascripts/admin.js"></script>
 </body>
 </html>

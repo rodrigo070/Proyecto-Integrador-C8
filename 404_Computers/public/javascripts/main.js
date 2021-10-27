@@ -91,6 +91,11 @@ function openPaymentSection(event, payOption) {
     event.currentTarget.className += " active";
 }
 
+function leftPanel(){
+    let button = document.querySelector(".leftPanelAdmin");
+    button.classList.toggle("leftPanelActive");
+}
+
 /* Calcular Costo de Envio */
 
 function shippingCost(){

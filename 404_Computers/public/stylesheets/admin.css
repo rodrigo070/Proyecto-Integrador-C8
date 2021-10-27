@@ -1,7 +1,9 @@
 .navBarAdmin{
     display: grid;
-    grid-template-columns: 20% 60% 20%;
-    background-color: red;
+    grid-template-columns: 10% 50% 10%;
+    gap: 15%;
+    padding: 5px;
+    align-items: center;
 }
 
 .navBarAdmin:nth-of-type(1),
@@ -24,14 +26,29 @@
 .leftPanelActive{
     display: flex;
     flex-direction: column;
+    padding: 10px 30px;
     width: 250px;
 }
 
+.leftPanelActive p{
+    margin: 10px 0;
+}
+
+.leftPanelActive a:hover{
+    background-color: black;
+    color: white;
+}
+
 .AdminContent{
-    background-color: crimson;
+    height: fit-content;
     width: 100%;
 }
 
 .deskMode{
     display: block;
+}
+
+.adminFilter label{
+    margin-right: 10px;
+    user-select: none;
 }

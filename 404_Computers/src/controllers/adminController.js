@@ -69,7 +69,6 @@ module.exports = {
         .then(productsData => {
             res.render('admin/adminPanel',  {
                 productsData,
-                messageToDisplay : "Disponibles",
                 session: req.session
             });
         })
@@ -281,9 +280,8 @@ module.exports = {
             include : ["images","Category","Subcategory"]
         })
         .then(productsData =>{
-            res.render('admin/adminProductList' , {
+            res.render('admin/adminPanel' , {
                 productsData,
-                messageToDisplay : "Disponibles en Stock",
                 session: req.session
             });
         })
@@ -303,9 +301,8 @@ module.exports = {
             include : ["images","Category","Subcategory"]
         })
         .then(productsData =>{
-            res.render('admin/adminProductList' , {
+            res.render('admin/adminPanel' , {
                 productsData,
-                messageToDisplay : "Disponibles en Oferta",
                 session: req.session
             });
         })
@@ -338,6 +335,80 @@ module.exports = {
         })
         .catch((err) => console.log("ERROR Agregando Banner: "+err));
 
+    }
+    ,
+    searchAdmin: (req, res) => {
+        let buscar = req.query.userSearch;
+        console.log("BUSCAR"+buscar);
+        if(buscar)
+        {
+            User.findAll()
+            .then(UserDB => {
+                let result = [];
+    
+                UserDB.forEach(UserSearch => {
+                    if(UserSearch.name.toLowerCase().includes(req.query.busqueda) || UserSearch.surname.toLowerCase().includes(req.query.busqueda)){
+                        result.push(UserSearch)
+                    }
+                });
+                if(result.length != 0)
+                {
+                    res.render('admin/adminUsersList' , {
+                        usersData : result,
+                        search: req.query.busqueda,
+                        title: req.query.busqueda+' - ',
+                        session: req.session
+                    });
+                }
+                else
+                {
+                    res.render('admin/adminUsersList' , {
+                        usersData : [],
+                        search: req.query.busqueda,
+                        title: req.query.busqueda+' - ',
+                        session: req.session
+                    });
+                }
+            })
+        }
+        else
+        {
+            Product.findAll({
+                include : ["images","Category","Subcategory"]
+            })
+            .then(ProductsDB =>{
+    
+                let result = [];
+    
+                ProductsDB.forEach(ProductSearch => {
+                    if(ProductSearch.name.toLowerCase().includes(req.query.busqueda)){
+                        result.push(ProductSearch)
+                    }
+                });
+    
+                if(result.length != 0)
+                {
+                    res.render('admin/adminPanel' , {
+                        productsData : result,
+                        search: req.query.busqueda,
+                        title: req.query.busqueda+' - ',
+                        session: req.session
+                    });
+                }
+                else
+                {
+                    res.render('admin/adminPanel' , {
+                        productsData : [],
+                        search: req.query.busqueda,
+                        title: req.query.busqueda+' - ',
+                        session: req.session
+                    });
+                }
+            })
+            .catch(error => {
+                console.log("Tenemos un ERROR: "+error);
+            });
+        }        
     }
     ,
     borrar_banner: (req, res) => {
@@ -389,7 +460,7 @@ module.exports = {
             }).catch((err) => console.log(err));
         }).catch((err) => console.log(err))
         .then(() => {
-            res.redirect("/admin/lista-productos")
+            res.redirect("/admin")
         }).catch(error => console.log(error))
     }
     ,

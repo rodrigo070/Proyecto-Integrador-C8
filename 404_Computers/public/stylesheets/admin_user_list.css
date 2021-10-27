@@ -1,5 +1,4 @@
 .user_List_Container{
-    width: 95%;
     margin: 15px auto;
 }
 
@@ -8,11 +7,13 @@
 }
 
 .user_List_Box{
-    margin: 0px auto;
+    margin: 15px auto;
     border-radius: 1rem;
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.2);
     overflow:hidden;
+    height: fit-content;
+    width: 85%;
 }
 
 .adm_Grid_List{
@@ -142,7 +143,5 @@
 /* Desktop */
 
 @media screen and (min-width: 990px){
-    .user_List_Container{
-        width: 90%;
-    }
+
 }

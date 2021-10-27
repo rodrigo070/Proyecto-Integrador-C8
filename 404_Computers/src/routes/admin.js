@@ -8,6 +8,7 @@ const uploadProductFile = require("../middlewares/uploadProductsFiles");
 const uploadBannerFile = require("../middlewares/uploadBannerFile");
 
 router.get('/', adminSessionCheck, controller.admin_productos);
+router.get('/buscarAdmin', controller.searchAdmin);
 router.get('/usuarios', adminSessionCheck, controller.admin_usuarios);
 router.get('/banners', adminSessionCheck, controller.banners);
 router.post('/banners', uploadBannerFile.single("image_Route") ,controller.banners_update);
