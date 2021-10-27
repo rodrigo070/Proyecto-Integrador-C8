@@ -1,22 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
 <%- include('../partials/head.ejs' ,{title: 'Bienvenido - '}) %>
-<body class="adminBG">
+<body>
   <div class="container_Page">
     <main>
-        <div class="headerAdmin">
-            <i class="fa fa-user-secret" aria-hidden="true"></i>
-            <p>Bienvenido al Panel de Admin</p>
-        </div>
-        <section class="adminPanel">
-            <a href="/admin/usuarios">
-                Registro de Usuarios
-            </a>
-            <a href="/admin/lista-productos">
-                Area de Productos
-            </a>
+        <nav class="navBarAdmin">
+            <button onclick="leftPanel();">Burger</button>
+            <form action="/buscar" method="GET" class="search_Bar_Box" id="searchBarButtonJS">
+                <div class="search_Bar">
+                    <input type="search" name="producto" id="" placeholder="Buscar">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+            <a href="/">Logo</a>
+        </nav>
+        <section class="adminContainer">
+            <section class="leftPanelAdmin">
+                <p>Productos</p>
+                <a href="/admin/lista-productos">Lista de Productos</a>
+                <a href="/admin/agregar-producto">Agregar Producto</a>
+                <a href="/admin/lista-productos/stock">Stock</a>
+                <a href="/admin/lista-productos/ofertas">Ofertas</a>
+                <a href="/admin/banners">Banners</a>
+                <p>Usuarios</p>
+            </section>
+            <section class="AdminContent">
+                <section>
+                    
+                </section>
+            </section>
         </section>
     </main>
   </div>
+  <script src="/javascripts/admin.js"></script>
 </body>
 </html>
