@@ -10,12 +10,6 @@ const Product_Images = db.ProductImage;
 const { Op } = require('sequelize');
 
 module.exports = {
-    admin: (req, res) => {
-        res.render('admin/adminPanel',{
-            session: req.session
-        });
-    }
-    ,
     admin_usuarios: (req, res) => {
         User.findAll()
         .then(usersData => {
@@ -73,7 +67,7 @@ module.exports = {
             include : ["images","Category","Subcategory"]
         })
         .then(productsData => {
-            res.render('admin/adminProductList',  {
+            res.render('admin/adminPanel',  {
                 productsData,
                 messageToDisplay : "Disponibles",
                 session: req.session

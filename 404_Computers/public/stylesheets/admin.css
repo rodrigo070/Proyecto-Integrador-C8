@@ -18,17 +18,20 @@
 
 .leftPanelAdmin{
     display: none;
-    grid-area: "panel";
-    background-color: chocolate;
-    width: 25%;
+    transition: width .5s;
 }
 
 .leftPanelActive{
     display: flex;
     flex-direction: column;
+    width: 250px;
 }
 
 .AdminContent{
     background-color: crimson;
     width: 100%;
+}
+
+.deskMode{
+    display: block;
 }

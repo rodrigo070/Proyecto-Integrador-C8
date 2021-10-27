@@ -5,7 +5,12 @@
   <div class="container_Page">
     <main>
         <nav class="navBarAdmin">
-            <button onclick="leftPanel();">Burger</button>
+            <button onclick="leftPanel(); BButton();" class="menuButtonMobile deskMode" id="burgerButton">
+                <span class="burgerLine"></span>
+                <span class="burgerLine"></span>
+                <span class="burgerLine"></span>
+            </button>
+
             <form action="/buscar" method="GET" class="search_Bar_Box" id="searchBarButtonJS">
                 <div class="search_Bar">
                     <input type="search" name="producto" id="" placeholder="Buscar">
@@ -19,15 +24,47 @@
                 <p>Productos</p>
                 <a href="/admin/lista-productos">Lista de Productos</a>
                 <a href="/admin/agregar-producto">Agregar Producto</a>
-                <a href="/admin/lista-productos/stock">Stock</a>
-                <a href="/admin/lista-productos/ofertas">Ofertas</a>
+                <a href="/admin/stock">Stock</a>
+                <a href="/admin/ofertas">Ofertas</a>
                 <a href="/admin/banners">Banners</a>
                 <p>Usuarios</p>
+                <a href="/admin/usuarios">Lista de Usuarios</a>
             </section>
             <section class="AdminContent">
-                <section>
-                    
-                </section>
+                <section class="adminListProducts">
+                    <div class="titles">Productos <%= messageToDisplay %> </div>
+                    <article class="product_Available">
+                      <div class="apID">
+                        ID
+                      </div>
+                      <div class="apName">
+                        Nombre
+                      </div>
+                      <div class="apGoTo apHide">
+                        Ver Producto
+                      </div>
+                      <div class="apEdit apHide">
+                        Editar Producto
+                      </div>
+                      <div class="apEditGoto">
+                        Ver/Editar
+                      </div>
+                      <div class="apDelete">
+                        Borrar
+                      </div>
+                    </article>
+                    <% productsData.forEach(productAvailable => { %>
+                      <article class="product_Available">
+                        <div class="apID"><%=productAvailable.id %></div>
+                        <div class="apName"><%=productAvailable.name %></div>
+                        <div class="apGoTo"><a href="/productos/<%= productAvailable.Category.category_Link %>/<%= productAvailable.Subcategory.subcategory_Link %>/<%= productAvailable.id %>"><i class="fa fa-eye" aria-hidden="true"></i></a></div>
+                        <div class="apEdit"><a href="/admin/editar-producto/<%=productAvailable.id %>"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>
+                        <form class="apDeleteBox" action="/admin/borrarProducto/<%- productAvailable.id %>?_method=DELETE" method="POST">
+                          <button type="submit" class="apDelete"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        </form>
+                      </article>
+                    <% }) %>
+                  </section>
             </section>
         </section>
     </main>

@@ -7,7 +7,7 @@ const productCheck = require('../validations/productCreateValidator');
 const uploadProductFile = require("../middlewares/uploadProductsFiles");
 const uploadBannerFile = require("../middlewares/uploadBannerFile");
 
-router.get('/', adminSessionCheck, controller.admin);
+router.get('/', adminSessionCheck, controller.admin_productos);
 router.get('/usuarios', adminSessionCheck, controller.admin_usuarios);
 router.get('/banners', adminSessionCheck, controller.banners);
 router.post('/banners', uploadBannerFile.single("image_Route") ,controller.banners_update);
@@ -27,11 +27,9 @@ router.get('/editar-usuario/:id', adminSessionCheck, controller.admin_detalle_us
 /* PUT recibo los datos modificados y aplico la actualizacion */
 router.put('/editar-usuario/:id', controller.admin_detalle_usuario_editar);
 
-
-router.get('/lista-productos', adminSessionCheck, controller.admin_productos);
 /* las vistas de abajo reutilizan el listado de productos */
-router.get('/lista-productos/stock', adminSessionCheck, controller.admin_stock);
-router.get('/lista-productos/ofertas', adminSessionCheck, controller.admin_ofertas);
+router.get('/stock', adminSessionCheck, controller.admin_stock);
+router.get('/ofertas', adminSessionCheck, controller.admin_ofertas);
 
 /* Boton de Borrar Banner */
 
