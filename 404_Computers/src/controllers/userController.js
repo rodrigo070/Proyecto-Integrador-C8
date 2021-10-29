@@ -201,7 +201,7 @@ module.exports = {
             where : {
                 id : req.session.user.id
             },
-            include: [{ association: "historyProducts"}] 
+            include: [{ association: "historyProducts"}]
         })
         .then(user => {
 
@@ -209,7 +209,9 @@ module.exports = {
                 include : ["images","Category","Subcategory"]
             })
             .then(productsData => {
+                
                 let result = []
+
                 productsData.forEach(historyData => {
                     for (let i = 0; i < user.historyProducts.length; i++) {
                         if (user.historyProducts[i].product_ID === historyData.id) {

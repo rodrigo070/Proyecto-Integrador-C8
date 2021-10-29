@@ -7,27 +7,29 @@
     <main>
       <section class="user_List_Container adminContainer">
         <%- include('../partials/adminSidePanel.ejs') %>
-        <section class="user_List_Box">
-          <nav class="admin_List_Titles adm_Grid_List">
-            <p>ID</p>
-            <p>Nombre</p>
-            <p>Apellido</p>
-            <p>E-Mail</p>
-            <p>Editar</p>
-            <p>Eliminar</p>
-          </nav>
-          <% usersData.forEach(usuario => { %>
-          <section class="admin_List_PG adm_Grid_List">
-                <p><%= usuario.id %></p>
-                <p><%= usuario.name %></p>
-                <p><%= usuario.surname %></p>
-                <p><%= usuario.email %></p>
-                <a href="/admin/editar-usuario/<%= usuario.id %>" title="Editar Usuario"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                <form class="btnDeleteUser" action="/admin/borrarUsuario/<%- usuario.id %>?_method=DELETE" method="POST" onclick="return confirm('Estas Seguro de que queres Borrarlo?');">
-                  <button type="submit" title="Borrar Usuario"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                </form>
+        <section class="AdminContent">
+          <section class="user_List_Box">
+            <nav class="admin_List_Titles adm_Grid_List">
+              <p>ID</p>
+              <p>Nombre</p>
+              <p>Apellido</p>
+              <p>E-Mail</p>
+              <p>Editar</p>
+              <p>Eliminar</p>
+            </nav>
+            <% usersData.forEach(usuario => { %>
+            <section class="admin_List_PG adm_Grid_List">
+                  <p><%= usuario.id %></p>
+                  <p><%= usuario.name %></p>
+                  <p><%= usuario.surname %></p>
+                  <p><%= usuario.email %></p>
+                  <a href="/admin/editar-usuario/<%= usuario.id %>" title="Editar Usuario"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                  <form class="btnDeleteUser" action="/admin/borrarUsuario/<%- usuario.id %>?_method=DELETE" method="POST" onclick="return confirm('Estas Seguro de que queres Borrarlo?');">
+                    <button type="submit" title="Borrar Usuario"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  </form>
+            </section>
+            <% }) %>
           </section>
-          <% }) %>
         </section>
       </section>
     </main>

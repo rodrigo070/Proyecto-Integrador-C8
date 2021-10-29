@@ -19,18 +19,28 @@
 }
 
 .leftPanelAdmin{
-    display: none;
-    transition: width .5s;
+    position: fixed;
+    left: 0;
+    transition: all .5s;
+    overflow-x: hidden;
+    width: 0%;
+}
+
+.leftPanelAdmin li{
+    white-space: pre;
+    transition: all 10s;
+}
+
+.mainPanelActive{
+    margin-left: 250px;
 }
 
 .leftPanelActive{
-    display: flex;
-    flex-direction: column;
-    padding: 10px 30px;
+    padding-left: 30px;
     width: 250px;
 }
 
-.leftPanelActive p{
+.mTop{
     margin: 10px 0;
 }
 
@@ -42,6 +52,9 @@
 .AdminContent{
     height: fit-content;
     width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+    transition: all .5s;
 }
 
 .deskMode{
@@ -51,4 +64,6 @@
 .adminFilter label{
     margin-right: 10px;
     user-select: none;
+    border-left: 1px solid #00000055;
+    padding-left: 10px;
 }
