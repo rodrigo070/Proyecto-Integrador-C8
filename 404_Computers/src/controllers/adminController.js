@@ -2,6 +2,9 @@ const { validationResult } = require('express-validator');
 const db = require('../database/models');
 const {eliminarImagen} = require("../database/config/product_config")
 const User = db.User;
+const History = db.History;
+const Cart = db.CartProduct;
+const Favorite = db.Favorite;
 const Product = db.Product;
 const Category = db.Category;
 const Subcategory = db.Subcategory;
@@ -465,6 +468,21 @@ module.exports = {
     }
     ,
     borrar_usuario: (req, res) => {
+        History.destroy({
+            where: {
+                user_ID: req.params.id
+            }
+        })
+        Cart.destroy({
+            where: {
+                user_ID: req.params.id
+            }
+        })
+        Favorite.destroy({
+            where: {
+                user_ID: req.params.id
+            }
+        })
         User.destroy({
             where: {
                 id: req.params.id

@@ -3,6 +3,7 @@
 <%- include('../partials/head.ejs' ,{title: 'Agregar Producto - '}) %>
 <head>
     <script src="/javascripts/previewImage_Admin.js" defer></script>
+    <script src="/javascripts/admin.js" defer></script>
 </head>
 <body class="background_Leaves">
   <div class="container_Page">
@@ -10,7 +11,7 @@
     <main class="admin">
         <section class="adminContainer">
             <%- include('../partials/adminSidePanel.ejs') %>
-            <form action="/admin/agregar-producto/" method="POST" class="admin_Grid" enctype="multipart/form-data">
+            <form action="/admin/agregar-producto/" method="POST" class="admin_Grid AdminContent" enctype="multipart/form-data">
                 
                 <div class="contenedor">
                     <div class="cheked">

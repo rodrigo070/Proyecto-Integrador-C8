@@ -3,6 +3,7 @@
 <%- include('../partials/head.ejs' ,{title: 'Banners - '}) %>
 <head>
     <script src="/javascripts/previewImage_Admin.js" defer></script>
+    <script src="/javascripts/admin.js" defer></script>
 </head>
 <body class="background_Leaves">
   <div class="container_Page"> 
@@ -10,7 +11,7 @@
     <main class="admin">
         <section class="adminContainer">
             <%- include('../partials/adminSidePanel.ejs') %>
-            <section class="grid_banners">
+            <section class="grid_banners AdminContent">
                 <section class="grid_list_box">
                     <section class="grid_item_list grid_titles">
                         <div class="grid_Id_List">ID</div>
@@ -33,7 +34,7 @@
                             <input type="file" id="examinar" name="image_Route" accept=".jpg, .png, .webp, .jpeg, .bmp">
                             <p><i class="fa fa-upload" aria-hidden="true"></i> Agregar Banner</p>
                         </label>
-                        <div id="imagePreview">
+                        <div id="imagePreview" class="bannerPreview">
                         </div>
                         <p id="errorImage"></p>
                         <button type="submit" id="saveButtonIMG" class="grid_submitButton" disabled>Guardar Banner</button>

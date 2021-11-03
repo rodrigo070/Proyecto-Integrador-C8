@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <%- include('../partials/head.ejs' ,{title: 'Edicion de Producto - '}) %>
+<%- include('../partials/adminHead.ejs') %>
 <body>
   <div class="container_Page">
     <%- include('../partials/adminHeader.ejs') %>
     <main>
         <section class="adminContainer">
             <%- include('../partials/adminSidePanel.ejs') %>
-            <section class="editProductSection">
+            <section class="editProductSection AdminContent">
                 <div>Edicion del Producto N°<%= productToEdit.id %></div>
                 <form action="/admin/editar-producto/<%= productToEdit.id %>?_method=PUT" enctype= "multipart/form-data" method="POST">
                     <div class="dataEditSection">

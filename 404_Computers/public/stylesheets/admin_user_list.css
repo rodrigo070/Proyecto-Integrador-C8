@@ -25,7 +25,7 @@
     width: 100%;
     text-align: center;
     padding: 10px 5px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .admin_List_Titles p:nth-child(1){
@@ -74,11 +74,17 @@
     outline: none;
     background: transparent;
     border-style: none;
+    margin: 0 auto;
+    width: fit-content;
 }
 
 .admin_List_PG i{
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
+}
+
+.delIcon{
+    color: red;
 }
 
 .admin_List_PG:hover{
@@ -100,6 +106,7 @@
 .admin_List_PG p:nth-child(4){
     display: none;
     grid-area: col4;
+    overflow: hidden;
 }
 
 .admin_List_PG a:nth-child(5){

@@ -13,21 +13,28 @@
         <!-- SECCION MOBILE: Visto Recientemente -->
         <% if (typeof session.user != "undefined" && userData.length > 0) { %>
             <section class="seccion-general">
-                <a href="/productos/<%= userData[userData.length-1].Category.category_Link %>/<%= userData[userData.length-1].Subcategory.subcategory_Link %>/<%=userData[userData.length-1].id%>">
+                <a href="/productos/<%= lastProduct.Category.category_Link %>/<%= lastProduct.Subcategory.subcategory_Link %>/<%= lastProduct.id%>">
                     <div class="titulo-articulo"> 
                         <h3> Visto Recientemente </h3>
                     </div>
                     <div>
-                        <img src="/images/products/<%= userData[userData.length-1].images[0]?.image_Route %>" alt="<%= userData[userData.length-1].name %>">
+                        <img src="/images/products/<%= lastProduct.images[0]?.image_Route %>" alt="<%= lastProduct.name %>">
                     </div>
                     <div class="descripcion-articulo">
-                        <p><%= userData[userData.length-1].name %></p>
-                        <h1>$<%= toThousand(userData[userData.length-1].finalPrice) %></h1>
+                        <p><%= lastProduct.name %></p>
+                        <% if (lastProduct.discount > 0) { %>
+                            <div class="discount_Prices_Box">
+                                <h1>$<%= toThousand(lastProduct.finalPrice) %></h1>
+                                <h1>$<%= toThousand(lastProduct.price) %></h1>
+                            </div>
+                        <% } else { %>
+                            <h1>$<%= toThousand(lastProduct.finalPrice) %></h1>
+                        <% } %>
                     </div>
                 </a>
                 <hr>
                 <div class="ver-historial-de-busqueda">
-                    <a href="/historial"><h3>Ver Historial de Busqueda</h3></a>
+                    <a class="btn_mb_option" href="/historial">Ver Historial de Busqueda</a>
                 </div>
             </section>
         <% } %>
@@ -41,7 +48,7 @@
 
         <% for( let i = 0; i < 3; i++ ) { %>
             <article class="product_Item_Recommended">
-                <a href="/productos/<%= productsData[i].category %>/<%= productsData[i].subcategory%>/<%= productsData[i].id%>">
+                <a href="/productos/<%= productsData[i].Category.category_Link %>/<%= productsData[i].Subcategory.subcategory_Link %>/<%= productsData[i].id%>">
                     <div class="img">
                         <img src="/images/products/<%= productsData[i].images[0].image_Route %>" alt="">
                     </div>
@@ -81,7 +88,7 @@
             <% for( let i = 3; i < 6; i++ ) { %>
                 
                 <article class="product_Item_Recommended">
-                    <a href="/productos/<%= productsData[i].category %>/<%= productsData[i].subcategory%>/<%= productsData[i].id%>">
+                    <a href="/productos/<%= productsData[i].Category.category_Link %>/<%= productsData[i].Subcategory.subcategory_Link%>/<%= productsData[i].id%>">
                         <div class="img">
                             <img src="/images/products/<%= productsData[i].images[0].image_Route %>" alt="">
                         </div>

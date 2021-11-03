@@ -210,8 +210,8 @@ module.exports = {
             })
             .then(productsData => {
                 
-                let result = []
-
+                let result = [];
+                
                 productsData.forEach(historyData => {
                     for (let i = 0; i < user.historyProducts.length; i++) {
                         if (user.historyProducts[i].product_ID === historyData.id) {

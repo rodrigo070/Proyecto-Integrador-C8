@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <%- include('../partials/head.ejs' ,{title: 'Editar Usuario - '}) %>
+<%- include('../partials/adminHead.ejs') %>
 <body>
   <div class="container_Page">
     <%- include('../partials/adminHeader.ejs') %>
     <main>
         <section class="adminContainer">
             <%- include('../partials/adminSidePanel.ejs') %>
-            <form action="/admin/editar-usuario/<%= user.id %>?_method=PUT" method="POST" class="user_Edit_Box user_Edit_Grid">
+            <form action="/admin/editar-usuario/<%= user.id %>?_method=PUT" method="POST" class="user_Edit_Box user_Edit_Grid AdminContent">
                 <section class="user_Col_1">
                     <p>Datos Personales</p>
     

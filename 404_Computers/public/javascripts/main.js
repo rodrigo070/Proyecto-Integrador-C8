@@ -91,12 +91,6 @@ function openPaymentSection(event, payOption) {
     event.currentTarget.className += " active";
 }
 
-function leftPanel(){
-    let button = document.querySelector(".leftPanelAdmin");
-    button.classList.toggle("leftPanelActive");
-    let home = document.querySelector(".AdminContent");
-    home.classList.toggle("mainPanelActive");
-}
 
 /* Calcular Costo de Envio */
 

@@ -28,6 +28,8 @@ module.exports = {
 
                     let productsHistory = []
 
+                    let lastProductSeen = user.historyProducts[user.historyProducts.length-1];
+
                     productsData.forEach(historyData => {
                         for (let i = 0; i < user.historyProducts.length; i++) {
                             if (user.historyProducts[i].product_ID === historyData.id) {
@@ -35,10 +37,17 @@ module.exports = {
                             }
                         }
                     });
+                    let lastProduct = []
+                    if(lastProductSeen != null)
+                    {
+                        lastProduct = productsData.find(historyData => historyData.id === lastProductSeen.product_ID)
+                    }
+
 
                     res.render('home' , {
                         productsData,
                         bannersData,
+                        lastProduct,
                         userData : productsHistory,
                         sliderProducts : productsData,
                         session: req.session,

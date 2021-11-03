@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <%- include('../partials/head.ejs' ,{title: 'Lista de Usuarios - '}) %>
+<%- include('../partials/adminHead.ejs') %>
 <body>
   <div class="container_Page">
     <%- include('../partials/adminHeader.ejs') %>
@@ -19,14 +20,14 @@
             </nav>
             <% usersData.forEach(usuario => { %>
             <section class="admin_List_PG adm_Grid_List">
-                  <p><%= usuario.id %></p>
-                  <p><%= usuario.name %></p>
-                  <p><%= usuario.surname %></p>
-                  <p><%= usuario.email %></p>
-                  <a href="/admin/editar-usuario/<%= usuario.id %>" title="Editar Usuario"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                  <form class="btnDeleteUser" action="/admin/borrarUsuario/<%- usuario.id %>?_method=DELETE" method="POST" onclick="return confirm('Estas Seguro de que queres Borrarlo?');">
-                    <button type="submit" title="Borrar Usuario"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                  </form>
+              <p><%= usuario.id %></p>
+              <p><%= usuario.name %></p>
+              <p><%= usuario.surname %></p>
+              <p><%= usuario.email %></p>
+              <a href="/admin/editar-usuario/<%= usuario.id %>" title="Editar Usuario"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+              <form class="btnDeleteUser" action="/admin/borrarUsuario/<%- usuario.id %>?_method=DELETE" method="POST" onclick="return confirm('Estas Seguro de que queres Borrarlo?');">
+                <button type="submit" title="Borrar Usuario"><i class="fa fa-trash" aria-hidden="true"></i></button>
+              </form>
             </section>
             <% }) %>
           </section>
