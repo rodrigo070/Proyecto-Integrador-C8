@@ -3,7 +3,6 @@ const router = express.Router();
 const controller = require('../controllers/adminController.js');
 const adminSessionCheck = require('../middlewares/adminSessionCheck');
 const productCheck = require('../validations/productCreateValidator');
-
 const uploadProductFile = require("../middlewares/uploadProductsFiles");
 const uploadBannerFile = require("../middlewares/uploadBannerFile");
 

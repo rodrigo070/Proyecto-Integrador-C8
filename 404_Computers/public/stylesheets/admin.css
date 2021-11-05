@@ -129,3 +129,28 @@
     border-left: 1px solid #00000055;
     padding-left: 10px;
 }
+
+/*-----------------------------------------------------------------*/
+/*------------------------- FORM INPUT ----------------------------*/
+/*-----------------------------------------------------------------*/
+
+.error{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    top: 69px;
+    color: red;
+}
+
+.input_Wrap{
+    position: relative;
+    padding: 10px 0;
+}
+
+.is-invalid{
+    border-color: red !important;
+}
+
+.is-valid{
+    border-color:green !important;
+}

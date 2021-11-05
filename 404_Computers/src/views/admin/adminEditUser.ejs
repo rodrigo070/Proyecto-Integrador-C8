@@ -8,23 +8,35 @@
     <main>
         <section class="adminContainer">
             <%- include('../partials/adminSidePanel.ejs') %>
-            <form action="/admin/editar-usuario/<%= user.id %>?_method=PUT" method="POST" class="user_Edit_Box user_Edit_Grid AdminContent">
+            <form id="form" action="/admin/editar-usuario/<%= user.id %>?_method=PUT" method="POST" class="user_Edit_Box user_Edit_Grid AdminContent">
                 <section class="user_Col_1">
                     <p>Datos Personales</p>
-    
-                    <label for="name">Nombre:</label>
-                    <input type="text" name="name" id="name" value="<%= user.name %>">
-        
-                    <label for="surname">Apellido:</label>
-                    <input type="text" name="surname" id="surname" value="<%= user.surname %>">
-        
-                    <label for="address">Domicilio:</label>
-                    <input type="text" name="address" id="address" value="<%= user.address %>">
+                    
+                    <div class="input_Wrap">
+                        <label for="name">Nombre:</label>
+                        <input type="text" name="name" id="name" value="<%= user.name %>">
+                        <span class="error" id="nameErrors"></span>
+                    </div>
+
+                    <div class="input_Wrap">
+                        <label for="surname">Apellido:</label>
+                        <input type="text" name="surname" id="surname" value="<%= user.surname %>">
+                        <span class="error" id="surnameErrors"></span>
+                    </div>
+
+                    <div class="input_Wrap">
+                        <label for="address">Domicilio:</label>
+                        <input type="text" name="address" id="address" value="<%= user.address %>">
+                        <span class="error" id="addressErrors"></span>
+                    </div>
     
                     <section class="user_Edit_Grid noRows">
                         <div class="user_Col_1 noBorder_PD">
-                            <label for="dni">DNI:</label>
-                            <input type="number" name="dni" id="dni" value="<%= user.dni %>">
+                            <div class="input_Wrap noPD">
+                                <label for="dni">DNI:</label>
+                                <input type="number" name="dni" id="dni" value="<%= user.dni %>">
+                                <span class="error" id="dniErrors"></span>
+                            </div>
                         </div>
                         <div class="user_Col_2 flex_col noBorder_PD">
                             <label for="role">Rol:</label>
@@ -47,11 +59,17 @@
     
                     <section class="user_Edit_Grid">
                         <div class="user_Col_1 noBorder_PD">
-                            <label for="email">e-Mail:</label>
-                            <input type="email" name="email" id="email" value="<%= user.email %>">
-                        
-                            <label for="phoneNumber">Telefono:</label>
-                            <input type="number" name="phoneNumber" id="phoneNumber" value="<%= user.phoneNumber %>">
+                            <div class="input_Wrap">
+                                <label for="email">e-Mail:</label>
+                                <input type="email" name="email" id="email" value="<%= user.email %>">
+                                <span class="error" id="emailErrors"></span>
+                            </div>
+
+                            <div class="input_Wrap mtop25">
+                                <label for="phoneNumber">Telefono:</label>
+                                <input type="number" name="phone" id="phoneNumber" value="<%= user.phone %>">
+                                <span class="error" id="phoneNumberErrors"></span>
+                            </div>
                         </div>
                         <div class="user_Col_2 flex_col noBorder_PD">
                             <label for="photoUserEdit">Foto:</label>
@@ -61,13 +79,17 @@
                 </section>
     
                 <section class="saveChangesAdmin">
-                    <button type="submit" title="Guardar Cambios">Guardar Cambios</button>
-                    <button type="reset" onclick="location.href='/admin/usuarios'" title="Cancelar">Cancelar</button>
+                    <div class="input_Wrap">
+                        <button type="submit" title="Guardar Cambios">Guardar Cambios</button>
+                        <span class="error" id="submitErrors"></span>
+                    </div>
                 </section>
     
             </form>
         </section>
     </main>
   </div>
+  <script src="/javascripts/adminEditUserValidator.js"></script>
+  <script src="/javascripts/moment.min.js"></script>
 </body>
 </html>

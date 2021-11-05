@@ -39,12 +39,22 @@
 }
 
 .noRows{
-    grid-template-rows: 100%;
+    grid-template-rows: 100% !important;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.noPD{
+    padding: 0 !important;
 }
 
 .noBorder_PD{
     border: none;
     padding: 0;
+}
+
+.mtop25{
+    margin-top: 25px;
 }
 
 .flex_col{
@@ -83,9 +93,11 @@
     width: 100%;
     height: 33px;
     border-style: none;
-    border: 1px solid rgba(0,0,0, 0.3);
     border-radius: 0.5rem;
     outline: none;
+    border-color: rgba(0,0,0, 0.3);
+    border: 1px;
+    border-style: solid;
 }
 
 .user_Edit_Box select{
