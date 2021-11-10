@@ -7,6 +7,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-bottom: 30px;
 }
 
 .user_Col_1,
@@ -75,7 +76,7 @@
     outline: none;
 }
 
-.saveChangesAdmin button{
+.editUserBtn1{
     padding: 10px;
     font-size: 18px;
     background-color: transparent;
@@ -106,6 +107,7 @@
     border: 1px solid rgba(0,0,0, 0.3);
     border-radius: 0.5rem;
     outline: none;
+    background-color: transparent;
 }
 
 #photoUserEdit{
@@ -131,6 +133,19 @@
     cursor: pointer;
 }
 
+.submitBtnEdit{
+    top: 81px !important;
+    display: flex;
+    justify-content: center;
+    right: 0;
+    margin: 10px;
+    white-space: pre;
+}
+
+.mtop13opt{
+    margin-top: 13px;
+}
+
 /* Tablet */
 
 @media screen and (min-width: 768px){
@@ -142,6 +157,10 @@
         grid-template-rows: 70% 30%;
         row-gap: 0;
         column-gap: 10%;
+    }
+
+    .mtop25opt{
+        margin-top: 0;
     }
 
 }

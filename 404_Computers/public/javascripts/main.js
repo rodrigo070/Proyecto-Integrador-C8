@@ -24,9 +24,11 @@ function decreaseCount(a, b) {
 let navBar = document.getElementById('mobile_Nav_Bar');
 let searchBar = document.getElementById("searchBarButtonJS");
 let burger = document.getElementById("burgerButton");
+let searchBarAdmin = document.querySelector(".search_Bar");
 
 function BButton() {
     burger.classList.toggle("is-active");
+    document.body.classList.toggle("bNoScroll");
 }
 
 function userPanel(){
@@ -59,6 +61,21 @@ function dropSearch(){
         searchBar.style.display = "block";
         navBar.style.display = "none";
         burger.classList.remove("is-active");
+    }
+}
+
+function dropSearchAD(){
+    if (searchBar.style.display === "block")
+    {
+        searchBar.style.display = "none";
+        burger.classList.remove("is-active");
+        searchBarAdmin.classList.remove("adminSearchBar");
+    }
+    else
+    {
+        searchBar.style.display = "block";
+        burger.classList.remove("is-active");
+        searchBarAdmin.classList.add("adminSearchBar");
     }
 }
 

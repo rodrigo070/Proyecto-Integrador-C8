@@ -148,14 +148,13 @@ window.addEventListener("load", function () {
         for (let index = 0; index < elementosForm.length - 1; index++) {
             if (elementosForm[index].value == "" || elementosForm[index].classList.contains("is-invalid")) {
                 elementosForm[index].classList.add('is-invalid');
-                submitErrors.innerHTML = "Los campos señalados son obligatorios";
+                submitErrors.innerHTML = "ERROR: Revise los Campos Señalados.";
                 error = true;
-                console.log("Los campos señalados son obligatorios");
+                console.log("ERROR: Revise los Campos Señalados.");
             }
         }
 
         if (!error) {
-            console.log('Todo bien');
             $form.submit()
         }
 

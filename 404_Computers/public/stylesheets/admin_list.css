@@ -109,6 +109,7 @@ los nombres de los productos */
     outline: none;
     grid-area: delete;
     background-color: transparent;
+    cursor: pointer;
 }
 
 .apDelete i{

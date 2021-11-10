@@ -4,14 +4,22 @@
         <span class="burgerLine"></span>
         <span class="burgerLine"></span>
     </button>
-    <form action="/admin/buscarAdmin" method="GET" class="search_Bar_Box" id="searchBarButtonJS">
-        <div class="search_Bar adminFilter">
-            <input type="search" name="busqueda" id="" placeholder="Buscar">
-            <label for="userSearch"><input type="checkbox" name="userSearch" id="userSearch"> Usuarios</label>
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </div>
-    </form>
-    <a href="/" style="margin: 0 auto;">
+
+    <div class="search_Categ_Area">
+        <form action="/admin/buscarAdmin" method="GET" class="search_Bar_Box" id="searchBarButtonJS">
+            <div class="search_Bar adminFilter">
+                <input type="search" name="busqueda" id="" placeholder="Buscar">
+                <label for="userSearch"><input type="checkbox" name="userSearch" id="userSearch"> Usuarios</label>
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+
+    <a href="/" style="order: 2;">
         <img class="footer_Logo" src="/images/logos/logo_1.png" alt="page_logo">
     </a>
+
+    <div class="search_Icon_Button" onclick="dropSearchAD()">
+        <i class="fa fa-search" aria-hidden="true"></i>
+    </div>
 </nav>

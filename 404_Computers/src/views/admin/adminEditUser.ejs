@@ -38,7 +38,7 @@
                                 <span class="error" id="dniErrors"></span>
                             </div>
                         </div>
-                        <div class="user_Col_2 flex_col noBorder_PD">
+                        <div class="user_Col_2 flex_col noBorder_PD mtop13opt">
                             <label for="role">Rol:</label>
                             <select name="role" id="role">
                                 <% if (user.role === "ROLE_ADMIN") { %>
@@ -80,8 +80,9 @@
     
                 <section class="saveChangesAdmin">
                     <div class="input_Wrap">
-                        <button type="submit" title="Guardar Cambios">Guardar Cambios</button>
-                        <span class="error" id="submitErrors"></span>
+                        <button class="editUserBtn1" type="submit" title="Guardar Cambios">Guardar Cambios</button>
+                        <span class="error submitBtnEdit" id="submitErrors"></span>
+                        <a href="/admin/usuarios" class="editUserBtn1">Cancelar</a>
                     </div>
                 </section>
     

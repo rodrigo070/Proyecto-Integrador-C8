@@ -6,10 +6,10 @@ var closeButton = document.getElementsByClassName("closeFilterOptions")[0];
 
 filterButton.onclick = function() {
     sideButton.style.display = "block";
-    document.body.style.overflowY = "hidden";
+    document.body.classList.toggle("bNoScroll");
 }
 
 closeButton.onclick = function() {
     sideButton.style.display = "none";
-    document.body.style.overflowY = "visible";
+    document.body.classList.toggle("bNoScroll");
 }

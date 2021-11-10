@@ -36,9 +36,17 @@
                         <div class="apName"><%=productAvailable.name %></div>
                         <div class="apGoTo"><a href="/productos/<%= productAvailable.Category.category_Link %>/<%= productAvailable.Subcategory.subcategory_Link %>/<%= productAvailable.id %>"><i class="fa fa-eye" aria-hidden="true"></i></a></div>
                         <div class="apEdit"><a href="/admin/editar-producto/<%=productAvailable.id %>"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>
-                        <form class="apDeleteBox" action="/admin/borrarProducto/<%- productAvailable.id %>?_method=DELETE" method="POST" onclick="return confirm('Estas Seguro de que queres Borrarlo?');">
-                          <button type="submit" class="apDelete"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                        </form>
+                        
+                        <i id="btnDeleteUser" class="fa fa-trash apDelete" aria-hidden="true"></i>
+              
+                        <div class="modalFormBox">
+                          <form class="modalFormContent" action="/admin/borrarProducto/<%- productAvailable.id %>?_method=DELETE" method="POST">
+                            <p>Desea Eliminar el Producto <%= productAvailable.name %></p>
+                            <button class="cancelDeleteBTN" type="button" title="Cancelar">Cancelar</button>
+                            <button type="submit" title="Borrar Producto">Confirmar</button>
+                          </form>
+                        </div>
+
                       </article>
                     <% }) %>
                   </section>
