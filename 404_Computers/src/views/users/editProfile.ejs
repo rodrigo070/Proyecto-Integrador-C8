@@ -8,50 +8,44 @@
     <div class="form-container">
         <h2>Editar mi perfil</h2>
         <hr>
-      <form action="/perfil/<%=user.id %>?_method=PUT" method="POST"
+            <form action="/editar-perfil/<%= user.id %>?_method=PUT" method="POST" id="form" enctype="multipart/form-data">
+                <div class="profile-box">
+                    <h4 class="profile-subtitle">Avatar</h4>
+                    <div class="avatar">
+                        <img src="/images/users/<%=user.image %>" alt="<%=user.image %>">
+                    </div>
+                    <div class="input-file-container">
+                        <input type="file" name="image" id="">
+                    </div>
+                </div>
                 <div class="profile-form">
                     
                     <div class="profile-box">
                         <h4 class="profile-subtitle">Datos personales</h4>
-                        
-                        <div class="input-container">
-                            <input class="input-style" type="text" name="name" placeholder="nombre"
-                            value="<%= user.name ? user.name : "" %>">
-                            <% if (locals.errors && errors.name) { %>
-                                <small class="error-message"><%= errors.name.msg %></small>
-                            <% } %>
-
-                        </div>
-
-                        <div class="input-container">
-                            <input class="input-style" type="text" name="surname" placeholder="Apellido"value="<%= user.surname ? user.surname : "" %>">
-                            <% if (locals.errors && errors.surname) { %>
-                                <small class="error-message"><%= errors.surname.msg %></small>
-                            <% } %>
-                            
-                        </div>
-                        <div class="input-container">
-                                <input class="input-style" type="email" name="email" placeholder="Ingrese su email" readonly value="<%= user.email %>">
-                                <% if (locals.errors && errors.email) { %>
-                                    <small class="error-message"><%= errors.email.msg %></small>
-                                <% } %>
-                            </div>
-                            
-                         
                             <div class="input-container">
-                                <input class="input-style" type="number" name="dni" placeholder="DNI"value=<%= user.dni ? user.dni : "" %>
-                                
+                                <input class="input-style" type="email" id="email" name="email" placeholder="Ingrese su email" value="<%=user.email %>">
+                                <span class="redError" id="emailErrors"></span>
+                            </div>
+                            <div class="input-container">
+                                <input class="input-style" type="text" id="name" name="name" placeholder="Nombre" value="<%=user.name %>">
+                                <span class="redError" id="nameErrors"></span>
+                            </div>
+                            <div class="input-container">
+                                <input class="input-style" type="text" id="surname" name="surname" placeholder="Apellido" value="<%=user.surname %>">
+                                <span class="redError" id="surnameErrors"></span>
+                            </div>
+                            <div class="input-container">
+                                <input class="input-style" type="number" id="dni" name="dni" placeholder="DNI" value="<%=user.dni %>">
+                                <span class="redError" id="dniErrors"></span>
                             </div>
                     </div>
                     <div class="profile-box">
                         <h4 class="profile-subtitle">Datos de contacto</h4>
                         <div class="input-container">
-                            <input class="input-style" type="tel" name="phone" placeholder="Teléfono"value="<%= user.phone ? user.phone : "" %>">
-                            <% if (locals.errors && errors.phone) { %>
-                                <small class="error-message"><%= errors.phone.msg %></small>
-                            <% } %>
+                            <input class="input-style" type="tel" id="phoneNumber" name="phone" placeholder="Teléfono" value="<%=user.phone %>">
+                            <span class="redError" id="phoneNumberErrors"></span>
                         </div>
-                      <div class="input-container">
+                        <div class="input-container">
                            <select name="provincia" class="input-select">
                                <option value="" hidden selected>Elija una provincia</option>
                                <option value="laRioja">La Rioja</option>
@@ -72,19 +66,21 @@
                             </select>
                         </div>
                         <div class="input-container">
-                            <input class="input-style" type="text" name="address" placeholder="Direccion"value="<%= user.address ? user.address : "" %>">
-                            <% if (locals.errors && errors.address) { %>
-                                <small class="error-message"><%= errors.address.msg %></small>
-                            <% } %>
+                            <input class="input-style" type="text" id="address" name="address" placeholder="Direccion" value="<%=user.address %>">
+                            <span class="redError" id="addressErrors"></span>
                         </div>
                     </div>
                 </div> 
                 <div class="button-container">
-                    <!-- <button type="reset" class="btn btn-reset">Reset</button> -->
                     <button type="submit" class="btn btn-edit">Guardar</button>
-                </div> 
+                </div>
+                <span class="redErrorSub" id="submitErrors"></span>
             </form>
     </div>
 </main>
     <%- include('../partials/footer.ejs') %> 
+  </div>
+  <script src="/javascripts/userEditFrontValidator.js"></script>
+  <script src="/javascripts/moment.min.js"></script>
+</body>
 </html>

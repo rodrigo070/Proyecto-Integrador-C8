@@ -1,52 +1,231 @@
-/* Panel de Admin */
+/*-----------------------------------------------------------------*/
+/*------------------------- MODAL FORM ----------------------------*/
+/*-----------------------------------------------------------------*/
 
-.adminBG{
-    background-color: black;
-}
-
-.adminPanel{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.modalFormBox{
+    display: none;
     width: 100%;
-    gap: 50px;
+    height: 100%;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
-
-.headerAdmin{
-    padding: 20px 0;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-    text-align: center;
-    font-size: 24px;
-    color: white;
-    transition: .3s ease;
-}
-
-.headerAdmin i{
-    font-size: 80px;
-}
-
-.adminPanel a{
-    margin: 10px 0;
-    padding: 20px;
+  
+.modalFormContent {
+    display: none;
+    padding: 20px 10px;
     border-radius: 1rem;
+    border: 1px solid blueviolet;
+    width: 280px;
     background-color: white;
-    flex-wrap: wrap;
-    font-size: 21px;
-    cursor: pointer;
     text-align: center;
-    transition: .3s ease;
-    border: 1px solid transparent;
+    animation: fadein .5s;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.adminPanel a:hover{
+.modalFormContent button {
+    cursor: pointer;
+    margin-top: 10px !important;
+    border-radius: 0.6rem;
+    padding: 5px 10px;
+    background-color: red !important;
+    color: white;
+    border-style: none;
+}
+
+.modalFormContent button:hover {
+    background-color: rgb(219, 0, 0) !important;
+}
+
+.modalFormContent button:nth-of-type(1) {
+    background-color: rgb(236, 236, 236) !important;
+    color: black;
+}
+
+.modalFormContent button:nth-of-type(1):hover {
+    background-color: rgb(223, 223, 223) !important;
+}
+
+.modalFormContent p {
+    user-select: none;
+}
+
+.formActive {
+    display: block;
+}
+
+/*-------------------------------------------------------------------*/
+/*--------------------------- FIN FORM ------------------------------*/
+/*-------------------------------------------------------------------*/
+
+.bNoScroll{
+    overflow-y: hidden;
+}
+
+.navBarAdmin{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 5px 10px;
+    align-items: center;
+}
+
+.navBarAdmin:nth-of-type(1),
+.navBarAdmin:nth-of-type(3){
+    text-align: center;
+    width: 100%;
+}
+
+.adminContainer{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.leftPanelAdmin{
+    opacity: 0;
+    position: fixed;
+    left: 0;
+    transition: all .5s;
+    overflow-x: hidden;
+    width: 0%;
+    font-size: 22px;
+}
+
+.leftPanelAdmin li{
+    white-space: pre;
+}
+
+.leftPanelAdmin a{
+    padding-right: 5px;
+}
+
+.leftPanelAdmin i{
+    width: 30px;
+    text-align: center;
+}
+
+.mainPanelActive{
+    opacity: 0;
+    width: 0 !important;
+}
+
+.leftPanelActive{
+    opacity: 1;
+    padding-left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    text-align: center;
+}
+
+.mTop{
+    margin: 10px 0;
+}
+
+.leftPanelActive a:hover{
     background-color: black;
     color: white;
-    border:1px solid white;
+    width: 100%;
+}
+
+.AdminContent{
+    height: fit-content;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: all .5s;
+}
+
+.deskMode{
+    display: block;
+}
+
+.adminFilter label{
+    margin-right: 10px;
+    user-select: none;
+    border-left: 1px solid #00000055;
+    padding-left: 10px;
+}
+
+/*-----------------------------------------------------------------*/
+/*------------------------- FORM INPUT ----------------------------*/
+/*-----------------------------------------------------------------*/
+
+.error{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    top: 69px;
+    color: red;
+}
+
+.input_Wrap{
+    position: relative;
+    padding: 10px 0;
+}
+
+.is-invalid{
+    border-color: red !important;
+}
+
+.is-valid{
+    border-color:green !important;
+}
+
+.adminSearchBar{
+    margin: 15px 0;
 }
 
 
+/*-----------------------------------------------------------------*/
+/*---------------------------- Tablet -----------------------------*/
+/*-----------------------------------------------------------------*/
 
+@media screen and (min-width: 768px){
+    .navBarAdmin{
+        padding: 5px 25px;
+    }
 
+    .leftPanelAdmin{
+        font-size: 20px;
+    }
+
+    .mainPanelActive{
+        opacity: 1;
+        margin-left: 250px;
+        width: 100% !important;
+    }
+
+    .leftPanelActive{
+        padding-left: 30px;
+        width: 250px;
+        background-color: transparent;
+        text-align: left;
+    }
+
+    .AdminContent{
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .adminSearchBar{
+        margin: 0;
+    }
+}
+
+/*-----------------------------------------------------------------*/
+/*------------------------------ PC -------------------------------*/
+/*-----------------------------------------------------------------*/
+
+@media screen and (min-width: 990px){
+
+}
+
+/*-----------------------------------------------------------------*/
+/*----------------------- Fin MODAL FORM --------------------------*/
+/*-----------------------------------------------------------------*/

@@ -22,10 +22,20 @@ router.post('/registro', registerValidator, controller.processRegister);
 
 router.get('/favoritos', userSessionCheck, controller.favorites);
 
+router.delete('/borrar-favorito-user/:id', controller.favorite_delete_user);
+
+/* Routers de Historial */
+
+router.get('/historial', userSessionCheck, controller.history);
+
+router.delete('/delHistoryProduct/:id', controller.delHistoryProduct);
+
 /* Routers de Edicion de Perfil */
 
 router.get('/editar-perfil', userSessionCheck, controller.editProfile);
-router.put('/perfil/:id' , controller.updateProfile)
+
+router.put('/editar-perfil/:id' ,uploadProfilePicFile.single("image"), controller.updateProfile)
+
 /* Routers de Perfil de Usuario */
 router.get('/perfil/:id', userSessionCheck,profileCheck ,controller.profile);/* cambie la ruta para que en perfil nos muestre los datos del usuario que venga por id */
 
@@ -33,6 +43,6 @@ router.get('/perfil/:id', userSessionCheck,profileCheck ,controller.profile);/* 
 
 router.get('/carrito', userSessionCheck, controller.cart);
 
-
+router.delete('/cart_delete/:id', controller.cart_delete);
 
 module.exports = router;

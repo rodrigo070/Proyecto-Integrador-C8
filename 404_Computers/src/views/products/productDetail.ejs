@@ -24,21 +24,20 @@
             <div class="breadcrumbs_Pages">
                 <a href="/productos">Volver al Listado</a>
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
-                <a href="/productos/<%= product.Category.categorylink %>"><%= product.Category.category %></a>
+                <a href="/productos/<%= product.Category.category_Link %>"><%= product.Category.category_Name %></a>
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
-                <a href="/productos/<%= product.Category.categorylink %>/<%= product.Subcategory.subcategorylink %>"><%= product.Subcategory.subcategory %></a>    
+                <a href="/productos/<%= product.Category.category_Link %>/<%= product.Subcategory.subcategory_Link %>"><%= product.Subcategory.subcategory_Name %></a>    
             </div>
         
 
             <section class="productPhoto">
                 <!-- Aca va la imagen Principal  -->
-                <img src="/images/products/<%= product.image0 %>" id="expandedImg" class="imageModal">
+                <img src="/images/products/<%= product.images[0]?.image_Route %>" id="expandedImg" class="imageModal">
                 <!-- Aca va la Grilla de Fotos del producto  -->
                 <div class="photosGalleryBox">
-                    <img class="miniPhoto" src="/images/products/<%= product.image0 %>" onmouseover="productGridImages(this);">
-                    <img class="miniPhoto" src="/images/products/<%= product.image1 %>" onmouseover="productGridImages(this);">
-                    <img class="miniPhoto" src="/images/products/<%= product.image2 %>" onmouseover="productGridImages(this);">
-                    <img class="miniPhoto" src="/images/products/<%= product.image3 %>" onmouseover="productGridImages(this);">
+                    <% product.images.forEach(imageGallery => { %>
+                        <img class="miniPhoto" src="/images/products/<%= imageGallery.image_Route %>" onmouseover="productGridImages(this);">
+                    <% }) %>
                 </div>
             </section>
     
@@ -46,7 +45,7 @@
                 <div class="priceNameProductPage">
                     <p><%= product.name %></p>
                     <% if (product.discount > 0) { %>
-                        <p>$<%= toThousand(product.price - product.price * product.discount / 100) %></p>
+                        <p>$<%= toThousand(product.finalPrice) %></p>
                         <p> Precio Lista $<%= toThousand(product.price) %></p>
                         <p> <%= product.discount %> % OFF</p>    
                     <% } else { %>
@@ -63,8 +62,28 @@
                 </div>
 
                 <div class="productPageButton">
-                    <button title="Comprar">Agregar al Carrito <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
-                    <button title="Agregar a Favoritos" onclick="fav();"> Agregar a Favoritos <i id="favBtn" class="fa fa-heart-o"></i></button>
+                     
+                    <% if (typeof session.user != "undefined") { %>
+                        <form action="/agregar-carrito/<%= product.id %>" method="POST">
+                            <button class="buyButton" title="Agregar al Carrito" type="submit">Agregar al Carrito <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+                        </form>
+                    <% } else { %>
+                        <button class="buyButton" title="Agregar al Carrito" onclick="location.href='/login'">Agregar al Carrito <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+                    <% } %>
+                    <% if (typeof session.user != "undefined") { %>
+                        <% if (!favoriteItem) { %>
+                            <form action="/agregar-favorito/<%= product.id %>" method="POST">
+                                <button class="favButton" title="Agregar a Favoritos" type="submit" onclick="fav();"> Agregar a Favoritos <i id="favBtn" class="fa fa-heart-o"></i></button>
+                            </form>
+                        <% } else { %>
+                            <form action="/borrar-favorito/<%= product.id %>?_method=DELETE" method="POST">
+                                <button class="favButtonDel" title="Quitar de Favoritos" type="submit" onclick="fav();"> Quitar de Favoritos <i id="favBtn" class="fa fa-heart"></i></button>                            
+                            </form>
+                        <% } %>
+                    <% } else { %>
+                        <button class="favButton" title="Agregar a Favoritos" onclick="location.href='/login'"> Agregar a Favoritos <i id="favBtn" class="fa fa-heart-o"></i></button>                            
+                    <% } %>
+                     
                 </div>
 
                 <div class="socialIconsShare">

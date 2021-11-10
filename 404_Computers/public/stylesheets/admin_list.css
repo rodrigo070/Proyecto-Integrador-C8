@@ -18,21 +18,37 @@
 }
 
 .adminListProducts{
-    width: 100%;
     margin: 0 auto 20px auto;
+    border-radius: 1rem;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    overflow: hidden;
 }
 
 .product_Available{
     width: 100%;
-    background-color: whitesmoke;
-    border-radius: 0.5rem;
-    padding: 5px;
-    margin: 5px auto;
+    padding: 10px 5px;
     display: grid;
     grid-template-areas:
     'id name goTo delete'
     'id name edit delete';
     grid-template-columns: 20% 30% 25% 25%;
+}
+
+.product_Available i{
+    font-size: 20px !important;
+}
+
+.product_Available:nth-of-type(1){
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.product_Available:nth-of-type(1):hover{
+    background-color: white;
+}
+
+.product_Available:hover{
+    background-color: whitesmoke;
 }
 
 .apHide{
@@ -93,12 +109,12 @@ los nombres de los productos */
     outline: none;
     grid-area: delete;
     background-color: transparent;
+    cursor: pointer;
 }
 
 .apDelete i{
     color: red;
     cursor: pointer;
-    font-size: 25px;
 }
 
 /* Tablet */
@@ -113,10 +129,6 @@ los nombres de los productos */
         grid-template-areas:
         'id name goTo edit delete';
         grid-template-columns: 10% 40% 20% 20% 10%;
-    }
-
-    .adminListProducts{
-        width: 85%;
     }
 
     .apHide{

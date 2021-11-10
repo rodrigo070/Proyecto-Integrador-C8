@@ -5,7 +5,7 @@
         </div>  
         
         <!-- Menu Mobile  --> 
-        <button onclick="dropMenu(); BButton();" class="menuButtonMobile" id="burgerButton">
+        <button onclick="dropMenu(); BButton();" class="menuButtonMobile mobileMode" id="burgerButton">
             <span class="burgerLine"></span>
             <span class="burgerLine"></span>
             <span class="burgerLine"></span>
@@ -20,7 +20,7 @@
 
                 <ul class="menu_Mobile">
                     <% if (typeof session.user != "undefined") { %>
-                        <% if (session.user.rol === "ROLE_ADMIN") { %>
+                        <% if (session.user.role === "ROLE_ADMIN") { %>
                             <li>
                                 <a href="/admin"><i class="icons_Mobile_Menu fa fa-user-secret" aria-hidden="true"></i>Panel de Admin</a>
                             </li>
@@ -68,6 +68,30 @@
                     <button type="reset" onclick="location.href='/login'">Iniciar Sesion</button>
                     <button type="reset" onclick="location.href='/registro'">Registrarse</button>
                 </div>
+
+                <ul class="menu_Mobile">
+    
+                    <li>
+                        <a href="/productos"><i class="icons_Mobile_Menu fa fa-circle" ></i>Productos</a>
+                    </li>
+    
+                    <li>
+                        <a href="/ofertas"><i class="icons_Mobile_Menu fa fa-percent"></i>Ofertas</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/local"><i class="icons_Mobile_Menu fa fa-location-arrow"></i>Visite Nuestro Local</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/contacto"><i class="icons_Mobile_Menu fa fa-address-book"></i>Contacto</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/404computers"><i class="icons_Mobile_Menu fa fa-users"></i>Nosotros</a>
+                    </li>
+                </ul>
+
             <% } %>
             
         </nav>
@@ -141,7 +165,7 @@
                         <button type="reset" onclick="location.href='/ofertas'">Ofertas <i class="fa fa-percent" ></i></button>
                     </li>
                     <% if (typeof session.user != "undefined") { %>
-                        <% if (session.user.rol === "ROLE_ADMIN") { %>
+                        <% if (session.user.role === "ROLE_ADMIN") { %>
                             <li>
                                 <button type="reset" onclick="location.href='/admin'">Admin <i class="fa fa-user-secret" ></i></button>
                             </li>

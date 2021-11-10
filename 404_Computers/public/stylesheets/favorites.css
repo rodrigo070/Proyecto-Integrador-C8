@@ -1,15 +1,14 @@
-.favoritesSection{
-    width: 95%;
-    margin: 0 auto;
-}
-
 .titles{
     margin-top: 10px;
     font-size: 1.5rem !important;
 }
 
+.favHisSection{
+    width: 95%;
+    margin: 0 auto;
+}
 
-.favoriteProduct{
+.favHisProduct{
     width: 100%;
     background-color: whitesmoke;
     border-radius: 1rem;
@@ -23,15 +22,15 @@
     grid-template-columns: 10% 25% 55% 10%;
 }
 
-#selectFavorite{
+#selectFavHis{
     margin: auto;
     transform: scale(1.5);
     grid-area: select;
     padding: 0;
 }
 
-.favoritePicture,
-.favoritePicture img{
+.favHisPicture,
+.favHisPicture img{
     display: flex;
     grid-area: picture;
     border-radius: 0.5rem;
@@ -41,28 +40,33 @@
     height: 70px;
 }
 
-.favoriteName{
+.favHisName{
     margin: auto 0;
     padding-left: 10px;
     font-size: 16px;
     grid-area: name;
 }
 
-.favoritePrice{
+.favHisPrice{
     margin: auto 0;
     padding-left: 10px;
     font-size: 16px;
     grid-area: price;
 }
 
-.favoriteDelete{
+.favHisDeleteForm{
+    display: flex;
+    grid-area: delete;
+}
+
+.favHisDelete{
     border-style: none;
     outline: none;
     grid-area: delete;
     background-color: transparent;
 }
 
-.favoriteDelete i{
+.favHisDelete i{
     color: red;
     cursor: pointer;
     font-size: 25px;
@@ -73,29 +77,29 @@
 /*-----------------------------------------------------------------*/
 
 @media screen and (min-width: 768px){
-    .favoritesSection{
+    .favHisSection{
         width: 80%;
     }
 
-    .favoriteProduct{
+    .favHisProduct{
         height: 150px;
     }
 
-    #selectFavorite{
+    #selectFavHis{
         transform: scale(2);
     }
 
-    .favoritePicture,
-    .favoritePicture img{
+    .favHisPicture,
+    .favHisPicture img{
         width: 135px;
         height: 130px;
     }
 
-    .favoriteName,
-    .favoritePrice{
+    .favHisName,
+    .favHisPrice{
         font-size: 20px;
     }
-    .favoriteDelete i{
+    .favHisDelete i{
         font-size: 30px;
     }
 }

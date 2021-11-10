@@ -1,9 +1,9 @@
 
-.termsSection{
+.textFooterSection{
     width: 100%;
 }
 
-.termsAndConditionsPage{
+.textFooterPage{
     width: 95%;
     white-space: pre-line;
     margin: 20px auto;
@@ -12,7 +12,7 @@
     border-radius: 1rem;
 }
 
-.termsAndConditionsPage strong{
+.textFooterPage strong{
     font-weight: bolder;
 }
 
@@ -21,7 +21,7 @@
 /*-----------------------------------------------------------------*/
 
 @media screen and (min-width: 768px){
-    .termsAndConditionsPage{
+    .textFooterPage{
         width: 70%;
     }
 }

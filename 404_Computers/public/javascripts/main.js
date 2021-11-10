@@ -24,9 +24,11 @@ function decreaseCount(a, b) {
 let navBar = document.getElementById('mobile_Nav_Bar');
 let searchBar = document.getElementById("searchBarButtonJS");
 let burger = document.getElementById("burgerButton");
+let searchBarAdmin = document.querySelector(".search_Bar");
 
 function BButton() {
     burger.classList.toggle("is-active");
+    document.body.classList.toggle("bNoScroll");
 }
 
 function userPanel(){
@@ -62,6 +64,21 @@ function dropSearch(){
     }
 }
 
+function dropSearchAD(){
+    if (searchBar.style.display === "block")
+    {
+        searchBar.style.display = "none";
+        burger.classList.remove("is-active");
+        searchBarAdmin.classList.remove("adminSearchBar");
+    }
+    else
+    {
+        searchBar.style.display = "block";
+        burger.classList.remove("is-active");
+        searchBarAdmin.classList.add("adminSearchBar");
+    }
+}
+
 /* Las funciones de abajo por el momento no tienen uso en la pagina*/
 
 function dropSubCategoryMenu (id) {
@@ -90,6 +107,7 @@ function openPaymentSection(event, payOption) {
     document.getElementById(payOption).style.display = "grid";
     event.currentTarget.className += " active";
 }
+
 
 /* Calcular Costo de Envio */
 

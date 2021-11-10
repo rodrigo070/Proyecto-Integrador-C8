@@ -1,250 +1,499 @@
-let { bannersData, productsData , usersData , categoriesData , subCategoriesData , writeProductEdit ,writeBannersEdit, writeUserEdit} = require('../data/db');
 const { validationResult } = require('express-validator');
+const db = require('../database/models');
+const {eliminarImagen} = require("../database/config/product_config")
+const User = db.User;
+const History = db.History;
+const Cart = db.CartProduct;
+const Favorite = db.Favorite;
+const Product = db.Product;
+const Category = db.Category;
+const Subcategory = db.Subcategory;
+const Banner = db.Banner;
+const Product_Images = db.ProductImage;
+const { Op } = require('sequelize');
 
 module.exports = {
-    admin: (req, res) => {
-        res.render('admin/adminPanel',{
-            session: req.session
-        });
-    }
-    ,
     admin_usuarios: (req, res) => {
-        res.render('admin/adminUsersList',  {
-            usersData,
-            session: req.session
-        });
+        User.findAll()
+        .then(usersData => {
+            res.render('admin/adminUsersList',  {
+                usersData,
+                session: req.session
+            });
+        })
+        .catch((err) => console.log("ERROR en Admin_Usuarios: "+err));
     }
     ,
     admin_detalle_usuario: (req, res) => {
-        let userID = +req.params.id;
-        let user = usersData.find(userToFind => userToFind.id === userID);
-
-        res.render('admin/adminEditUser',  {
-            user,
-            session: req.session
-        });
+        User.findOne({
+            where : {
+                id : req.params.id
+            }
+        })
+        .then(user => {
+            res.render('admin/adminEditUser',  {
+                user,
+                session: req.session
+            });
+        })
+        .catch((err) => console.log("ERROR en Detalle Usuario: "+err));
     }
     ,
     admin_detalle_usuario_editar: (req, res) => {
 
-        usersData.forEach(userToEdit => {
-            if(userToEdit.id === +req.params.id)
-            {
-                userToEdit.id = userToEdit.id,
-                userToEdit.name = req.body.name ? req.body.name : userToEdit.name,
-                userToEdit.surname = req.body.surname ? req.body.surname : userToEdit.surname,
-                userToEdit.address = req.body.address ? req.body.address : userToEdit.address,
-                userToEdit.dni = req.body.dni ? req.body.dni : userToEdit.dni,
-                userToEdit.rol = req.body.rol ? req.body.rol : userToEdit.rol,
-                userToEdit.email = req.body.email ? req.body.email : userToEdit.email,
-                userToEdit.phoneNumber = req.body.phoneNumber ? req.body.phoneNumber : userToEdit.phoneNumber,
-                userToEdit.image = userToEdit.image
+        let { name, surname, address, dni, role ,email, phone, image } = req.body;
+
+        User.update({
+            name,
+            surname,
+            address,
+            dni,
+            role,
+            email,
+            phone,
+            image
+        },
+        {
+            where : {
+                id : req.params.id
             }
-        });
-
-        writeUserEdit(usersData)
-
-        res.redirect('/admin/usuarios')
+        })
+        .then(() => {
+            res.redirect('/admin/usuarios')
+        })
+        .catch((err) => console.log("ERROR Editando Usuario: "+err));
     }
     ,
     admin_productos: (req, res) => {
-        res.render('admin/adminProductList',  {
-            productsData,
-            messageToDisplay : "Disponibles",
-            session: req.session
-        });
+
+        Product.findAll({
+            include : ["images","Category","Subcategory"]
+        })
+        .then(productsData => {
+            res.render('admin/adminPanel',  {
+                productsData,
+                session: req.session
+            });
+        })
+        .catch((err) => console.log("ERROR Lista Productos Admin: "+err));
+
     }
     ,
     admin_agregar: (req, res) => {
-        res.render('admin/adminAddProduct',  {
-            productsData,
-            categoriesData,
-            subCategoriesData,
-            session: req.session
-        });
+
+        let categoriesData = Category.findAll()
+        let subCategoriesData = Subcategory.findAll()
+
+        Promise.all([categoriesData, subCategoriesData])
+        .then(([categoriesData, subCategoriesData]) => {
+            res.render('admin/adminAddProduct',  {
+                categoriesData,
+                subCategoriesData,
+                session: req.session
+            });
+        })
+        .catch((err) => console.log("ERROR Vista Agregar Producto: "+err));
     }
     ,
     admin_carga_update: (req, res) => {
-        
-        let errors = validationResult(req)
+        let errors = validationResult(req);
 
-        if(errors.isEmpty()){
-
-            let lastId = 1;
-
-            productsData.forEach(product => {
-                if(product.id > lastId){
-                    lastId = product.id
-                }
-            });
-
-            let productIMGArray = [];
-
-            req.files.forEach(image => {
-                productIMGArray.push(image.filename);
-            });
-
-            let newProduct = {
-                id: lastId + 1,
-                image: productIMGArray.length > 0 ? productIMGArray : ["default.jpg"],
-                name: req.body.name,
-                color: req.body.color,
-                price: req.body.price,
-                stock: 1,
-                discount: req.body.discount,
-                onSale: req.body.onSale,
-                description: req.body.description,
-                category: req.body.category,
-                subcategory: req.body.subcategory
-            }
-
-            productsData.push(newProduct);
-            writeProductEdit(productsData);
-
-            res.redirect('/admin/lista-productos');
+        if (req.fileValidatorError) {
+          let image = {
+            param: "image_Route",
+            msg: req.fileValidatorError,
+          };
+          errors.push(image);
         }
-        else
-        {
-            console.log("ERROR al Agregar Producto");
-            res.render("admin/adminAddProduct", {
-                productsData,
+
+        if (errors.isEmpty()) {
+          let arrayImages = [];
+          if (req.files) {
+            req.files.forEach((image) => {
+              arrayImages.push(image.filename);
+            });
+          }
+
+          let {
+            name,
+            price,
+            discount,
+            description,
+            product_Category,
+            product_Subcategory,
+          } = req.body;
+          /*  return res.json(req.body) */
+          Product.create({
+            name,
+            price,
+            finalPrice: req.body.price,
+            color: "Blanco",
+            discount,
+            description,
+            product_Category,
+            onSale: 0,
+            product_Subcategory,
+          })
+            .then((product) => {
+              if (arrayImages.length > 0) {
+                let images = arrayImages.map((image) => {
+                  return {
+                    image_Route: image,
+                    product_Id: product.id,
+                  };
+                });
+                Product_Images.bulkCreate(images)
+                  .then(() => res.redirect("/admin/lista-productos"))
+                  .catch((err) => console.log(err));
+              } else {
+                Product_Images.create({
+                  image_Route: "default.jpg",
+                  product_Id: product.id,
+                })
+                  .then(() => res.redirect("/admin/lista-productos"))
+                  .catch((err) => console.log(err));
+              }
+            })
+            .catch((err) => console.log(err));
+        } else {
+          let categoriesData = Category.findAll();
+          let subCategoriesData = Subcategory.findAll();
+          Promise.all([categoriesData, subCategoriesData]).then(
+            ([categoriesData, subCategoriesData]) => {
+              console.log("ERROR al Agregar Producto");
+              res.render("admin/adminAddProduct", {
                 categoriesData,
                 subCategoriesData,
                 errors: errors.mapped(),
                 old: req.body,
-                session: req.session
-            })
+                session: req.session,
+              });
+            }
+          );
         }
     },
     admin_editar_producto: (req, res) => {
 
-        let productToEditID = +req.params.id;
-        let productToEdit = productsData.find(productToEditFind => productToEditFind.id === productToEditID);
+        const productToEdit = Product.findOne({
+            where : {
+                id : req.params.id
+            },
+            include : ["images","Category","Subcategory"]
+        })
 
-        res.render('admin/adminEditProduct',  {
-            productToEdit,
-            categoriesData,
-            subCategoriesData,
-            session: req.session
-        });
+        const categoriesData = Category.findAll()
+        const subCategoriesData = Subcategory.findAll()
+
+        Promise.all([productToEdit, categoriesData, subCategoriesData])
+        .then( ([productToEdit, categoriesData, subCategoriesData]) => {
+            res.render('admin/adminEditProduct',  {
+                productToEdit,
+                categoriesData,
+                subCategoriesData,
+                session: req.session
+            });
+        })
+        .catch((err) => console.log("ERROR Editando Producto: "+err));
     }
     ,
     admin_editar_producto_update: (req, res) => {
 
-        let productIMGArray = [];
-        
-        req.files.forEach(image => {
-            productIMGArray.push(image.filename);
-        });
+        let errors = validationResult(req);
 
-        productsData.forEach(productToEdit => {
-            if(productToEdit.id === +req.params.id)
+        if (errors.isEmpty()) {
+          let {
+            name,
+            color,
+            price,
+            onSale,
+            stock,
+            discount,
+            description,
+            product_Category,
+            product_Subcategory,
+          } = req.body;
+
+          Product.update(
             {
-                productToEdit.id = productToEdit.id,
-                productToEdit.image = productIMGArray.length > 0 ? productIMGArray : productToEdit.image,
-                productToEdit.name = req.body.name ? req.body.name : productToEdit.name,
-                productToEdit.color = req.body.color ? req.body.color : productToEdit.color,
-                productToEdit.price = req.body.price ? req.body.price : productToEdit.price,
-                productToEdit.stock = req.body.stock ? req.body.stock : productToEdit.stock,
-                productToEdit.discount = req.body.discount ? req.body.discount : productToEdit.discount,
-                productToEdit.onSale = req.body.onSale ? req.body.onSale : productToEdit.onSale,
-                productToEdit.description = req.body.description ? req.body.description : productToEdit.description,
-                productToEdit.category = req.body.category ? req.body.category : productToEdit.category,
-                productToEdit.subcategory = req.body.subcategory ? req.body.subcategory : productToEdit.subcategory
+              name,
+              color,
+              price,
+              finalPrice: req.body.price - (req.body.price * req.body.discount) / 100,
+              onSale,
+              stock,
+              discount,
+              description,
+              product_Category,
+              product_Subcategory,
+            },
+            {
+              where: {
+                id: req.params.id,
+              },
             }
-        });
+          )
+            .then(() => {
+              res.redirect("/admin/lista-productos");
+            })
+            .catch((error) =>
+              console.log(
+                "Error al Actualizar Producto : " +
+                  error +
+                  "++++++++++++++++++++++++++++++++++"
+              )
+            );
+        } else {
+          let categoriesData = Category.findAll();
+          let subCategoriesData = Subcategory.findAll();
 
-        writeProductEdit(productsData)
-
-        res.redirect('/admin/lista-productos')
+          Promise.all([categoriesData, subCategoriesData])
+            .then(([categoriesData, subCategoriesData]) => {
+              Product.findOne({
+                where: {
+                  id: req.params.id,
+                },
+              }).then((productToEdit) => {
+                res.render("admin/adminEditProduct", {
+                  categoriesData,
+                  subCategoriesData,
+                  productToEdit,
+                  errors: errors.mapped(),
+                  old: req.body,
+                });
+              });
+            })
+            .catch((err) =>
+              console.log(
+                "ERROR Ver Campos de Editar Producto " +
+                  err +
+                  "-----------------------------"
+              )
+            );
+        }
     }
     ,
     admin_stock: (req, res) => {
-        let products = productsData.filter(product => product.stock > 0);
-
-        res.render('admin/adminProductList',  {
-            productsData: products,
-            messageToDisplay : "Disponibles en Stock",
-            session: req.session
+        
+        Product.findAll({
+            where : {
+                stock : {
+                    [Op.gt]: 0, 
+                }
+            },
+            include : ["images","Category","Subcategory"]
+        })
+        .then(productsData =>{
+            res.render('admin/adminPanel' , {
+                productsData,
+                session: req.session
+            });
+        })
+        .catch(error => {
+            console.log("Tenemos un ERROR: "+error);
         });
     }
     ,
     admin_ofertas: (req, res) => {
 
-        let products = productsData.filter(product => product.discount > 0);
-
-        res.render('admin/adminProductList',  {
-            productsData:products,
-            messageToDisplay : "Disponibles en Oferta",
-            session: req.session
+        Product.findAll({
+            where : {
+                discount : {
+                    [Op.gt]: 0, 
+                }
+            },
+            include : ["images","Category","Subcategory"]
+        })
+        .then(productsData =>{
+            res.render('admin/adminPanel' , {
+                productsData,
+                session: req.session
+            });
+        })
+        .catch(error => {
+            console.log("Tenemos un ERROR: "+error);
         });
+
     }
     ,
     banners: (req, res) => {
         
-        res.render('admin/addBanners',  {
-            productsData,
-            bannersData,
-            session: req.session
-        });
+        Banner.findAll()
+        .then(bannersData => {
+            res.render('admin/addBanners',  {
+                bannersData,
+                session: req.session
+            });
+        })
     }
     ,
     banners_update: (req, res) => {
 
-        let lastId = 1;
+        let image_Route = req.file.filename;
+        
+        Banner.create({
+            image_Route
+        })
+        .then(() => {
+            res.redirect('/admin/banners')
+        })
+        .catch((err) => console.log("ERROR Agregando Banner: "+err));
 
-        bannersData.forEach(banner => {
-            if(banner.id > lastId){
-                lastId = banner.id
-            }
-        });
-
-        let newBanner = {
-            id: lastId + 1,
-            bannerImage: req.file ? req.file.filename : "default.jpg",
+    }
+    ,
+    searchAdmin: (req, res) => {
+        let buscar = req.query.userSearch;
+        console.log("BUSCAR"+buscar);
+        if(buscar)
+        {
+            User.findAll()
+            .then(UserDB => {
+                let result = [];
+    
+                UserDB.forEach(UserSearch => {
+                    if(UserSearch.name.toLowerCase().includes(req.query.busqueda) || UserSearch.surname.toLowerCase().includes(req.query.busqueda)){
+                        result.push(UserSearch)
+                    }
+                });
+                if(result.length != 0)
+                {
+                    res.render('admin/adminUsersList' , {
+                        usersData : result,
+                        search: req.query.busqueda,
+                        title: req.query.busqueda+' - ',
+                        session: req.session
+                    });
+                }
+                else
+                {
+                    res.render('admin/adminUsersList' , {
+                        usersData : [],
+                        search: req.query.busqueda,
+                        title: req.query.busqueda+' - ',
+                        session: req.session
+                    });
+                }
+            })
         }
-
-        bannersData.push(newBanner);
-        console.log(newBanner);
-
-        writeBannersEdit(bannersData);
-
-        res.redirect('/');
+        else
+        {
+            Product.findAll({
+                include : ["images","Category","Subcategory"]
+            })
+            .then(ProductsDB =>{
+    
+                let result = [];
+    
+                ProductsDB.forEach(ProductSearch => {
+                    if(ProductSearch.name.toLowerCase().includes(req.query.busqueda)){
+                        result.push(ProductSearch)
+                    }
+                });
+    
+                if(result.length != 0)
+                {
+                    res.render('admin/adminPanel' , {
+                        productsData : result,
+                        search: req.query.busqueda,
+                        title: req.query.busqueda+' - ',
+                        session: req.session
+                    });
+                }
+                else
+                {
+                    res.render('admin/adminPanel' , {
+                        productsData : [],
+                        search: req.query.busqueda,
+                        title: req.query.busqueda+' - ',
+                        session: req.session
+                    });
+                }
+            })
+            .catch(error => {
+                console.log("Tenemos un ERROR: "+error);
+            });
+        }        
     }
     ,
     borrar_banner: (req, res) => {
-        bannersData.forEach(bannerToDelete => {
-            if(bannerToDelete.id === +req.params.id){
-                let borrarBanner = bannersData.indexOf(bannerToDelete)
-                bannersData.splice(borrarBanner, 1)
+
+        Banner.destroy({
+            where: {
+                id: req.params.id
             }
         })
+        .then(()=> {
+            res.redirect('/admin/banners');
+        })
+        .catch(errr => {
+            console.log("ERROR AL BORRAR BANNER : "+errr);
+            res.redirect('/admin/banners');
+        })
 
-        writeBannersEdit(bannersData);
-        res.redirect('/admin/banners');
     }
     ,
     borrar_Producto: (req, res) => {
-        productsData.forEach(productToDelete => {
-            if(productToDelete.id === +req.params.id){
-                let sucursalAEliminar = productsData.indexOf(productToDelete)
-                productsData.splice(sucursalAEliminar, 1)
+        Product.findByPk(req.params.id, {
+            include: [{
+                association: "images",
+            }, ],
+        })
+        .then((product) => {
+            for (let i = 0; i < product.images.length; i++) {
+                eliminarImagen(product.images[i].image_Route);
             }
         })
-
-        writeProductEdit(productsData);
-        res.redirect('/admin/lista-productos');
+        .catch((err) => console.log(err))
+        .then(() => {
+            Product.findByPk(req.params.id)
+            .then((product) => {
+                Product_Images.destroy({
+                        where: {
+                            product_Id: product.id
+                        }
+                    })
+                    .then(() => {
+                        Product.destroy({
+                            where: {
+                                id: +req.params.id
+                            }
+                        });
+                    }).catch((err) => {
+                        console.log(err);
+                    });
+            }).catch((err) => console.log(err));
+        }).catch((err) => console.log(err))
+        .then(() => {
+            res.redirect("/admin")
+        }).catch(error => console.log(error))
     }
     ,
     borrar_usuario: (req, res) => {
-        usersData.forEach(userToDelete => {
-            if(userToDelete.id === +req.params.id){
-                let deleteUser = usersData.indexOf(userToDelete)
-                usersData.splice(deleteUser, 1)
+        History.destroy({
+            where: {
+                user_ID: req.params.id
             }
         })
-
-        writeUserEdit(usersData);
-        res.redirect('/admin/usuarios');
+        Cart.destroy({
+            where: {
+                user_ID: req.params.id
+            }
+        })
+        Favorite.destroy({
+            where: {
+                user_ID: req.params.id
+            }
+        })
+        User.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(()=> {
+            res.redirect('/admin/usuarios');
+        })
+        .catch(errr => {
+            console.log("ERROR AL BORRAR USUARIO : "+errr);
+            res.redirect('/admin/usuarios');
+        })
     }
 }

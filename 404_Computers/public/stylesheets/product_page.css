@@ -158,22 +158,32 @@
     cursor: pointer;
 }
 
-.productPageButton button:nth-child(1){
+
+.buyButton{
     background-color: #1dff6c;
 }
 
-.productPageButton button:nth-child(1):hover{
+.buyButton:hover{
     transition: 1s ease;
     background-color: #1dcf5c;
 }
 
-.productPageButton button:nth-child(2){
+.favButton{
     background-color: rgb(87, 30, 245);
 }
 
-.productPageButton button:nth-child(2):hover{
+.favButton:hover{
     transition: 1s ease;
     background-color: rgb(71, 25, 197);
+}
+
+.favButtonDel{
+    background-color: red;
+}
+
+.favButtonDel:hover{
+    transition: 1s ease;
+    background-color: rgb(212, 1, 1);
 }
 
 .socialIconsShare{

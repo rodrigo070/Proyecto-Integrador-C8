@@ -104,7 +104,6 @@ el producto a ser agregado.*/
     max-height: 150px;
     width: 100%;
     border-radius: 10px;
-    text-align: center;
     outline: none;
     padding: 4px;
 }
@@ -167,15 +166,16 @@ el producto a ser agregado.*/
 .imagePreviewSection{
     margin: 0 auto;
     grid-area: previewImageAdd;
+    width: 100%;
 }
 
 #imagePreview{
     display: flex;
     align-items: center;
-    width: 300px;
-    height: 230px;
     background: white;
     border-radius: 1rem;
+    min-height: 180px;
+    width: 60%;
     margin: 15px auto;
     padding: 15px;
     border:1px solid rgba(0, 0, 0, 0.3);

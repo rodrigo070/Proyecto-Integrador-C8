@@ -1,33 +1,33 @@
-module.exports = (sequelize, dataTypes) => {
+module.exports = (sequelize, DataTypes) => {
     let alias = "History";
     let cols = {
         id: {
-            type: dataTypes.INTEGER(11).UNSIGNED,
+            type: DataTypes.INTEGER(10).UNSIGNED,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false 
         },
-        userID: {
-             type: dataTypes.INTEGER(11).UNSIGNED,
+        user_ID: {
+            type: DataTypes.INTEGER(10).UNSIGNED,
             allowNull: false
         },
-       productID: {
-             type: dataTypes.INTEGER(11).UNSIGNED,
+        product_ID: {
+            type: DataTypes.INTEGER(10).UNSIGNED,
             allowNull: false
-        },
-        
+        }
     }
+
     let config = {
-        tableName: "historyProducts",
+        tableName : "history_products",
         timestamps: false
     }
 
     const History = sequelize.define(alias, cols, config)
 
-   History.associate = models => {
+    History.associate = models => {
        History.belongsTo(models.User, {
             as: "User",
-            foreignKey:"userId" 
+            foreignKey:"user_ID" 
         })
     }
 

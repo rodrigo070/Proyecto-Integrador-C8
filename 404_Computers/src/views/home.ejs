@@ -11,24 +11,34 @@
     <%- include('partials/carousel.ejs') %>   
 
         <!-- SECCION MOBILE: Visto Recientemente -->
-        <section class="seccion-general">
-            <a href="/productos/3/21/1">
-                <div class="titulo-articulo"> 
-                    <h3> Visto Recientemente </h3>
+        <% if (typeof session.user != "undefined" && userData.length > 0) { %>
+            <section class="seccion-general">
+                <a href="/productos/<%= lastProduct.Category.category_Link %>/<%= lastProduct.Subcategory.subcategory_Link %>/<%= lastProduct.id%>">
+                    <div class="titulo-articulo"> 
+                        <h3> Visto Recientemente </h3>
+                    </div>
+                    <div>
+                        <img src="/images/products/<%= lastProduct.images[0]?.image_Route %>" alt="<%= lastProduct.name %>">
+                    </div>
+                    <div class="descripcion-articulo">
+                        <p><%= lastProduct.name %></p>
+                        <% if (lastProduct.discount > 0) { %>
+                            <div class="discount_Prices_Box">
+                                <h1>$<%= toThousand(lastProduct.finalPrice) %></h1>
+                                <h1>$<%= toThousand(lastProduct.price) %></h1>
+                            </div>
+                        <% } else { %>
+                            <h1>$<%= toThousand(lastProduct.finalPrice) %></h1>
+                        <% } %>
+                    </div>
+                </a>
+                <hr>
+                <div class="ver-historial-de-busqueda">
+                    <a class="btn_mb_option" href="/historial">Ver Historial de Busqueda</a>
                 </div>
-                <div>
-                    <img src="/images/products/notebook_C.jpg" alt=""> <!-- imagen que se muestra en el articulo -->
-                </div>
-                <div class="descripcion-articulo">
-                    <p>Notebook Lenovo 14P</p>
-                    <h1> $ 58.000 </h1>
-                </div>
-            </a>
-            <hr>
-            <div class="ver-historial-de-busqueda">
-                <h3>Ver Historial de Busqueda</h3>
-            </div>
-        </section>
+            </section>
+        <% } %>
+         
 
         <!-- SECCION MOBILE :ARTICULOS QUE PUEDEN INTERESARTE -->
         <section class="seccion-general">
@@ -38,9 +48,9 @@
 
         <% for( let i = 0; i < 3; i++ ) { %>
             <article class="product_Item_Recommended">
-                <a href="/productos/<%= productsData[i].category %>/<%= productsData[i].subcategory%>/<%= productsData[i].id%>">
+                <a href="/productos/<%= productsData[i].Category.category_Link %>/<%= productsData[i].Subcategory.subcategory_Link %>/<%= productsData[i].id%>">
                     <div class="img">
-                        <img src="/images/products/<%= productsData[i].image[0] %>" alt="">
+                        <img src="/images/products/<%= productsData[i].images[0].image_Route %>" alt="">
                     </div>
                     <div class="descripcion-articulo">
                         <p><%= productsData[i].name %></p>
@@ -78,9 +88,9 @@
             <% for( let i = 3; i < 6; i++ ) { %>
                 
                 <article class="product_Item_Recommended">
-                    <a href="/productos/<%= productsData[i].category %>/<%= productsData[i].subcategory%>/<%= productsData[i].id%>">
+                    <a href="/productos/<%= productsData[i].Category.category_Link %>/<%= productsData[i].Subcategory.subcategory_Link%>/<%= productsData[i].id%>">
                         <div class="img">
-                            <img src="/images/products/<%= productsData[i].image[0] %>" alt="">
+                            <img src="/images/products/<%= productsData[i].images[0].image_Route %>" alt="">
                         </div>
                         <div class="descripcion-articulo">
                             <p><%= productsData[i].name %></p>
@@ -104,61 +114,63 @@
         <!-- SLIDER DE MARCAS (INTEL, GIGABYTE ETC)  -->
         <%- include('partials/sliderBrands.ejs') %>   
 
-        <div class="titulo-seccion-desktop">
-            <h3>Visto Recientemente</h3>
-        </div>
-        <div class="desktopCardsBox">
-            <section class="homeProductBoxCards productListView">
-
-                <% for( let i = 0; i < 6; i++ ) { %>
-                    <article class="products_Page_Article">
-                        <a href="/productos/<%= productsData[i].category %>/<%= productsData[i].subcategory %>/<%=productsData[i].id%>">
-                            <div class="img_Product_Page">
-                                <% if (productsData[i].discount > 1) { %>
-                                    <label><%= productsData[i].discount %>% OFF</label>
-                                <% } %>
-                                <img src="/images/products/<%= productsData[i].image[0] %>" alt="<%= productsData.name %>">
-                            </div>
-                            <div class="description_Article_Page homeProductCard">
-                                <p><%= productsData[i].name %></p>
-                                <div class="prices_Product_Page">
-                                    <% if (productsData[i].discount === 0) { %>
-                                        <p>$<%= toThousand(productsData.price) %></p>
-                                    <% } else { %>
-                                        <p>$<%= toThousand(finalPrice = productsData[i].price - ((productsData[i].price * productsData[i].discount)/100)) %></p>
+        <% if (typeof session.user != "undefined" && userData.length > 0) { %>
+            <div class="titulo-seccion-desktop">
+                <h3>Visto Recientemente</h3>
+            </div>
+            <div class="desktopCardsBox">
+                <section class="homeProductBoxCards productListView">
+    
+                    <% for( let i = 0; i < userData.length; i++ ) { %>
+                        <article class="products_Page_Article">
+                            <a href="/productos/<%= userData[i].Category.category_Link %>/<%= userData[i].Subcategory.subcategory_Link %>/<%=userData[i].id%>">
+                                <div class="img_Product_Page">
+                                    <% if (userData[i].discount > 1) { %>
+                                        <label><%= userData[i].discount %>% OFF</label>
                                     <% } %>
+                                    <img src="/images/products/<%= userData[i].images[0]?.image_Route %>" alt="<%= userData.name %>">
                                 </div>
-                            </div>
-                        </a>
-                    </article>
-                <% } %>
-            </section>
-        </div>
+                                <div class="description_Article_Page homeProductCard">
+                                    <p><%= userData[i].name %></p>
+                                    <div class="prices_Product_Page">
+                                        <% if (userData[i].discount === 0) { %>
+                                            <p>$<%= toThousand(userData[i].price) %></p>
+                                        <% } else { %>
+                                            <p>$<%= toThousand(userData[i].finalPrice) %></p>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    <% } %>
+                </section>
+            </div>
+        <% } %>
 
         <!-- barra que vimos en maximus -->
         <section class="menu-categorias-desktop">
             <div class="seccion">
-            <img src="/images/logos/notebook.svg" alt="">
+                <a href="/productos/oficina/notebooks"><img src="/images/logos/notebook.svg" alt=""></a>
             <h4>Notebook</h4>
             </div>
             <div class="seccion">
-            <img src="/images/logos/mouse.svg" alt="">
+                <a href="/productos/gaming/mouse"><img src="/images/logos/mouse.svg" alt=""></a>
             <h4>Mouse</h4>
             </div>
             <div class="seccion">
-            <img src="/images/logos/auriculares.svg" alt="">
+                <a href="/productos/gaming/auriculares"><img src="/images/logos/auriculares.svg" alt=""></a>
             <h4>Auriculares</h4>
             </div>
             <div class="seccion">
-            <img src="/images/logos/jostyck.svg" alt="">
+                <a href="/productos/gaming/joysticks"><img src="/images/logos/jostyck.svg" alt=""></a>
             <h4>Joysticks</h4>
             </div>
             <div class="seccion">
-            <img src="/images/logos/teclado.svg" alt="">
+                <a href="/productos/gaming/teclados"><img src="/images/logos/teclado.svg" alt=""></a>
             <h4>Teclado</h4>
             </div>
             <div class="seccion">
-            <img src="/images/logos/monitores.svg" alt="">
+                <a href="/productos/gaming/monitores"><img src="/images/logos/monitores.svg" alt=""></a>
             <h4>Monitores</h4>
             </div>
         </section>

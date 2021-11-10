@@ -5,32 +5,34 @@
   <div class="container_Page">
     <%- include('../partials/header.ejs') %>   
     <main>
-      <form action="/login" method="POST">
+      <form action="/login" method="POST" id="form">
         <section class="login_Reg_Container">
             <div class="login_Reg_Box">
                 <section class="titleLogin">
                     <p>Bienvenido!</p>
                 </section>
+                
                 <section class="email_Area_Login">
                     <input type="email" name="email" id="emailUser" placeholder="Ingrese su E-mail: ">
-                    <% if (locals.errors && errors.email) { %>
-                        <small class="error-message"><%= errors.email.msg %></small>
-                    <% } %>
+                    <span class="errorLogReg" id="emailErrors"></span>
                 </section>
                 <section class="password_Area_Login">
                     <input type="password" name="pass" id="passUser" placeholder="Ingrese su Contraseña: ">
-                    <% if (locals.errors && errors.pass) { %>
-                        <small class="error-message"><%= errors.pass.msg %></small>
-                    <% } %>
+                    <i class="fa fa-eye-slash" id="eyeBTNP1" aria-hidden="true" onclick="showPassword(`passUser`,`eyeBTNP1`);"></i>
+                    <span class="errorLogReg" id="passErrors"></span>
                 </section>
+                <% if (locals.errors && errors.email) { %>
+                    <small class="errorLogReg"><%= errors.email.msg %> </small>
+                <% } %>
                 <section class="rememberMe">
                     <input type="checkbox" name="rememberDevice" id="recordar">
                     <label for="recordar"><pre>Recordarme</pre></a></label>
                 </section>
                 <section class="buttonsLoginRegister">
                     <button type="submit">Iniciar Sesion</button>
-                    <button type="reset" onclick="location.href='/registro'">Crear Cuenta</button>
+                    <a href="/registro">Crear Cuenta</a>
                 </section>
+                <span class="errorLogRegSub" id="submitErrors"></span>
                 <section class="goToForgetPassword">
                     <a href="/restablecer_contrasena"><pre>¿Olvidaste tu contraseña? <strong>Hace Click Aqui.</strong></pre></a>
                 </section>
@@ -41,5 +43,7 @@
     </main>
     <%- include('../partials/footer.ejs') %> 
   </div>
+  <script src="/javascripts/userFrontValidator.js"></script>
+  <script src="/javascripts/moment.min.js"></script>
 </body>
 </html>

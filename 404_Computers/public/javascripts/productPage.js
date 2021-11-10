@@ -34,6 +34,13 @@ for(let i = 0; i < images.length; i++){
   }
 }
 
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+    document.body.style.overflowY = "visible";
+  }
+}
+
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 

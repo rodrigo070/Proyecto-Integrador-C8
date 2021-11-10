@@ -25,9 +25,10 @@
                     </div>
                     <form action="">
                         <label>Ordenar Por: </label>
-                        <select name="sortBy" id="sortby">
-                            <option value="lowPrices">Menor Precio</option>
-                            <option value="highPrices">Mayor Precio</option>
+                        <select name="sortBy" id="sortby" onchange="location = this.value;">
+                            <option>Elegir</option>
+                            <option value="/productos/menor">Menor Precio</option>
+                            <option value="/productos/mayor">Mayor Precio</option>
                         </select>
                     </form>
                 </div>
@@ -38,18 +39,18 @@
                 <% products.forEach(product => { %>
                     <article class="products_Page_Article">
 
-                        <a href="/productos/<%= product.Category.categorylink %>/<%= product.Subcategory.subcategorylink %>/<%=product.id%>">
+                        <a href="/productos/<%= product.Category.category_Link %>/<%= product.Subcategory.subcategory_Link %>/<%=product.id%>">
                             <div class="img_Product_Page">
                                 <% if (product.discount > 1) { %>
                                     <label><%= product.discount %>% OFF</label>
                                 <% } %>
-                                <img src="/images/products/<%= product.image0 %>" alt="<%= product.name %>">
+                                <img src="/images/products/<%= product.images[0]?.image_Route %>" alt="<%= product.name %>">
                             </div>
                             <div class="description_Article_Page">
                                 <p><%= product.name %></p>
                                 <div class="prices_Product_Page">
-                                    <% if (product.discount > 0) { %>
-                                        <p>$<%= toThousand(finalPrice = product.price - ((product.price * product.discount)/100)) %></p>
+                                    <% if (product.discount > 1) { %>
+                                        <p>$<%= toThousand(product.finalPrice) %></p>
                                         <p>$<%= toThousand(product.price) %></p>
                                     <% } else { %>
                                         <p>$<%= toThousand(product.price) %></p>

@@ -23,6 +23,22 @@ router.get('/contacto', controller.contact);
 
 router.get('/terminos', controller.terms);
 
+/* Router de Pagina de Privacidad */
+
+router.get('/privacidad', controller.privacy);
+
+/* Router de Pagina de Arrepentimiento de Compra */
+
+router.get('/arrepentimiento-compra', controller.purchaseRegret);
+
+/* Router de Pagina de Venta Mayorista */
+
+router.get('/venta-mayorista', controller.resell);
+
+/* Router de Pagina de Venta Mayorista */
+
+router.get('/preguntas-frecuentes', controller.questions);
+
 /* Router del Buscador de Productos */
 
 router.get('/buscar', controller.search);

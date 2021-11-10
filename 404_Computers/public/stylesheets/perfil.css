@@ -65,7 +65,7 @@
 .perfil-usuario .main-conteiner-pefil{
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
+    margin: 0 auto 30px auto;
     width: 50%;
     background-color: #d3c5ee;
     padding: 20px;
