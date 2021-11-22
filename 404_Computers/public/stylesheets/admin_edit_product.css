@@ -72,7 +72,7 @@
     border-radius: 0.2rem;
     width: 100%;
     height: 200px;
-    padding: 0px 13px 0px 0px;
+    padding: 10px
 }
 
 
@@ -112,47 +112,25 @@
 }
 
 .imgBoxEdit{
-    display: flex;
+    display: grid;
     width: 100%;
     margin: 0 auto;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
 }
 
 .productImageEdit{
-    width: 25%;
-    max-height: 250px;
-    margin:5px;
+    width: 100%;
+    margin:5px 0;
     position: relative;
 }
 
 .productImageEdit img{
     width: 100%;
-    height: 100%;
+    height: 200px;
     object-fit: contain;
     border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 0.5rem;
-}
-
-.productImageEdit .optionBoxP{
-    position: absolute;
-    font-size: 19px;
-    left: 25%;
-    bottom: 35%;
-    gap: 20px;
-    display: flex;
-}
-
-.optionBoxP i{
-    cursor: pointer;
-    color: white;
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    border-radius: 1rem;
-}
-
-.optionBoxP i:hover{
-    color: black;
-    background: rgba(255, 255, 255, 0.8);;
 }
 
 .editProductSaveCancel{
@@ -191,6 +169,15 @@
 
 #uploadNewImage input[type="file"] {
     display: none;
+}
+
+.imagesTitle{
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+.imagesBoxProduct{
+    margin-bottom: 30px;
 }
 
 @media screen and (min-width: 768px){
@@ -249,6 +236,11 @@
     .productImageEdit img{
         padding: 30px;
     }
+
+    .imgBoxEdit{
+        grid-template-columns: repeat(4,1fr);
+    }
+
 }
 
 @media screen and (min-width: 990px){

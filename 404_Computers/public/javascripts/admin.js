@@ -38,7 +38,6 @@ function submitThisForm(event,form) {
 }
 
 let imageEditProduct = document.querySelectorAll("#examinar");
-let formDelOptions = document.querySelectorAll("#formFilledDel");
 
 for (let i = 0; i < imageEditProduct.length; i++) {
     
@@ -55,10 +54,7 @@ for (let i = 0; i < imageEditProduct.length; i++) {
 
             reader.readAsDataURL(imageEditProduct[i].files[0]);
 
-            if(imageRPC[i].src != "/images/products/default.jpg")
-            {
-                formDelOptions[i].style.display = "block !important"
-            }
+            
         }
     })
     
@@ -71,10 +67,6 @@ for (let i = 0; i < deleteImageProduct.length; i++) {
     function deleteImageUploaded(){
         var deleteThisIMG = document.querySelectorAll('#imagePreviewEdit')
         deleteThisIMG[i].src = "/images/products/default.jpg";
-        if(deleteThisIMG[i].src === "/images/products/default.jpg")
-        {
-            formDelOptions[i].style.display = "none !important"
-        }
     })
 }
 

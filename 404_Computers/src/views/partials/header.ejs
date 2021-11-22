@@ -14,8 +14,9 @@
         <nav id="mobile_Nav_Bar" class="mobile_Nav_Bar_Menu">
 
             <% if (typeof session.user != "undefined") { %>
-                <div class="crear-cuenta">
-                    <h2><i class="fa fa-user" aria-hidden="true"></i>¡Bienvenidx Usuarix!</h2>
+                <div class="profileDetailHD">
+                    <img src="/images/users/<%= session.user.image %>" alt="imagen">
+                    <h2>Hola <%= session.user.name %></h2>
                 </div>
 
                 <ul class="menu_Mobile">
