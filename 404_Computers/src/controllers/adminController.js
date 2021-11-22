@@ -506,10 +506,21 @@ module.exports = {
     }
     ,
     borrar_foto_producto: (req, res) => {
-        Product_Images.destroy({
+
+        Product_Images.findOne({
             where: {
                 id: req.params.id
             }
         })
+        .then(delThis => {
+            eliminarImagen(delThis.image_Route);
+
+            Product_Images.destroy({
+                where: {
+                    id: req.params.id
+                }
+            })
+        })
+
     }
 }
