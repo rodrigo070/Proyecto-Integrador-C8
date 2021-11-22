@@ -121,6 +121,7 @@
     width: 25%;
     max-height: 250px;
     margin:5px;
+    position: relative;
 }
 
 .productImageEdit img{
@@ -129,6 +130,29 @@
     object-fit: contain;
     border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 0.5rem;
+}
+
+.productImageEdit .optionBoxP{
+    position: absolute;
+    font-size: 19px;
+    left: 25%;
+    bottom: 35%;
+    gap: 20px;
+    display: flex;
+}
+
+.optionBoxP i{
+    cursor: pointer;
+    color: white;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 1rem;
+}
+
+.optionBoxP i:hover{
+    color: black;
+    background: rgba(255, 255, 255, 0.8);;
 }
 
 .editProductSaveCancel{
@@ -148,6 +172,25 @@
     width: 100px;
     margin: 10px 0;
     font-size: 19px;
+}
+
+#uploadNewImage{
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.noMG{
+    margin: 0 !important;
+}
+
+.delPicBTN{
+    width: 100%;
+}
+
+#uploadNewImage input[type="file"] {
+    display: none;
 }
 
 @media screen and (min-width: 768px){

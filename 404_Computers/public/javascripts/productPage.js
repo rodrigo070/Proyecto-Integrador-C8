@@ -52,11 +52,22 @@ span.onclick = function() {
 
 function fav() {
   var icon = document.getElementById("favBtn");
-    if (icon.classList.contains("fa-heart-o")) {
-      icon.classList.remove("fa-heart-o");
-      icon.classList.add("fa-heart");
-    } else {
-      icon.classList.remove("fa-heart");
-      icon.classList.add("fa-heart-o");
-    }
+  var fav = document.querySelector("#btnFavDel");
+
+  if (icon.classList.contains("fa-heart-o")) {
+    icon.classList.remove("fa-heart-o");
+    icon.classList.add("fa-heart");
+  } else {
+    icon.classList.remove("fa-heart");
+    icon.classList.add("fa-heart-o");
   }
+}
+
+function submitThisForm(event,form) {
+  fetch(form.action, {
+      method:'post',
+      body: new FormData(form)
+  });
+
+  event.preventDefault();
+}

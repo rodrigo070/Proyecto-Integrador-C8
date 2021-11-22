@@ -229,6 +229,41 @@ module.exports = {
         })
     }
     ,
+    borrar_perfil: (req, res) => {
+        History.destroy({
+            where: {
+                user_ID: req.params.id
+            }
+        })
+        Cart.destroy({
+            where: {
+                user_ID: req.params.id
+            }
+        })
+        Favorite.destroy({
+            where: {
+                user_ID: req.params.id
+            }
+        })
+        User.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(()=> {
+            req.session.destroy()
+            if(req.cookies.user404){
+                res.cookie('user404', '', {maxAge: -1})
+            }
+
+            res.redirect('/');
+        })
+        .catch(errr => {
+            console.log("ERROR AL BORRAR PERFIL : "+errr);
+            res.redirect('/editar-perfil');
+        })
+    }
+    ,
     delHistoryProduct: (req, res) => {
         History.destroy({
             where : {

@@ -147,10 +147,10 @@
 
 .description_Article_Page{
     display: grid;
-    grid-template-rows: 32% 23% 45%;
+    grid-template-rows: 35% 25% 40%;
     text-align: left;
     background-image: linear-gradient(180deg, #f0f5fde0 0%, #c2b8f98c 100%);
-    height: 200px;
+    height: 160px;
     width: 100%;
     padding: 10px 25px;
     font-size: 18px;
@@ -182,6 +182,8 @@
     width: 100%;
     text-align: center;
     margin: 5px 0;
+    display: flex;
+    gap: 15px;
 }
 
 .goTo_Add_Item button{
@@ -195,12 +197,15 @@
     padding: 3px;
     cursor: pointer;
     transition: .3s ease;
+    width: 30%;
+    height: 100%;
 }
 
 .goTo_Add_Item button:nth-child(1){
     background-color: #3bff80;
     color: white;
     margin-bottom: 7px;
+    width: 70%;
 }
 
 .goTo_Add_Item button:hover{

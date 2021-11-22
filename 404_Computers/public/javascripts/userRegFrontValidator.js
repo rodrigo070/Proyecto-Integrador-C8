@@ -1,5 +1,3 @@
-/* Funciones de Errores Admin - Editar Usuario */
-
 function qs(element) {
     return document.querySelector(element);
 }
@@ -10,18 +8,15 @@ window.addEventListener("load", function () {
         $inputLastname = qs("#surname"),
         $lastnameErrors = qs("#surnameErrors"),
         $form = qs("#form"),
-        $dni = qs("#dni"),
-        $dniErrors = qs("#dniErrors"),
         $email = qs("#email"),
         $emailErrors = qs("#emailErrors"),
-        $address = qs("#address"),
-        $addressErrors = qs("#addressErrors"),
-        $phoneNumber = qs("#phoneNumber"),
-        $phoneNumberErrors = qs("#phoneNumberErrors"),
-        regExAlpha = /^[a-zA-Z\sñáéíóúü ]*$/,
-        regExDNI = /^[0-9]{8}/,
-        regExPhone = /^[0-9]{11}/,
-        regExEmail = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+        $pass = qs("#pass"),
+        $passErrors = qs("#passErrors"),
+        $passCheck = qs("#passCheck"),
+        $passCheckErrors = qs("#passCheckErrors"),
+        regExAlpha = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{5,}$/,
+        regExEmail = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i,
+        regExPass = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,12}$/;
 
     $inputName.addEventListener("blur", function () {
         switch (true) {
@@ -64,26 +59,6 @@ window.addEventListener("load", function () {
         }
     });
 
-    $dni.addEventListener('blur', function () {
-        switch (true) {
-            case !$dni.value.trim():
-                $dniErrors.innerHTML = 'El campo DNI es obligatorio';
-                $dni.classList.add('is-invalid');
-                $dni.classList.remove("is-valid");
-                break;
-            case !regExDNI.test($dni.value):
-                $dniErrors.innerHTML = 'Debe ingresar un DNI válido';
-                $dni.classList.add('is-invalid');
-                $dni.classList.remove("is-valid");
-                break
-            default:
-                $dni.classList.remove('is-invalid');
-                $dni.classList.add('is-valid');
-                $dniErrors.innerHTML = ''
-                break;
-        }
-    })
-
     $email.addEventListener('blur', function () {
         switch (true) {
             case !$email.value.trim():
@@ -104,37 +79,42 @@ window.addEventListener("load", function () {
         }
     })
 
-    $address.addEventListener('blur', function () {
+    $pass.addEventListener('blur', function() {
         switch (true) {
-            case !$address.value.trim():
-                $addressErrors.innerHTML = 'El campo Domicilio es obligatorio';
-                $address.classList.add('is-invalid')
-                $address.classList.remove("is-valid");
+            case !$pass.value.trim():
+                $passErrors.innerHTML = 'El campo contraseña es obligatorio';
+                $pass.classList.add('is-invalid');
+                $pass.classList.remove("is-valid");
                 break;
+            case !regExPass.test($pass.value):
+                $passErrors.innerHTML = 'La contraseña debe tener: entre 6 o 12 caracteres, al menos una mayúscula, una minúscula y un número';
+                $pass.classList.add('is-invalid');
+                $pass.classList.remove("is-valid");
+                break
             default:
-                $address.classList.remove('is-invalid');
-                $address.classList.add('is-valid');
-                $addressErrors.innerHTML = ''
+                $pass.classList.remove('is-invalid');
+                $pass.classList.add('is-valid');
+                $passErrors.innerHTML = ''
                 break;
         }
     })
 
-    $phoneNumber.addEventListener('blur', function () {
+    $passCheck.addEventListener('blur', function() {
         switch (true) {
-            case !$phoneNumber.value.trim():
-                $phoneNumberErrors.innerHTML = 'El campo Telefono es obligatorio';
-                $phoneNumber.classList.add('is-invalid')
-                $phoneNumber.classList.remove("is-valid");
+            case !$passCheck.value.trim():
+                $passCheckErrors.innerHTML = 'El campo contraseña es obligatorio.';
+                $passCheck.classList.add('is-invalid');
+                $passCheck.classList.remove("is-valid");
                 break;
-            case !regExPhone.test($phoneNumber.value):
-                $phoneNumberErrors.innerHTML = 'Debe ingresar un telefono válido';
-                $phoneNumber.classList.add('is-invalid');
-                $phoneNumber.classList.remove("is-valid");
+            case $pass.value != $passCheck.value:
+                $passCheckErrors.innerHTML = 'Las contraseñas no coinciden.';
+                $passCheck.classList.add('is-invalid');
+                $passCheck.classList.remove("is-valid");
                 break
             default:
-                $phoneNumber.classList.remove('is-invalid');
-                $phoneNumber.classList.add('is-valid');
-                $phoneNumberErrors.innerHTML = ''
+                $passCheck.classList.remove('is-invalid');
+                $passCheck.classList.add('is-valid');
+                $passCheckErrors.innerHTML = ''
                 break;
         }
     })

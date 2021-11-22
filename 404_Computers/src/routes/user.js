@@ -45,4 +45,7 @@ router.get('/carrito', userSessionCheck, controller.cart);
 
 router.delete('/cart_delete/:id', controller.cart_delete);
 
+/* Boton de Eliminar Perfil */
+router.delete('/borrarPerfil/:id', controller.borrar_perfil);
+
 module.exports = router;

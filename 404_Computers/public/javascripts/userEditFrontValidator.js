@@ -146,7 +146,7 @@ window.addEventListener("load", function () {
         let elementosForm = this.elements
 
         for (let index = 0; index < elementosForm.length - 1; index++) {
-            if (elementosForm[index].value == "" || elementosForm[index].classList.contains("is-invalid")) {
+            if (elementosForm[index].value == "" && elementosForm[index].name == "localidad" && elementosForm[index].name == "provincia" || elementosForm[index].classList.contains("is-invalid")) {
                 elementosForm[index].classList.add('is-invalid');
                 submitErrors.innerHTML = "ERROR: Revise los Campos Señalados.";
                 error = true;
@@ -161,3 +161,25 @@ window.addEventListener("load", function () {
     })
 
 });
+
+/* Funciones del modal de Form Delete Msg .etc */
+
+window.addEventListener("load", function() {
+    
+    const element = document.querySelectorAll("#btnDeleteUser");
+    const contentBox = document.querySelectorAll(".modalFormBox");
+    const content = document.querySelectorAll(".modalFormContent");
+    const cancel = document.querySelectorAll(".cancelDeleteBTN");
+
+    for(let i = 0; i < element.length; i++) {
+        element[i].addEventListener('click' , function(){
+            contentBox[i].classList.toggle("formActive");
+            content[i].classList.toggle("formActive");
+        })
+        cancel[i].addEventListener('click' , function(){
+            contentBox[i].classList.toggle("formActive");
+            content[i].classList.toggle("formActive");
+        })
+    }
+
+})

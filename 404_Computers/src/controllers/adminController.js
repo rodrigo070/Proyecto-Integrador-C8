@@ -340,6 +340,14 @@ module.exports = {
 
     }
     ,
+    subir_foto_producto: (req, res) => {
+
+        Product_Images.create({
+            image_Route : req.file.filename,
+            product_Id: req.params.id
+        })
+    }
+    ,
     searchAdmin: (req, res) => {
         let buscar = req.query.userSearch;
         console.log("BUSCAR"+buscar);
@@ -494,6 +502,14 @@ module.exports = {
         .catch(errr => {
             console.log("ERROR AL BORRAR USUARIO : "+errr);
             res.redirect('/admin/usuarios');
+        })
+    }
+    ,
+    borrar_foto_producto: (req, res) => {
+        Product_Images.destroy({
+            where: {
+                id: req.params.id
+            }
         })
     }
 }

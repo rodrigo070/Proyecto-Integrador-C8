@@ -31,6 +31,11 @@ router.put('/editar-usuario/:id', controller.admin_detalle_usuario_editar);
 router.get('/stock', adminSessionCheck, controller.admin_stock);
 router.get('/ofertas', adminSessionCheck, controller.admin_ofertas);
 
+/* POST Carga de Imagen de Edicion de Producto */
+
+router.post('/subir-foto/:id', uploadProductFile.single("image_Route") , controller.subir_foto_producto);
+
+
 /* Boton de Borrar Banner */
 
 router.delete('/borrarBanner/:id', controller.borrar_banner);
@@ -40,5 +45,8 @@ router.delete('/borrarProducto/:id', controller.borrar_Producto);
 
 /* Boton de Eliminar Usuario */
 router.delete('/borrarUsuario/:id', controller.borrar_usuario);
+
+/* Boton de Eliminar Usuario */
+router.delete('/borrarImagenProducto/:id', controller.borrar_foto_producto);
 
 module.exports = router;

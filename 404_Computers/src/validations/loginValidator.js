@@ -4,25 +4,26 @@ const db = require('../database/models');
 const User = db.User;
 
 module.exports = [
-    check('email')
-    .notEmpty()
-    .withMessage('Debe ingresar su E-Mail.'),
 
-    body("custom").custom((value, { req }) => {
+    body("email").custom((value, { req }) => {
         return User.findOne({
             where: {
-                email: req.body.email,
+                email: req.body.email
             },
         })
         .then(user => {
-        if (!bcrypt.compareSync(req.body.pass, user.dataValues.pass)) {
-            return Promise.reject();
-        }
+            if (user.length<1) {
+                return Promise.reject();
+            }
+
+            if (!bcrypt.compareSync(req.body.pass, user.dataValues.pass)) {
+                return Promise.reject();
+            }
         })
         .catch((error) => {
-            return Promise.reject("Credenciales inválidas");
+            return Promise.reject();
         });
     })
-    .withMessage("Usuario no registrado"),
+    .withMessage("ERROR: Credenciales no Validas."),
 
 ]

@@ -5,7 +5,7 @@
   <div class="container_Page">
     <%- include('../partials/header.ejs') %>   
     <main>
-      <form action="/registro" method="POST">
+      <form action="/registro" method="POST" id="form">
           <section class="login_Reg_Container register_box">
               <div class="login_Reg_Box">
                 <section class="titleLogin">
@@ -13,40 +13,34 @@
                 </section>
                 <section class="name_Area_Register">
                     <input type="text" name="name" id="name" placeholder="Nombre: ">
-                    <% if (locals.errors && errors.name) { %>
-                        <small class="error-message"><%= errors.name.msg %> </small>
-                    <% } %>
+                    <span class="errorLogReg" id="nameErrors"></span>
                 </section>
                 <section class="name_Area_Register">
                     <input type="text" name="surname" id="surname" placeholder="Apellido: ">
-                    <% if (locals.errors && errors.surname) { %>
-                        <small class="error-message"><%= errors.surname.msg %> </small>
-                    <% } %>
+                    <span class="errorLogReg" id="surnameErrors"></span>
                 </section>
                 <section class="email_Area_Register">
                     <input type="email" name="email" id="email" placeholder="Correo Electronico:">
                     <% if (locals.errors && errors.email) { %>
-                        <small class="error-message"><%= errors.email.msg %> </small>
+                        <small class="errorLogReg"><%= errors.email.msg %> </small>
                     <% } %>
+                    <span class="errorLogReg" id="emailErrors"></span>
                 </section>
                 <section class="password_Area_Register">
                     <input type="password" name="pass" id="pass" placeholder="Contraseña:">
-                    <% if (locals.errors && errors.pass) { %>
-                        <small class="error-message"><%= errors.pass.msg %> </small>
-                    <% } %>
-                    <i class="fa fa-eye-slash" id="eyeBTNP1" aria-hidden="true" onclick="showPassword(`pass`,`eyeBTNP1`);"></i>                     
+                    <i class="fa fa-eye-slash" id="eyeBTNP1" aria-hidden="true" onclick="showPassword(`pass`,`eyeBTNP1`);"></i>
+                    <span class="errorLogReg" id="passErrors"></span>            
                 </section>
                 <section class="password_Area_Register">
                     <input type="password" name="passCheck" id="passCheck" placeholder="Confirmar Contraseña:">
-                    <% if (locals.errors && errors.passCheck) { %>
-                        <small class="error-message"><%= errors.passCheck.msg %> </small>
-                    <% } %>
-                    <i class="fa fa-eye-slash" id="eyeBTNP2" aria-hidden="true" onclick="showPassword(`passCheck`,`eyeBTNP2`);"></i>                     
+                    <i class="fa fa-eye-slash" id="eyeBTNP2" aria-hidden="true" onclick="showPassword(`passCheck`,`eyeBTNP2`);"></i>  
+                    <span class="errorLogReg" id="passCheckErrors"></span>                   
                 </section>
                 <section class="buttonsLoginRegister">
                     <button type="submit">Crear Cuenta</button>
-                    <button type="reset" onclick="location.href='/login'">Iniciar Sesion</button>
+                    <a href="/login">Iniciar Sesion</a>
                 </section>
+                <span class="errorLogRegSub" id="submitErrors"></span>
                 <section class="termsAndConditions">
                     <pre>"Al Presionar "Crear Cuenta" estas aceptando nuestros <a href="/terminos">Términos y Condiciones."</a>
                     </pre>
@@ -58,5 +52,7 @@
     </main>
     <%- include('../partials/footer.ejs') %> 
   </div>
+  <script src="/javascripts/userRegFrontValidator.js"></script>
+  <script src="/javascripts/moment.min.js"></script>
 </body>
 </html>

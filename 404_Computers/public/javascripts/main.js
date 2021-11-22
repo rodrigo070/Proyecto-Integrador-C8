@@ -55,12 +55,14 @@ function dropSearch(){
     {
         searchBar.style.display = "none";
         burger.classList.remove("is-active");
+        document.body.classList.remove("bNoScroll");
     }
     else
     {
         searchBar.style.display = "block";
         navBar.style.display = "none";
         burger.classList.remove("is-active");
+        document.body.classList.remove("bNoScroll");
     }
 }
 

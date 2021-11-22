@@ -178,12 +178,12 @@
 }
 
 .favButtonDel{
-    background-color: red;
+    background-color: #532ac5;
 }
 
 .favButtonDel:hover{
     transition: 1s ease;
-    background-color: rgb(212, 1, 1);
+    background-color: #42219c;
 }
 
 .socialIconsShare{

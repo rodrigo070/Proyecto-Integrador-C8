@@ -128,10 +128,15 @@
     cursor: pointer;
     border-radius: 0.5rem;
     background: white;
+    font-size: 15px;
 }
 
 .buttonToAddImage i{
     margin-right: 5px;
+}
+
+.buttonToAddImage p{
+    text-align: center;
 }
 
 .previewImageArea{
@@ -146,6 +151,10 @@
 
 .bannerPreview{
     width: 80% !important;
+}
+
+#formFilledDel{
+    display: none;
 }
 
 /* Tablet */

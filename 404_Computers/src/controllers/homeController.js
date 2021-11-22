@@ -25,22 +25,26 @@ module.exports = {
                     include: [{ association: "historyProducts"}] 
                 })
                 .then(user => {
+                    let productsHistory = [];
+                    let lastProduct = [];
 
-                    let productsHistory = []
-
-                    let lastProductSeen = user.historyProducts[user.historyProducts.length-1];
-
-                    productsData.forEach(historyData => {
-                        for (let i = 0; i < user.historyProducts.length; i++) {
-                            if (user.historyProducts[i].product_ID === historyData.id) {
-                                productsHistory.push(historyData)
-                            }
-                        }
-                    });
-                    let lastProduct = []
-                    if(lastProductSeen != null)
+                    if(user)
                     {
-                        lastProduct = productsData.find(historyData => historyData.id === lastProductSeen.product_ID)
+
+                        let lastProductSeen = user.historyProducts[user.historyProducts.length-1];
+    
+                        productsData.forEach(historyData => {
+                            for (let i = 0; i < user.historyProducts.length; i++) {
+                                if (user.historyProducts[i].product_ID === historyData.id) {
+                                    productsHistory.push(historyData)
+                                }
+                            }
+                        });
+                        
+                        if(lastProductSeen != null)
+                        {
+                            lastProduct = productsData.find(historyData => historyData.id === lastProductSeen.product_ID)
+                        }
                     }
 
 

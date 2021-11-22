@@ -8,49 +8,43 @@
     <div class="form-container">
         <h2>Editar mi perfil</h2>
         <hr>
-            <form action="/editar-perfil/<%= user.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+            <form action="/editar-perfil/<%= user.id %>?_method=PUT" method="POST" id="form" enctype="multipart/form-data">
                 <div class="profile-box">
                     <h4 class="profile-subtitle">Avatar</h4>
                     <div class="avatar">
                         <img src="/images/users/<%=user.image %>" alt="<%=user.image %>">
                     </div>
-                    <div class="input-file-container">
-                        <input type="file" name="image" id="">
-                    </div>
+                    <label class="buttonToAddImage">
+                        <input type="file" id="examinar" name="image" accept=".jpg, .png, .webp, .jpeg, .bmp">
+                        <p><i class="fa fa-upload" aria-hidden="true"></i>Cambiar Foto de Perfil</p>
+                    </label>
                 </div>
                 <div class="profile-form">
                     
                     <div class="profile-box">
                         <h4 class="profile-subtitle">Datos personales</h4>
                             <div class="input-container">
-                                <input class="input-style" type="email" name="email" placeholder="Ingrese su email" value="<%=user.email %>">
-                                <% if (locals.errors && errors.email) { %>
-                                    <small class="error-message"><%= errors.email.msg %></small>
-                                <% } %>
+                                <input class="input-style" type="email" id="email" name="email" placeholder="Ingrese su email" value="<%=user.email %>">
+                                <span class="redError" id="emailErrors"></span>
                             </div>
                             <div class="input-container">
-                                <input class="input-style" type="text" name="name" placeholder="Nombre" value="<%=user.name %>">
-                                <% if (locals.errors && errors.name) { %>
-                                    <small class="error-message"><%= errors.name.msg %></small>
-                                <% } %>
+                                <input class="input-style" type="text" id="name" name="name" placeholder="Nombre" value="<%=user.name %>">
+                                <span class="redError" id="nameErrors"></span>
                             </div>
                             <div class="input-container">
-                                <input class="input-style" type="text" name="surname" placeholder="Apellido" value="<%=user.surname %>">
-                                <% if (locals.errors && errors.surname) { %>
-                                    <small class="error-message"><%= errors.surname.msg %></small>
-                                <% } %>
+                                <input class="input-style" type="text" id="surname" name="surname" placeholder="Apellido" value="<%=user.surname %>">
+                                <span class="redError" id="surnameErrors"></span>
                             </div>
                             <div class="input-container">
-                                <input class="input-style" type="number" name="dni" placeholder="DNI" value="<%=user.dni %>">
+                                <input class="input-style" type="number" id="dni" name="dni" placeholder="DNI" value="<%=user.dni %>">
+                                <span class="redError" id="dniErrors"></span>
                             </div>
                     </div>
                     <div class="profile-box">
                         <h4 class="profile-subtitle">Datos de contacto</h4>
                         <div class="input-container">
-                            <input class="input-style" type="tel" name="phone" placeholder="Teléfono" value="<%=user.phone %>">
-                            <% if (locals.errors && errors.phone) { %>
-                                <small class="error-message"><%= errors.phone.msg %></small>
-                            <% } %>
+                            <input class="input-style" type="tel" id="phoneNumber" name="phone" placeholder="Teléfono" value="<%=user.phone %>">
+                            <span class="redError" id="phoneNumberErrors"></span>
                         </div>
                         <div class="input-container">
                            <select name="provincia" class="input-select">
@@ -73,18 +67,31 @@
                             </select>
                         </div>
                         <div class="input-container">
-                            <input class="input-style" type="text" name="address" placeholder="Direccion" value="<%=user.address %>">
-                            <% if (locals.errors && errors.address) { %>
-                                <small class="error-message"><%= errors.address.msg %></small>
-                            <% } %>
+                            <input class="input-style" type="text" id="address" name="address" placeholder="Direccion" value="<%=user.address %>">
+                            <span class="redError" id="addressErrors"></span>
                         </div>
                     </div>
                 </div> 
                 <div class="button-container">
                     <button type="submit" class="btn btn-edit">Guardar</button>
-                </div> 
+                    <span id="btnDeleteUser">Eliminar Perfil</span>
+                </div>
+
+                <span class="redErrorSub" id="submitErrors"></span>
             </form>
+
+            <div class="modalFormBox">
+                <form class="modalFormContent" action="/borrarPerfil/<%- user.id %>?_method=DELETE" method="POST">
+                    <p>Estas Seguro? Se borrara "toda" su informacion.</p>
+                    <button class="cancelDeleteBTN" type="button" title="Cancelar">Cancelar</button>
+                    <button type="submit" title="Borrar Perfil">Confirmar</button>
+                </form>
+            </div>
     </div>
 </main>
     <%- include('../partials/footer.ejs') %> 
+  </div>
+  <script src="/javascripts/userEditFrontValidator.js"></script>
+  <script src="/javascripts/moment.min.js"></script>
+</body>
 </html>

@@ -55,7 +55,8 @@
     font-size: 18px;
     text-indent: 8px;
     outline: none;
-    border-style: none;
+    border: 2px solid;
+    border-color: transparent;
     border-radius: 1rem;
     padding: 5px;
 }
@@ -70,14 +71,15 @@
 {
     margin: 0 auto;
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     position: relative;
 }
 
+.password_Area_Login i,
 .password_Area_Register i{
     position: absolute;
     right: 20px;
-    top: 10px;
+    top: 12px;
 }
 
 .termsAndConditions a{
@@ -117,7 +119,8 @@
     margin-left: 5px;
 }
 
-.buttonsLoginRegister button {
+.buttonsLoginRegister button,
+.buttonsLoginRegister a {
     padding: 10px 10px;
     margin-top: 0;
     margin-bottom: 30px;
@@ -136,18 +139,19 @@
     border: 2px solid transparent;
 }
 
-.buttonsLoginRegister button:nth-child(1){
+.buttonsLoginRegister button{
     margin-left: 0;
     margin-right: auto;
 }
 
-.buttonsLoginRegister button:nth-child(2){
+.buttonsLoginRegister a{
     margin-right: 0;
     margin-left: auto;
     background-image: linear-gradient(to right, #9c4eff 0%, #685fff  51%, #9650ff  100%);
 }
 
-.buttonsLoginRegister button:hover{
+.buttonsLoginRegister button:hover,
+.buttonsLoginRegister a:hover{
     border: 2px solid rgba(255,255,255, 0.3);
 }
 
@@ -193,8 +197,26 @@
 }
 
 /*-----------------------------------------------------------------*/
-/*--------------------- Fin Pagina de Login--- --------------------*/
+/*--------------------- Fin Pagina de Login -----------------------*/
 /*-----------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------*/
+/*----------------- Validaciones Login Register -------------------*/
+/*-----------------------------------------------------------------*/
+
+.errorLogReg{
+    bottom: 0;
+    left: 0;
+    top: 38px;
+    color: white;
+}
+
+.errorLogRegSub{
+    display: flex;
+    margin-bottom: 15px;
+    color: white;
+}
+
 
 /*-----------------------------------------------------------------*/
 /*------------------------- Media Queries -------------------------*/
@@ -221,6 +243,7 @@
         cursor: pointer;
     }
 
+    .buttonsLoginRegister a,
     .buttonsLoginRegister button {
         padding: 10px 15px;
         font-size: 20px;

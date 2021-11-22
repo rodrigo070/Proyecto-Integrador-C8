@@ -85,36 +85,49 @@
     
                         </section>
                     </div>
-                    <div id="addProductImages">
-                        <label class="addImagesButton">
-                            <input type="file" name="image_Route" multiple accept=".jpg, .png, .webp, .jpeg, .bmp">
-                            <p><i class="fa fa-upload" aria-hidden="true"></i> Agregar Imagenes</p>
-                        </label>
-                        <p>Imagenes del Producto</p>
+                    
+                    <div class="editProductSaveCancel">
+                        <button type="submit">Guardar</button>
+                        <button type="reset" onclick="location.href='/admin/lista-productos'">Cancelar</button>
                     </div>
+                </form>
+                <div>
+                    <p>Imagenes del Producto</p>
                     <div class="imgBoxEdit">
                         <% for( let i = 0; i < productToEdit.images.length; i++ ) { %>
                             <section class="productImageEdit">
-                                <img src="/images/products/<%= productToEdit.images[i].image_Route %>" alt="<%= productToEdit.name %>">
+                                <img id="imagePreviewEdit" src="/images/products/<%= productToEdit.images[i].image_Route %>" alt="<%= productToEdit.name %>">
+                                <form id="uploadNewImage" action="/subir-foto/<%- productToEdit.id %>" method="POST" enctype="multipart/form-data" onsubmit="submitThisForm(event,this)">
+                                    <label class="buttonToAddImage noMG delPicBTN">
+                                        <input id="examinar" type="file" name="image_Route" accept=".jpg, .png, .webp, .jpeg, .bmp">
+                                        <p><i class="fa fa-upload" aria-hidden="true"></i>Subir Foto</p>
+                                    </label>
+                                    <button class="buttonToAddImage noMG delPicBTN" type="submit"><p><i class="fa fa-floppy-o" aria-hidden="true"></i>Guardar Foto</p></button>
+                                </form>
+                                <form action="/admin/borrarImagenProducto/<%- productToEdit.images[i].id %>?_method=DELETE" method="POST" onsubmit="submitThisForm(event,this)">
+                                    <button id="delBTNP" class="buttonToAddImage noMG delPicBTN" type="submit"><p><i class="fa fa-trash" aria-hidden="true"></i>Borrar Foto</p></i></button>
+                                </form>
                             </section>
                         <% } %>
     
-                        <% var fillImageBlocks = 4-(productToEdit.images.length) %> 
                         <% if (productToEdit.images.length < 4) { %>
-                            <% for( let i = 0; i < fillImageBlocks; i++ ) { %>
+                            <% for( let i = 0; i < 4-(productToEdit.images.length); i++ ) { %>
                                 <section class="productImageEdit">
-                                    <img src="/images/products/default.jpg" alt="Default">
+                                    <img id="imagePreviewEdit" src="/images/products/default.jpg" alt="Default">
+                                    <form id="uploadNewImage" action="/admin/subir-foto/<%- productToEdit.id %>" method="POST" enctype="multipart/form-data" onsubmit="submitThisForm(event,this)">
+                                        <label class="buttonToAddImage noMG delPicBTN">
+                                            <input id="examinar" type="file" name="image_Route" accept=".jpg, .png, .webp, .jpeg, .bmp">
+                                            <p><i class="fa fa-upload" aria-hidden="true"></i>Subir Foto</p>
+                                        </label>
+                                        <button class="buttonToAddImage noMG delPicBTN" type="submit"><p><i class="fa fa-floppy-o" aria-hidden="true"></i>Guardar Foto</p></button>
+                                    </form>
                                 </section>
                             <% } %>
                         <% } else { %>
                          
                         <% } %>
                     </div>
-                    <div class="editProductSaveCancel">
-                        <button type="submit">Guardar</button>
-                        <button type="reset" onclick="location.href='/admin/lista-productos'">Cancelar</button>
-                    </div>
-                </form>
+                </div>
             </section>
         </section>
     </main>

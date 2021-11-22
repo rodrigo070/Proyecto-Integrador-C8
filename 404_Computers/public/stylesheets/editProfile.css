@@ -18,8 +18,18 @@
     align-items: center;
 }
 
+.profile-box input[type="file"] {
+    display: none;
+}
+
 .profile-box h4 {
     margin-bottom: 1rem;
+}
+
+.input-container{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
 }
 
 .profile .button-container {
@@ -52,7 +62,6 @@
     border-radius: 10px;
     margin: 5px;
     padding: 5px;
-    width: 100%; 
 }
 
 .profile .input-style{
@@ -62,7 +71,7 @@
     border-radius: 10px;
     margin: 5px;
     padding: 5px;
-    width: 100%;     
+    position: relative;
 }
 .profile .button-container {
     text-align: center;
@@ -94,6 +103,19 @@
     color: rgb(172, 172, 172);
     box-shadow: -5px -5px 10px rgb(255, 255, 255, 0.7);
     background: linear-gradient(285deg, rgba(255,255,255,0.5) 0%, #7356de 50%);
+}
+
+.redError{
+    bottom: 0;
+    left: 0;
+    color: red;
+    top: 38px;
+}
+
+.redErrorSub{
+    display: flex;
+    margin-bottom: 15px;
+    color: red;
 }
 
 /* Media queries */
