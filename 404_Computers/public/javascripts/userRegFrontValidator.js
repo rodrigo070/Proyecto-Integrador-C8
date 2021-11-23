@@ -39,7 +39,6 @@ window.addEventListener("load", function () {
     });
 
     $inputLastname.addEventListener("blur", function () {
-        console.log("hola")
         switch (true) {
             case !$inputLastname.value.trim():
                 $lastnameErrors.innerHTML = "El campo apellido es obligatorio";
@@ -122,7 +121,6 @@ window.addEventListener("load", function () {
     $form.addEventListener('submit', function (event) {
         let error = false;
         event.preventDefault()
-        console.log("entramos al Form")
         let elementosForm = this.elements
 
         for (let index = 0; index < elementosForm.length - 1; index++) {

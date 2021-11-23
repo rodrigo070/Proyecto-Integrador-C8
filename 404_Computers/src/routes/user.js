@@ -6,6 +6,7 @@ const registerValidator = require('../validations/registerValidator');
 const userSessionCheck = require('../middlewares/userSessionCheck');
 const userLog = require('../middlewares/userLog');
 const profileCheck = require('../middlewares/profileCheck');
+const userEditCheck = require('../validations/profileEditValidator');
 const uploadProfilePicFile = require("../middlewares/uploadProfilePicFile");
 
 /* Router de Login y Logout */
@@ -34,7 +35,7 @@ router.delete('/delHistoryProduct/:id', controller.delHistoryProduct);
 
 router.get('/editar-perfil', userSessionCheck, controller.editProfile);
 
-router.put('/editar-perfil/:id' ,uploadProfilePicFile.single("image"), controller.updateProfile)
+router.put('/editar-perfil/:id' ,uploadProfilePicFile.single("image"),userEditCheck, controller.updateProfile)
 
 /* Routers de Perfil de Usuario */
 router.get('/perfil/:id', userSessionCheck,profileCheck ,controller.profile);/* cambie la ruta para que en perfil nos muestre los datos del usuario que venga por id */

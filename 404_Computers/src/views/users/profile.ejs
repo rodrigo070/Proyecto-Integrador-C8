@@ -65,7 +65,7 @@
                 <span>Documento:</span>
               </div>
               <div class="indicador-value">
-                <span><%= users.dni ? toDNI(users.dni) : "------" %></span>
+                <span><%= users.dni ? toDNI(users.dni) : "--.---.---" %></span>
               </div>
             </div>
             <div class="info">
@@ -74,7 +74,7 @@
                   <span>Telefono</span>
                 </div>
                 <div class="indicador-value">
-                  <span><%= users.phone ? users.phone : "------" %></span>
+                  <span><%= users.phone ? users.phone : "-- ---- ----" %></span>
                 </div>
               </div>
             </div>
@@ -108,8 +108,8 @@
             <div class="tarjetas-contenedoras">
               <div class="datos-tarjetas">
                 <p><%= users.address ? users.address : "Direccion" %> </p>
-                <p class="info-tarjeta">Buenos Aires(1655<!-- codigo postal -->), Localidad falsa</p>
-                <p class="info-tarjeta"><%= users.name %> <%= users.surname %> - +54 <%= users.phone ? users.phone : "------" %> </p><!-- lo de +54 no se si dejarlo o no por ahora lo dejo mas adelante lo hablamos -->
+                <p class="info-tarjeta">Buenos Aires(1655), Localidad falsa</p>
+                <p class="info-tarjeta"><%= users.name %> <%= users.surname %> - +54 <%= users.phone ? users.phone : "-- ---- ----" %> </p><!-- lo de +54 no se si dejarlo o no por ahora lo dejo mas adelante lo hablamos -->
                </div>
             </div>
             <div class="tarjetas-contenedoras">

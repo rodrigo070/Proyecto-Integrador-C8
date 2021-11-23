@@ -54,7 +54,6 @@ window.addEventListener("load", function () {
     $form.addEventListener('submit', function (event) {
         let error = false;
         event.preventDefault()
-        console.log("entramos al Form")
         let elementosForm = this.elements
 
         for (let index = 0; index < elementosForm.length - 1; index++) {

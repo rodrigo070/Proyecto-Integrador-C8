@@ -26,6 +26,9 @@
                             <div class="input-container">
                                 <input class="input-style" type="email" id="email" name="email" placeholder="Ingrese su email" value="<%=user.email %>">
                                 <span class="redError" id="emailErrors"></span>
+                                <% if (locals.errors && errors.email) { %>
+                                    <small class="redError"><%= errors.email.msg %> </small>
+                                <% } %>
                             </div>
                             <div class="input-container">
                                 <input class="input-style" type="text" id="name" name="name" placeholder="Nombre" value="<%=user.name %>">
@@ -38,6 +41,9 @@
                             <div class="input-container">
                                 <input class="input-style" type="number" id="dni" name="dni" placeholder="DNI" value="<%=user.dni %>">
                                 <span class="redError" id="dniErrors"></span>
+                                <% if (locals.errors && errors.dni) { %>
+                                    <small class="redError"><%= errors.dni.msg %> </small>
+                                <% } %>
                             </div>
                     </div>
                     <div class="profile-box">

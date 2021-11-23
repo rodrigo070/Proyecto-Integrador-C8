@@ -23,15 +23,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(180deg,
-            #f0f5fde0 0%,
-            #aea1fb8c 50%,
-            #e3defb8c 100%);
+    background: #f3eaff;
     border-radius: 13px;
     padding: 20px;
     width: 90%;
     margin: 0 auto;
     margin-bottom: 50px;
+    gap: 20px;
 }
 
 .home_Container .seccion-general .titulo-articulo {
@@ -43,6 +41,10 @@
     font-size: 14px;
     color: white;
     text-align: center;
+}
+
+.titulo-articulo h3{
+    font-size: 19px;
 }
 
 .home_Container .seccion-general div img {
@@ -79,10 +81,41 @@
     color: black;
 }
 
+.ver-historial-de-busqueda{
+    padding: 15px;
+}
+
+.product_Item_Recommended{
+    background: #dfd9ff;
+    padding: 20px;
+    border-radius: 1rem;
+}
+
+.w100{
+    width: 90% !important;
+    height: 40px !important;
+    margin: 0 auto;
+}
+
+.img{
+    position: relative;
+}
+
+.img label{
+    position: absolute;
+    padding: 10px 10px;
+    color: white;
+    background-color: red;
+    font-weight: bold;
+    border-radius: 0 0 0 1rem;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+
 .home_Container .seccion-general hr {
-    background: linear-gradient(90deg, rgb(47, 12, 104), white);
+    background: linear-gradient(90deg, rgb(97 0 255), white);
     height: 2px;
-    margin-bottom: 1rem;
     width: 100%;
     border: none;
 }
@@ -97,7 +130,6 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    border-block: 1px solid;
 }
 
 /*esto contiene los productos mostrados en el home
@@ -111,7 +143,7 @@ con texto incluido*/
 
 .home_Container .seccion-general article div img {
     width: 100%;
-    margin: 20px auto;
+    margin: 0 auto 10px auto;
     background-color: white;
     padding: 20px;
 }
@@ -140,6 +172,10 @@ con texto incluido*/
 
 .home_Container .crear-cuenta a {
     color: black;
+    border-radius: 1rem;
+    padding: 10px;
+    background: white;
+    margin: 10px auto;
 }
 
 .home_Container .crear-cuenta button {

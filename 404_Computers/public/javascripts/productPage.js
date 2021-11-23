@@ -52,8 +52,6 @@ span.onclick = function() {
 
 function fav() {
   var icon = document.getElementById("favBtn");
-  var fav = document.querySelector("#btnFavDel");
-
   if (icon.classList.contains("fa-heart-o")) {
     icon.classList.remove("fa-heart-o");
     icon.classList.add("fa-heart");

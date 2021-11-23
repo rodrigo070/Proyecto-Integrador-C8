@@ -27,12 +27,21 @@
                             </li>
                         <% } %>
                     <% } %>
+
                     <li>
                         <a href="/carrito"><i class="icons_Mobile_Menu fa fa-shopping-cart" aria-hidden="true"></i>Carrito de Compras</a>
+                    </li>
+
+                    <li>
+                        <a href="/perfil/<%= session.user.id %>"><i class="icons_Mobile_Menu fa fa-user" aria-hidden="true"></i>Ver Perfil</a>
                     </li>
     
                     <li>
                         <a href="/favoritos"><i class="icons_Mobile_Menu fa fa-heart"></i>Mis favoritos</a>
+                    </li>
+
+                    <li>
+                        <a href="/historial"><i class="icons_Mobile_Menu fa fa-history"></i>Mi Historial</a>
                     </li>
     
                     <li>
@@ -40,15 +49,11 @@
                     </li>
     
                     <li>
-                        <a href="/historial"><i class="icons_Mobile_Menu fa fa-history"></i>Mi Historial</a>
-                    </li>
-    
-                    <li>
                         <a href="/ofertas"><i class="icons_Mobile_Menu fa fa-percent"></i>Ofertas</a>
                     </li>
                     
                     <li>
-                        <a href="/local"><i class="icons_Mobile_Menu fa fa-location-arrow"></i>Visite Nuestro Local</a>
+                        <a href="/local"><i class="icons_Mobile_Menu fa fa-location-arrow"></i>Local</a>
                     </li>
                     
                     <li>
@@ -59,14 +64,14 @@
                         <a href="/404computers"><i class="icons_Mobile_Menu fa fa-users"></i>Nosotros</a>
                     </li>
                     <li>
-                        <a href="/logout"><i class="icons_Mobile_Menu fa fa-sign-out"></i>Salir</a>
+                        <a href="/logout"><i class="icons_Mobile_Menu fa fa-sign-out"></i>Cerrar Sesión</a>
                     </li>
                 </ul>
             <% } else { %>
                 <div class="crear-cuenta">
-                    <h2>Bienvenido a</h2>
+                    <h2>Bienvenidx a</h2>
                     <h2>404 Computers</h2>
-                    <button type="reset" onclick="location.href='/login'">Iniciar Sesion</button>
+                    <button type="reset" onclick="location.href='/login'">Iniciar Sesión</button>
                     <button type="reset" onclick="location.href='/registro'">Registrarse</button>
                 </div>
 
@@ -81,7 +86,7 @@
                     </li>
                     
                     <li>
-                        <a href="/local"><i class="icons_Mobile_Menu fa fa-location-arrow"></i>Visite Nuestro Local</a>
+                        <a href="/local"><i class="icons_Mobile_Menu fa fa-location-arrow"></i>Local</a>
                     </li>
                     
                     <li>

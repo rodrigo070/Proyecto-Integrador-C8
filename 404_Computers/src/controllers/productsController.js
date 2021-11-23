@@ -342,6 +342,7 @@ module.exports = {
     }
     ,
     favorite_add: (req, res) => {
+
         Favorite.findOne({
             where : {
                 user_ID : req.session.user.id,
@@ -382,11 +383,11 @@ module.exports = {
             }
         })
         .then(()=> {
-            res.redirect('/favoritos');
+            res.redirect("/favoritos");
         })
         .catch(errr => {
             console.log("ERROR AL BORRAR PRODUCTO DE Favoritos : "+errr);
-            res.redirect('/favoritos');
+            res.redirect("/favoritos");
         })
     }
 }

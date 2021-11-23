@@ -22,14 +22,10 @@
                     </div>
                     <div class="descripcion-articulo">
                         <p><%= lastProduct.name %></p>
-                        <% if (lastProduct.discount > 0) { %>
-                            <div class="discount_Prices_Box">
-                                <h1>$<%= toThousand(lastProduct.finalPrice) %></h1>
-                                <h1>$<%= toThousand(lastProduct.price) %></h1>
-                            </div>
-                        <% } else { %>
-                            <h1>$<%= toThousand(lastProduct.finalPrice) %></h1>
-                        <% } %>
+                        <h1>$<%= toThousand(lastProduct.finalPrice) %></h1>
+                        <div class="goTo_Add_Item">
+                            <button class="w100">Ver Producto</button>
+                        </div>
                     </div>
                 </a>
                 <hr>
@@ -50,60 +46,70 @@
             <article class="product_Item_Recommended">
                 <a href="/productos/<%= productsData[i].Category.category_Link %>/<%= productsData[i].Subcategory.subcategory_Link %>/<%= productsData[i].id%>">
                     <div class="img">
+                        <% if (productsData[i].discount > 1) { %>
+                            <label><%= productsData[i].discount %>% OFF</label>
+                        <% } %>
                         <img src="/images/products/<%= productsData[i].images[0].image_Route %>" alt="">
                     </div>
                     <div class="descripcion-articulo">
                         <p><%= productsData[i].name %></p>
-                        <h1>$<%= toThousand(productsData[i].price) %></h1>
-                        <p>Envio Gratis</p>
-                        <p>Hasta 12 Cuotas sin interes</p>
+                        <h1>$<%= toThousand(productsData[i].finalPrice) %></h1>
+                        <div class="goTo_Add_Item">
+                            <button class="w100">Ver Producto</button>
+                        </div>
                     </div>
                 </a>
             </article>
         <% } %>
 
         <div class="ver-mas">
-            <h3>Ver mas productos</h3>
+            <a class="btn_mb_option" href="/productos">Ver mas Productos</a>
         </div>
         </section>
 
-        <!-- crear cuenta -->
-        <div class="crear-cuenta">
-            <h3>¡Crea una cuenta y mejora tu experiencia!</h3>
+        <% if (typeof session.user === "undefined") { %>
+         <!-- crear cuenta -->
+            <div class="crear-cuenta">
+                <h3>¡Crea una cuenta y mejora tu experiencia!</h3>
 
-            <button type="reset" onclick="location.href='/registro'">Crear Cuenta</button>
+                <a href="/registro">Crear Cuenta</a>
 
-            <p>
-                ¿Ya tienes cuenta? 
-                <br>
+                <h4>¿Ya estas Registrado?</h4>
+
                 <a href="/login">Inicia Sesion Aca.</a>
-            </p>
-        </div>
+            </div>
+        <% } %>
 
         <!-- seccion ofertas MOBILE -->
         <section class="seccion-general">
             <div class="titulo-articulo">
                 <h3>Ofertas</h3>
             </div>
-            <% for( let i = 3; i < 6; i++ ) { %>
+            <% for( let i = 3; i < 12; i++ ) { %>
                 
-                <article class="product_Item_Recommended">
-                    <a href="/productos/<%= productsData[i].Category.category_Link %>/<%= productsData[i].Subcategory.subcategory_Link%>/<%= productsData[i].id%>">
-                        <div class="img">
-                            <img src="/images/products/<%= productsData[i].images[0].image_Route %>" alt="">
-                        </div>
-                        <div class="descripcion-articulo">
-                            <p><%= productsData[i].name %></p>
-                            <h1>$<%= toThousand(productsData[i].price) %></h1>
-                            <p>Envio Gratis</p>
-                            <p>Hasta 12 Cuotas sin interes</p>
-                        </div>
-                    </a>
-                </article>
+                <% if (productsData[i].discount > 1) { %>
+                    <article class="product_Item_Recommended">
+                        <a href="/productos/<%= productsData[i].Category.category_Link %>/<%= productsData[i].Subcategory.subcategory_Link%>/<%= productsData[i].id%>">
+                            <div class="img">
+                                <% if (productsData[i].discount > 1) { %>
+                                    <label><%= productsData[i].discount %>% OFF</label>
+                                <% } %>
+                                <img src="/images/products/<%= productsData[i].images[0].image_Route %>" alt="">
+                            </div>
+                            <div class="descripcion-articulo">
+                                <p><%= productsData[i].name %></p>
+                                <h1>$<%= toThousand(productsData[i].price) %></h1>
+                                <div class="goTo_Add_Item">
+                                    <button class="w100">Ver Producto</button>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                <% } %>
 
             <% } %>
             <div class="ver-mas">
-                <h3>Ver mas productos</h3>
+                <a class="btn_mb_option" href="/ofertas">Ver mas productos</a>
             </div>
         </section>
 

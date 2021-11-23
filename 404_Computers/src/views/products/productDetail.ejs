@@ -72,7 +72,7 @@
                     <% } %>
                     <% if (typeof session.user != "undefined") { %>
                         <% if (!favoriteItem) { %>
-                            <form action="/agregar-favorito/<%= product.id %>" method="POST" onsubmit="submitThisForm(event,this)">
+                            <form action="/agregar-favorito/<%= product.id %>" method="POST">
                                 <button id="btnFavDel" class="favButton" title="Agregar a Favoritos" type="submit" onclick="fav();"> Agregar a Favoritos <i id="favBtn" class="fa fa-heart-o"></i></button>
                             </form>
                         <% } else { %>

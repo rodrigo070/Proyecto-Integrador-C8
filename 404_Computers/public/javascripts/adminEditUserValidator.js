@@ -20,7 +20,7 @@ window.addEventListener("load", function () {
         $phoneNumberErrors = qs("#phoneNumberErrors"),
         regExAlpha = /^[a-zA-Z\sñáéíóúü ]*$/,
         regExDNI = /^[0-9]{8}/,
-        regExPhone = /^[0-9]{11}/,
+        regExPhone = /^\d{10}$/,
         regExEmail = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
 
     $inputName.addEventListener("blur", function () {
@@ -44,7 +44,6 @@ window.addEventListener("load", function () {
     });
 
     $inputLastname.addEventListener("blur", function () {
-        console.log("hola")
         switch (true) {
             case !$inputLastname.value.trim():
                 $lastnameErrors.innerHTML = "El campo apellido es obligatorio";
@@ -142,7 +141,6 @@ window.addEventListener("load", function () {
     $form.addEventListener('submit', function (event) {
         let error = false;
         event.preventDefault()
-        console.log("entramos al Form")
         let elementosForm = this.elements
 
         for (let index = 0; index < elementosForm.length - 1; index++) {
