@@ -57,31 +57,39 @@
                     <img src="/images/payments_Logos/ahora1218.svg" alt="Ahora 12 y 18 Cuotas Sin Interes">
                     <label><i class="fas fa-store-alt"></i>Retirar en local gratis</label>
                     <label><i class="fas fa-shipping-fast"></i>Envios a todo el país</label>
-                    <label><i class="far fa-check-circle"></i>En stock</label>
+                    <% if (product.stock > 0) { %>
+                        <label><i class="far fa-check-circle"></i>En Stock</label>
+                    <% } else { %>
+                        <label class="noStock"><i class="far fa-check-circle"></i>Sin Stock</label>
+                    <% } %>
                     <label><i class="fas fa-award"></i>Garantía 12 Meses</label>
                 </div>
 
                 <div class="productPageButton">
-                     
-                    <% if (typeof session.user != "undefined") { %>
-                        <form action="/agregar-carrito/<%= product.id %>" method="POST">
-                            <button class="buyButton" title="Agregar al Carrito" type="submit">Agregar al Carrito <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
-                        </form>
-                    <% } else { %>
-                        <button class="buyButton" title="Agregar al Carrito" onclick="location.href='/login'">Agregar al Carrito <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
-                    <% } %>
-                    <% if (typeof session.user != "undefined") { %>
-                        <% if (!favoriteItem) { %>
-                            <form action="/agregar-favorito/<%= product.id %>" method="POST">
-                                <button id="btnFavDel" class="favButton" title="Agregar a Favoritos" type="submit" onclick="fav();"> Agregar a Favoritos <i id="favBtn" class="fa fa-heart-o"></i></button>
+                    <% if (product.stock > 0) { %>
+                        <% if (typeof session.user != "undefined") { %>
+                            <form action="/agregar-carrito/<%= product.id %>" method="POST">
+                                <button class="buyButton" title="Agregar al Carrito" type="submit">Agregar al Carrito <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
                             </form>
                         <% } else { %>
-                            <form action="/borrar-favorito/<%= product.id %>?_method=DELETE" method="POST">
-                                <button class="favButtonDel" title="Quitar de Favoritos" type="submit" onclick="fav();"> Quitar de Favoritos <i id="favBtn" class="fa fa-heart"></i></button>                            
-                            </form>
+                            <button class="buyButton" title="Agregar al Carrito" onclick="location.href='/login'">Agregar al Carrito <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
                         <% } %>
+                        <% if (typeof session.user != "undefined") { %>
+                            <% if (!favoriteItem) { %>
+                                <form action="/agregar-favorito/<%= product.id %>" method="POST">
+                                    <button id="btnFavDel" class="favButton" title="Agregar a Favoritos" type="submit" onclick="fav();"> Agregar a Favoritos <i id="favBtn" class="fa fa-heart-o"></i></button>
+                                </form>
+                            <% } else { %>
+                                <form action="/borrar-favorito/<%= product.id %>?_method=DELETE" method="POST">
+                                    <button class="favButtonDel" title="Quitar de Favoritos" type="submit" onclick="fav();"> Quitar de Favoritos <i id="favBtn" class="fa fa-heart"></i></button>                            
+                                </form>
+                            <% } %>
+                        <% } else { %>
+                            <button class="favButton" title="Agregar a Favoritos" onclick="location.href='/login'"> Agregar a Favoritos <i id="favBtn" class="fa fa-heart-o"></i></button>                            
+                        <% } %>
+
                     <% } else { %>
-                        <button class="favButton" title="Agregar a Favoritos" onclick="location.href='/login'"> Agregar a Favoritos <i id="favBtn" class="fa fa-heart-o"></i></button>                            
+
                     <% } %>
                      
                 </div>

@@ -1,22 +1,80 @@
 /* Botones de Stock de Carrito */
-/* Code By  Stackfindover */
+/* Code By  Stackfindover , re-edited by 404 Computers Team */
+
+let priceList = document.querySelectorAll("#priceItem");
+let productsSize = document.querySelectorAll("#cartProd");
+let priceChange = document.querySelectorAll("#finalPriceItem");
+let quantity = document.querySelectorAll("#inputCartVal");
+let discount = document.querySelectorAll("#discountVal");
+
+function clearNumber(number){
+    number = number.textContent;
+    return number.replace(".","");
+}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+function calcDiscount(number,discount){
+
+    return number - (number * discount) / 100
+}
+
+function normal(number){
+
+    number = (number.textContent).replace(/[^0-9]/g,'');
+
+    return parseInt(number);
+}
 
 function increaseCount(a, b) {
-  var input = b.previousElementSibling;
-  var value = parseInt(input.value, 10);
-  value = isNaN(value) ? 0 : value;
-  value++;
-  input.value = value;
-}
-  
-function decreaseCount(a, b) {
-  var input = b.nextElementSibling;
-  var value = parseInt(input.value, 10);
-  if (value > 1) {
+    var input = b.previousElementSibling;
+    var value = parseInt(input.value, 10);
     value = isNaN(value) ? 0 : value;
-    value--;
+    value++;
     input.value = value;
-  }
+    let total;
+
+    for (let i = 0; i < productsSize.length; i++) {
+        if(quantity[i].value == value)
+        {
+            if (normal(discount[i])>0) {
+                total = parseFloat(clearNumber(priceList[i])).toFixed(3);
+                total = calcDiscount(total, normal(discount[i]));
+                priceChange[i].innerHTML = numberWithCommas(value * total);
+            }
+            else
+            {
+                priceChange[i].innerHTML = numberWithCommas(value * parseFloat(priceList[i] = (priceList[i].textContent).replace(".","")).toFixed(3));
+            }
+        }
+    }
+}
+
+function decreaseCount(a, b) {
+    var input = b.nextElementSibling;
+    var value = parseInt(input.value, 10);
+    if (value > 1) {
+        value = isNaN(value) ? 0 : value;
+        value--;
+        input.value = value;
+    }
+
+    for (let i = 0; i < productsSize.length; i++) {
+        if(quantity[i].value == value)
+        {
+            if (normal(discount[i])>0) {
+                total = parseFloat(clearNumber(priceList[i])).toFixed(3);
+                total = calcDiscount(total, normal(discount[i]));
+                priceChange[i].innerHTML = numberWithCommas(value * total);
+            }
+            else
+            {
+                priceChange[i].innerHTML = numberWithCommas(value * parseFloat(priceList[i] = (priceList[i].textContent).replace(".","")).toFixed(3));
+            }
+        }
+    }
 }
 
 /* Funcion del Home */
@@ -132,8 +190,8 @@ function shippingCost(){
         {
             finalCost = 1900;
         }
-    
-        fieldToReplace.innerHTML = "$"+finalCost;
+
+        fieldToReplace.innerHTML = "$"+Math.round(finalCost);
     }
     else
     {

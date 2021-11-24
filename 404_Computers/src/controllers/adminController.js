@@ -190,7 +190,8 @@ module.exports = {
                 productToEdit,
                 categoriesData,
                 subCategoriesData,
-                session: req.session
+                session: req.session,
+                data : ""
             });
         })
         .catch((err) => console.log("ERROR Editando Producto: "+err));
@@ -341,7 +342,6 @@ module.exports = {
     }
     ,
     subir_foto_producto: (req, res) => {
-
         Product_Images.create({
             image_Route : req.file.filename,
             product_Id: req.params.id
@@ -350,7 +350,6 @@ module.exports = {
     ,
     searchAdmin: (req, res) => {
         let buscar = req.query.userSearch;
-        console.log("BUSCAR"+buscar);
         if(buscar)
         {
             User.findAll()

@@ -130,6 +130,10 @@
     color: #1dff6c;
 }
 
+.noStock{
+    color: red !important;
+}
+
 .iconDetailProduct i{
     height: 30px;
     width: 30px;
@@ -188,6 +192,7 @@
 
 .socialIconsShare{
     margin: 15px auto;
+    display: none;
 }
 
 .socialIconsShare i{

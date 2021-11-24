@@ -93,6 +93,7 @@
     .favHisPicture img{
         width: 135px;
         height: 130px;
+        object-fit: contain;
     }
 
     .favHisName,

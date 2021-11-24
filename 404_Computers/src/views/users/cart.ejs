@@ -23,7 +23,7 @@
 
                 <% productsData.forEach(productsData => { %>
                     
-                    <section class="item_Product_Box sec_Grid">
+                    <section id="cartProd" class="item_Product_Box sec_Grid">
                         <section class="icon_Plist">
                             <i class="fa fa-minus" aria-hidden="true"></i>
                         </section>
@@ -35,26 +35,28 @@
                                 <button onclick="decreaseCount(event, this)">
                                     <i class="fa fa-minus-circle" aria-hidden="true"></i>
                                 </button>
-                                <input type="number" value="1">
+                                <input id="inputCartVal" type="number" value="1" readonly="readonly">
                                 <button onclick="increaseCount(event, this)">
                                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                 </button>
                             </div>
                         </section>
                         <section>
-                            <p>$<%= toThousand(productsData.price) %></p>
+                            <p>$</p>
+                            <p id="priceItem"><%= toThousand(productsData.price) %></p>
                         </section>
                         <section>
                             <% if (productsData.discount) { %>
                                 <div class="discount_Tag_Plist">
-                                    <%= productsData.discount %>% OFF
+                                    <p id="discountVal"><%= productsData.discount %>% OFF</p>
                                 </div>
                             <% } else { %>
-                                
+                                <p id="discountVal"></p>
                             <% } %>
                         </section>
                         <section>
-                            <p>$<%= toThousand(productsData.finalPrice) %></p>
+                            <p>$</p>
+                            <p id="finalPriceItem"><%= toThousand(productsData.finalPrice) %></p>
                         </section>
                         <section>
                             <form class="delete_Plist" action="/cart_delete/<%- productsData.id %>?_method=DELETE" method="POST">
@@ -117,12 +119,18 @@
                             <input type="number" placeholder="Numero de la Tarjeta">
                             <div>
                                 <select name="yearCard" id="">
-                                    <option value="2021">2021</option> 
                                     <option value="2022">2022</option>
                                     <option value="2023">2023</option> 
                                     <option value="2024">2024</option> 
                                     <option value="2025">2025</option> 
-                                    <option value="2026">2026</option> 
+                                    <option value="2026">2026</option>
+                                    <option value="2027">2027</option> 
+                                    <option value="2028">2028</option> 
+                                    <option value="2029">2029</option> 
+                                    <option value="2030">2030</option>
+                                    <option value="2031">2031</option> 
+                                    <option value="2032">2032</option> 
+                                    <option value="2033">2033</option> 
                                 </select>
 
                                 <select name="monthCard" id="">
@@ -145,16 +153,19 @@
                         </section>
                         <section class="cashSection tabContent" id="cashTab">
                             <p>Podes Retirarlo y Pagar en efectivo en nuestro local de Lunes a Sabados de 8hs a 22hs.</p>
-                            <button>Confirmar</button>
+                            <p>Hace Click abajo para confirmar tu pedido y retirarlo en nuestro Local.</p>
+                            <button>Continuar</button>
                         </section>
                         <section class="mpSection tabContent" id="mpTab">
                             <p>Ahora podes abonar con Mercadopago : Seras redirigido a un link de MercadoPago al hacer click en el boton de abajo.</p>
+                            <p>Una vez realizado el pago y confirmado en nuestro sistema, Podra ver el estado de su compra en : <a href="/mis-compras">Mis Compras.</a></p>
                             <button>Pagar con MercadoPago</button>
                         </section>
                     </div>
                 </section>
                 <section class="buySection">
                     <button>Comprar</button>
+                    <a href="/productos">Seguir Comprando</a>
                 </section>
             </div>
         </div>

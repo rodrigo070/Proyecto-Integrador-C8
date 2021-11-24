@@ -477,9 +477,11 @@ header {
     }
 
     .column_Catg a:hover{
-        padding: 13px 13px 13px 5px;
-        background-color: whitesmoke;
+        padding: 13px 13px 13px 25px;
+        background-color: black;
+        color: white;
         transition: 0.1s ease-in-out;
+        border-radius: 0.5rem;
     }
 
     .column_Catg a i{

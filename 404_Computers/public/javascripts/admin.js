@@ -69,4 +69,3 @@ for (let i = 0; i < deleteImageProduct.length; i++) {
         deleteThisIMG[i].src = "/images/products/default.jpg";
     })
 }
-

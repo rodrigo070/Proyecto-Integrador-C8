@@ -33,13 +33,13 @@
     margin-top: 10px !important;
     border-radius: 0.6rem;
     padding: 5px 10px;
-    background-color: red !important;
+    background-color: rgb(47, 0, 255) !important;
     color: white;
     border-style: none;
 }
 
 .modalFormContent button:hover {
-    background-color: rgb(219, 0, 0) !important;
+    background-color: rgb(77, 0, 219) !important;
 }
 
 .modalFormContent button:nth-of-type(1) {

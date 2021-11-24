@@ -158,10 +158,6 @@
     color: #353535;
 }
 
-.description_Article_Page p:nth-child(1){
-    overflow : hidden;
-}
-
 .prices_Product_Page{
     padding-top: 5px;
     font-size: 21px;
