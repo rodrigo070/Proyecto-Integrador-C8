@@ -245,6 +245,16 @@ con texto incluido*/
     padding-top: 20px !important;
 }
 
+.catg_All{
+    text-align: center !important;
+    margin: 15px auto 0 auto
+}
+
+.catg_All:hover{
+    background-color: black;
+    color: white;
+}
+
 /* 
 en desarrollo
 
@@ -473,12 +483,19 @@ en desarrollo
     .home_Container .menu-categorias-desktop .seccion {
         text-align: center;
         font-size: 20px;
+        height: 100%;
+        width: 100%;
     }
 
     .home_Container .menu-categorias-desktop .seccion img {
-        padding: 10px;
+        padding: 30px;
         width: 100%;
         cursor: pointer;
+        transition: all .5s;
+    }
+
+    .home_Container .menu-categorias-desktop .seccion img:hover {
+        padding: 15px;
     }
 
     .home_Container .titulo-seccion-desktop h3 {

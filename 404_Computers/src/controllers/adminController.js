@@ -294,6 +294,27 @@ module.exports = {
         });
     }
     ,
+    admin_sin_stock: (req, res) => {
+        
+        Product.findAll({
+            where : {
+                stock : {
+                    [Op.lt]: 1,
+                }
+            },
+            include : ["images","Category","Subcategory"]
+        })
+        .then(productsData =>{
+            res.render('admin/adminPanel' , {
+                productsData,
+                session: req.session
+            });
+        })
+        .catch(error => {
+            console.log("Tenemos un ERROR: "+error);
+        });
+    }
+    ,
     admin_ofertas: (req, res) => {
 
         Product.findAll({

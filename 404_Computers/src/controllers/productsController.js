@@ -328,7 +328,7 @@ module.exports = {
                     res.redirect("/carrito");
                 })
                 .catch(errr => {
-                    console.log("ERROR Al Agregar a Carrito");
+                    console.log("ERROR Al Agregar a Carrito Nuevo Producto");
                 })
             }
             else

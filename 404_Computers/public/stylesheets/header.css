@@ -427,10 +427,10 @@ header {
         display: none;
         position: absolute;
         background-color: white;
-        min-width: 80%;
+        min-width: 100%;
         top: 100px;
-        right: 90px;
-        left: 90px;
+        right: 0;
+        left: 0;
     }
 
     .dropdown_Categories a{
@@ -617,6 +617,13 @@ header {
     .search_Categ_Area{
         width: 50%;
     }
+
+    .dropdown_Categories{
+        min-width: 80%;
+        right: 90px;
+        left: 90px;
+    }
+
 
     .desktop_Bar_Options ul{
         margin-left: 10px;
