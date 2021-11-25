@@ -273,16 +273,6 @@ con texto incluido*/
     padding-top: 20px !important;
 }
 
-.catg_All{
-    text-align: center !important;
-    margin: 15px auto 0 auto
-}
-
-.catg_All:hover{
-    background-color: black;
-    color: white;
-}
-
 /* 
 en desarrollo
 

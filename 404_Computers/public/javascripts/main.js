@@ -218,4 +218,9 @@ function showPassword(passSection, eyeBTN) {
 function formAnim(){
     document.querySelector(".contactPage").style.display = "none";
     document.querySelector(".messageSent").style.display = "block";
+    setTimeout(function() {
+        location.reload()
+    }, 10000);
+    /* se recarga luego de 10 segundos */
+    setTimeout();
 }
