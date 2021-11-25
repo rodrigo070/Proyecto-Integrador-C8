@@ -1,19 +1,41 @@
 <!DOCTYPE html>
 <html lang="es">
 <%- include('partials/head.ejs' ,{title: 'Contacto - '}) %>
+<head>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function () {
+      emailjs.init("user_csJQ1J53DEYbKoeClzgsS");
+    })();
+  </script>
+  <script type="text/javascript">
+    window.onload = function () {
+      document.getElementById('contact_form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        // these IDs from the previous steps
+        emailjs.sendForm('service_ycov8es', 'template_mn8vjt3', this)
+          .then(function () {
+            console.log('Mensaje Enviado!');
+          }, function (error) {
+            console.log('Error al Enviar...', error);
+          });
+      });
+    }
+  </script>
+</head>
 <body>
   <div class="container_Page">
     <%- include('partials/header.ejs') %>   
     <main>
         <section class="contactPage">
-            <section class="contactContent">
+            <form id="contact_form" class="contactContent">
                 <div class="titles">Contactanos</div>
-                <input type="text" id="nameContact" placeholder="Nombre y Apellido">
-                <input type="email" id="emailContact" name="emailContact" placeholder="Email">
+                <input type="text" id="nameContact" placeholder="Nombre y Apellido" name="nameContact" required>
+                <input type="email" id="emailContact" name="emailContact" placeholder="Email" required>
                 <input type="tel" id="phoneContact" name="phoneContact" placeholder="N° De Telefono">
-                <textarea name="messageContact" id="messageContact" cols="40" rows="5" placeholder="Tu Mensaje" style="resize: none;"></textarea>
-                <button>Enviar Mensaje</button>
-            </section>
+                <textarea name="messageContact" id="messageContact" cols="40" rows="5" placeholder="Tu Mensaje" style="resize: none;" required></textarea>
+                <button type="submit">Enviar Mensaje</button>
+            </form>
         </section>
     </main>
     <%- include('partials/footer.ejs') %> 
