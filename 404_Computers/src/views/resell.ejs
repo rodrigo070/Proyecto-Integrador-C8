@@ -27,8 +27,11 @@
   <div class="container_Page">
     <%- include('partials/header.ejs') %>   
     <main>
+      <div class="messageSent">
+        <p>Mensaje Enviado <i class="fa fa-check-circle-o" aria-hidden="true"></i></p>
+      </div>
       <section class="contactPage">
-        <form id="contact_form" class="contactContent">
+        <form id="contact_form" class="contactContent" onsubmit="formAnim()">
             <div class="titles">Solicitá Cotización</div>
             <input type="text" id="nameContact" placeholder="Titular o Empresa" required>
             <input type="email" id="emailContact" name="emailContact" placeholder="Email" required>

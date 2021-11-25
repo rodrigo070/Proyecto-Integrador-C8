@@ -27,8 +27,11 @@
   <div class="container_Page">
     <%- include('partials/header.ejs') %>   
     <main>
+      <div class="messageSent">
+        <p>Mensaje Enviado <i class="fa fa-check-circle-o" aria-hidden="true"></i></p>
+      </div>
       <section class="contactPage">
-        <form id="contact_form" class="contactContent">
+        <form id="contact_form" class="contactContent" onsubmit="formAnim()">
             <div class="titles">Completa el Formulario</div>
             <input type="text" id="nameContact" placeholder="Nombre y Apellido" name="nameContact" required>
             <input type="email" id="emailContact" name="emailContact" placeholder="Email" required>

@@ -214,3 +214,8 @@ function showPassword(passSection, eyeBTN) {
         icon.classList.add("fa-eye-slash");
     }
 }
+
+function formAnim(){
+    document.querySelector(".contactPage").style.display = "none";
+    document.querySelector(".messageSent").style.display = "block";
+}

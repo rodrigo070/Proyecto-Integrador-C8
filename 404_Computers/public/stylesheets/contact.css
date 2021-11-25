@@ -1,5 +1,6 @@
 
 .contactPage{
+    transition: all 8s;
     margin: 30px auto;
     width: 100%;
 }
