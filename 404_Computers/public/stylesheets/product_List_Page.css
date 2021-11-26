@@ -2,7 +2,8 @@
     display: grid;
     grid-template-areas: 
     'opciones'
-    'vista';
+    'vista'
+    'paginas';
     grid-template-columns: 100%;
     width: 100%;
 }
@@ -209,13 +210,36 @@
     color: white;
 }
 
+.pagesBox{
+    grid-area: paginas;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 10px auto;
+    gap: 10px;
+    width: 100%;
+}
+
+.pagesBox a{
+    border: 1px solid black;
+    background: white;
+    color: black;
+    border-radius: 0.5rem;
+    padding: 10px;
+}
+
+.pagesBox a:hover{
+    background: whitesmoke;
+}
+
 /* Tablet */
 
 @media screen and (min-width: 768px){
     .product_Page_Grid{
         grid-template-areas: 
         'categorias opciones'
-        'categorias vista';
+        'categorias vista'
+        'categorias paginas';
         grid-template-columns: 25% 75%;
     }
 

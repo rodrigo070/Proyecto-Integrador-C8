@@ -129,9 +129,11 @@ module.exports = {
     ,
     categories: (req, res) => {
 
+        let quantityProducts = 3;
+
         Category.findOne({
             where : {
-                category_Link : req.params.category
+                category_Link : req.params.category,
             }
         })
         .then(categoryPage => {
@@ -141,9 +143,22 @@ module.exports = {
             let products = Product.findAll({
                 include :  ["images","Category","Subcategory"],
                 where : {
-                    product_Category : categoryPage.id
-                }
+                    product_Category : categoryPage.id,
+                },
+                offset : 0,
+                limit : quantityProducts,
             })
+
+            if (+req.query.page>1) {
+                products = Product.findAll({
+                    include :  ["images","Category","Subcategory"],
+                    where : {
+                        product_Category : categoryPage.id,
+                    },
+                    offset : +req.query.page,
+                    limit : quantityProducts,
+                })
+            }
 
             let subcategories = Subcategory.findAll({
                 where : {
