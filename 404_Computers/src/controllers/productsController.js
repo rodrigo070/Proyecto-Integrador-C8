@@ -12,9 +12,9 @@ const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 module.exports = {
     productsList: (req, res) => {
-        const quantityProducts = 9;
+        let quantityProducts = 9;
         let pagesCount = Product.findAll()
-
+        let pageActive = 0;
         const categories = Category.findAll()
         let products = Product.findAll({
             include : ["images","Category","Subcategory"],
@@ -28,21 +28,33 @@ module.exports = {
                 offset : quantityProducts*(+req.query.page-1),
                 limit : quantityProducts,
             })
+            pageActive = +req.query.page-1;
         }
-
+    
+        
         Promise.all([products,categories,pagesCount,quantityProducts])
         .then(([products,categories,pagesCount,quantityProducts]) =>{
-
-            res.render('products/productsList' , {
-                products,
-                categories,
-                quantityProducts,
-                pagesCount : pagesCount.length,
-                subCategoriesFiltered : 0,
-                title : 'Productos - ',
-                session: req.session,
-                toThousand
-            });
+            
+            if (+req.query.page > pagesCount.length/quantityProducts+1) {
+                res.render('errorPage' , {
+                    error: "La Pagina a la cual intenta acceder no existe",
+                    session: req.session
+                })
+            }
+            else
+            {
+                res.render('products/productsList' , {
+                    products,
+                    categories,
+                    quantityProducts,
+                    pagesCount : pagesCount.length,
+                    pageActive,
+                    subCategoriesFiltered : 0,
+                    title : 'Productos - ',
+                    session: req.session,
+                    toThousand
+                });
+            }
         })
         .catch(error => {
             console.log("Tenemos un ERROR: "+error);
@@ -145,6 +157,7 @@ module.exports = {
     categories: (req, res) => {
 
         let quantityProducts = 3;
+        let pageActive = 0;
 
         Category.findOne({
             where : {
@@ -179,6 +192,7 @@ module.exports = {
                     offset : quantityProducts*(+req.query.page-1),
                     limit : quantityProducts,
                 })
+                pageActive = +req.query.page-1;
             }
 
             let subcategories = Subcategory.findAll({
@@ -190,18 +204,29 @@ module.exports = {
             Promise.all([categoryPage,categories, products,subcategories,pagesCount,quantityProducts])
             .then(([categoryPage,categories, products,subcategories,pagesCount,quantityProducts]) => {
                 
-                res.render('products/productsList', {
-                    products,
-                    categories,
-                    pagesCount : pagesCount.length+1,
-                    quantityProducts,
-                    title : categoryPage.category_Name+" - ",
-                    linkOfCategory : req.params.category,
-                    subCategoriesFiltered : 1,
-                    subcategories,
-                    session: req.session,
-                    toThousand
-                });
+                if (+req.query.page > pagesCount.length/quantityProducts+1) {
+                    res.render('errorPage' , {
+                        error: "La Pagina a la cual intenta acceder no existe",
+                        session: req.session
+                    })
+                }
+                else
+                {
+
+                    res.render('products/productsList', {
+                        products,
+                        categories,
+                        pagesCount : pagesCount.length+1,
+                        pageActive,
+                        quantityProducts,
+                        title : categoryPage.category_Name+" - ",
+                        linkOfCategory : req.params.category,
+                        subCategoriesFiltered : 1,
+                        subcategories,
+                        session: req.session,
+                        toThousand
+                    });
+                }
             })
             .catch(error => {
                 console.log("Tenemos un ERROR: "+error);
@@ -219,6 +244,7 @@ module.exports = {
     subCategories: (req, res) => {
 
         let quantityProducts = 3;
+        let pageActive = 0;
 
         Subcategory.findOne({
             where : {
@@ -253,6 +279,7 @@ module.exports = {
                     offset : quantityProducts*(+req.query.page-1),
                     limit : quantityProducts,
                 })
+                pageActive = +req.query.page-1;
             }
 
             let subcategories = Subcategory.findAll({
@@ -264,18 +291,28 @@ module.exports = {
             Promise.all([subcategoryPage,categories, products,subcategories,pagesCount,quantityProducts])
             .then(([subcategoryPage,categories, products,subcategories,pagesCount,quantityProducts]) => {
                 
-                res.render('products/productsList', {
-                    products,
-                    categories,
-                    pagesCount : pagesCount.length+1,
-                    quantityProducts,
-                    title : subcategoryPage.subcategory_Name+" - ",
-                    linkOfCategory : req.params.category,
-                    subCategoriesFiltered : 1,
-                    subcategories,
-                    session: req.session,
-                    toThousand
-                });
+                if (+req.query.page > pagesCount.length/quantityProducts+1) {
+                    res.render('errorPage' , {
+                        error: "La Pagina a la cual intenta acceder no existe",
+                        session: req.session
+                    })
+                }
+                else
+                {
+                    res.render('products/productsList', {
+                        products,
+                        categories,
+                        pagesCount : pagesCount.length+1,
+                        pageActive,
+                        quantityProducts,
+                        title : subcategoryPage.subcategory_Name+" - ",
+                        linkOfCategory : req.params.category,
+                        subCategoriesFiltered : 1,
+                        subcategories,
+                        session: req.session,
+                        toThousand
+                    });
+                }
             })
             .catch(error => {
                 console.log("Tenemos un ERROR: "+error);

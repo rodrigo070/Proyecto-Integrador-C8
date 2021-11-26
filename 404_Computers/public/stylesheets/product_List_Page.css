@@ -227,6 +227,7 @@
     color: black;
     border-radius: 0.5rem;
     padding: 10px;
+    height: 48px;
 }
 
 .pagesBox a:hover{
