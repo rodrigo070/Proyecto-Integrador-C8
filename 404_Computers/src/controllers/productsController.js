@@ -140,6 +140,12 @@ module.exports = {
 
             let categories = Category.findAll()
 
+            let pagesCount = Product.findAll({
+                where: {
+                    product_Category : categoryPage.id,
+                }
+            })
+
             let products = Product.findAll({
                 include :  ["images","Category","Subcategory"],
                 where : {
@@ -166,12 +172,13 @@ module.exports = {
                 }
             })
 
-            Promise.all([categoryPage,categories, products,subcategories])
-            .then(([categoryPage,categories, products,subcategories]) => {
+            Promise.all([categoryPage,categories, products,subcategories,pagesCount])
+            .then(([categoryPage,categories, products,subcategories,pagesCount]) => {
                 
                 res.render('products/productsList', {
                     products,
                     categories,
+                    pagesCount : pagesCount.length,
                     title : categoryPage.category_Name+" - ",
                     linkOfCategory : req.params.category,
                     subCategoriesFiltered : 1,
