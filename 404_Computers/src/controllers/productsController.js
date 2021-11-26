@@ -12,17 +12,32 @@ const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 module.exports = {
     productsList: (req, res) => {
+        const quantityProducts = 9;
+        let pagesCount = Product.findAll()
 
         const categories = Category.findAll()
-        const products = Product.findAll({
-            include : ["images","Category","Subcategory"]
+        let products = Product.findAll({
+            include : ["images","Category","Subcategory"],
+            offset : 0,
+            limit : quantityProducts,
         })
-        Promise.all([products,categories])
-        .then(([products,categories]) =>{
+
+        if (+req.query.page>1) {
+            products = Product.findAll({
+                include : ["images","Category","Subcategory"],
+                offset : quantityProducts*(+req.query.page-1),
+                limit : quantityProducts,
+            })
+        }
+
+        Promise.all([products,categories,pagesCount,quantityProducts])
+        .then(([products,categories,pagesCount,quantityProducts]) =>{
 
             res.render('products/productsList' , {
                 products,
                 categories,
+                quantityProducts,
+                pagesCount : pagesCount.length,
                 subCategoriesFiltered : 0,
                 title : 'Productos - ',
                 session: req.session,

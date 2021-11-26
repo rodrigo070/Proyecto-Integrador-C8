@@ -67,7 +67,7 @@
                 <% }) %>
             </section>
             <section class="pagesBox">
-                <% for( let i = 0; i < Math.round(pagesCount/3)+1; i++ ) { %>
+                <% for( let i = 0; i < Math.round(pagesCount/quantityProducts); i++ ) { %>
                     <a href="?page=<%= [i+1] %>">Pag <%= [i+1] %></a>
                 <% } %>
             </section>
