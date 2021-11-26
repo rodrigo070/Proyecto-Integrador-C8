@@ -218,6 +218,8 @@ module.exports = {
     ,
     subCategories: (req, res) => {
 
+        let quantityProducts = 3;
+
         Subcategory.findOne({
             where : {
                 subcategory_Link : req.params.subcategory
@@ -227,12 +229,31 @@ module.exports = {
 
             let categories = Category.findAll()
 
-            let products = Product.findAll({
-                include :  ["images","Category","Subcategory"],
+            let pagesCount = Product.findAll({
                 where : {
                     product_Subcategory : subcategoryPage.id
                 }
             })
+
+            let products = Product.findAll({
+                include :  ["images","Category","Subcategory"],
+                where : {
+                    product_Subcategory : subcategoryPage.id
+                },
+                offset : 0,
+                limit : quantityProducts,
+            })
+
+            if (+req.query.page>1) {
+                products = Product.findAll({
+                    include :  ["images","Category","Subcategory"],
+                    where : {
+                        product_Subcategory : subcategoryPage.id
+                    },
+                    offset : quantityProducts*(+req.query.page-1),
+                    limit : quantityProducts,
+                })
+            }
 
             let subcategories = Subcategory.findAll({
                 where : {
@@ -240,12 +261,14 @@ module.exports = {
                 }
             })
 
-            Promise.all([subcategoryPage,categories, products,subcategories])
-            .then(([subcategoryPage,categories, products,subcategories]) => {
+            Promise.all([subcategoryPage,categories, products,subcategories,pagesCount,quantityProducts])
+            .then(([subcategoryPage,categories, products,subcategories,pagesCount,quantityProducts]) => {
                 
                 res.render('products/productsList', {
                     products,
                     categories,
+                    pagesCount : pagesCount.length+1,
+                    quantityProducts,
                     title : subcategoryPage.subcategory_Name+" - ",
                     linkOfCategory : req.params.category,
                     subCategoriesFiltered : 1,
