@@ -78,6 +78,15 @@
     margin: 20px auto;
 }
 
+.btnDel{
+    border-radius: 1rem;
+    background: #e74460;
+    padding: 7px;
+    color: white;
+    cursor: pointer;
+    border: 2px solid #767676;
+}
+
 /* .profile .btn-reset {
     background:  linear-gradient(45deg,#d379dd 0%, #a547af 50%);
     color: rgb(75, 75, 75);

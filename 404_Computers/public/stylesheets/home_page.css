@@ -2,33 +2,6 @@
 /*----------------------- Pagina Principal ------------------------*/
 /*-----------------------------------------------------------------*/
 
-.messageSent{
-    display: none;
-    background-color: white;
-    color: black;
-    transition: all 2s;
-    font-size: 25px;
-    position: absolute;
-    text-align: center;
-    left: 50%;
-    top: 50%;
-    width: 225px;
-    padding: 40px 0px;
-    transform: translate(-50%,-50%) scale(1.2);
-    border-radius: 1rem;
-    border: 2px solid black;
-    animation-name: zoomBox;
-    animation-duration: 0.7s;
-}
-
-@keyframes zoomBox {
-    from {
-        transform: translate(-50%,-50%) scale(0.5);
-    }
-    to {
-        transform: translate(-50%,-50%) scale(1.2);
-    }
-  }
 
 .btn_mb_option {
     border: 1px solid #0000004f;
