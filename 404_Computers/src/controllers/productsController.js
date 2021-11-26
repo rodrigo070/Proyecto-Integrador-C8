@@ -176,7 +176,7 @@ module.exports = {
                     where : {
                         product_Category : categoryPage.id,
                     },
-                    offset : +req.query.page+1,
+                    offset : quantityProducts*(+req.query.page-1),
                     limit : quantityProducts,
                 })
             }
@@ -187,13 +187,14 @@ module.exports = {
                 }
             })
 
-            Promise.all([categoryPage,categories, products,subcategories,pagesCount])
-            .then(([categoryPage,categories, products,subcategories,pagesCount]) => {
+            Promise.all([categoryPage,categories, products,subcategories,pagesCount,quantityProducts])
+            .then(([categoryPage,categories, products,subcategories,pagesCount,quantityProducts]) => {
                 
                 res.render('products/productsList', {
                     products,
                     categories,
-                    pagesCount : pagesCount.length,
+                    pagesCount : pagesCount.length+1,
+                    quantityProducts,
                     title : categoryPage.category_Name+" - ",
                     linkOfCategory : req.params.category,
                     subCategoriesFiltered : 1,
