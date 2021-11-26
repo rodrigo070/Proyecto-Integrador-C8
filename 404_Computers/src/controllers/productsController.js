@@ -155,7 +155,7 @@ module.exports = {
                     where : {
                         product_Category : categoryPage.id,
                     },
-                    offset : +req.query.page,
+                    offset : +req.query.page+1,
                     limit : quantityProducts,
                 })
             }
