@@ -406,25 +406,91 @@ module.exports = {
     ,
     offers: (req, res) => {
         
+        let order = "ASC";
+        let orderURL = "";
+        
+        if (req.query.order != undefined) {
+            if(!+req.query.order) {
+                orderURL = "&order=0";
+            }
+            else
+            {
+                order = "DESC";
+                orderURL = "&order=1";
+            }
+        }
+        else
+        {
+            orderURL = "";
+        }
+        
+
+        let quantityProducts = 9;
+        let pagesCount = Product.findAll({
+            where : {
+                discount : {
+                    [Op.gt]: 0, 
+                }
+            }
+        })
+        let pageActive = 0;
+
         const categories = Category.findAll()
-        const products = Product.findAll({
+        let products = Product.findAll({
             where : {
                 discount : {
                     [Op.gt]: 0, 
                 }
             },
-            include : ["images","Category","Subcategory"]
+            include : ["images","Category","Subcategory"],
+            offset : 0,
+            limit : quantityProducts,
+            order: [
+                ["finalPrice", order]
+            ]
         })
-        Promise.all([products,categories])
-        .then(([products,categories]) =>{
-            res.render('products/productsList' , {
-                products,
-                categories,
-                subCategoriesFiltered : 0,
-                title : 'Ofertas - ',
-                session: req.session,
-                toThousand
-            });
+
+        if (+req.query.page>1) {
+            products = Product.findAll({
+                where : {
+                    discount : {
+                        [Op.gt]: 0, 
+                    }
+                },
+                include : ["images","Category","Subcategory"],
+                offset : quantityProducts*(+req.query.page-1),
+                limit : quantityProducts,
+                order: [
+                    ["finalPrice", order]
+                ]
+            })
+            pageActive = +req.query.page-1;
+        }
+
+        Promise.all([products,categories,pagesCount,quantityProducts])
+        .then(([products,categories,pagesCount,quantityProducts]) =>{
+            
+            if (+req.query.page > pagesCount.length/quantityProducts+1) {
+                res.render('errorPage' , {
+                    error: "La Pagina a la cual intenta acceder no existe",
+                    session: req.session
+                })
+            }
+            else
+            {
+                res.render('products/productsList' , {
+                    products,
+                    categories,
+                    quantityProducts,
+                    pagesCount : pagesCount.length,
+                    pageActive,
+                    orderURL,
+                    subCategoriesFiltered : 0,
+                    title : 'Ofertas - ',
+                    session: req.session,
+                    toThousand
+                });
+            }
         })
         .catch(error => {
             console.log("Tenemos un ERROR: "+error);
