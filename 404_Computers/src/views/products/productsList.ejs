@@ -70,7 +70,7 @@
                 <% for( let i = 0; i < Math.round(pagesCount/quantityProducts); i++ ) { %>
 
                     <% if (pageActive === i) { %>
-                        <a href="?page=<%= [i+1] %>" style="background-color: #877cff; color: white;">Pag <%= [i+1] %></a>
+                        <a style="background-color: #877cff; color: white; user-select: none;">Pag <%= [i+1] %></a>
                     <% } else { %>
                         <a href="?page=<%= [i+1] %>">Pag <%= [i+1] %></a>
                     <% } %>
