@@ -6,14 +6,6 @@ const controller = require('../controllers/productsController.js')
 
 router.get('/productos', controller.productsList);
 
-/* Orden Productos menor a mayor */
-
-router.get('/productos/menor', controller.order_low);
-
-/* Orden Productos Mayor a menor */
-
-router.get('/productos/mayor', controller.order_high);
-
 /* Router de Agregar Producto a Carrito */
 
 router.post('/agregar-carrito/:id', controller.cart_add);

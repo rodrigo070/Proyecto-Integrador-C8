@@ -12,6 +12,25 @@ const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 module.exports = {
     productsList: (req, res) => {
+        let order = "ASC";
+        let orderURL = "";
+        
+        if (req.query.order != undefined) {
+            if(!+req.query.order) {
+                orderURL = "&order=0";
+            }
+            else
+            {
+                order = "DESC";
+                orderURL = "&order=1";
+            }
+        }
+        else
+        {
+            orderURL = "";
+        }
+        
+
         let quantityProducts = 9;
         let pagesCount = Product.findAll()
         let pageActive = 0;
@@ -20,6 +39,9 @@ module.exports = {
             include : ["images","Category","Subcategory"],
             offset : 0,
             limit : quantityProducts,
+            order: [
+                ["finalPrice", order]
+            ]
         })
 
         if (+req.query.page>1) {
@@ -27,6 +49,9 @@ module.exports = {
                 include : ["images","Category","Subcategory"],
                 offset : quantityProducts*(+req.query.page-1),
                 limit : quantityProducts,
+                order: [
+                    ["finalPrice", order]
+                ]
             })
             pageActive = +req.query.page-1;
         }
@@ -49,6 +74,7 @@ module.exports = {
                     quantityProducts,
                     pagesCount : pagesCount.length,
                     pageActive,
+                    orderURL,
                     subCategoriesFiltered : 0,
                     title : 'Productos - ',
                     session: req.session,
@@ -156,6 +182,24 @@ module.exports = {
     ,
     categories: (req, res) => {
 
+        let order = "ASC";
+        let orderURL = "";
+        
+        if (req.query.order != undefined) {
+            if(!+req.query.order) {
+                orderURL = "&order=0";
+            }
+            else
+            {
+                order = "DESC";
+                orderURL = "&order=1";
+            }
+        }
+        else
+        {
+            orderURL = "";
+        }
+
         let quantityProducts = 3;
         let pageActive = 0;
 
@@ -181,6 +225,9 @@ module.exports = {
                 },
                 offset : 0,
                 limit : quantityProducts,
+                order: [
+                    ["finalPrice", order]
+                ]
             })
 
             if (+req.query.page>1) {
@@ -191,6 +238,9 @@ module.exports = {
                     },
                     offset : quantityProducts*(+req.query.page-1),
                     limit : quantityProducts,
+                    order: [
+                        ["finalPrice", order]
+                    ]
                 })
                 pageActive = +req.query.page-1;
             }
@@ -218,6 +268,7 @@ module.exports = {
                         categories,
                         pagesCount : pagesCount.length+1,
                         pageActive,
+                        orderURL,
                         quantityProducts,
                         title : categoryPage.category_Name+" - ",
                         linkOfCategory : req.params.category,
@@ -242,6 +293,24 @@ module.exports = {
     }
     ,
     subCategories: (req, res) => {
+
+        let order = "ASC";
+        let orderURL = "";
+        
+        if (req.query.order != undefined) {
+            if(!+req.query.order) {
+                orderURL = "&order=0";
+            }
+            else
+            {
+                order = "DESC";
+                orderURL = "&order=1";
+            }
+        }
+        else
+        {
+            orderURL = "";
+        }
 
         let quantityProducts = 3;
         let pageActive = 0;
@@ -268,6 +337,9 @@ module.exports = {
                 },
                 offset : 0,
                 limit : quantityProducts,
+                order: [
+                    ["finalPrice", order]
+                ]
             })
 
             if (+req.query.page>1) {
@@ -278,6 +350,9 @@ module.exports = {
                     },
                     offset : quantityProducts*(+req.query.page-1),
                     limit : quantityProducts,
+                    order: [
+                        ["finalPrice", order]
+                    ]
                 })
                 pageActive = +req.query.page-1;
             }
@@ -304,6 +379,7 @@ module.exports = {
                         categories,
                         pagesCount : pagesCount.length+1,
                         pageActive,
+                        orderURL,
                         quantityProducts,
                         title : subcategoryPage.subcategory_Name+" - ",
                         linkOfCategory : req.params.category,
@@ -346,56 +422,6 @@ module.exports = {
                 categories,
                 subCategoriesFiltered : 0,
                 title : 'Ofertas - ',
-                session: req.session,
-                toThousand
-            });
-        })
-        .catch(error => {
-            console.log("Tenemos un ERROR: "+error);
-        });
-    }
-    ,
-    order_low: (req, res) => {
-        const categories = Category.findAll()
-        const products = Product.findAll({
-            include : ["images","Category","Subcategory"],
-            order: [
-                ["finalPrice", "ASC"]
-            ]
-        })
-        Promise.all([products,categories])
-        .then(([products,categories]) =>{
-
-            res.render('products/productsList' , {
-                products,
-                categories,
-                subCategoriesFiltered : 0,
-                title : 'Menor A Mayor - ',
-                session: req.session,
-                toThousand
-            });
-        })
-        .catch(error => {
-            console.log("Tenemos un ERROR: "+error);
-        });
-    }
-    ,
-    order_high: (req, res) => {
-        const categories = Category.findAll()
-        const products = Product.findAll({
-            include : ["images","Category","Subcategory"],
-            order: [
-                ["finalPrice", "DESC"]
-            ]
-        })
-        Promise.all([products,categories])
-        .then(([products,categories]) =>{
-
-            res.render('products/productsList' , {
-                products,
-                categories,
-                subCategoriesFiltered : 0,
-                title : 'Mayor a Menor - ',
                 session: req.session,
                 toThousand
             });
