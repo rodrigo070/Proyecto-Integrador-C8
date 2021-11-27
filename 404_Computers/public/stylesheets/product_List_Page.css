@@ -56,9 +56,7 @@
     background-color: black;
     color: white;
     margin-left: 20px;
-}
-.categories_SidePanel a:hover:nth-child(1){
-    margin: 0;
+    padding-left: 20px;
 }
 
 .optionsSidePanel{
@@ -99,7 +97,7 @@
     min-height: calc(100vh/2);
     border-radius: 0 0 1rem 1rem;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    background: -webkit-linear-gradient(top,rgba(235,235,235,0) 0%,rgba(235,235,235,1) 100%);
+    background: -webkit-linear-gradient(top,rgba(235,235,235,0) 0%,rgb(251 250 255) 100%);
 }
 
 .products_Page_Article{
@@ -114,7 +112,7 @@
 }
 
 .products_Page_Article:hover{
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px #9c8affbe;
     border-radius: 0.5rem;
 }
 
@@ -210,6 +208,10 @@
     color: white;
     margin-bottom: 7px;
     width: 70%;
+}
+
+.goTo_Add_Item button:nth-child(1):hover{
+    background-color: #26f66f;
 }
 
 .goTo_Add_Item button:hover{
