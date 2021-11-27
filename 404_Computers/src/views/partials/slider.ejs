@@ -10,11 +10,7 @@
                         <img src="/images/products/<%= productSlider.images[0]?.image_Route %>">
                         <div class="productRecommendedDescription">
                             <p><%= productSlider.name %></p>
-                            <% if (productSlider.discount === 0) { %>
-                                <p>$<%= toThousand(productSlider.price) %></p>
-                            <% } else { %>
-                                <p>$<%= toThousand(productSlider.price - ((productSlider.price * productSlider.discount)/100)) %></p>
-                            <% } %>
+                            <p>$<%= toThousand(productSlider.finalPrice) %></p>
                             <button>Ver Producto</button>
                         </div>
                     </a>

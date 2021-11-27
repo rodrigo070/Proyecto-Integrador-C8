@@ -124,33 +124,7 @@
             <div class="titulo-seccion-desktop">
                 <h3>Visto Recientemente</h3>
             </div>
-            <div class="desktopCardsBox">
-                <section class="homeProductBoxCards productListView">
-    
-                    <% for( let i = 0; i < userData.length; i++ ) { %>
-                        <article class="products_Page_Article">
-                            <a href="/productos/<%= userData[i].Category.category_Link %>/<%= userData[i].Subcategory.subcategory_Link %>/<%=userData[i].id%>">
-                                <div class="img_Product_Page">
-                                    <% if (userData[i].discount > 1) { %>
-                                        <label><%= userData[i].discount %>% OFF</label>
-                                    <% } %>
-                                    <img src="/images/products/<%= userData[i].images[0]?.image_Route %>" alt="<%= userData.name %>">
-                                </div>
-                                <div class="description_Article_Page homeProductCard">
-                                    <p><%= userData[i].name %></p>
-                                    <div class="prices_Product_Page">
-                                        <% if (userData[i].discount === 0) { %>
-                                            <p>$<%= toThousand(userData[i].price) %></p>
-                                        <% } else { %>
-                                            <p>$<%= toThousand(userData[i].finalPrice) %></p>
-                                        <% } %>
-                                    </div>
-                                </div>
-                            </a>
-                        </article>
-                    <% } %>
-                </section>
-            </div>
+            <%- include('partials/historySlider.ejs') %>  
         <% } %>
 
         <!-- barra que vimos en maximus -->

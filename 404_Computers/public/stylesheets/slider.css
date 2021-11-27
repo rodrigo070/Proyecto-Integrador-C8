@@ -15,6 +15,7 @@
 	height: 100px;
 	overflow: hidden;
 }
+
 .sliderBrands{
     width:90%;
     margin:0px auto;
@@ -85,6 +86,8 @@
     text-align:center;
 	background-color: #ffffff;
 }
+
+.historyProductsSlider,
 .sliderProducts{
     width:90%;
     margin:0px auto 20px auto;
@@ -147,6 +150,8 @@
 	transform: scale(1.1);
 }
 
+#button_Right_Slider3,
+#button_Left_Slider3,
 #button_Left_Slider1,
 #button_Right_Slider1{
 	position: absolute;
@@ -156,14 +161,18 @@
 	width: 20%;
 }
 
+#button_Left_Slider3,
 #button_Left_Slider1{
 	left: 0;
 }
 
+#button_Right_Slider3,
 #button_Right_Slider1{
 	right: 0;
 }
 
+#button_Right_Slider3 i,
+#button_Left_Slider3 i,
 #button_Left_Slider1 i,
 #button_Right_Slider1 i{
 	color: rgb(0, 0, 0);
@@ -184,6 +193,8 @@
 		height: 120px;
 	}
 
+	#button_Right_Slider3,
+	#button_Left_Slider3,
 	#button_Left_Slider1,
     #button_Right_Slider1{
         width: 17%;
@@ -195,6 +206,8 @@
 		height: 130px;
 	}
 
+	#button_Right_Slider3,
+	#button_Left_Slider3,
 	#button_Left_Slider1,
     #button_Right_Slider1{
         width: 15%;
@@ -206,6 +219,8 @@
 		height: 160px;
 	}
 
+	#button_Right_Slider3,
+	#button_Left_Slider3,
 	#button_Left_Slider1,
     #button_Right_Slider1{
         width: 13%;
@@ -217,6 +232,8 @@
 		height: 150px;
 	}
 
+	#button_Right_Slider3,
+	#button_Left_Slider3,
 	#button_Left_Slider1,
     #button_Right_Slider1{
         width: 12%;
@@ -260,6 +277,8 @@
 		font-size: 18px;
 	}
 
+	#button_Right_Slider3,
+	#button_Left_Slider3,
     #button_Left_Slider1,
     #button_Right_Slider1{
         width: 11%;
@@ -303,6 +322,8 @@
 		font-size: 22px;
 	}
 
+	#button_Right_Slider3,
+	#button_Left_Slider3,
     #button_Left_Slider1,
     #button_Right_Slider1{
         width: 8%;
