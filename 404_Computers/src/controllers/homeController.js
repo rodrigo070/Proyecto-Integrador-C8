@@ -53,6 +53,7 @@ module.exports = {
                         productsData,
                         bannersData,
                         lastProduct,
+                        pageURL : "productos",
                         userData : productsHistory,
                         sliderProducts : productsData,
                         session: req.session,
@@ -66,7 +67,7 @@ module.exports = {
                     productsData,
                     bannersData,
                     userData : [],
-                    pageURL : "productos"+req.url,
+                    pageURL : "productos",
                     sliderProducts : productsData,
                     session: req.session,
                     toThousand
@@ -80,49 +81,57 @@ module.exports = {
     ,
     location: (req, res) => {
         res.render('location',{
-            session: req.session
+            session: req.session,
+            pageURL : "productos"
         });
     }
     ,
     contact: (req, res) => {
         res.render('contact',{
-            session: req.session
+            session: req.session,
+            pageURL : "productos"
         });
     }
     ,
     about: (req, res) => {
         res.render('404computers',{
-            session: req.session
+            session: req.session,
+            pageURL : "productos"
         });
     }
     ,
     terms: (req, res) => {
         res.render('termsAndCond',{
-            session: req.session
+            session: req.session,
+            pageURL : "productos"
         });
     }
     ,
     privacy: (req, res) => {
         res.render('privacy',{
-            session: req.session
+            session: req.session,
+            pageURL : "productos"
         });
     }
     ,
     purchaseRegret: (req, res) => {
         res.render('purchaseRegret',{
-            session: req.session
+            session: req.session,
+            pageURL : "productos"
         });
     }
     ,
     resell: (req, res) => {
         res.render('resell',{
-            session: req.session
+            session: req.session,
+            pageURL : "productos"
         });
     }
     ,
     questions: (req, res) => {
         res.render('frequentQA',{
-            session: req.session
+            session: req.session,
+            pageURL : "productos"
         });
     }
 }

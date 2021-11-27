@@ -74,6 +74,7 @@ module.exports = {
                         res.render('products/productDetail' , {
                             product,
                             sliderProducts,
+                            pageURL : "http://"+req.headers.host+"/productos",
                             favoriteItem,
                             session: req.session,
                             toThousand
@@ -86,6 +87,7 @@ module.exports = {
                         product,
                         sliderProducts,
                         favoriteItem : -1,
+                        pageURL : "http://"+req.headers.host+"/productos",
                         session: req.session,
                         toThousand
                     })
@@ -108,7 +110,18 @@ module.exports = {
 
         let order = "ASC";
         let orderURL = "";
-        
+        let offers;
+        let offersURL = "";
+
+        if (req.query.offers != undefined) {
+            offers = 1;
+            offersURL = "&offers=1"
+        }
+        else
+        {
+            offers = 0;
+        }
+
         if (req.query.order != undefined) {
             if(!+req.query.order) {
                 orderURL = "&order=0";
@@ -204,6 +217,51 @@ module.exports = {
             }
         }
 
+        if(offers)
+        {   
+            products = Product.findAll({
+                where : {
+                    discount : {
+                        [Op.gt]: 0, 
+                    }
+                },
+                include : ["images","Category","Subcategory"],
+                offset : 0,
+                limit : quantityProducts,
+                order: [
+                    ["finalPrice", order]
+                ]
+            })
+
+            pagesCount = Product.findAll({
+                where : {
+                    discount : {
+                        [Op.gt]: 0, 
+                    }
+                },
+                include : ["images","Category","Subcategory"],
+                order: [
+                    ["finalPrice", order]
+                ]
+            });
+
+            if (+req.query.page>0){
+                products = Product.findAll({
+                    where : {
+                        discount : {
+                            [Op.gt]: 0, 
+                        }
+                    },
+                    include : ["images","Category","Subcategory"],
+                    offset : quantityProducts*(+req.query.page-1),
+                    limit : quantityProducts,
+                    order: [
+                        ["finalPrice", order]
+                    ]
+                })
+            }
+        }
+
         Promise.all([products,categories,pagesCount,quantityProducts])
         .then(([products,categories,pagesCount,quantityProducts]) =>{
 
@@ -229,6 +287,7 @@ module.exports = {
                     pageActive,
                     searchQuery,
                     orderURL,
+                    offersURL,
                     pageURL : req.url,
                     subCategoriesFiltered : 0,
                     title : 'Productos - ',
@@ -415,6 +474,7 @@ module.exports = {
         .catch(() => {
             res.render('errorPage' , {
                 error: "La Categoria a la cual intenta acceder no existe o fue removida de la pagina.",
+                pageURL : "http://"+req.headers.host+"/productos",
                 session: req.session
             });
         });
@@ -591,6 +651,7 @@ module.exports = {
         .catch(error => {
             res.render('errorPage' , {
                 error: "La Sub Categoria a la cual intenta acceder no existe o fue removida de la pagina.",
+                pageURL : "http://"+req.headers.host+"/productos",
                 session: req.session
             });
         });

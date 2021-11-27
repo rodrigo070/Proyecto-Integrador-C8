@@ -44,7 +44,8 @@ app.use('/admin', adminRouter)
 app.use((req, res, next) => {
   res.status(404).render('errorPage', {
     error: "ERROR 404: La Pagina a la cual intenta acceder no existe o fue removida del sistema.",
-    session: req.session
+    session: req.session,
+    pageURL : "productos"
   });
 })
 

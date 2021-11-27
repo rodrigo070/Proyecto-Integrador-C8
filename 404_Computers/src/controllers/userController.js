@@ -14,6 +14,7 @@ const toDNI = n => n.toString().replace(/\d(?=(?:\d{3})+$)/g, '$&.');
 module.exports = {
     login: (req, res) => {
         res.render('users/login',{
+            pageURL : "productos",
             session: req.session
         });
     },
@@ -27,6 +28,7 @@ module.exports = {
         }).then((user) => {
             res.render("users/editProfile", {
                 user,
+                pageURL : "productos",
                 session: req.session,
             });
         });
@@ -74,6 +76,7 @@ module.exports = {
             res.render('users/profile',{
                 users,
                 toDNI,
+                pageURL : "productos",
                 session: req.session
             });
         })
@@ -126,6 +129,7 @@ module.exports = {
 	},
     register: (req, res) => {
         res.render('users/register',{
+            pageURL : "productos",
             session: req.session
         });
     }
@@ -188,6 +192,7 @@ module.exports = {
 
                 res.render("users/favorites" , {
                     productsData : result,
+                    pageURL : "productos",
                     session: req.session,
                     toThousand
                 })
@@ -222,6 +227,7 @@ module.exports = {
 
                 res.render("users/history" , {
                     productsData : result,
+                    pageURL : "productos",
                     session: req.session,
                     toThousand
                 })
@@ -307,6 +313,7 @@ module.exports = {
                 res.render("users/cart" , {
                     productsData : result,
                     sliderProducts,
+                    pageURL : "productos",
                     session: req.session,
                     toThousand
                 })
@@ -351,7 +358,6 @@ module.exports = {
         if(req.cookies.user404){
             res.cookie('user404', '', {maxAge: -1})
         }
-
         res.redirect('/')
     }
 }

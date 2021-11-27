@@ -27,8 +27,9 @@
                         <label>Ordenar Por: </label>
                         <select name="sortBy" id="sortby" onchange="location = this.value;">
                             <option>Elegir</option>
-                            <option value="?order=0<%= searchQuery %>">Menor Precio</option>
-                            <option value="?order=1<%= searchQuery %>">Mayor Precio</option>
+                            <option value="?offers=1<%= searchQuery %><%= offersURL %>">Ver Ofertas</option>
+                            <option value="?order=0<%= searchQuery %><%= offersURL %>">Menor Precio</option>
+                            <option value="?order=1<%= searchQuery %><%= offersURL %>">Mayor Precio</option>
                         </select>
                     </form>
                 </div>
@@ -75,7 +76,7 @@
                         <% if (pageActive === i) { %>
                             <a style="background-color: #877cff; color: white; user-select: none;">Pag <%= [i+1] %></a>
                         <% } else { %>
-                            <a href="?page=<%= [i+1]%><%= orderURL %><%= searchQuery %>">Pag <%= [i+1] %></a>
+                            <a href="?page=<%= [i+1]%><%= orderURL %><%= searchQuery %><%= offersURL %>">Pag <%= [i+1] %></a>
                         <% } %>
     
                     <% } %>
