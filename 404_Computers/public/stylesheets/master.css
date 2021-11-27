@@ -250,7 +250,7 @@ a {
   .whatsapp_Box{
     display: block;
     position: fixed;
-    z-index: 404;
+    z-index: 404000000;
     bottom: 4%;
     right: 3%;
   }
