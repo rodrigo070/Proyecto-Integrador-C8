@@ -110,6 +110,7 @@ module.exports = {
 
         let order = "ASC";
         let orderURL = "";
+
         let offers;
         let offersURL = "";
 
@@ -260,6 +261,60 @@ module.exports = {
                     ]
                 })
             }
+
+            /* Busqueda con Ofertas */
+
+            if(req.query.search != undefined)
+            {
+                searchQuery = "&search="+req.query.search;
+                searchWord = req.query.search.toLowerCase();
+                
+                products = Product.findAll({
+                    where: {
+                        name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%'),
+                        discount : {
+                            [Op.gt]: 0, 
+                        }
+                    },
+                    include : ["images","Category","Subcategory"],
+                    offset : 0,
+                    limit : quantityProducts,
+                    order: [
+                        ["finalPrice", order]
+                    ]
+                })
+
+                pagesCount = Product.findAll({
+                    where: {
+                        name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%'),
+                        discount : {
+                            [Op.gt]: 0, 
+                        }
+                    },
+                    include : ["images","Category","Subcategory"],
+                    order: [
+                        ["finalPrice", order]
+                    ]
+                });
+
+                if (+req.query.page>0){
+                    products = Product.findAll({
+                        where: {
+                            name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%'),
+                            discount : {
+                                [Op.gt]: 0, 
+                            }
+                        },
+                        include : ["images","Category","Subcategory"],
+                        offset : quantityProducts*(+req.query.page-1),
+                        limit : quantityProducts,
+                        order: [
+                            ["finalPrice", order]
+                        ]
+                    })
+                }
+            }
+
         }
 
         Promise.all([products,categories,pagesCount,quantityProducts])
@@ -306,6 +361,18 @@ module.exports = {
 
         let order = "ASC";
         let orderURL = "";
+
+        let offers;
+        let offersURL = "";
+
+        if (req.query.offers != undefined) {
+            offers = 1;
+            offersURL = "&offers=1"
+        }
+        else
+        {
+            offers = 0;
+        }
         
         if (req.query.order != undefined) {
             if(!+req.query.order) {
@@ -424,6 +491,111 @@ module.exports = {
                 }
             }
 
+            if(offers)
+            {   
+                products = Product.findAll({
+                    where : {
+                        product_Category : categoryPage.id,
+                        discount : {
+                            [Op.gt]: 0, 
+                        }
+                    },
+                    include : ["images","Category","Subcategory"],
+                    offset : 0,
+                    limit : quantityProducts,
+                    order: [
+                        ["finalPrice", order]
+                    ]
+                })
+
+                pagesCount = Product.findAll({
+                    where : {
+                        product_Category : categoryPage.id,
+                        discount : {
+                            [Op.gt]: 0, 
+                        }
+                    },
+                    include : ["images","Category","Subcategory"],
+                    order: [
+                        ["finalPrice", order]
+                    ]
+                });
+
+                if (+req.query.page>0){
+                    products = Product.findAll({
+                        where : {
+                            product_Category : categoryPage.id,
+                            discount : {
+                                [Op.gt]: 0, 
+                            }
+                        },
+                        include : ["images","Category","Subcategory"],
+                        offset : quantityProducts*(+req.query.page-1),
+                        limit : quantityProducts,
+                        order: [
+                            ["finalPrice", order]
+                        ]
+                    })
+                }
+
+                /* Busqueda con Ofertas */
+
+                if(req.query.search != undefined)
+                {
+                    searchQuery = "&search="+req.query.search;
+                    searchWord = req.query.search.toLowerCase();
+                    
+                    products = Product.findAll({
+                        where: {
+                            product_Category : categoryPage.id,
+                            name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%'),
+                            discount : {
+                                [Op.gt]: 0, 
+                            }
+                        },
+                        include : ["images","Category","Subcategory"],
+                        offset : 0,
+                        limit : quantityProducts,
+                        order: [
+                            ["finalPrice", order]
+                        ]
+                    })
+
+                    pagesCount = Product.findAll({
+                        where: {
+                            product_Category : categoryPage.id,
+                            name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%'),
+                            discount : {
+                                [Op.gt]: 0, 
+                            }
+                        },
+                        include : ["images","Category","Subcategory"],
+                        order: [
+                            ["finalPrice", order]
+                        ]
+                    });
+
+                    if (+req.query.page>0){
+                        products = Product.findAll({
+                            where: {
+                                product_Category : categoryPage.id,
+                                name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%'),
+                                discount : {
+                                    [Op.gt]: 0, 
+                                }
+                            },
+                            include : ["images","Category","Subcategory"],
+                            offset : quantityProducts*(+req.query.page-1),
+                            limit : quantityProducts,
+                            order: [
+                                ["finalPrice", order]
+                            ]
+                        })
+                    }
+                }
+
+            }
+
             let subcategories = Subcategory.findAll({
                 where : {
                     category_Id : categoryPage.id
@@ -454,6 +626,7 @@ module.exports = {
                         pagesCount : pagesCount.length+1,
                         pageActive,
                         orderURL,
+                        offersURL,
                         searchQuery,
                         pageURL : req.url,
                         quantityProducts,
@@ -484,6 +657,18 @@ module.exports = {
 
         let order = "ASC";
         let orderURL = "";
+
+        let offers;
+        let offersURL = "";
+
+        if (req.query.offers != undefined) {
+            offers = 1;
+            offersURL = "&offers=1"
+        }
+        else
+        {
+            offers = 0;
+        }
         
         if (req.query.order != undefined) {
             if(!+req.query.order) {
@@ -602,6 +787,111 @@ module.exports = {
                 }
             }
 
+            if(offers)
+            {   
+                products = Product.findAll({
+                    where : {
+                        product_Subcategory : subcategoryPage.id,
+                        discount : {
+                            [Op.gt]: 0, 
+                        }
+                    },
+                    include : ["images","Category","Subcategory"],
+                    offset : 0,
+                    limit : quantityProducts,
+                    order: [
+                        ["finalPrice", order]
+                    ]
+                })
+
+                pagesCount = Product.findAll({
+                    where : {
+                        product_Subcategory : subcategoryPage.id,
+                        discount : {
+                            [Op.gt]: 0, 
+                        }
+                    },
+                    include : ["images","Category","Subcategory"],
+                    order: [
+                        ["finalPrice", order]
+                    ]
+                });
+
+                if (+req.query.page>0){
+                    products = Product.findAll({
+                        where : {
+                            product_Subcategory : subcategoryPage.id,
+                            discount : {
+                                [Op.gt]: 0, 
+                            }
+                        },
+                        include : ["images","Category","Subcategory"],
+                        offset : quantityProducts*(+req.query.page-1),
+                        limit : quantityProducts,
+                        order: [
+                            ["finalPrice", order]
+                        ]
+                    })
+                }
+
+                /* Busqueda con Ofertas */
+
+                if(req.query.search != undefined)
+                {
+                    searchQuery = "&search="+req.query.search;
+                    searchWord = req.query.search.toLowerCase();
+                    
+                    products = Product.findAll({
+                        where: {
+                            product_Subcategory : subcategoryPage.id,
+                            name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%'),
+                            discount : {
+                                [Op.gt]: 0, 
+                            }
+                        },
+                        include : ["images","Category","Subcategory"],
+                        offset : 0,
+                        limit : quantityProducts,
+                        order: [
+                            ["finalPrice", order]
+                        ]
+                    })
+
+                    pagesCount = Product.findAll({
+                        where: {
+                            product_Subcategory : subcategoryPage.id,
+                            name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%'),
+                            discount : {
+                                [Op.gt]: 0, 
+                            }
+                        },
+                        include : ["images","Category","Subcategory"],
+                        order: [
+                            ["finalPrice", order]
+                        ]
+                    });
+
+                    if (+req.query.page>0){
+                        products = Product.findAll({
+                            where: {
+                                product_Subcategory : subcategoryPage.id,
+                                name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%'),
+                                discount : {
+                                    [Op.gt]: 0, 
+                                }
+                            },
+                            include : ["images","Category","Subcategory"],
+                            offset : quantityProducts*(+req.query.page-1),
+                            limit : quantityProducts,
+                            order: [
+                                ["finalPrice", order]
+                            ]
+                        })
+                    }
+                }
+
+            }
+
             let subcategories = Subcategory.findAll({
                 where : {
                     category_Id : subcategoryPage.category_Id
@@ -631,6 +921,7 @@ module.exports = {
                         pagesCount : pagesCount.length+1,
                         pageActive,
                         orderURL,
+                        offersURL,
                         searchQuery,
                         pageURL : req.url,
                         quantityProducts,
@@ -656,99 +947,6 @@ module.exports = {
             });
         });
 
-    }
-    ,
-    offers: (req, res) => {
-        
-        let order = "ASC";
-        let orderURL = "";
-        
-        if (req.query.order != undefined) {
-            if(!+req.query.order) {
-                orderURL = "&order=0";
-            }
-            else
-            {
-                order = "DESC";
-                orderURL = "&order=1";
-            }
-        }
-        else
-        {
-            orderURL = "";
-        }
-        
-
-        let quantityProducts = 9;
-        let pagesCount = Product.findAll({
-            where : {
-                discount : {
-                    [Op.gt]: 0, 
-                }
-            }
-        })
-        let pageActive = 0;
-
-        const categories = Category.findAll()
-        let products = Product.findAll({
-            where : {
-                discount : {
-                    [Op.gt]: 0, 
-                }
-            },
-            include : ["images","Category","Subcategory"],
-            offset : 0,
-            limit : quantityProducts,
-            order: [
-                ["finalPrice", order]
-            ]
-        })
-
-        if (+req.query.page>1) {
-            products = Product.findAll({
-                where : {
-                    discount : {
-                        [Op.gt]: 0, 
-                    }
-                },
-                include : ["images","Category","Subcategory"],
-                offset : quantityProducts*(+req.query.page-1),
-                limit : quantityProducts,
-                order: [
-                    ["finalPrice", order]
-                ]
-            })
-            pageActive = +req.query.page-1;
-        }
-
-        Promise.all([products,categories,pagesCount,quantityProducts])
-        .then(([products,categories,pagesCount,quantityProducts]) =>{
-            
-            if (+req.query.page > pagesCount.length/quantityProducts+1) {
-                res.render('errorPage' , {
-                    error: "La Pagina a la cual intenta acceder no existe",
-                    session: req.session
-                })
-            }
-            else
-            {
-                res.render('products/productsList' , {
-                    products,
-                    categories,
-                    quantityProducts,
-                    pagesCount : pagesCount.length,
-                    pageActive,
-                    orderURL,
-                    subCategoriesFiltered : 0,
-                    title : 'Ofertas - ',
-                    session: req.session,
-                    toThousand
-                });
-            }
-        })
-        .catch(error => {
-            console.log("Tenemos un ERROR: "+error);
-        });
     }
     ,
     cart_add: (req, res) => {
