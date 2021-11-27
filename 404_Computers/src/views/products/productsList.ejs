@@ -25,47 +25,55 @@
                     </div>
                     <form action="">
                         <label>Ordenar Por: </label>
-                        <select name="sortBy" id="sortby" onchange="location = this.value;">
+                        <select style="border-radius: 0.5rem; margin-left: 5px;" name="sortBy" id="sortby" onchange="location = this.value;">
                             <option>Elegir</option>
-                            <option value="?offers=1<%= searchQuery %><%= offersURL %>">Ver Ofertas</option>
+                            <option value="?offers=1<%= searchQuery %><%= offersURL %>">Descuento</option>
                             <option value="?order=0<%= searchQuery %><%= offersURL %>">Menor Precio</option>
                             <option value="?order=1<%= searchQuery %><%= offersURL %>">Mayor Precio</option>
                         </select>
                     </form>
                 </div>
             </section>
-            <% var finalPrice = 0 %>  
             <section class="productListView">
 
-                <% products.forEach(product => { %>
-                    <article class="products_Page_Article">
-
-                        <a href="/productos/<%= product.Category.category_Link %>/<%= product.Subcategory.subcategory_Link %>/<%=product.id%>">
-                            <div class="img_Product_Page">
-                                <% if (product.discount > 1) { %>
-                                    <label><%= product.discount %>% OFF</label>
-                                <% } %>
-                                <img src="/images/products/<%= product.images[0]?.image_Route %>" alt="<%= product.name %>">
-                            </div>
-                            <div class="description_Article_Page">
-                                <p><%= product.name %></p>
-                                <div class="prices_Product_Page">
-                                    <% if (product.discount > 1) { %>
-                                        <p>$<%= toThousand(product.finalPrice) %></p>
-                                        <p>$<%= toThousand(product.price) %></p>
-                                    <% } else { %>
-                                        <p>$<%= toThousand(product.price) %></p>
-                                    <% } %>
-                                </div>
-                                <div class="goTo_Add_Item">
-                                    <button>Comprar</button>
-                                    <button><i class="fa fa-eye" aria-hidden="true"></i></button>
-                                </div>
-                            </div>
-                        </a>
-                    </article>
+                <% if (productNotFound) { %>
+                    <section class="productNotFound fillCols">
+                        <p>Oops!</p>
+                        <p><%= productNotFound %></p>
+                        <img src="/images/logos/panda_error.png" alt="Panda">
+                        <span></span>
+                      </section>
+                <% } else { %>
+                    <% products.forEach(product => { %>
+                        <article class="products_Page_Article">
     
-                <% }) %>
+                            <a href="/productos/<%= product.Category.category_Link %>/<%= product.Subcategory.subcategory_Link %>/<%=product.id%>">
+                                <div class="img_Product_Page">
+                                    <% if (product.discount > 1) { %>
+                                        <label><%= product.discount %>% OFF</label>
+                                    <% } %>
+                                    <img src="/images/products/<%= product.images[0]?.image_Route %>" alt="<%= product.name %>">
+                                </div>
+                                <div class="description_Article_Page">
+                                    <p><%= product.name %></p>
+                                    <div class="prices_Product_Page">
+                                        <% if (product.discount > 1) { %>
+                                            <p>$<%= toThousand(product.finalPrice) %></p>
+                                            <p>$<%= toThousand(product.price) %></p>
+                                        <% } else { %>
+                                            <p>$<%= toThousand(product.price) %></p>
+                                        <% } %>
+                                    </div>
+                                    <div class="goTo_Add_Item">
+                                        <button>Comprar</button>
+                                        <button><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    <% }) %>                 
+                <% } %>
+
             </section>
             <section class="pagesBox">
                 <% if (pageActive < 0) { %>
@@ -74,9 +82,9 @@
                     <% for( let i = 0; i < Math.round(pagesCount/quantityProducts); i++ ) { %>
 
                         <% if (pageActive === i) { %>
-                            <a style="background-color: #877cff; color: white; user-select: none;">Pag <%= [i+1] %></a>
+                            <a title="Pagina <%= [i+1]%>" style="background-color: #877cff; color: white; user-select: none;"><%= [i+1] %></a>
                         <% } else { %>
-                            <a href="?page=<%= [i+1]%><%= orderURL %><%= searchQuery %><%= offersURL %>">Pag <%= [i+1] %></a>
+                            <a title="Pagina <%= [i+1]%>" href="?page=<%= [i+1]%><%= orderURL %><%= searchQuery %><%= offersURL %>"><%= [i+1] %></a>
                         <% } %>
     
                     <% } %>

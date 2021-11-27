@@ -108,6 +108,7 @@ module.exports = {
     ,
     productsList: (req, res) => {
 
+        let productNotFound = 0;
         let order = "ASC";
         let orderURL = "";
 
@@ -324,7 +325,11 @@ module.exports = {
                 pageActive = -1
             }
 
-            console.log("Pagina Activa : "+pageActive);
+            if (!products.length) {
+                productNotFound = "Lo sentimos "+req.query.search+" no se encuentra disponible en la tienda."
+            }
+
+            console.log("Pagina Activa : "+products.length);
 
             if (+req.query.page > pagesCount.length/quantityProducts+1) {
                 res.render('errorPage' , {
@@ -342,6 +347,7 @@ module.exports = {
                     pageActive,
                     searchQuery,
                     orderURL,
+                    productNotFound,
                     offersURL,
                     pageURL : req.url,
                     subCategoriesFiltered : 0,
@@ -359,6 +365,7 @@ module.exports = {
     ,
     categories: (req, res) => {
 
+        let productNotFound = 0;
         let order = "ASC";
         let orderURL = "";
 
@@ -609,6 +616,10 @@ module.exports = {
                     pageActive = -1
                 }
 
+                if (!products.length) {
+                    productNotFound = "Lo sentimos "+req.query.search+" no se encuentra disponible en esta Categoria - Tienda."
+                }
+
                 console.log("Pagina Activa : "+pageActive);
 
                 if (+req.query.page > pagesCount.length/quantityProducts+1) {
@@ -628,6 +639,7 @@ module.exports = {
                         orderURL,
                         offersURL,
                         searchQuery,
+                        productNotFound,
                         pageURL : req.url,
                         quantityProducts,
                         title : categoryPage.category_Name+" - ",
@@ -655,6 +667,7 @@ module.exports = {
     ,
     subCategories: (req, res) => {
 
+        let productNotFound = 0;
         let order = "ASC";
         let orderURL = "";
 
@@ -905,6 +918,10 @@ module.exports = {
                     pageActive = -1
                 }
 
+                if (!products.length) {
+                    productNotFound = "Lo sentimos "+req.query.search+" no se encuentra disponible en esta Sub Categoria - Tienda."
+                }
+
                 console.log("Pagina Activa : "+pageActive);
 
                 if (+req.query.page > pagesCount.length/quantityProducts+1) {
@@ -923,6 +940,7 @@ module.exports = {
                         orderURL,
                         offersURL,
                         searchQuery,
+                        productNotFound,
                         pageURL : req.url,
                         quantityProducts,
                         title : subcategoryPage.subcategory_Name+" - ",
