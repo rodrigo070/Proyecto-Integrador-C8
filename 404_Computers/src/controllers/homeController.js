@@ -4,6 +4,7 @@ const Category = db.Category;
 const Banner = db.Banner;
 const User = db.User;
 const { Op } = require('sequelize');
+const sequelize = require('sequelize');
 
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
@@ -65,6 +66,7 @@ module.exports = {
                     productsData,
                     bannersData,
                     userData : [],
+                    pageURL : "productos"+req.url,
                     sliderProducts : productsData,
                     session: req.session,
                     toThousand
@@ -122,48 +124,5 @@ module.exports = {
         res.render('frequentQA',{
             session: req.session
         });
-    }
-    ,
-    search: (req, res) => {
-
-        const categories = Category.findAll()
-        const products = Product.findAll({
-            include : ["images","Category","Subcategory"]
-        })
-        Promise.all([products,categories])
-        .then(([products,categories]) =>{
-
-            let result = [];
-
-            products.forEach(product => {
-                if(product.name.toLowerCase().includes(req.query.producto)){
-                    result.push(product)
-                }
-            });
-
-            if(result.length != 0)
-            {
-                res.render('products/productsList' , {
-                    products : result,
-                    categories,
-                    subCategoriesFiltered : 0,
-                    search: req.query.producto,
-                    title: req.query.producto+' - ',
-                    session: req.session,
-                    toThousand
-                });
-            }
-            else
-            {
-                res.render('errorPage', {
-                    error: `Lo sentimos el Producto: ${req.query.producto} no existe o fue removido de la pagina.`,
-                    session: req.session
-                })
-            }
-        })
-        .catch(error => {
-            console.log("Tenemos un ERROR: "+error);
-        });
-        
     }
 }

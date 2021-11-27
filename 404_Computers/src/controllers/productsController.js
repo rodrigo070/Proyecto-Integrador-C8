@@ -7,87 +7,11 @@ const History = db.History;
 const Cart = db.CartProduct;
 const Favorite = db.Favorite;
 const { Op } = require('sequelize');
+const sequelize = require('sequelize');
 
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 module.exports = {
-    productsList: (req, res) => {
-        let order = "ASC";
-        let orderURL = "";
-        
-        if (req.query.order != undefined) {
-            if(!+req.query.order) {
-                orderURL = "&order=0";
-            }
-            else
-            {
-                order = "DESC";
-                orderURL = "&order=1";
-            }
-        }
-        else
-        {
-            orderURL = "";
-        }
-        
-
-        let quantityProducts = 9;
-        let pagesCount = Product.findAll()
-        let pageActive = 0;
-        const categories = Category.findAll()
-        let products = Product.findAll({
-            include : ["images","Category","Subcategory"],
-            offset : 0,
-            limit : quantityProducts,
-            order: [
-                ["finalPrice", order]
-            ]
-        })
-
-        if (+req.query.page>1) {
-            products = Product.findAll({
-                include : ["images","Category","Subcategory"],
-                offset : quantityProducts*(+req.query.page-1),
-                limit : quantityProducts,
-                order: [
-                    ["finalPrice", order]
-                ]
-            })
-            pageActive = +req.query.page-1;
-        }
-    
-        
-        Promise.all([products,categories,pagesCount,quantityProducts])
-        .then(([products,categories,pagesCount,quantityProducts]) =>{
-            
-            if (+req.query.page > pagesCount.length/quantityProducts+1) {
-                res.render('errorPage' , {
-                    error: "La Pagina a la cual intenta acceder no existe",
-                    session: req.session
-                })
-            }
-            else
-            {
-                res.render('products/productsList' , {
-                    products,
-                    categories,
-                    quantityProducts,
-                    pagesCount : pagesCount.length,
-                    pageActive,
-                    orderURL,
-                    subCategoriesFiltered : 0,
-                    title : 'Productos - ',
-                    session: req.session,
-                    toThousand
-                });
-            }
-        })
-        .catch(error => {
-            console.log("Tenemos un ERROR: "+error);
-        });
-
-    }
-    ,
     product_Detail: (req, res) => {
 
         let sliderProducts = Product.findAll({
@@ -180,6 +104,145 @@ module.exports = {
         });
     }
     ,
+    productsList: (req, res) => {
+
+        let order = "ASC";
+        let orderURL = "";
+        
+        if (req.query.order != undefined) {
+            if(!+req.query.order) {
+                orderURL = "&order=0";
+            }
+            else
+            {
+                order = "DESC";
+                orderURL = "&order=1";
+            }
+        }
+        else
+        {
+            orderURL = "";
+        }
+        
+        let pageActive;
+
+        if (req.query.page != undefined) {
+            pageActive = +req.query.page-1;
+        }
+        else
+        {
+            pageActive = 0;
+        }
+
+        let quantityProducts = 9;
+        let pagesCount = Product.findAll()
+        
+        let searchQuery = "";
+
+        let searchWord = "";
+
+        const categories = Category.findAll()
+        let products = Product.findAll({
+            include : ["images","Category","Subcategory"],
+            offset : 0,
+            limit : quantityProducts,
+            order: [
+                ["finalPrice", order]
+            ]
+        })
+
+        if (+req.query.page>1) {
+            products = Product.findAll({
+                include : ["images","Category","Subcategory"],
+                offset : quantityProducts*(+req.query.page-1),
+                limit : quantityProducts,
+                order: [
+                    ["finalPrice", order]
+                ]
+            })
+        }
+
+        if(req.query.search != undefined)
+        {
+            searchQuery = "&search="+req.query.search;
+            searchWord = req.query.search.toLowerCase();
+            
+            products = Product.findAll({
+                where: {
+                    name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%')
+                },
+                include : ["images","Category","Subcategory"],
+                offset : 0,
+                limit : quantityProducts,
+                order: [
+                    ["finalPrice", order]
+                ]
+            })
+
+            pagesCount = Product.findAll({
+                where: {
+                    name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%')
+                },
+                include : ["images","Category","Subcategory"],
+                order: [
+                    ["finalPrice", order]
+                ]
+            });
+
+            if (+req.query.page>0){
+                products = Product.findAll({
+                    where: {
+                        name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%')
+                    },
+                    include : ["images","Category","Subcategory"],
+                    offset : quantityProducts*(+req.query.page-1),
+                    limit : quantityProducts,
+                    order: [
+                        ["finalPrice", order]
+                    ]
+                })
+            }
+        }
+
+        Promise.all([products,categories,pagesCount,quantityProducts])
+        .then(([products,categories,pagesCount,quantityProducts]) =>{
+
+            if (pagesCount.length < 9) {
+                pageActive = -1
+            }
+
+            console.log("Pagina Activa : "+pageActive);
+
+            if (+req.query.page > pagesCount.length/quantityProducts+1) {
+                res.render('errorPage' , {
+                    error: "La Pagina a la cual intenta acceder no existe",
+                    session: req.session
+                })
+            }
+            else
+            {
+                res.render('products/productsList' , {
+                    products,
+                    categories,
+                    quantityProducts,
+                    pagesCount : pagesCount.length,
+                    pageActive,
+                    searchQuery,
+                    orderURL,
+                    pageURL : req.url,
+                    subCategoriesFiltered : 0,
+                    title : 'Productos - ',
+                    session: req.session,
+                    toThousand
+                });
+            }
+        })
+        .catch(error => {
+            console.log("Tenemos un ERROR: "+error);
+        });
+
+    }
+    ,
     categories: (req, res) => {
 
         let order = "ASC";
@@ -200,8 +263,17 @@ module.exports = {
             orderURL = "";
         }
 
+        let pageActive;
+
+        if (req.query.page != undefined) {
+            pageActive = +req.query.page-1;
+        }
+        else
+        {
+            pageActive = 0;
+        }
+
         let quantityProducts = 3;
-        let pageActive = 0;
 
         Category.findOne({
             where : {
@@ -217,6 +289,10 @@ module.exports = {
                     product_Category : categoryPage.id,
                 }
             })
+
+            let searchQuery = "";
+
+            let searchWord = "";
 
             let products = Product.findAll({
                 include :  ["images","Category","Subcategory"],
@@ -242,7 +318,51 @@ module.exports = {
                         ["finalPrice", order]
                     ]
                 })
-                pageActive = +req.query.page-1;
+            }
+
+            if(req.query.search != undefined)
+            {
+                searchQuery = "&search="+req.query.search;
+                searchWord = req.query.search.toLowerCase();
+                
+                products = Product.findAll({
+                    where: {
+                        product_Category : categoryPage.id,
+                        name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%')
+                    },
+                    include : ["images","Category","Subcategory"],
+                    offset : 0,
+                    limit : quantityProducts,
+                    order: [
+                        ["finalPrice", order]
+                    ]
+                })
+
+                pagesCount = Product.findAll({
+                    where: {
+                        product_Category : categoryPage.id,
+                        name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%')
+                    },
+                    include : ["images","Category","Subcategory"],
+                    order: [
+                        ["finalPrice", order]
+                    ]
+                });
+
+                if (+req.query.page>0){
+                    products = Product.findAll({
+                        where: {
+                            product_Category : categoryPage.id,
+                            name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%')
+                        },
+                        include : ["images","Category","Subcategory"],
+                        offset : quantityProducts*(+req.query.page-1),
+                        limit : quantityProducts,
+                        order: [
+                            ["finalPrice", order]
+                        ]
+                    })
+                }
             }
 
             let subcategories = Subcategory.findAll({
@@ -254,6 +374,12 @@ module.exports = {
             Promise.all([categoryPage,categories, products,subcategories,pagesCount,quantityProducts])
             .then(([categoryPage,categories, products,subcategories,pagesCount,quantityProducts]) => {
                 
+                if (pagesCount.length < 3) {
+                    pageActive = -1
+                }
+
+                console.log("Pagina Activa : "+pageActive);
+
                 if (+req.query.page > pagesCount.length/quantityProducts+1) {
                     res.render('errorPage' , {
                         error: "La Pagina a la cual intenta acceder no existe",
@@ -269,6 +395,8 @@ module.exports = {
                         pagesCount : pagesCount.length+1,
                         pageActive,
                         orderURL,
+                        searchQuery,
+                        pageURL : req.url,
                         quantityProducts,
                         title : categoryPage.category_Name+" - ",
                         linkOfCategory : req.params.category,
@@ -312,8 +440,17 @@ module.exports = {
             orderURL = "";
         }
 
+        let pageActive;
+
+        if (req.query.page != undefined) {
+            pageActive = +req.query.page-1;
+        }
+        else
+        {
+            pageActive = 0;
+        }
+
         let quantityProducts = 3;
-        let pageActive = 0;
 
         Subcategory.findOne({
             where : {
@@ -329,6 +466,10 @@ module.exports = {
                     product_Subcategory : subcategoryPage.id
                 }
             })
+
+            let searchQuery = "";
+
+            let searchWord = "";
 
             let products = Product.findAll({
                 include :  ["images","Category","Subcategory"],
@@ -354,7 +495,51 @@ module.exports = {
                         ["finalPrice", order]
                     ]
                 })
-                pageActive = +req.query.page-1;
+            }
+
+            if(req.query.search != undefined)
+            {
+                searchQuery = "&search="+req.query.search;
+                searchWord = req.query.search.toLowerCase();
+                
+                products = Product.findAll({
+                    where: {
+                        product_Subcategory : subcategoryPage.id,
+                        name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%')
+                    },
+                    include : ["images","Category","Subcategory"],
+                    offset : 0,
+                    limit : quantityProducts,
+                    order: [
+                        ["finalPrice", order]
+                    ]
+                })
+
+                pagesCount = Product.findAll({
+                    where: {
+                        product_Subcategory : subcategoryPage.id,
+                        name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%')
+                    },
+                    include : ["images","Category","Subcategory"],
+                    order: [
+                        ["finalPrice", order]
+                    ]
+                });
+
+                if (+req.query.page>0){
+                    products = Product.findAll({
+                        where: {
+                            product_Subcategory : subcategoryPage.id,
+                            name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%')
+                        },
+                        include : ["images","Category","Subcategory"],
+                        offset : quantityProducts*(+req.query.page-1),
+                        limit : quantityProducts,
+                        order: [
+                            ["finalPrice", order]
+                        ]
+                    })
+                }
             }
 
             let subcategories = Subcategory.findAll({
@@ -366,6 +551,12 @@ module.exports = {
             Promise.all([subcategoryPage,categories, products,subcategories,pagesCount,quantityProducts])
             .then(([subcategoryPage,categories, products,subcategories,pagesCount,quantityProducts]) => {
                 
+                if (pagesCount.length < 3) {
+                    pageActive = -1
+                }
+
+                console.log("Pagina Activa : "+pageActive);
+
                 if (+req.query.page > pagesCount.length/quantityProducts+1) {
                     res.render('errorPage' , {
                         error: "La Pagina a la cual intenta acceder no existe",
@@ -380,6 +571,8 @@ module.exports = {
                         pagesCount : pagesCount.length+1,
                         pageActive,
                         orderURL,
+                        searchQuery,
+                        pageURL : req.url,
                         quantityProducts,
                         title : subcategoryPage.subcategory_Name+" - ",
                         linkOfCategory : req.params.category,

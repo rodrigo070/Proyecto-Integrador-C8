@@ -14,7 +14,8 @@
     'top1 top2'
     'middle1 middle2'
     'bottom1 bottom1'
-    'sendButton sendButton';
+    'sendButton sendButton'
+    'captcha captcha';
     grid-template-rows: repeat(5,auto);
     grid-template-columns: 48% 48%;
     gap: 10px;
@@ -110,6 +111,16 @@
     animation-duration: 0.7s;
 }
 
+#captchaBox{
+    grid-area: captcha;
+    margin: 10px auto 0 auto;
+}
+
+.g-recaptcha {
+    transform: scale(0.93);
+    transform-origin: 0 0;
+}
+
 @keyframes zoomBox {
     from {
         transform: translate(-50%, -50%) scale(0.5);
@@ -137,6 +148,10 @@
     .contactContent button{
         font-size: 22px;
     }
+
+    .g-recaptcha {
+        transform: scale(0.98);
+    }
 }
 
 /*-----------------------------------------------------------------*/
@@ -148,5 +163,9 @@
         margin-top: 0 !important;
         font-size: 40px !important;
         margin-bottom: 15px;
+    }
+
+    .g-recaptcha {
+        transform: scale(1);
     }
 }

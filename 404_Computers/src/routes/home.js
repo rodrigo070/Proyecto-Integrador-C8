@@ -39,10 +39,4 @@ router.get('/venta-mayorista', controller.resell);
 
 router.get('/preguntas-frecuentes', controller.questions);
 
-/* Router del Buscador de Productos */
-
-router.get('/buscar', controller.search);
-
-
-
 module.exports = router;

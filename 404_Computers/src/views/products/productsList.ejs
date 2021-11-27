@@ -27,8 +27,8 @@
                         <label>Ordenar Por: </label>
                         <select name="sortBy" id="sortby" onchange="location = this.value;">
                             <option>Elegir</option>
-                            <option value="?order=0">Menor Precio</option>
-                            <option value="?order=1">Mayor Precio</option>
+                            <option value="?order=0<%= searchQuery %>">Menor Precio</option>
+                            <option value="?order=1<%= searchQuery %>">Mayor Precio</option>
                         </select>
                     </form>
                 </div>
@@ -67,14 +67,18 @@
                 <% }) %>
             </section>
             <section class="pagesBox">
-                <% for( let i = 0; i < Math.round(pagesCount/quantityProducts); i++ ) { %>
+                <% if (pageActive < 0) { %>
+                    <a style="background-color: #877cff; color: white; user-select: none;">Pag 1</a>
+                <% } else { %>
+                    <% for( let i = 0; i < Math.round(pagesCount/quantityProducts); i++ ) { %>
 
-                    <% if (pageActive === i) { %>
-                        <a style="background-color: #877cff; color: white; user-select: none;">Pag <%= [i+1] %></a>
-                    <% } else { %>
-                        <a href="?page=<%= [i+1]%><%= orderURL %>">Pag <%= [i+1] %></a>
+                        <% if (pageActive === i) { %>
+                            <a style="background-color: #877cff; color: white; user-select: none;">Pag <%= [i+1] %></a>
+                        <% } else { %>
+                            <a href="?page=<%= [i+1]%><%= orderURL %><%= searchQuery %>">Pag <%= [i+1] %></a>
+                        <% } %>
+    
                     <% } %>
-
                 <% } %>
             </section>
         </section>

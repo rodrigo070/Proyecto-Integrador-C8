@@ -216,11 +216,23 @@ function showPassword(passSection, eyeBTN) {
 }
 
 function formAnim(){
-    document.querySelector(".contactPage").style.display = "none";
-    document.querySelector(".messageSent").style.display = "block";
-    setTimeout(function() {
-        location.reload()
-    }, 10000);
-    /* se recarga luego de 10 segundos */
-    setTimeout();
+
+    let captchaCheck = grecaptcha.getResponse().length;
+
+    if (captchaCheck) {
+        document.querySelector(".contactPage").style.display = "none";
+        document.querySelector(".messageSent").style.display = "block";
+        setTimeout(function() {
+            location.reload()
+        }, 10000);
+        /* se recarga luego de 10 segundos */
+        setTimeout(true);   
+    }
+    else
+    {
+        let caja = document.querySelector(".g-recaptcha div div");
+        caja.style.height = "100%";
+        caja.style.border = "1px solid red";
+        console.log("Por Favor haga click en el Captcha");
+    }
 }

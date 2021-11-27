@@ -22,6 +22,15 @@
       });
     }
   </script>
+
+  <script type="text/javascript">
+    var onloadCallback = function() {
+      grecaptcha.render('captchaBox', {
+        'sitekey' : '6LcryF8dAAAAANvv9QLuJLm9QPYre66sTuo3jSQ6'
+      });
+    };
+  </script>
+
 </head>
 <body>
   <div class="container_Page">
@@ -39,10 +48,16 @@
             <input type="number" id="extraContact" name="purchaseContact" placeholder="N° De Compra" required>
             <textarea name="messageContact" id="messageContact" cols="40" rows="5" placeholder="Tu Mensaje" style="resize: none;" required></textarea>
             <button type="submit">Enviar Mensaje</button>
+            <div class="g-recaptcha" data-sitekey="6LcryF8dAAAAANvv9QLuJLm9QPYre66sTuo3jSQ6" id="captchaBox"></div>
         </form>
       </section>
     </main>
     <%- include('partials/footer.ejs') %> 
   </div>
+
+  <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+    async defer>
+  </script>
+
 </body>
 </html>
