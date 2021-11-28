@@ -64,6 +64,11 @@ module.exports = (sequelize,DataTypes) => {
             as: "images",
             foreignKey: "product_Id"
         })
+
+        Product.belongsTo(models.CartProduct, {
+            as: "CartItem",
+            foreignKey: "id"
+        })
     }
     return Product;
 }

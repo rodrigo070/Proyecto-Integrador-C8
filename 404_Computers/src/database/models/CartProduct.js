@@ -15,6 +15,10 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.INTEGER(10).UNSIGNED,
             allowNull: false
         },
+        cart_Quantity: {
+            type: dataTypes.INTEGER(10).UNSIGNED,
+            allowNull: false
+        },
     }
     let config = {
         tableName: "cart_products",
@@ -30,8 +34,8 @@ module.exports = (sequelize, dataTypes) => {
         })
 
         CartProduct.belongsTo(models.Product, {
-            as: "Product",
-            foreignKey:"id"
+            as: "CartProducts",
+            foreignKey:"cart_Product"
         })
     }
 

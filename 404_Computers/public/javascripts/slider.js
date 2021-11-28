@@ -135,9 +135,10 @@ $(document).ready(function(){
 	});
 });
 
-/* Slider para productos */
+/* Slider para el Historial de Productos */
 
 $(document).ready(function(){
+    $('.historyProductsSlider').attr('dir', 'rtl');
 	$('.historyProductsSlider').slick({
 	slidesToShow: 1,
 	centerMode: true,
@@ -145,6 +146,8 @@ $(document).ready(function(){
 	nextArrow: document.getElementById('button_Right_Slider3'),
     prevArrow: document.getElementById('button_Left_Slider3'),
 	mobileFirst:true,
+    infinite: true,
+    rtl: true,
 	responsive: [
         {
             breakpoint: 1300,

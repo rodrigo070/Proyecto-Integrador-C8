@@ -301,23 +301,41 @@ module.exports = {
             })
             .then(productsData => {
                 let sliderProducts = productsData;
-                let result = []
+                
+                let listOfProducts = [];
+                let ListOfQuantity = []
                 productsData.forEach(cart => {
                     for (let i = 0; i < user.cartProducts.length; i++) {
                         if (user.cartProducts[i].cart_Product === cart.id) {
-                            result.push(cart)
+                            listOfProducts.push(cart)
+                            ListOfQuantity.push(user.cartProducts[i])
                         }
                     }
                 });
 
+                ListOfQuantity = ListOfQuantity.reverse();
+
+                let totalToPay = 0;
+
+                for (let i = 0; i < listOfProducts.length; i++) {
+                    totalToPay = totalToPay + listOfProducts[i].finalPrice*ListOfQuantity[i].cart_Quantity 
+                }
+
+                /* res.send(productsData[0].CartProducts); */
                 res.render("users/cart" , {
-                    productsData : result,
+                    productsData : listOfProducts,
                     sliderProducts,
+                    cartData : ListOfQuantity,
+                    totalToPay,
+                    cartObj : (user.cartProducts).length,
                     pageURL : "productos",
                     session: req.session,
                     toThousand
                 })
             })
+        })
+        .catch(errr => {
+            console.log("ERROR EN PRODUCTOS CARRITO : "+errr);
         })
         
     },
@@ -334,6 +352,95 @@ module.exports = {
         .catch(errr => {
             console.log("ERROR AL BORRAR PRODUCTO DEL CARRITO : "+errr);
             res.redirect('/carrito');
+        })
+    }
+    ,
+    cart_plus_stock: (req, res) => {
+
+        let products = Product.findOne({
+            where : {
+                id : req.params.id
+            }
+        })
+
+        let foundProduct = Cart.findOne({
+            where: {
+                cart_Product : req.params.id
+            }
+        })
+        Promise.all([products,foundProduct])
+        .then( ([products,foundProduct])=>{
+
+            let number = foundProduct.cart_Quantity
+
+            if (number >= products.stock) {
+                number = products.stock
+            }
+            else
+            {
+                number = number+1
+            }
+
+            Cart.update({
+                cart_Quantity : number,
+            },
+            {
+              where: {
+                cart_Product: req.params.id,
+                user_ID: req.session.user.id
+              }
+            }
+            ).then(() => {
+                console.log("Stock Agregado del Carrito Actualizado");
+                res.redirect('/carrito');
+            })
+            .catch(errr => {
+                console.log("ERROR AL AUMENTAR STOCK DEL CARRITO : "+errr);
+            })
+        })
+        .catch(errr => {
+            console.log("ERROR AL BUSCAR STOCK DEL CARRITO +: "+errr);
+        })
+    }
+    ,
+    cart_minus_stock: (req, res) => {
+
+        Cart.findOne({
+            where: {
+                cart_Product : req.params.id
+            }
+        })
+        .then(foundProduct =>{
+
+            let number = foundProduct.cart_Quantity
+
+            if (number === 1) {
+                number = 1
+            }
+            else
+            {
+                number = number-1
+            }
+
+            Cart.update({
+                cart_Quantity : number,
+            },
+            {
+              where: {
+                cart_Product: req.params.id,
+                user_ID: req.session.user.id
+              }
+            }
+            ).then(() => {
+                console.log("Stock Restado del Carrito Actualizado");
+                res.redirect('/carrito');
+            })
+            .catch(errr => {
+                console.log("ERROR AL RESTAR STOCK DEL PRODUCTO: "+errr);
+            })
+        })
+        .catch(errr => {
+            console.log("ERROR AL BUSCAR STOCK DEL CARRITO -: "+errr);
         })
     }
     ,

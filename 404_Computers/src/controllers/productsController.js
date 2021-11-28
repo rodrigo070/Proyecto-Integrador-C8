@@ -70,7 +70,6 @@ module.exports = {
                                 )
                             }
                         })
-
                         res.render('products/productDetail' , {
                             product,
                             sliderProducts,
@@ -984,7 +983,8 @@ module.exports = {
                 Cart.create(
                     {
                         user_ID : req.session.user.id,
-                        cart_Product : req.params.id
+                        cart_Product : req.params.id,
+                        cart_Quantity : 1
                     }
                 )
                 .then(()=> {

@@ -4,11 +4,23 @@
 
 .empty_Cart{
     background-color: #f1f0ff;
-    padding: 50px;
+    padding: 50px 70px;
     border-radius: 2rem;
     font-size: 29px;
     text-align: center;
-    margin: 20px;
+    margin: 20px auto;
+    width: fit-content;
+}
+
+.titleSliderRec{
+    margin: 0px auto -14px auto;
+    background-color: rgb(129 67 228);
+    width: fit-content;
+    border-radius: 1rem 1rem 0.3rem 0.3rem;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    font-size: 20px;
 }
 
 /* Caja de toda la pagina */
@@ -21,6 +33,7 @@
     grid-template-columns: 100%;
     margin:auto;
     width: 95%;
+    margin-bottom: 30px;
 }
 
 /* Caja de la seccion de lista de productos */
@@ -258,6 +271,7 @@ input::-webkit-inner-spin-button {
     padding:15px;
     grid-area: cartPayment;
     gap: 10px;
+    max-height: 900px;
 }
 
 
@@ -392,7 +406,8 @@ input::-webkit-inner-spin-button {
 }
 
 .tabContent{
-    height: 400px;
+    height: max-content;
+    transition: all .5s;
 }
 
 /* Tarjeta */
@@ -440,8 +455,10 @@ input::-webkit-inner-spin-button {
     padding: 20px;
     margin: 0 auto;
     width: 100%;
+    gap: 20px;
 }
 
+.cardpaySection button,
 .mpSection button,
 .cashSection button{
     margin: 0 auto;
@@ -451,15 +468,17 @@ input::-webkit-inner-spin-button {
     font-size: 17px;
     outline: none;
     border-style: none;
-    background-color: royalblue;
+    background-color: #63eb93;
     color: white;
     border-radius: 0.7rem;
     cursor: pointer;
+    transition: all .5s;
 }
 
+.cardpaySection button:hover,
 .mpSection button:hover,
 .cashSection button:hover{
-    background: rgb(59, 96, 206);
+    background: #26f66f;
 }
 
 
@@ -482,19 +501,61 @@ input::-webkit-inner-spin-button {
     height: 100%;
     padding: 25px;
     align-items: center;
+    overflow: hidden;
 }
 
+.list_Products_Box,
+.paymentSection,
+.buySection,
+.shippingSection{
+    border: 1px solid transparent;
+    transition: all .5s;
+}
+
+.list_Products_Box:hover,
+.paymentSection:hover,
+.shippingSection:hover,
+.buySection:hover{
+    border: 1px solid #633ad369;
+}
+
+.buySection a,
 .buySection button{
     background-color: #63eb93;
     padding: 18px 25px;
-    font-size: 25px;
+    font-size: 22px;
     border-radius: 1rem;
     border-style: none;
     cursor: pointer;
+    color: whitesmoke;
+    transition: all .5s;
+    border: 2px solid transparent;
+}
+
+.buySection a:nth-of-type(1){
+    background-color: royalblue;
+    color: whitesmoke;
 }
 
 .buySection button:hover{
-    background-color: #52d881;
+    background-color: #26f66f;
+    color: white;
+}
+
+.buySection a:nth-of-type(1):hover{
+    background-color: rgb(59, 96, 206);
+    color: white;
+}
+.buySection button:hover,
+.buySection a:nth-of-type(1):hover{
+    border: 2px solid rgb(59, 96, 206);
+}
+
+.bg_CartMSG{
+    background: #e6e4ff;
+    text-align: center;
+    border-radius: 1rem;
+    padding: 10px;
 }
 
 /*-----------------------------------------------------------------*/
@@ -561,7 +622,7 @@ input::-webkit-inner-spin-button {
     }
 
     .tabContent{
-        height: 250px;
+        height: fit-content;
     }
 
     .buySection {
@@ -599,6 +660,5 @@ input::-webkit-inner-spin-button {
         width: 100%;
         margin-left: auto;
         margin-right: auto;
-        flex-direction: row;
     }
 }
