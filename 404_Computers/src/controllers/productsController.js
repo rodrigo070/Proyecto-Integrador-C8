@@ -149,7 +149,7 @@ module.exports = {
             pageActive = 0;
         }
 
-        let quantityProducts = 9;
+        let quantityProducts = 8;
         let pagesCount = Product.findAll()
         
         let searchQuery = "";
@@ -329,11 +329,12 @@ module.exports = {
                 productNotFound = "Lo sentimos "+req.query.search+" no se encuentra disponible en la tienda."
             }
 
-            console.log("Pagina Activa : "+products.length);
+            console.log("Paginas Disponibles : "+pagesCount.length/(quantityProducts+1));
 
-            if (+req.query.page > pagesCount.length/quantityProducts+1) {
+            if (+req.query.page <= 0 || +req.query.page > Math.round(pagesCount.length/quantityProducts)) {
                 res.render('errorPage' , {
                     error: "La Pagina a la cual intenta acceder no existe",
+                    pageURL : req.url,
                     session: req.session
                 })
             }
@@ -622,9 +623,10 @@ module.exports = {
 
                 console.log("Pagina Activa : "+pageActive);
 
-                if (+req.query.page > pagesCount.length/quantityProducts+1) {
+                if (+req.query.page <= 0 || +req.query.page > Math.round(pagesCount.length/quantityProducts)+1) {
                     res.render('errorPage' , {
                         error: "La Pagina a la cual intenta acceder no existe",
+                        pageURL : req.url,
                         session: req.session
                     })
                 }
@@ -924,9 +926,10 @@ module.exports = {
 
                 console.log("Pagina Activa : "+pageActive);
 
-                if (+req.query.page > pagesCount.length/quantityProducts+1) {
+                if (+req.query.page <= 0 || +req.query.page > Math.round(pagesCount.length/quantityProducts)+1) {
                     res.render('errorPage' , {
                         error: "La Pagina a la cual intenta acceder no existe",
+                        pageURL : req.url,
                         session: req.session
                     })
                 }

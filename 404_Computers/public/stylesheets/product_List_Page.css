@@ -238,6 +238,9 @@
     height: 48px;
     width: 48px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .pagesBox a:hover{
