@@ -15,7 +15,7 @@
             <section class="seccion-general">
                 <a href="/productos/<%= lastProduct.Category.category_Link %>/<%= lastProduct.Subcategory.subcategory_Link %>/<%= lastProduct.id%>">
                     <div class="titulo-articulo"> 
-                        <h3> Visto Recientemente </h3>
+                        <h3>Tu Historial</h3>
                     </div>
                     <div>
                         <img src="/images/products/<%= lastProduct.images[0]?.image_Route %>" alt="<%= lastProduct.name %>">
@@ -122,7 +122,7 @@
 
         <% if (typeof session.user != "undefined" && userData.length > 0) { %>
             <div class="titulo-seccion-desktop">
-                <h3>Visto Recientemente</h3>
+                <h3>Tu Historial</h3>
             </div>
             <%- include('partials/historySlider.ejs') %>  
         <% } %>

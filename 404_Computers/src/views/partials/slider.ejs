@@ -7,7 +7,12 @@
             <% if (productSlider.onSale != 0) { %>
                 <div class="productRecommended">
                     <a href="/productos/<%= productSlider.Category.category_Link %>/<%= productSlider.Subcategory.subcategory_Link %>/<%= productSlider.id %>">
-                        <img src="/images/products/<%= productSlider.images[0]?.image_Route %>">
+                        <div class="img">
+                            <% if (productSlider.discount > 1) { %>
+                                <label><%= productSlider.discount %>% OFF</label>
+                            <% } %>
+                            <img src="/images/products/<%= productSlider.images[0]?.image_Route %>">
+                        </div>
                         <div class="productRecommendedDescription">
                             <p><%= productSlider.name %></p>
                             <p>$<%= toThousand(productSlider.finalPrice) %></p>
