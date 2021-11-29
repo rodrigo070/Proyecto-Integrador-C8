@@ -149,6 +149,14 @@ header {
     margin: 0 auto;
 }
 
+.logoPage img:hover{
+    animation-name: profileAnim;
+    animation-timing-function: ease;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    transition: all .5s;
+}
+
 .crear-cuenta{
     width: 100%;
     margin: 0 auto;
@@ -376,13 +384,13 @@ header {
 @media screen and (min-width: 768px){
     .main-header{
         padding: 15px 5px 0 5px;
-        min-height: 110px;
+        min-height: 135px;
         align-items: center;
     }
 
     .logoPage{
-        width: 130px;
-        margin-bottom: 24px;
+        width: 200px;
+        margin-bottom: 16px;
     }
 
     .logoPage img {
@@ -447,7 +455,7 @@ header {
         position: absolute;
         background-color: white;
         min-width: 100%;
-        top: 100px;
+        top: 113px;
         right: 0;
         left: 0;
         box-shadow: 0 12px 20px rgb(0 0 0 / 20%);
@@ -545,10 +553,18 @@ header {
 
     .desktop_Profile i{
         color: black;
-        font-size: 25px;
+        font-size: 33px;
         position: relative;
         user-select: none;
         cursor: pointer;
+    }
+
+    .desktop_Profile i:hover{
+        animation-name: profileAnim;
+        animation-timing-function: ease;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        transition: all .5s;
     }
 
     .desktop_Profile i:nth-child(1){
@@ -558,7 +574,7 @@ header {
     .user-logged-in{
         position: absolute;
         color: rgb(0, 255, 0);
-        right: -8px;
+        right: -12px;
         bottom: 12px;
         transform: scale(0.6);
     }
@@ -605,11 +621,20 @@ header {
         border-radius: 0.3rem;
         left: 0;
         right: 0;
-        margin: 10px auto 0 auto;
+        margin: 14px auto 0 auto;
     }
 
     #userPanel a{
         display: flex;
+        transition: all .5s;
+    }
+
+    #userPanel a:hover i{
+        animation-name: profileAnim;
+        animation-timing-function: ease;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        transition: all .5s;
     }
 
     #userPanel i{
@@ -617,7 +642,7 @@ header {
         align-items: center;
         font-size: 20px;
         margin-right: 5px;
-        width: 22px;
+        width: 24px;
     }
 
     .panel_Active{
@@ -632,14 +657,14 @@ header {
 @media screen and (min-width: 990px){
     
     .logoPage{
-        width: 180px;
-        margin-left: 20px;
+        width: 240px;
+        margin-left: 0px;
     }
 
     .logoPage img{
         width: 80%;
         margin-top: 5px;
-        margin-bottom: -10px;
+        margin-bottom: 0px;
     }
 
     .search_Bar_Box{
