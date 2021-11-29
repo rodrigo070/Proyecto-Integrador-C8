@@ -150,8 +150,6 @@
 .adminFilter label{
     margin-right: 10px;
     user-select: none;
-    border-left: 1px solid #00000055;
-    padding-left: 10px;
 }
 
 /*-----------------------------------------------------------------*/
