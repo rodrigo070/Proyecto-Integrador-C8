@@ -26,7 +26,6 @@ module.exports = {
             }
         )
 
-
         let favoriteItem = req.session.user? Favorite.findOne({
             where : {
                 favorite_Product : req.params.id,

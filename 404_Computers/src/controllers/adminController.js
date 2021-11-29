@@ -11,15 +11,104 @@ const Subcategory = db.Subcategory;
 const Banner = db.Banner;
 const Product_Images = db.ProductImage;
 const { Op } = require('sequelize');
+const sequelize = require('sequelize');
 
 module.exports = {
     admin_usuarios: (req, res) => {
-        User.findAll()
-        .then(usersData => {
-            res.render('admin/adminUsersList',  {
-                usersData,
-                session: req.session
+
+        let pageActive;
+        let searchQuery = "";
+        if (req.query.page != undefined) {
+            pageActive = +req.query.page-1;
+        }
+        else
+        {
+            pageActive = 0;
+        }
+
+        let quantityUsers = 8;
+        let pagesCount = User.findAll()
+
+        let users = User.findAll({
+            offset : 0,
+            limit : quantityUsers,
+        })
+
+        if (+req.query.page>1) {
+            users = User.findAll({
+                offset : quantityUsers*(+req.query.page-1),
+                limit : quantityUsers,
+            })
+        }
+
+        if(req.query.busqueda != undefined)
+        {
+            searchQuery = "&busqueda="+req.query.busqueda;
+            searchWord = req.query.busqueda.toLowerCase();
+            
+            users = User.findAll({
+                where: {
+                    name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%')
+                },
+                offset : 0,
+                limit : quantityUsers,
+            })
+
+            pagesCount = User.findAll({
+                where: {
+                    name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%')
+                },
             });
+
+            if (+req.query.page>0){
+                users = User.findAll({
+                    where: {
+                        name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%')
+                    },
+                    offset : quantityUsers*(+req.query.page-1),
+                    limit : quantityUsers,
+                })
+            }
+        }
+
+        Promise.all([users,pagesCount,quantityUsers])
+        .then(([users,pagesCount,quantityUsers]) => {
+
+            let lastPage = Math.round(pagesCount.length/quantityUsers);
+            let firstPage = lastPage - lastPage+1;
+            let pageLinkFirst = "?page="+firstPage;
+            let pageLinkLast = "?page="+lastPage;
+
+            if (lastPage === 0) {
+                pageLinkFirst = ""
+                pageLinkLast = ""
+            }
+            
+            console.log("LAST PAGE "+lastPage);
+            console.log("FIRST PAGE "+firstPage);
+
+            if (+req.query.page < 1) {
+                res.redirect(`/admin/usuarios${pageLinkFirst}${searchQuery}`)
+            }
+            else if(+req.query.page > Math.round(pagesCount.length/quantityUsers))
+            {
+                res.redirect(`/admin/usuarios${pageLinkLast}${searchQuery}`)
+            }
+            else
+            {
+                if (pagesCount.length < 9) {
+                    pageActive = -1
+                }
+
+                res.render('admin/adminUsersList',  {
+                    usersData : users,
+                    pagesCount : pagesCount.length,
+                    pageActive,
+                    searchQuery,
+                    quantityUsers,
+                    session: req.session
+                });
+            }
         })
         .catch((err) => console.log("ERROR en Admin_Usuarios: "+err));
     }
@@ -66,14 +155,105 @@ module.exports = {
     ,
     admin_productos: (req, res) => {
 
-        Product.findAll({
-            include : ["images","Category","Subcategory"]
+        let pageActive;
+        let searchQuery = "";
+        if (req.query.page != undefined) {
+            pageActive = +req.query.page-1;
+        }
+        else
+        {
+            pageActive = 0;
+        }
+
+        let quantityProducts = 8;
+        let pagesCount = Product.findAll()
+
+        let products = Product.findAll({
+            include : ["Category","Subcategory"],
+            offset : 0,
+            limit : quantityProducts,
         })
-        .then(productsData => {
-            res.render('admin/adminPanel',  {
-                productsData,
-                session: req.session
+
+        if (+req.query.page>1) {
+            products = Product.findAll({
+                include : ["Category","Subcategory"],
+                offset : quantityProducts*(+req.query.page-1),
+                limit : quantityProducts,
+            })
+        }
+
+        if(req.query.busqueda != undefined)
+        {
+            searchQuery = "&busqueda="+req.query.busqueda;
+            searchWord = req.query.busqueda.toLowerCase();
+            
+            products = Product.findAll({
+                where: {
+                    name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%')
+                },
+                include : ["Category","Subcategory"],
+                offset : 0,
+                limit : quantityProducts,
+            })
+
+            pagesCount = Product.findAll({
+                where: {
+                    name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%')
+                },
+                include : ["Category","Subcategory"],
             });
+
+            if (+req.query.page>0){
+                products = Product.findAll({
+                    where: {
+                        name: sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', '%' + searchWord + '%')
+                    },
+                    include : ["Category","Subcategory"],
+                    offset : quantityProducts*(+req.query.page-1),
+                    limit : quantityProducts,
+                })
+            }
+        }
+
+        Promise.all([products,pagesCount,quantityProducts])
+        .then(([products,pagesCount,quantityProducts]) => {
+
+            let lastPage = Math.round(pagesCount.length/quantityProducts);
+            let firstPage = lastPage - lastPage+1;
+            let pageLinkFirst = "?page="+firstPage;
+            let pageLinkLast = "?page="+lastPage;
+
+            if (lastPage === 0) {
+                pageLinkFirst = ""
+                pageLinkLast = ""
+            }
+
+            console.log("LAST PAGE "+lastPage);
+            console.log("FIRST PAGE "+firstPage);
+
+            if (+req.query.page < 1) {
+                res.redirect(`/admin${pageLinkFirst}${searchQuery}`)
+            }
+            else if(+req.query.page > Math.round(pagesCount.length/quantityProducts))
+            {
+                res.redirect(`/admin${pageLinkLast}${searchQuery}`)
+            }
+            else
+            {
+                if (pagesCount.length < 9) {
+                    pageActive = -1
+                }
+
+                res.render('admin/adminPanel',  {
+                    productsData : products,
+                    pagesCount : pagesCount.length,
+                    pageActive,
+                    searchQuery,
+                    quantityProducts,
+                    session: req.session
+                });
+            }
+            
         })
         .catch((err) => console.log("ERROR Lista Productos Admin: "+err));
 
@@ -371,74 +551,14 @@ module.exports = {
     ,
     searchAdmin: (req, res) => {
         let buscar = req.query.userSearch;
+
         if(buscar)
         {
-            User.findAll()
-            .then(UserDB => {
-                let result = [];
-    
-                UserDB.forEach(UserSearch => {
-                    if(UserSearch.name.toLowerCase().includes(req.query.busqueda) || UserSearch.surname.toLowerCase().includes(req.query.busqueda)){
-                        result.push(UserSearch)
-                    }
-                });
-                if(result.length != 0)
-                {
-                    res.render('admin/adminUsersList' , {
-                        usersData : result,
-                        search: req.query.busqueda,
-                        title: req.query.busqueda+' - ',
-                        session: req.session
-                    });
-                }
-                else
-                {
-                    res.render('admin/adminUsersList' , {
-                        usersData : [],
-                        search: req.query.busqueda,
-                        title: req.query.busqueda+' - ',
-                        session: req.session
-                    });
-                }
-            })
+            res.redirect(`/admin/usuarios?busqueda=${req.query.busqueda}`);
         }
         else
         {
-            Product.findAll({
-                include : ["images","Category","Subcategory"]
-            })
-            .then(ProductsDB =>{
-    
-                let result = [];
-    
-                ProductsDB.forEach(ProductSearch => {
-                    if(ProductSearch.name.toLowerCase().includes(req.query.busqueda)){
-                        result.push(ProductSearch)
-                    }
-                });
-    
-                if(result.length != 0)
-                {
-                    res.render('admin/adminPanel' , {
-                        productsData : result,
-                        search: req.query.busqueda,
-                        title: req.query.busqueda+' - ',
-                        session: req.session
-                    });
-                }
-                else
-                {
-                    res.render('admin/adminPanel' , {
-                        productsData : [],
-                        search: req.query.busqueda,
-                        title: req.query.busqueda+' - ',
-                        session: req.session
-                    });
-                }
-            })
-            .catch(error => {
-                console.log("Tenemos un ERROR: "+error);
-            });
+            res.redirect(`/admin?busqueda=${req.query.busqueda}`);
         }        
     }
     ,

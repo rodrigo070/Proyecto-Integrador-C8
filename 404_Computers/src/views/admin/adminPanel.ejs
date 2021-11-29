@@ -50,6 +50,33 @@
                       </article>
                     <% }) %>
                   </section>
+                  <section class="pagesBox">
+                    <% if (pageActive < 0) { %>
+                        <a title="Pagina 1" style="background-color: #000000; color: white; user-select: none;">1</a>
+                    <% } else { %>
+    
+                        <% if (pageActive === 0) { %>
+                        <% } else { %>
+                            <a title="Pagina <%= pageActive %>" href="?page=<%= pageActive %><%= searchQuery %>"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+                        <% } %>
+    
+                        <% for( let i = 0; i < Math.round(pagesCount/quantityProducts); i++ ) { %>
+    
+                            <% if (pageActive === i) { %>
+                                <a title="Pagina <%= [i+1]%>" style="background-color: #000000; color: white; user-select: none;"><%= [i+1] %></a>
+                            <% } else { %>
+                                <a title="Pagina <%= [i+1]%>" href="?page=<%= [i+1]%><%= searchQuery %>"><%= [i+1] %></a>
+                            <% } %>
+        
+                        <% } %>
+    
+                        <% if (pageActive+2 > Math.round(pagesCount/quantityProducts)) { %>
+                        <% } else { %>
+                            <a title="Pagina <%= pageActive+2 %>" href="?page=<%= pageActive+2 %><%= searchQuery %>"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                        <% } %>
+                        
+                    <% } %>
+                </section>
             </section>
         </section>
     </main>
