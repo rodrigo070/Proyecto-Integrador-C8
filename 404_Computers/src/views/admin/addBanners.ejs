@@ -22,9 +22,18 @@
                         <section class="grid_item_list">
                             <div class="grid_Id_List">#<%= banner.id %> </div>
                             <div class="grid_Image_List"><img src="/images/banners/<%= banner.image_Route %>" alt=""></div>
-                            <form class="grid_Delete_List" action="/admin/borrarBanner/<%= banner.id  %>?_method=DELETE" method="POST">
-                                <button type="submit" class="grid_Delete_List"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                            </form>
+                            <div class="grid_Delete_List">
+                                <i id="btnDeleteUser" class="fa fa-trash" aria-hidden="true"></i>
+                            </div>
+
+                            <div class="modalFormBox">
+                                <form class="modalFormContent" action="/admin/borrarBanner/<%- banner.id %>?_method=DELETE" method="POST">
+                                    <p>¿Desea Borrar el Banner N° <%= banner.id %>?</p>
+                                    <button class="cancelDeleteBTN" type="button" title="Cancelar">Cancelar</button>
+                                    <button type="submit" title="Borrar Banner">Confirmar</button>
+                                </form>
+                            </div>
+
                         </section>
                     <% }) %>
                 </section>
