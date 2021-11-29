@@ -1,6 +1,6 @@
 const { validationResult } = require('express-validator');
 const db = require('../database/models');
-const {eliminarImagen} = require("../database/config/product_config")
+const {eliminarImagen, eliminarBanner} = require("../database/config/product_config")
 const User = db.User;
 const History = db.History;
 const Cart = db.CartProduct;
@@ -444,19 +444,32 @@ module.exports = {
     ,
     borrar_banner: (req, res) => {
 
-        Banner.destroy({
-            where: {
+        Banner.findOne({
+            where : {
                 id: req.params.id
             }
         })
-        .then(()=> {
-            res.redirect('/admin/banners');
+        .then(del => {
+            eliminarBanner(del.image_Route);
+
+            Banner.destroy({
+                where: {
+                    id: req.params.id
+                }
+            })
+            .then(()=> {
+    
+                res.redirect('/admin/banners');
+            })
+            .catch(errr => {
+                console.log("ERROR AL BORRAR BANNER : "+errr);
+                res.redirect('/admin/banners');
+            })
         })
         .catch(errr => {
-            console.log("ERROR AL BORRAR BANNER : "+errr);
+            console.log("ERROR AL ENCONTRAR EL BANNER : "+errr);
             res.redirect('/admin/banners');
         })
-
     }
     ,
     borrar_Producto: (req, res) => {
