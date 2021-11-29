@@ -157,6 +157,10 @@ module.exports = {
 
         let pageActive;
         let searchQuery = "";
+        let stockLink = "";
+        let noStockLink = "";
+        let offersLink = "";
+
         if (req.query.page != undefined) {
             pageActive = +req.query.page-1;
         }
@@ -215,6 +219,120 @@ module.exports = {
             }
         }
 
+        if (req.query.stock) {
+
+            stockLink = "&stock=1"
+
+            products = Product.findAll({
+                where : {
+                    stock : {
+                        [Op.gt]: 0, 
+                    }
+                },
+                include : ["Category","Subcategory"],
+                offset : 0,
+                limit : quantityProducts,
+            })
+
+            pagesCount = Product.findAll({
+                where : {
+                    stock : {
+                        [Op.gt]: 0, 
+                    }
+                },
+                include : ["Category","Subcategory"],
+            });
+
+            if (+req.query.page>0){
+                products = Product.findAll({
+                    where : {
+                        stock : {
+                            [Op.gt]: 0, 
+                        }
+                    },
+                    include : ["Category","Subcategory"],
+                    offset : quantityProducts*(+req.query.page-1),
+                    limit : quantityProducts,
+                })
+            }
+        }
+
+        if (req.query.noStock) {
+
+            noStockLink = "&noStock=1"
+
+            products = Product.findAll({
+                where : {
+                    stock : {
+                        [Op.lt]: 1,
+                    }
+                },
+                include : ["Category","Subcategory"],
+                offset : 0,
+                limit : quantityProducts,
+            })
+
+            pagesCount = Product.findAll({
+                where : {
+                    stock : {
+                        [Op.lt]: 1,
+                    }
+                },
+                include : ["Category","Subcategory"],
+            });
+
+            if (+req.query.page>0){
+                products = Product.findAll({
+                    where : {
+                        stock : {
+                            [Op.lt]: 1,
+                        }
+                    },
+                    include : ["Category","Subcategory"],
+                    offset : quantityProducts*(+req.query.page-1),
+                    limit : quantityProducts,
+                })
+            }
+        }
+
+        if (req.query.offers) {
+
+            offersLink = "&offers=1"
+
+            products = Product.findAll({
+                where : {
+                    discount : {
+                        [Op.gt]: 0, 
+                    }
+                },
+                include : ["Category","Subcategory"],
+                offset : 0,
+                limit : quantityProducts,
+            })
+
+            pagesCount = Product.findAll({
+                where : {
+                    discount : {
+                        [Op.gt]: 0, 
+                    }
+                },
+                include : ["Category","Subcategory"],
+            });
+
+            if (+req.query.page>0){
+                products = Product.findAll({
+                    where : {
+                        discount : {
+                            [Op.gt]: 0, 
+                        }
+                    },
+                    include : ["Category","Subcategory"],
+                    offset : quantityProducts*(+req.query.page-1),
+                    limit : quantityProducts,
+                })
+            }
+        }
+
         Promise.all([products,pagesCount,quantityProducts])
         .then(([products,pagesCount,quantityProducts]) => {
 
@@ -232,11 +350,11 @@ module.exports = {
             console.log("FIRST PAGE "+firstPage);
 
             if (+req.query.page < 1) {
-                res.redirect(`/admin${pageLinkFirst}${searchQuery}`)
+                res.redirect(`/admin${pageLinkFirst}${searchQuery}${stockLink}${noStockLink}${offersLink}`)
             }
             else if(+req.query.page > Math.round(pagesCount.length/quantityProducts))
             {
-                res.redirect(`/admin${pageLinkLast}${searchQuery}`)
+                res.redirect(`/admin${pageLinkLast}${searchQuery}${stockLink}${noStockLink}${offersLink}`)
             }
             else
             {
@@ -249,6 +367,9 @@ module.exports = {
                     pagesCount : pagesCount.length,
                     pageActive,
                     searchQuery,
+                    stockLink,
+                    noStockLink,
+                    offersLink,
                     quantityProducts,
                     session: req.session
                 });
@@ -451,70 +572,6 @@ module.exports = {
               )
             );
         }
-    }
-    ,
-    admin_stock: (req, res) => {
-        
-        Product.findAll({
-            where : {
-                stock : {
-                    [Op.gt]: 0, 
-                }
-            },
-            include : ["images","Category","Subcategory"]
-        })
-        .then(productsData =>{
-            res.render('admin/adminPanel' , {
-                productsData,
-                session: req.session
-            });
-        })
-        .catch(error => {
-            console.log("Tenemos un ERROR: "+error);
-        });
-    }
-    ,
-    admin_sin_stock: (req, res) => {
-        
-        Product.findAll({
-            where : {
-                stock : {
-                    [Op.lt]: 1,
-                }
-            },
-            include : ["images","Category","Subcategory"]
-        })
-        .then(productsData =>{
-            res.render('admin/adminPanel' , {
-                productsData,
-                session: req.session
-            });
-        })
-        .catch(error => {
-            console.log("Tenemos un ERROR: "+error);
-        });
-    }
-    ,
-    admin_ofertas: (req, res) => {
-
-        Product.findAll({
-            where : {
-                discount : {
-                    [Op.gt]: 0, 
-                }
-            },
-            include : ["images","Category","Subcategory"]
-        })
-        .then(productsData =>{
-            res.render('admin/adminPanel' , {
-                productsData,
-                session: req.session
-            });
-        })
-        .catch(error => {
-            console.log("Tenemos un ERROR: "+error);
-        });
-
     }
     ,
     banners: (req, res) => {

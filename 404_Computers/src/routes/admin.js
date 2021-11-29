@@ -27,11 +27,6 @@ router.get('/editar-usuario/:id', adminSessionCheck, controller.admin_detalle_us
 /* PUT recibo los datos modificados y aplico la actualizacion */
 router.put('/editar-usuario/:id', controller.admin_detalle_usuario_editar);
 
-/* las vistas de abajo reutilizan el listado de productos */
-router.get('/stock', adminSessionCheck, controller.admin_stock);
-router.get('/sin-stock', adminSessionCheck, controller.admin_sin_stock);
-router.get('/ofertas', adminSessionCheck, controller.admin_ofertas);
-
 /* POST Carga de Imagen de Edicion de Producto */
 
 router.post('/subir-foto/:id', uploadProductFile.single("image_Route") , controller.subir_foto_producto);
