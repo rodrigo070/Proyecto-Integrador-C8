@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head.ejs' ,{title: 'Checkout - '}) %>
+<body>
+  <div class="container_Page">
+    <%- include('../partials/header.ejs') %>   
+    <main>
+        <div id="rgbar"></div>
+        
+        <% if (payOption == 1) { %>
+            <p>Vista Efectivo</p>
+        <% } else if (payOption == 2) { %>
+            <form class="checkOut_Container" action="/confirmPurchase/<%= payOption %>" method="POST" onsubmit="submitThisForm(event,this)">
+                <div class="checkOut_details_Box">
+                    <div style="margin-bottom: 10px;">
+                        <p>Producto</p>
+                        <p>Cantidad</p>
+                        <p>Precio</p>
+                    </div>
+                    <div>
+                        <% productsData.forEach(product => { %>
+                            <p><%= product.name %></p>
+                            <p><%= stockData[cartObj = cartObj-1].cart_Quantity %></p>
+                            <p>$<%= toThousand(stockData[cartObj].cart_Quantity*product.finalPrice) %></p>
+                        <% }) %>
+                    </div>
+                    <div style="margin-top: 10px; padding-top: 7px; border-top: 1px solid #633ad369;">
+                        <p>Total a Pagar: </p>
+                        <p></p>
+                        <p id="getTotalPrice">$<%= toThousand(totalToPay) %></p>
+                    </div>
+                </div>
+                <div class="checkOut_shipping_Box">
+                    <p class="shippingText">Calcular Costo de Envio</p>
+                    <div class="grid_Shipping_Box">
+                        <div>
+                            <label for="cpcode">Codigo Postal:</label>
+                            <input type="number" name="cpCode" id="cpcode" placeholder="Ej: 2000">
+                        </div>
+                        <div>
+                            <button name="calculate" onclick="shippingCost()" value="">Calcular</button>
+                        </div>
+                        <div>
+                            <label>Costo:</label>
+                            <div id="shippingCost" class="ship_input">&#x200B;</div>
+                        </div>
+                        <div>
+                            <label>Total con Envio:</label>
+                            <div style="margin: 0;" class="ship_input" id="totalShipping">&#x200B;</div>
+                        </div>
+                    </div>
+                    <p class="shippingText" style="margin-top: 10px; font-size: 18px !important;">Ingrese su Dirección: </p>
+                    <input class="shippingInput" style="display:flex; margin: 0px auto; text-align: left !important;" type="text" name="homeAddress" placeholder="Ingrese su Dirección">
+                </div>
+                <div class="checkOut_pay_Box">
+                    <div class="cardpaySection">
+                        <a href="#medios" style="padding: 15px !important; font-size: 17px;" class="bg_CartMSG">Medios de Pago Disponibles <i class="fa fa-credit-card iconPayment" aria-hidden="true"></i></a>
+                        <input style="margin-top: 10px;" type="text" name="nameCard" placeholder="Nombre del Titular" required>
+                        <input type="number" name="cardNumber" placeholder="Numero de la Tarjeta" required onkeydown="ncard(this);" onkeyup="ncard(this);">
+                        <p style="color: #5a5a5a;">Ingrese la fecha de vencimiento</p>
+                        <div>
+                            <select name="yearCard" id="">
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option> 
+                                <option value="2024">2024</option> 
+                                <option value="2025">2025</option> 
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option> 
+                                <option value="2028">2028</option> 
+                                <option value="2029">2029</option> 
+                                <option value="2030">2030</option>
+                                <option value="2031">2031</option> 
+                                <option value="2032">2032</option> 
+                                <option value="2033">2033</option> 
+                            </select>
+    
+                            <select name="monthCard" id="">
+                                <option value="01">Enero</option> 
+                                <option value="02">Febrero</option> 
+                                <option value="03">Marzo</option> 
+                                <option value="04">Abril</option> 
+                                <option value="05">Mayo</option> 
+                                <option value="06">Junio</option> 
+                                <option value="07">Julio</option> 
+                                <option value="08">Agosto</option> 
+                                <option value="09">Septiembre</option> 
+                                <option value="10">Octubre</option> 
+                                <option value="11">Noviembre</option> 
+                                <option value="12">Diciembre</option> 
+                            </select>
+    
+                            <input type="number" placeholder="CVV" name="ccvCard" onkeydown="cvv(this);" onkeyup="cvv(this);" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="checkOut_confirm_Box">
+                    <button type="submit">Confirmar Compra</button>
+                </div>
+            </form>
+            <%- include('../partials/paymentBanner.ejs') %>
+        <% } else if (payOption == 3) { %>
+            <p>Vista Mercado Pago</p>
+        <% } %>
+        
+    </main>
+    <%- include('../partials/footer.ejs') %> 
+  </div>
+</body>
+</html>

@@ -224,6 +224,7 @@ input::-webkit-inner-spin-button {
     padding: 4px 6px;
     border-radius: 0.6rem;
     color: white;
+    cursor: default;
 }
 
 /* Seccion 7 - Borrar Producto */
@@ -234,10 +235,17 @@ input::-webkit-inner-spin-button {
     background: transparent;
     cursor: pointer;
     font-size: 22px;
+    transition: all .5s;
 }
 
 .delete_Plist:hover{
-    color: red;
+    color: rgb(255, 0, 0);
+    filter: brightness(1.1);
+    animation-name: profileAnim;
+    animation-timing-function: ease;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    transition: all .5s;
 }
 
 /*Seccion Precio Final*/
@@ -245,7 +253,7 @@ input::-webkit-inner-spin-button {
 .totalPrice {
     height: 35px;
     margin-top: 20px;
-    border-top: 1px solid black;
+    border-top: 1px solid #633ad369;
     text-align: center;
 }
 
@@ -336,6 +344,7 @@ input::-webkit-inner-spin-button {
     border-style: none;
     margin: 5px 0;
     width: 45%;
+    border:2px solid #633ad369;
 }
 
 .gridShipping div{
@@ -345,6 +354,7 @@ input::-webkit-inner-spin-button {
     border-radius: 0.5rem;
     margin: 5px 0;
     width: 45%;
+    border:2px solid #633ad369;
 }
 
 
@@ -427,6 +437,7 @@ input::-webkit-inner-spin-button {
     border-style: none;
     border-radius: 0.5rem;
     padding: 5px;
+    border:2px solid #633ad369;
 }
 
 .cardpaySection select{
@@ -434,13 +445,14 @@ input::-webkit-inner-spin-button {
     outline: none;
     border-style: none;
     padding: 5px;
+    border:2px solid #633ad369;
 }
 
 .cardpaySection div{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 100%;
+    width: 100% !important;
     gap: 10px;
 }
 
@@ -504,6 +516,7 @@ input::-webkit-inner-spin-button {
     overflow: hidden;
 }
 
+.empty_Cart,
 .list_Products_Box,
 .paymentSection,
 .buySection,
@@ -512,6 +525,7 @@ input::-webkit-inner-spin-button {
     transition: all .5s;
 }
 
+.empty_Cart:hover,
 .list_Products_Box:hover,
 .paymentSection:hover,
 .shippingSection:hover,
@@ -552,7 +566,7 @@ input::-webkit-inner-spin-button {
 }
 
 .bg_CartMSG{
-    background: #e6e4ff;
+    background: #e6e4ff99;
     text-align: center;
     border-radius: 1rem;
     padding: 10px;

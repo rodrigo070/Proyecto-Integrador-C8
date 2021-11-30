@@ -349,16 +349,18 @@ module.exports = {
             console.log("LAST PAGE "+lastPage);
             console.log("FIRST PAGE "+firstPage);
 
+            console.log("CALCULO DE PAGINAS :"+pagesCount.length/quantityProducts);
+
             if (+req.query.page < 1) {
                 res.redirect(`/admin${pageLinkFirst}${searchQuery}${stockLink}${noStockLink}${offersLink}`)
             }
-            else if(+req.query.page > Math.round(pagesCount.length/quantityProducts))
+            else if(+req.query.page > Math.round(pagesCount.length/quantityProducts+1))
             {
                 res.redirect(`/admin${pageLinkLast}${searchQuery}${stockLink}${noStockLink}${offersLink}`)
             }
             else
             {
-                if (pagesCount.length < 9) {
+                if (pagesCount.length < 8) {
                     pageActive = -1
                 }
 
@@ -427,15 +429,17 @@ module.exports = {
           Product.create({
             name,
             price,
-            finalPrice: req.body.price,
+            finalPrice: +req.body.price,
             color: "Blanco",
-            discount,
+            discount: +req.body.discount ? discount : 0,
             description,
             product_Category,
             onSale: 0,
             product_Subcategory,
           })
             .then((product) => {
+                console.log("AGREGAR PRODUCTO");
+
               if (arrayImages.length > 0) {
                 let images = arrayImages.map((image) => {
                   return {
@@ -444,14 +448,14 @@ module.exports = {
                   };
                 });
                 Product_Images.bulkCreate(images)
-                  .then(() => res.redirect("/admin/lista-productos"))
+                  .then(() => res.redirect("/admin"))
                   .catch((err) => console.log(err));
               } else {
                 Product_Images.create({
                   image_Route: "default.jpg",
                   product_Id: product.id,
                 })
-                  .then(() => res.redirect("/admin/lista-productos"))
+                  .then(() => res.redirect("/admin"))
                   .catch((err) => console.log(err));
               }
             })
@@ -650,6 +654,21 @@ module.exports = {
     }
     ,
     borrar_Producto: (req, res) => {
+        History.findAll({
+            where : {
+                product_ID : req.params.id
+            }
+        })
+        .then(historyDestroy => {
+            for (let i = 0; i < historyDestroy.length; i++) {
+                History.destroy({
+                    where : {
+                        product_ID : historyDestroy[i].product_ID
+                    }
+                })
+            }
+        })
+
         Product.findByPk(req.params.id, {
             include: [{
                 association: "images",

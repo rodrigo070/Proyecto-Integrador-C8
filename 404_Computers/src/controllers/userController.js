@@ -1,11 +1,13 @@
 const { validationResult } = require('express-validator');
 let bcrypt = require("bcrypt");
 const db = require('../database/models');
+const { forEach } = require('../validations/loginValidator');
 const User = db.User;
 const Product = db.Product;
 const History = db.History;
 const Cart = db.CartProduct;
 const Favorite = db.Favorite;
+const Purchase = db.Purchase;
 
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
@@ -122,6 +124,7 @@ module.exports = {
         {
           res.render('./users/login', {
             errors: errors.mapped(),
+            pageURL : "productos",
             session: req.session
           });
         }
@@ -303,7 +306,7 @@ module.exports = {
                 let sliderProducts = productsData;
                 
                 let listOfProducts = [];
-                let ListOfQuantity = []
+                let ListOfQuantity = [];
                 productsData.forEach(cart => {
                     for (let i = 0; i < user.cartProducts.length; i++) {
                         if (user.cartProducts[i].cart_Product === cart.id) {
@@ -313,13 +316,13 @@ module.exports = {
                     }
                 });
 
-                ListOfQuantity = ListOfQuantity.reverse();
-
                 let totalToPay = 0;
 
                 for (let i = 0; i < listOfProducts.length; i++) {
                     totalToPay = totalToPay + listOfProducts[i].finalPrice*ListOfQuantity[i].cart_Quantity 
                 }
+
+                ListOfQuantity = ListOfQuantity.reverse();
 
                 /* res.send(productsData[0].CartProducts); */
                 res.render("users/cart" , {
@@ -442,6 +445,207 @@ module.exports = {
         .catch(errr => {
             console.log("ERROR AL BUSCAR STOCK DEL CARRITO -: "+errr);
         })
+    }
+    ,
+    checkout: (req, res) => {
+        /* Productos para el Slider */
+
+        let sliderProducts = Product.findAll({
+            include : ["images","Category","Subcategory"]
+        });
+
+        let user = User.findOne({
+            where : {
+                id : req.session.user.id
+            },
+            include: [{ association: "cartProducts"}] 
+        })
+
+        let productsData = Product.findAll({
+            include : ["Category","Subcategory"]
+        })
+
+        Promise.all([sliderProducts,user,productsData])
+        .then(([sliderProducts,user,productsData])=> {
+            let paySelected = +req.params.pay;
+            let payOption = "";
+
+            /* obtengo los datos del carrito del usuario logueado
+            y verifico que el carrito no estee vacio, si se encuentra con un producto o mas sigo a la siguiente validacion
+            donde verifico que los params de la ruta sean 1, 2 o 3
+            de lo contrario los redirijo al carrito en caso de que las validaciones previas no se cumplan
+            */
+            
+            if (!user.cartProducts.length) {
+                res.redirect('/carrito');
+            }
+
+            if (paySelected < 1 || paySelected > 3) {
+                res.redirect('/carrito');
+            }
+            else
+            {
+                /* Aca obtengo los productos de la tienda y filtro los que coincidan con el carrito del usuario tambien filtro y ordeno el stock elegido del usuario a obtener de cada producto , esta informacion se usara para mostrar en el recibo del checkout el producto que compro, el precio en base al stock seleccionado y el total de lo que sale toda la compra.
+                
+                el costo de envio se agregara solo si se marca la opcion en pantalla en base a su codigo postal, una vez confirmada la compra con el boton de confirmar compra se graba en la base de datos los productos junto a un id de orden de compra.
+                
+                seguido de eso procedo a restar el stock de la base de datos de productos uno por uno segun el stock elegido y luego elimino del carrito de usuario los productos que se compraron */
+
+                /* Obtengo Productos, Cantidad de Stock del Carrito por producto y el total de todo en base a precio final multiplicado por el stock seleccionado */
+
+                let listOfProducts = [];
+                let ListOfQuantity = [];
+
+                productsData.forEach(cart => {
+                    for (let i = 0; i < user.cartProducts.length; i++) {
+                        if (user.cartProducts[i].cart_Product === cart.id) {
+                            listOfProducts.push(cart)
+                            ListOfQuantity.push(user.cartProducts[i])
+                        }
+                    }
+                });
+
+                let totalToPay = 0;
+
+                for (let i = 0; i < listOfProducts.length; i++) {
+                    totalToPay = totalToPay + listOfProducts[i].finalPrice*ListOfQuantity[i].cart_Quantity 
+                }
+
+                ListOfQuantity = ListOfQuantity.reverse();
+                /* Hasta aca termina lo de productos, stock y precio total */
+
+                /* Aca renderizo el contenido de la vista en base al
+                medio de pago que se selecciono */
+
+                if (paySelected === 1) {
+                    payOption = 1
+
+                    res.render('users/checkOut',{
+                        productsData : listOfProducts,
+                        stockData : ListOfQuantity,
+                        cartObj : (user.cartProducts).length,
+                        totalToPay,
+                        sliderProducts,
+                        toThousand,
+                        payOption,
+                        pageURL : "productos",
+                        session: req.session
+                    });
+                }
+                else if (paySelected === 2) {
+                    payOption = 2;
+
+                    res.render('users/checkOut',{
+                        productsData : listOfProducts,
+                        stockData : ListOfQuantity,
+                        cartObj : (user.cartProducts).length,
+                        totalToPay,
+                        sliderProducts,
+                        toThousand,
+                        payOption,
+                        pageURL : "productos",
+                        session: req.session
+                    });
+                }
+                else if (paySelected === 3) {
+                    payOption = 3
+
+                    res.render('users/checkOut',{
+                        productsData : listOfProducts,
+                        stockData : ListOfQuantity,
+                        cartObj : (user.cartProducts).length,
+                        totalToPay,
+                        sliderProducts,
+                        toThousand,
+                        payOption,
+                        pageURL : "productos",
+                        session: req.session
+                    });
+                }
+            }
+        })
+    }
+    ,
+    checkout_confirm: (req,res) => {
+        let getPaymentOption = +req.params.payopt;
+        let getBuyer = +req.session.user.id;
+        let createOrderID = Math.floor(Math.random() * 100)+(+req.session.user.id);
+        console.log("ORDEN CREADA :"+createOrderID);
+        
+        let checkOrdersDB = Purchase.findAll({
+            where: {
+                order_ID : createOrderID,
+            }
+        })
+        .then(orderFound => {
+            if (orderFound.length>0) {
+                createOrderID = Math.floor(Math.random() * 100)+(+req.session.user.id);
+                console.log("ORDEN NUEVA CREADA :"+createOrderID);
+                console.log("ORDEN ENCONTRADA :"+orderFound.order_ID);
+            }
+            else
+            {
+                let getUserCart = User.findOne({
+                    where : {
+                        id: +req.session.user.id
+                    },
+                    include: [{ association: "cartProducts"}]
+                })
+                let getProductsDB = Product.findAll();
+                Promise.all([getUserCart,getProductsDB])
+                .then(([getUserCart,getProductsDB])=>{
+
+                    let listOfProductsFiltered = [];
+                    let ListOfQuantityFiltered = [];
+                    let totalToPay = 0;
+
+                    getProductsDB.forEach(product => {
+                        for (let i = 0; i < getUserCart.cartProducts.length; i++) {
+                            if (getUserCart.cartProducts[i].cart_Product === product.id) {
+                                listOfProductsFiltered.push(product)
+                                ListOfQuantityFiltered.push(getUserCart.cartProducts[i])
+                            }
+                        }
+                    });
+
+                    for (let i = 0; i < listOfProductsFiltered.length; i++) {
+                        totalToPay = totalToPay + listOfProductsFiltered[i].finalPrice*ListOfQuantityFiltered[i].cart_Quantity 
+                    }
+    
+                    let {cpCode,nameCard,cardNumber,yearCard,monthCard,ccvCard,homeAddress} = req.body;
+
+                    
+                    for (let i = 0; i < listOfProductsFiltered.length; i++) {
+                        console.log("PRODUCT CREATE : "+listOfProductsFiltered[i].name);
+                        console.log("QUANTITY CREATE : "+ListOfQuantityFiltered[i].cart_Quantity);
+                        console.log("CARD NUMBER LENGTH: "+cardNumber.length+" nro "+cardNumber);
+                        Purchase.create({
+                            buyer_ID: getBuyer,
+                            item_Name: listOfProductsFiltered[i].name,
+                            item_ID: listOfProductsFiltered[i].id,
+                            item_Price: listOfProductsFiltered[i].finalPrice * ListOfQuantityFiltered[i].cart_Quantity,
+                            item_Quantity: ListOfQuantityFiltered[i].cart_Quantity,
+                            order_ID: createOrderID,
+                            payment_Option: getPaymentOption,
+                            homeAddress: homeAddress,
+                            cpCode: cpCode,
+                            nameCard: nameCard,
+                            cardNumber: String(cardNumber),
+                            monthCard: monthCard,
+                            yearCard: yearCard,
+                            cvvCard: ccvCard,
+                        })
+                        .then()
+                        .catch(errr => {
+                            console.log("ERROR EN PURCHASE: "+errr);
+                        })
+                    }
+
+                })
+
+            }
+        })
+
     }
     ,
     favorite_delete_user: (req, res) => {

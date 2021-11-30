@@ -14,10 +14,7 @@
             <form action="/admin/agregar-producto/" method="POST" class="admin_Grid AdminContent" enctype="multipart/form-data">
                 
                 <div class="contenedor">
-                    <div class="cheked">
-                        <label for="sub-category">Agregar subcategoria</label>
-                        <input type="checkbox" name="sub-category" id="sub-category">
-                    </div>
+                    
                     <div class="seleccionar">
                         <div class="cat1admin">
                             <select name="product_Category" id="inputCategoryProduct" class="input-select">
@@ -44,7 +41,7 @@
                                 <small class="error-message"><%= errors.name.msg %> </small>
                             <% } %>
     
-                            <input type="text" name="discount" placeholder="Descuento" class="input-select">
+                            <input type="number" name="discount" placeholder="Descuento" value="0" class="input-select">
                         </div>
                     </div>
                 

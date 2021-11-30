@@ -29,8 +29,10 @@
                             <div class="modalFormBox">
                                 <form class="modalFormContent" action="/admin/borrarBanner/<%- banner.id %>?_method=DELETE" method="POST">
                                     <p>¿Desea Borrar el Banner N° <%= banner.id %>?</p>
-                                    <button class="cancelDeleteBTN" type="button" title="Cancelar">Cancelar</button>
-                                    <button type="submit" title="Borrar Banner">Confirmar</button>
+                                    <div style="display: flex;">
+                                        <button class="cancelDeleteBTN" type="button" title="Cancelar">Cancelar</button>
+                                        <button type="submit" title="Borrar Banner">Confirmar</button>
+                                    </div>
                                 </form>
                             </div>
 

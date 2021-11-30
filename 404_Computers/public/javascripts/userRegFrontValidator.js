@@ -14,7 +14,7 @@ window.addEventListener("load", function () {
         $passErrors = qs("#passErrors"),
         $passCheck = qs("#passCheck"),
         $passCheckErrors = qs("#passCheckErrors"),
-        regExAlpha = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{5,}$/,
+        regExAlpha = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/,
         regExEmail = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i,
         regExPass = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,12}$/;
 

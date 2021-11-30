@@ -84,6 +84,24 @@ let searchBar = document.getElementById("searchBarButtonJS");
 let burger = document.getElementById("burgerButton");
 let searchBarAdmin = document.querySelector(".search_Bar");
 
+function cvv(element)
+{
+    var max_chars = 3;
+
+    if(element.value.length > max_chars) {
+    element.value = element.value.substr(0, max_chars);
+    }
+}
+
+function ncard(element)
+{
+    var max_chars = 16;
+
+    if(element.value.length > max_chars) {
+    element.value = element.value.substr(0, max_chars);
+    }
+}
+
 function BButton() {
     burger.classList.toggle("is-active");
     document.body.classList.toggle("bNoScroll");
@@ -93,6 +111,7 @@ function userPanel(){
     let panel = document.getElementById('userPanel');
 
     panel.classList.toggle("panel_Active");
+
 }
 
 function dropMenu(){
@@ -172,9 +191,16 @@ function openPaymentSection(event, payOption) {
 /* Calcular Costo de Envio */
 
 function shippingCost(){
-    let cpCode =document.getElementById("cpcode").value;
+    let cpCode = document.getElementById("cpcode").value;
+
+    let getPrice = document.getElementById("getTotalPrice");
 
     let fieldToReplace = document.getElementById("shippingCost");
+
+    let priceToReplace = document.getElementById("totalShipping");
+
+    getPrice = normal(getPrice);
+    getPrice = Number(getPrice);
 
     let cost = 0.400;
 
@@ -191,7 +217,10 @@ function shippingCost(){
             finalCost = 1900;
         }
 
-        fieldToReplace.innerHTML = "$"+Math.round(finalCost);
+        finalCost = Math.round(finalCost);
+
+        fieldToReplace.innerHTML = "$"+finalCost;
+        priceToReplace.innerHTML = "$"+numberWithCommas(finalCost+getPrice);
     }
     else
     {

@@ -44,10 +44,15 @@ router.get('/perfil/:id', userSessionCheck,profileCheck ,controller.profile);/* 
 
 router.get('/carrito', userSessionCheck, controller.cart);
 
+router.get('/checkout/:pay', userSessionCheck, controller.checkout);
+
 /* Routers de Stock Carrito */
 
 router.put('/updateCartMinus/:id', controller.cart_minus_stock);
 router.put('/updateCartPlus/:id', controller.cart_plus_stock);
+
+router.post('/confirmPurchase/:payopt', userSessionCheck, controller.checkout_confirm);
+
 
 router.delete('/cart_delete/:id', controller.cart_delete);
 

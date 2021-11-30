@@ -101,6 +101,7 @@
 }
 
 .products_Page_Article{
+    height: fit-content;
     margin: 20px auto;
     width: 85%;
     transition: .5s ease;
