@@ -32,7 +32,7 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.STRING,
         },
         cpCode: {
-            type: dataTypes.INTEGER(10).UNSIGNED,
+            type: dataTypes.STRING,
         },
         nameCard: {
             type: dataTypes.STRING,
@@ -44,7 +44,7 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.INTEGER(10).UNSIGNED,
         },
         yearCard: {
-            type: dataTypes.INTEGER(10).UNSIGNED,
+            type: dataTypes.STRING,
         },
         cvvCard: {
             type: dataTypes.INTEGER(10).UNSIGNED,

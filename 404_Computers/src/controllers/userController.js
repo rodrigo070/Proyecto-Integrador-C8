@@ -572,7 +572,7 @@ module.exports = {
         let createOrderID = Math.floor(Math.random() * 100)+(+req.session.user.id);
         console.log("ORDEN CREADA :"+createOrderID);
         
-        let checkOrdersDB = Purchase.findAll({
+        Purchase.findAll({
             where: {
                 order_ID : createOrderID,
             }
@@ -616,9 +616,8 @@ module.exports = {
 
                     
                     for (let i = 0; i < listOfProductsFiltered.length; i++) {
-                        console.log("PRODUCT CREATE : "+listOfProductsFiltered[i].name);
-                        console.log("QUANTITY CREATE : "+ListOfQuantityFiltered[i].cart_Quantity);
-                        console.log("CARD NUMBER LENGTH: "+cardNumber.length+" nro "+cardNumber);
+                        /* Actualizo la base de datos de Compra(Purchase) agregando cada producto */
+
                         Purchase.create({
                             buyer_ID: getBuyer,
                             item_Name: listOfProductsFiltered[i].name,
@@ -628,21 +627,49 @@ module.exports = {
                             order_ID: createOrderID,
                             payment_Option: getPaymentOption,
                             homeAddress: homeAddress,
-                            cpCode: cpCode,
+                            cpCode: String(cpCode),
                             nameCard: nameCard,
                             cardNumber: String(cardNumber),
                             monthCard: monthCard,
-                            yearCard: yearCard,
+                            yearCard: String(yearCard),
                             cvvCard: ccvCard,
                         })
                         .then()
                         .catch(errr => {
                             console.log("ERROR EN PURCHASE: "+errr);
                         })
+
+                        /* Actualizo la base de datos de Carrito eliminando lo que se compro */
+
+                        Cart.destroy({
+                            where: {
+                                user_ID : getBuyer,
+                            }
+                        })
+                        .then()
+                        .catch(errr => {
+                            console.log("ERROR EN DESTROY CARRITO: "+errr);
+                        })
+
+                        /* Actualizo la base de datos de Productos restando el stock de lo que se compro */
+
+                        Product.update({
+                            stock : listOfProductsFiltered[i].stock - ListOfQuantityFiltered[i].cart_Quantity,
+                        },
+                        {
+                          where: {
+                            id: listOfProductsFiltered[i].id,
+                          }
+                        })
+                        .then()
+                        .catch(errr => {
+                            console.log("ERROR EN RESTAR STOCK PRODUCTOS: "+errr);
+                        })
+                        
                     }
 
                 })
-
+                res.redirect('/mis-compras');
             }
         })
 
