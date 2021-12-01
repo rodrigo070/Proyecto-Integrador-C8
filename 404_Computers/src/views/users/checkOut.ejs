@@ -8,7 +8,49 @@
         <div id="rgbar"></div>
         
         <% if (payOption == 1) { %>
-            <p>Vista Efectivo</p>
+            <form class="checkOut_Container" action="/confirmPurchase/<%= payOption %>" method="POST" onsubmit="submitThisForm(event,this)">
+                <div class="checkOut_details_Box">
+                    <div style="margin-bottom: 10px;">
+                        <p>Producto</p>
+                        <p>Cantidad</p>
+                        <p>Precio</p>
+                    </div>
+                    <div>
+                        <% productsData.forEach(product => { %>
+                            <p><%= product.name %></p>
+                            <p><%= stockData[cartObj = cartObj-1].cart_Quantity %></p>
+                            <p>$<%= toThousand(stockData[cartObj].cart_Quantity*product.finalPrice) %></p>
+                        <% }) %>
+                    </div>
+                    <div style="margin-top: 10px; padding-top: 7px; border-top: 1px solid #633ad369;">
+                        <p>Total a Pagar: </p>
+                        <p></p>
+                        <p id="getTotalPrice">$<%= toThousand(totalToPay) %></p>
+                    </div>
+                </div>
+                <div class="checkOut_shipping_Box">
+                    <p style="text-align: center; font-size: 22px; padding: 15px;">Mensaje para el Comprador</p>
+                    <div style="padding: 0 30px;">
+                        <p>Recorda que una vez Confirmada la Compra</p>
+                        <p>tendras 7 dias disponibles para acercarte al local</p>
+                        <p>y abonar tu compra de lo contrario se Cancelara.</p>
+                    </div>
+                </div>
+                <div class="checkOut_pay_Box" style="padding-bottom: 25px;">
+                    <p style="text-align: center; font-size: 22px; padding: 10px 0;">Formulario de Facturación</p>
+                    <div class="formPurchase">
+                        <p>Ingresa tu Domicilio</p>
+                        <input type="text" name="homeAddress" id="homeAddress" required>
+                        <p>Ingresa tu Codigo Postal</p>
+                        <input type="number" name="cpCode" id="cpCode" placeholder="Ej: 1824" required>
+                    </div>
+                </div>
+                <div class="checkOut_confirm_Box">
+                    <button type="submit">Confirmar Compra</button>
+                </div>
+            </form>
+            <!-- SLIDER DE MARCAS (INTEL, GIGABYTE ETC)  -->
+        <%- include('../partials/sliderBrands.ejs') %>   
         <% } else if (payOption == 2) { %>
             <form class="checkOut_Container" action="/confirmPurchase/<%= payOption %>" method="POST" onsubmit="submitThisForm(event,this)">
                 <div class="checkOut_details_Box">
@@ -99,9 +141,51 @@
             </form>
             <%- include('../partials/paymentBanner.ejs') %>
         <% } else if (payOption == 3) { %>
-            <p>Vista Mercado Pago</p>
+            <form class="checkOut_Container" action="/confirmPurchase/<%= payOption %>" method="POST" onsubmit="submitThisForm(event,this)">
+                <div class="checkOut_details_Box">
+                    <div style="margin-bottom: 10px;">
+                        <p>Producto</p>
+                        <p>Cantidad</p>
+                        <p>Precio</p>
+                    </div>
+                    <div>
+                        <% productsData.forEach(product => { %>
+                            <p><%= product.name %></p>
+                            <p><%= stockData[cartObj = cartObj-1].cart_Quantity %></p>
+                            <p>$<%= toThousand(stockData[cartObj].cart_Quantity*product.finalPrice) %></p>
+                        <% }) %>
+                    </div>
+                    <div style="margin-top: 10px; padding-top: 7px; border-top: 1px solid #633ad369;">
+                        <p>Total a Pagar: </p>
+                        <p></p>
+                        <p id="getTotalPrice">$<%= toThousand(totalToPay) %></p>
+                    </div>
+                </div>
+                <div class="checkOut_shipping_Box">
+                    <p style="text-align: center; font-size: 22px; padding: 15px;">Mensaje para el Comprador</p>
+                    <div style="padding: 0 30px;">
+                        <p>Recorda que una vez Confirmada la Compra por Mercadopago</p>
+                        <p>Recibira un E-Mail de Confirmacion de pedido</p>
+                        <p>al Hacer click sera redirigido a MercadoPago</p>
+                        <p>y se confirmara su Compra.</p>
+                    </div>
+                </div>
+                <div class="checkOut_pay_Box" style="padding-bottom: 25px;">
+                    <p style="text-align: center; font-size: 22px; padding: 10px 0;">Formulario de Facturación</p>
+                    <div class="formPurchase">
+                        <p>Ingresa tu Domicilio</p>
+                        <input type="text" name="homeAddress" id="homeAddress" required>
+                        <p>Ingresa tu Codigo Postal</p>
+                        <input type="number" name="cpCode" id="cpCode" placeholder="Ej: 1824" required>
+                    </div>
+                </div>
+                <div class="checkOut_confirm_Box">
+                    <button type="submit" onclick="location.href='www.mercadopago.com.ar'">Confirmar Compra</button>
+                </div>
+            </form>
+            <!-- SLIDER DE MARCAS (INTEL, GIGABYTE ETC)  -->
+        <%- include('../partials/sliderBrands.ejs') %>   
         <% } %>
-        
     </main>
     <%- include('../partials/footer.ejs') %> 
   </div>

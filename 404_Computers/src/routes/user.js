@@ -23,6 +23,10 @@ router.post('/registro', registerValidator, controller.processRegister);
 
 router.get('/favoritos', userSessionCheck, controller.favorites);
 
+router.get('/mis-compras', userSessionCheck, controller.purchases);
+
+router.get('/mis-compras/:order', userSessionCheck, controller.purchase_detail);
+
 router.delete('/borrar-favorito-user/:id', controller.favorite_delete_user);
 
 /* Routers de Historial */

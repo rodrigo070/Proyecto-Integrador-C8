@@ -26,6 +26,7 @@
 @import url(admin_list.css);
 @import url(admin_edit_user.css);
 @import url(checkOut.css);
+@import url(purchases.css);
 
 @font-face {
   font-family: 'Karmatic';

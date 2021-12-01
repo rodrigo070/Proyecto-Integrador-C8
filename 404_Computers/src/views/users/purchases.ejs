@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head.ejs' ,{title: 'Mis Compras - '}) %>
+<body>
+  <div class="container_Page">
+    <%- include('../partials/header.ejs') %>   
+    <main>
+      <section class="purchasesContainer">
+        <div class="titles">Mis Compras</div>
+        <% for( let i = 0; i < userPurchases.length; i++ ) { %>
+          <% if (i === 0) { %>
+            <div class="purchasesBox">
+              <p>Orden de Compra: <%= userPurchases[i].order_ID %></p>
+              <div>
+                <p>Cantidad de Productos: <%= userPurchases[i].item_Quantity %></p>
+                <% if (userPurchases[i].payment_Option === 1) { %>
+                  <p>Metodo de Pago: Efectivo</p>
+                <% } else if (userPurchases[i].payment_Option === 2) { %>
+                  <p>Metodo de Pago: Tarjeta</p>
+                <% } else if (userPurchases[i].payment_Option === 3) { %>
+                    <p>Metodo de Pago: MercadoPago</p>
+                <% } %>
+              </div>
+              <a href="/mis-compras/<%= userPurchases[i].order_ID %>">Ver Detalle</a>
+            </div>
+          <% } else if (i > 0 && userPurchases[i].order_ID != userPurchases[i-1].order_ID) { %>
+            <div class="purchasesBox">
+              <p>Orden de Compra: <%= userPurchases[i].order_ID %></p>
+              <div>
+                <p>Cantidad de Productos: <%= userPurchases[i].item_Quantity %></p>
+                <% if (userPurchases[i].payment_Option === 1) { %>
+                  <p>Metodo de Pago: Efectivo</p>
+                <% } else if (userPurchases[i].payment_Option === 2) { %>
+                  <p>Metodo de Pago: Tarjeta</p>
+                <% } else if (userPurchases[i].payment_Option === 3) { %>
+                    <p>Metodo de Pago: MercadoPago</p>
+                <% } %>
+              </div>
+              <a href="/mis-compras/<%= userPurchases[i].order_ID %>">Ver Detalle</a>
+            </div>
+          <% } %>
+        <% } %>
+      </section>
+    </main>
+    <%- include('../partials/footer.ejs') %> 
+  </div>
+</body>
+</html>

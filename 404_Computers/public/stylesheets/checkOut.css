@@ -88,6 +88,7 @@
     width: 70%;
 }
 
+.formPurchase input,
 .shippingInput,
 .ship_input,
 .grid_Shipping_Box button,
@@ -159,4 +160,10 @@
     text-align: center;
     font-size: 22px;
     padding-bottom: 10px;
+}
+
+.formPurchase{
+    text-align: left !important;
+    margin: 10px auto;
+    width: fit-content !important;
 }

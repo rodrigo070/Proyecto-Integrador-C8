@@ -618,26 +618,53 @@ module.exports = {
                     for (let i = 0; i < listOfProductsFiltered.length; i++) {
                         /* Actualizo la base de datos de Compra(Purchase) agregando cada producto */
 
-                        Purchase.create({
-                            buyer_ID: getBuyer,
-                            item_Name: listOfProductsFiltered[i].name,
-                            item_ID: listOfProductsFiltered[i].id,
-                            item_Price: listOfProductsFiltered[i].finalPrice * ListOfQuantityFiltered[i].cart_Quantity,
-                            item_Quantity: ListOfQuantityFiltered[i].cart_Quantity,
-                            order_ID: createOrderID,
-                            payment_Option: getPaymentOption,
-                            homeAddress: homeAddress,
-                            cpCode: String(cpCode),
-                            nameCard: nameCard,
-                            cardNumber: String(cardNumber),
-                            monthCard: monthCard,
-                            yearCard: String(yearCard),
-                            cvvCard: ccvCard,
-                        })
-                        .then()
-                        .catch(errr => {
-                            console.log("ERROR EN PURCHASE: "+errr);
-                        })
+                        /* si es opcion 2 tomo los datos de tarjeta y envio - si es por mercadopago solo los de envio */
+
+                        if (getPaymentOption === 2) {
+                            Purchase.create({
+                                buyer_ID: getBuyer,
+                                item_Name: listOfProductsFiltered[i].name,
+                                item_ID: listOfProductsFiltered[i].id,
+                                item_Price: listOfProductsFiltered[i].finalPrice * ListOfQuantityFiltered[i].cart_Quantity,
+                                item_Quantity: ListOfQuantityFiltered[i].cart_Quantity,
+                                order_ID: createOrderID,
+                                payment_Option: getPaymentOption,
+                                homeAddress: homeAddress,
+                                cpCode: String(cpCode),
+                                nameCard: nameCard,
+                                cardNumber: String(cardNumber),
+                                monthCard: monthCard,
+                                yearCard: String(yearCard),
+                                cvvCard: ccvCard,
+                            })
+                            .then()
+                            .catch(errr => {
+                                console.log("ERROR EN PURCHASE: "+errr);
+                            })
+                        }
+                        else
+                        {
+                            Purchase.create({
+                                buyer_ID: getBuyer,
+                                item_Name: listOfProductsFiltered[i].name,
+                                item_ID: listOfProductsFiltered[i].id,
+                                item_Price: listOfProductsFiltered[i].finalPrice * ListOfQuantityFiltered[i].cart_Quantity,
+                                item_Quantity: ListOfQuantityFiltered[i].cart_Quantity,
+                                order_ID: createOrderID,
+                                payment_Option: getPaymentOption,
+                                homeAddress: homeAddress,
+                                cpCode: String(cpCode),
+                                nameCard: "",
+                                cardNumber: "",
+                                monthCard : 0,
+                                yearCard: 0,
+                                cvvCard: 0,
+                            })
+                            .then()
+                            .catch(errr => {
+                                console.log("ERROR EN PURCHASE: "+errr);
+                            })
+                        }
 
                         /* Actualizo la base de datos de Carrito eliminando lo que se compro */
 
@@ -669,10 +696,82 @@ module.exports = {
                     }
 
                 })
-                res.redirect('/mis-compras');
+                if (getPaymentOption === 3) {
+                    res.redirect('https://www.mercadopago.com.ar');
+                }
+                else
+                {
+                    res.redirect('/mis-compras');
+                }
             }
         })
 
+    }
+    ,
+    purchases: (req, res) => {
+        Purchase.findAll({
+            where : {
+                buyer_ID: +req.session.user.id 
+            }
+        })
+        .then(userPurchases => {
+
+                console.log("CANT DE ORDENES : "+userPurchases.length);
+
+                let ordenes = 0;
+
+                for (let i = 0; i < userPurchases.length; i++) {
+                    if (i > 0) {
+                        if (userPurchases[i].order_ID === userPurchases[i-1].order_ID) {
+                            ordenes = ordenes+1
+                            console.log("ESTA ORDEN ESTA REPETIDA :"+userPurchases[i].order_ID);
+                        }
+                    }
+                }
+
+                ordenes = userPurchases.length-ordenes
+
+                console.log("CANT DE ORDENES FILTRADAS : "+ordenes);
+
+                res.render('users/purchases',{
+                    userPurchases,
+                    pageURL : "productos",
+                    session: req.session
+                });
+        })
+        .catch(errr => {
+            console.log("ERROR AL CARGAR DB PURCHASES: "+errr+" USER : "+req.session.user.id);
+        })
+        
+    }
+    ,
+    purchase_detail: (req, res) => {
+        Purchase.findAll({
+            where: {
+                order_ID : req.params.order,
+                buyer_ID : req.session.user.id
+            }
+        })
+        .then(details =>{
+            let payment = "";
+
+            if (details[0].payment_Option === 1) {
+                payment = "Efectivo"
+            }
+            else if (details[0].payment_Option === 2) {
+                payment = "Tarjeta"
+            }
+            else if (details[0].payment_Option === 3) {
+                payment = "MercadoPago"
+            }
+
+            res.render('users/purchaseDetail',{
+                details,
+                payment,
+                pageURL : "productos",
+                session: req.session
+            });
+        })
     }
     ,
     favorite_delete_user: (req, res) => {

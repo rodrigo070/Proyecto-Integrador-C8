@@ -1,0 +1,75 @@
+.purchaseDetailContainer,
+.purchasesContainer{
+    margin: 20px auto;
+    width: 90%;
+}
+
+.purchasesBox{
+    border-radius: 1rem;
+    border: 1px solid #9073e269;
+    margin: 10px auto;
+    background: #f4f1ff;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    transition: all .5s;
+}
+
+.purchasesBox a:last-of-type{
+    text-align: center;
+    border: 1px solid #9073e269;
+    background: #b297ff7a;
+    padding: 15px;
+    width: fit-content;
+    margin: 0 auto;
+    transition: all .5s;
+    border-radius: 1rem;
+    color: white;
+}
+
+.purchasesBox a:last-of-type:hover{
+    border: 1px solid #7648f669;
+    background: #8358fa7a;
+}
+
+.purchasesBox:hover{
+    border: 1px solid #4911e469;
+}
+
+.purchaseDetailContainer{
+    display: grid;
+    grid-template-areas: 
+    "title title"
+    "pay pay"
+    "list formDetail";
+    grid-template-columns: 68% 28%;
+    background: #d4c5ff7a;
+    padding: 20px;
+    border-radius: 1rem;
+    gap: 4%;
+}
+
+.purchaseDetailBox{
+    grid-area: list;
+    background: #fcfbffba;
+    padding: 20px;
+    border-radius: 1rem;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.purchaseDetailItem{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    margin: 5px auto;
+    text-align: center;
+}
+
+.purchaseDetailFormBox{
+    grid-area: formDetail;
+    background: #fcfbffba;
+    text-align: center;
+    width: 100%;
+    border-radius: 1rem;
+    margin-bottom: 20px;
+}

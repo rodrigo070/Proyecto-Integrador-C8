@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('../partials/head.ejs' ,{title: 'Detalle de Compra - '}) %>
+<body>
+  <div class="container_Page">
+    <%- include('../partials/header.ejs') %>   
+    <main>
+      <section class="purchaseDetailContainer">
+        <div style="grid-area: title;" class="titles">N° de Orden: #<%= details[0].order_ID %></div>
+        <div style="grid-area: pay;">
+            <p>Recibimos tu Pago por : <%= payment %></p>
+        </div>
+        <div class="purchaseDetailBox">
+            <div class="purchaseDetailItem" style="border-bottom: 1px solid rgba(0,0,0,0.3);">
+                <p>N°</p>
+                <p>Producto</p>
+                <p>Precio</p>
+                <p>Unidades</p>
+                <p>Total</p>
+            </div>
+            
+            <% for( let i = 0; i < details.length; i++ ) { %>
+                <div class="purchaseDetailItem">
+                    <p>#<%= i %> </p>
+                    <p><%= details[i].item_Name %></p>
+                    <p><%= details[i].item_Price / details[i].item_Quantity %></p>
+                    <p><%= details[i].item_Quantity %></p>
+                    <p><%= details[i].item_Price %></p>
+                </div>
+            <% } %>
+        </div>
+        <div class="purchaseDetailFormBox">
+            <p><%= details[0].homeAddress %></p>
+        </div>
+      </section>
+    </main>
+    <%- include('../partials/footer.ejs') %> 
+  </div>
+</body>
+</html>
