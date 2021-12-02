@@ -76,11 +76,15 @@
     margin: auto;
 }
 
-.grid_Shipping_Box button{
+.grid_Shipping_Box a{
     background: royalblue;
     color: white;
     cursor: pointer;
     width: 105px;
+    border-radius: 1rem;
+    padding: 12px 22px;
+    display: flex;
+    font-size: 18px;
 }
 
 .grid_Shipping_Box #shippingCost,

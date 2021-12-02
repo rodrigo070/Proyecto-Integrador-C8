@@ -18,7 +18,7 @@
     display: none;
     padding: 20px 10px;
     border-radius: 1rem;
-    border: 1px solid blueviolet;
+    border: 1px solid rgba(107, 43, 226, 0.37);
     width: 280px;
     background-color: white;
     text-align: center;
@@ -34,13 +34,13 @@
     margin-top: 10px !important;
     border-radius: 0.6rem;
     padding: 5px 10px;
-    background-color: rgb(47, 0, 255) !important;
+    background-color: rgb(69, 38, 207) !important;
     color: white;
     border-style: none;
 }
 
 .modalFormContent button:hover {
-    background-color: rgb(77, 0, 219) !important;
+    background-color: rgb(89, 0, 255) !important;
 }
 
 .modalFormContent button:nth-of-type(1) {
@@ -63,6 +63,16 @@
 /*-------------------------------------------------------------------*/
 /*--------------------------- FIN FORM ------------------------------*/
 /*-------------------------------------------------------------------*/
+
+.addPicsAdm{
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    display: flex !important;
+    justify-content: center;
+    font-size: 22px !important;
+    border: 1px solid transparent !important;
+}
 
 .bNoScroll{
     overflow-y: hidden;

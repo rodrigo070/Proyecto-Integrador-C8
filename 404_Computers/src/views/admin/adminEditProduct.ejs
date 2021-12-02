@@ -64,7 +64,20 @@
                             <div class="col2EditProduct">
                                 <article>
                                     <label for="inputColorProduct">Color:</label>
-                                    <input type="text" name="color" id="inputColorProduct" value="<%= productToEdit.color %>">
+                                    <select name="color" id="inputColorProduct">
+                                        <option value=<%= productToEdit.color? productToEdit.color : "" %> disabled selected><%= productToEdit.color? productToEdit.color : "-" %></option>
+                                        <option value="Blanco">Blanco</option>
+                                        <option value="Negro">Negro</option>
+                                        <option value="Gris">Gris</option>
+                                        <option value="Rojo">Rojo</option>
+                                        <option value="Azul">Azul</option>
+                                        <option value="Amarillo">Amarillo</option>
+                                        <option value="Rosa">Rosa</option>
+                                        <option value="Verde">Verde</option>
+                                        <option value="Naranja">Naranja</option>
+                                        <option value="Marron">Marron</option>
+                                        <option value="RGB">RGB</option>
+                                    </select>
                                 </article>
                                 <article>
                                     <label for="inputPriceProduct">Precio:</label>
@@ -79,17 +92,23 @@
                                 </article>
                                 <article>
                                     <label for="inputDiscountProduct">Descuento:</label>
-                                    <input type="number" name="discount" id="inputDiscountProduct" value="<%= productToEdit.discount %>">
+                                    <select name="discount" id="inputDiscountProduct">
+                                        <option value=<%= productToEdit.discount? productToEdit.discount : "" %> disabled selected><%= productToEdit.discount? productToEdit.discount : "-" %></option>
+                                        <option value="0">0%</option>
+                                        <option value="15">15%</option>
+                                        <option value="25">25%</option>
+                                        <option value="50">50%</option>
+                                        <option value="70">70%</option>
+                                    </select>
                                 </article>
                             </div>
-    
+                            <div class="editProductSaveCancel">
+                                <button type="submit">Guardar</button>
+                                <button type="reset" onclick="location.href='/admin'">Cancelar</button>
+                            </div>
                         </section>
                     </div>
                     
-                    <div class="editProductSaveCancel">
-                        <button type="submit">Guardar</button>
-                        <button type="reset" onclick="location.href='/admin'">Cancelar</button>
-                    </div>
                 </form>
                 <div class="imagesBoxProduct">
                     <p class="imagesTitle">Imagenes del Producto</p>

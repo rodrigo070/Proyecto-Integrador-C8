@@ -39,7 +39,7 @@ router.delete('/delHistoryProduct/:id', controller.delHistoryProduct);
 
 router.get('/editar-perfil', userSessionCheck, controller.editProfile);
 
-router.put('/editar-perfil/:id' ,uploadProfilePicFile.single("image"),userEditCheck, controller.updateProfile)
+router.put('/updateprofile/:id' ,uploadProfilePicFile.single("image"),userEditCheck, controller.updateProfile)
 
 /* Routers de Perfil de Usuario */
 router.get('/perfil/:id', userSessionCheck,profileCheck ,controller.profile);/* cambie la ruta para que en perfil nos muestre los datos del usuario que venga por id */

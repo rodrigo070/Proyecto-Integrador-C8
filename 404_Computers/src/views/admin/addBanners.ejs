@@ -5,7 +5,7 @@
     <script src="/javascripts/previewImage_Admin.js" defer></script>
     <script src="/javascripts/admin.js" defer></script>
 </head>
-<body class="background_Leaves">
+<body>
   <div class="container_Page"> 
     <%- include('../partials/adminHeader.ejs') %>
     <main class="admin">
@@ -29,7 +29,7 @@
                             <div class="modalFormBox">
                                 <form class="modalFormContent" action="/admin/borrarBanner/<%- banner.id %>?_method=DELETE" method="POST">
                                     <p>¿Desea Borrar el Banner N° <%= banner.id %>?</p>
-                                    <div style="display: flex;">
+                                    <div style="display: inline-flex; gap: 20px;">
                                         <button class="cancelDeleteBTN" type="button" title="Cancelar">Cancelar</button>
                                         <button type="submit" title="Borrar Banner">Confirmar</button>
                                     </div>

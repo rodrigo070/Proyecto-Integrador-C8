@@ -5,7 +5,7 @@
     <script src="/javascripts/previewImage_Admin.js" defer></script>
     <script src="/javascripts/admin.js" defer></script>
 </head>
-<body class="background_Leaves">
+<body>
   <div class="container_Page">
     <%- include('../partials/adminHeader.ejs') %>
     <main class="admin">
@@ -62,9 +62,10 @@
                 </section>
     
                 <section class="agregar-imagen">
-                    <label for="archivo">Agregar archivos de Imagen</label>
-                    <hr>
-                    <input type="file" id="examinar" name="image_Route" multiple accept=".jpg, .png, .webp, .jpeg, .bmp">
+                    <label class="buttonToAddImage addPicsAdm">
+                        <input style="display: none;" type="file" id="examinar" name="image_Route" accept=".jpg, .png, .webp, .jpeg, .bmp">
+                        <p><i class="fa fa-upload" aria-hidden="true"></i>Subir Fotos</p>
+                    </label>
                     <% if (locals.errors && errors.image_Route) { %>
                         <small class="error-message"><%= errors.image_Route.msg %> </small>
                     <% } %>

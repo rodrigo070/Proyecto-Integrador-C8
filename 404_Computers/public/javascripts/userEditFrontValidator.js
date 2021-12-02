@@ -12,16 +12,13 @@ window.addEventListener("load", function () {
         $form = qs("#form"),
         $dni = qs("#dni"),
         $dniErrors = qs("#dniErrors"),
-        $email = qs("#email"),
-        $emailErrors = qs("#emailErrors"),
         $address = qs("#address"),
         $addressErrors = qs("#addressErrors"),
         $phoneNumber = qs("#phoneNumber"),
         $phoneNumberErrors = qs("#phoneNumberErrors"),
         regExAlpha = /^[a-zA-Z\sñáéíóúü ]*$/,
         regExDNI = /^[0-9]{8}/,
-        regExPhone = /^\d{10}$/,
-        regExEmail = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+        regExPhone = /^\d{10}$/;
 
     $inputName.addEventListener("blur", function () {
         switch (true) {
@@ -79,26 +76,6 @@ window.addEventListener("load", function () {
                 $dni.classList.remove('is-invalid');
                 $dni.classList.add('is-valid');
                 $dniErrors.innerHTML = ''
-                break;
-        }
-    })
-
-    $email.addEventListener('blur', function () {
-        switch (true) {
-            case !$email.value.trim():
-                $emailErrors.innerHTML = 'El campo email es obligatorio';
-                $email.classList.add('is-invalid')
-                $email.classList.remove("is-valid");
-                break;
-            case !regExEmail.test($email.value):
-                $emailErrors.innerHTML = 'Debe ingresar un email válido';
-                $email.classList.add('is-invalid')
-                $email.classList.remove("is-valid");
-                break
-            default:
-                $email.classList.remove('is-invalid');
-                $email.classList.add('is-valid');
-                $emailErrors.innerHTML = ''
                 break;
         }
     })
@@ -181,4 +158,73 @@ window.addEventListener("load", function() {
         })
     }
 
+})
+
+/* API PROVINCIAS Y CIUDADES */
+
+window.addEventListener('load', function () {
+    let $provinceList = document.querySelector('#provinceList');
+    let $citiesList = document.querySelector('#citiesList');
+
+    fetch('https://apis.datos.gob.ar/georef/api/provincias')
+    .then(function(response){
+        return response.json()
+    })
+    .then(function(result){
+        let provinces = result.provincias.sort(function (prev, next) {
+            return prev.nombre > next.nombre
+            ? 1
+            : prev.nombre < next.nombre
+            ? -1
+            : 0;
+        });
+        return provinces.forEach(province => {
+            $provinceList.innerHTML += `<option value="${province.nombre}">${province.nombre}</option>`
+        })
+    })
+    .catch(function (error){
+               console.log(error);
+    });
+
+    $provinceList.addEventListener('change', function(event){
+        let idProvince = event.target.value
+        $citiesList.innerHTML = ""
+
+        function fetchCities (id){
+            fetch(`https://apis.datos.gob.ar/georef/api/localidades?provincia=${id}&campos=id,nombre&max=5000`)
+            .then(response => response.json())
+            .then(result => {
+                let cities = result.localidades.sort(function (prev, next) {
+                    return prev.nombre > next.nombre
+                    ? 1
+                    : prev.nombre < next.nombre
+                    ? -1
+                    : 0;
+                });
+              cities.forEach(city => {
+                  $citiesList.innerHTML += `<option value="${city.nombre}">${city.nombre}</option>`
+              })  
+            })
+        }
+        fetchCities(idProvince)
+    })
+})
+
+let changeProfilePic = document.querySelector("#examinar")
+
+changeProfilePic.addEventListener("change",
+    function showImageUploaded(){
+        if(changeProfilePic.files && changeProfilePic.files[0]){
+
+            var reader = new FileReader();
+            var imageRPC = document.querySelector('#changeImageProfile');
+
+            reader.onload = function(e){
+                imageRPC.src = e.target.result;
+            };
+
+            reader.readAsDataURL(changeProfilePic.files[0]);
+
+            
+        }
 })

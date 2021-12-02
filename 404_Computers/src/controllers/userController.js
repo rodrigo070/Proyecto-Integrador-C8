@@ -27,7 +27,7 @@ module.exports = {
                 id : req.session.user.id
             },
             include: [{ association: "historyProducts" }]
-        }).then((user) => {
+        }).then(user => {
             res.render("users/editProfile", {
                 user,
                 pageURL : "productos",
@@ -39,16 +39,17 @@ module.exports = {
     updateProfile: (req, res) => {
         let errors = validationResult(req);
         if (errors.isEmpty()) {
-          let { email, name, surname, address, phone, dni } = req.body;
+          let { name, surname, address, phone, dni, province, city } = req.body;
           User.update(
             {
-                email,
                 name,
                 surname,
                 address,
                 image : req.file ? req.file.filename : req.body.image,
                 phone,
                 dni,
+                province,
+                city,
             },
             {
               where: {
@@ -59,11 +60,22 @@ module.exports = {
             res.redirect(`/perfil/${req.session.user.id}`);
           })
         } else {
-          res.render("users/editProfile", {
-            errors: errors.mapped(),
-            old: req.body,
-            session: req.session
-          });
+
+            User.findOne({
+                where: {
+                    id : req.session.user.id
+                }
+            })
+            .then(user =>{
+                console.log("ERROR AL ACTUALIZAR PERFIL");
+                res.render("users/editProfile", {
+                    errors: errors.mapped(),
+                    user,
+                    pageURL : "productos",
+                    old: req.body,
+                    session: req.session
+                  });
+            })
         }
 
     },
@@ -152,8 +164,10 @@ module.exports = {
             role : "ROLE_USER",
             image : "user_default.jpg",
             address : "",
-            phone: 0,
-            dni: 0
+            phone: null,
+            dni: null,
+            province: "",
+            city: "",
     
             }).then(()=>{
                 res.redirect('/login')
@@ -164,6 +178,7 @@ module.exports = {
         {
             res.render('users/register', {
                 errors: errors.mapped(),
+                pageURL : "productos",
                 old : req.body,
                 session: req.session
             });
@@ -696,13 +711,7 @@ module.exports = {
                     }
 
                 })
-                if (getPaymentOption === 3) {
-                    res.redirect('https://www.mercadopago.com.ar');
-                }
-                else
-                {
-                    res.redirect('/mis-compras');
-                }
+                res.redirect(`/mis-compras/${createOrderID}`);
             }
         })
 
@@ -754,6 +763,7 @@ module.exports = {
         })
         .then(details =>{
             let payment = "";
+            let totalPurchased = 0;
 
             if (details[0].payment_Option === 1) {
                 payment = "Efectivo"
@@ -764,10 +774,16 @@ module.exports = {
             else if (details[0].payment_Option === 3) {
                 payment = "MercadoPago"
             }
+            
+            for (let i = 0; i < details.length; i++) {
+                totalPurchased = totalPurchased + details[i].item_Price
+            }
 
             res.render('users/purchaseDetail',{
                 details,
                 payment,
+                totalPurchased,
+                toThousand,
                 pageURL : "productos",
                 session: req.session
             });

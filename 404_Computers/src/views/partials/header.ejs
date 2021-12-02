@@ -176,7 +176,7 @@
                         <button type="reset" onclick="location.href='/productos?offers=1'">Ofertas <i class="fa fa-percent" ></i></button>
                     </li>
                     <% if (typeof session.user != "undefined") { %>
-                        <% if (session.user.role === "ROLE_ADMIN") { %>
+                        <% if (session.user.role === "ROLE_ADMIN" || session.user.role === "ROLE_SUPER_ADMIN") { %>
                             <li>
                                 <button type="reset" onclick="location.href='/admin'">Admin <i class="fa fa-user-secret" ></i></button>
                             </li>

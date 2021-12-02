@@ -1,178 +1,173 @@
-.profile .form-container h2{
-    text-align: center;
+.profileEditContainer{
+    background: #f9f9f965;
+    width: 95%;
+    border-radius: 1rem;
+    padding: 10px;
+    margin: 20px auto;
+    border: 1px solid rgb(211 120 221);
 }
 
-.profile .form-container {
+.button_container,
+.locationSelects{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+
+.formEditProfile{
+    display: grid;
+    grid-template-areas: 
+    "title"
+    "col1"
+    "col2"
+    "buttons";
+    grid-template-columns: 100%;
     width: 100%;
 }
 
-.profile-form {
+.userPhotoEdit{
     display: flex;
     flex-direction: column;
-}
-
-.profile-box {
     width: 100%;
+}
+
+.profilePicture{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    margin: 20px auto;
 }
 
-.profile-box input[type="file"] {
-    display: none;
-}
-
-.profile-box h4 {
-    margin-bottom: 1rem;
-}
-
-.input-container{
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-}
-
-.profile .button-container {
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    margin: 0;
-    gap: 10px;
-}
-
-.profile .avatar {
+.profilePicture img{
+    object-fit: contain;
     width: 150px;
     height: 150px;
-    background-color: thistle;
+    margin: 0 auto;
+    background: white;
     border-radius: 50%;
     margin-bottom: 1rem;
     overflow: hidden;
     border: 1px solid #d379dd;
 }
 
-.profile .avatar img{
+.profileFormCol{
     width: 100%;
-    height: 100%;
 }
 
-.profile .input-select{
-    outline: none;
-    border: 2px solid #d379dd;
-    box-shadow: 0 2px 2px rgb(44, 0, 204), 0 5px 5px rgba(55, 0, 255, 0.1);
-    border-radius: 10px;
-    margin: 5px;
-    padding: 5px;
+.col1edit{
+    grid-area: col1;
 }
 
-.profile .input-style{
-    outline: none;
-    border: 2px solid #d379dd;
-    box-shadow: 0 2px 2px rgb(44, 0, 204), 0 5px 5px rgba(55, 0, 255, 0.1);
-    border-radius: 10px;
-    margin: 5px;
-    padding: 5px;
-    position: relative;
-}
-.profile .button-container {
-    text-align: center;
-    margin: 20px auto;
+.col2edit{
+    grid-area: col2;
 }
 
-.btnDel{
+.button_container{
+    grid-area: buttons;
+    width: fit-content;
+    border: 1px solid #d379dd;
     border-radius: 1rem;
-    background: #e74460;
-    padding: 7px;
-    color: white;
+    padding: 10px 20px;
+    margin: 0 auto;
+    gap: 30px;    
+}
+
+.button_container button,
+.button_container span{
+    margin: auto;
+    outline: none;
     cursor: pointer;
-    border: 2px solid #767676;
+    border-style: none;
+    transition: all .5s ease;
+    border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-/* .profile .btn-reset {
-    background:  linear-gradient(45deg,#d379dd 0%, #a547af 50%);
-    color: rgb(75, 75, 75);
-    font-weight: bold;
-    transition: all 1s ease;
+.input-container{
+    display: flex;
+    flex-direction: column;
 }
 
-.profile .btn-reset:hover {
-    color: rgb(172, 172, 172);
-    box-shadow: -5px -5px 10px rgb(255, 255, 255, 0.7);
-    background: linear-gradient(285deg, rgba(255,255,255,0.5) 0%, #892194 50%);
-} */
+.input-container select,
+.input-container input{
+    text-indent: 3px;
+    padding: 5px;
+    margin-bottom: 10px;
+    width: 80%;
+    height: 33px;
+    border-style: none;
+    border-radius: 0.5rem;
+    outline: none;
+    border: 2px solid #d379dd;
+    box-shadow: 0 2px 2px rgb(44, 0, 204), 0 5px 5px rgba(55, 0, 255, 0.1);
+}
 
-.profile .btn-edit {
+.w100i{
+    width: 100% !important;
+}
+
+.locationSelects{
+    gap: 30px;
+}
+
+.button_container span{
+    background: red;
+    color: white;
+    padding: 8px;
+    border-radius: 1rem;
+}
+
+.button_container span:hover{
+    background: rgb(192, 16, 16);
+}
+
+.btn-edit {
     background: linear-gradient(45deg,#d379dd 0%, #f9c4ff 50%);
-    color: rgb(75, 75, 75);
     font-weight: bold;
-    transition: all 1s ease;
-
 }
 
-.profile .btn-edit:hover {
-    color: rgb(172, 172, 172);
+.btn-edit:hover {
     box-shadow: -5px -5px 10px rgb(255, 255, 255, 0.7);
     background: linear-gradient(285deg, rgba(255,255,255,0.5) 0%, #7356de 50%);
 }
 
-.redError{
-    bottom: 0;
-    left: 0;
-    color: red;
-    top: 38px;
-}
+/*-----------------------------------------------------------------*/
+/*---------------------------- Tablet -----------------------------*/
+/*-----------------------------------------------------------------*/
 
-.redErrorSub{
-    display: flex;
-    margin-bottom: 15px;
-    color: red;
-}
+@media screen and (min-width: 768px){
 
-/* Media queries */
-/* Tablet */
-
-@media screen and (min-width: 475px) {
-   
-    .profile .form-container {
-        width: 90%;
-    }
-
-}
-
-
-@media screen and (min-width: 768px) {
-  
-    .profile .form-container {
+    .profileEditContainer{
         width: 80%;
+        padding: 30px;
     }
 
+    .formEditProfile{
+        grid-template-areas: 
+        "title title"
+        "col1 col2"
+        "col1 buttons";
+        grid-template-columns: 50% 50%;
+    }
+
+    .input-container select,
+    .input-container input{
+        width: 50%;
+    }
+
+    .profilePicture{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        margin: 20px 0;
+    }
+
+    .profilePicture img{
+        margin: 0 !important;
+    }
 }
 
+/*-----------------------------------------------------------------*/
+/*------------------------------ PC -------------------------------*/
+/*-----------------------------------------------------------------*/
 
-/* Desktop */
+@media screen and (min-width: 990px){
 
-
-@media screen and (min-width: 992px) {
-
-    .profile .input-file-container {
-        max-width: 300px;
-    }
-  
-    .profile .form-container {
-        width: 100%;
-    }
-
-    .profile-form {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
-
-    .profile .button-container {
-        flex-direction: row;
-        margin-top: 2rem;
-        gap: 20px;
-        justify-content: center;
-    }
 
 }
-

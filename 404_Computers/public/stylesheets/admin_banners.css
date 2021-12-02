@@ -34,7 +34,7 @@
 }
 
 .grid_item_list:hover{
-    background: rgb(240, 229, 249);
+    background: rgba(72,36,255,0.1)
 }
 
 .grid_list_box{

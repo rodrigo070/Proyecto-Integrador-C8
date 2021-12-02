@@ -228,6 +228,36 @@ function shippingCost(){
     }
 }
 
+function shippingCostCart(){
+    let cpCode =document.getElementById("cpcode").value;
+
+    let fieldToReplace = document.getElementById("shippingCost");
+
+    let cost = 0.400;
+
+    let finalCost = cpCode * cost;
+
+    if(cpCode > 0 && cpCode.length > 3)
+    {
+        if(finalCost < 600)
+        {
+            finalCost = 720;
+        }
+        else if(finalCost > 2300)
+        {
+            finalCost = 1900;
+        }
+
+        finalCost = Math.round(finalCost);
+    
+        fieldToReplace.innerHTML = "$"+finalCost;
+    }
+    else
+    {
+        fieldToReplace.innerHTML = "$";
+    }
+}
+
 
 function showPassword(passSection, eyeBTN) {
     let button = document.getElementById(passSection);

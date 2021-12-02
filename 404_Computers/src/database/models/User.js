@@ -37,7 +37,13 @@ module.exports = (sequelize,DataTypes) => {
         },
         dni : {
             type: DataTypes.INTEGER
-        }
+        },
+        province : {
+            type: DataTypes.STRING
+        },
+        city : {
+            type: DataTypes.STRING
+        },
     }
 
     let config = {

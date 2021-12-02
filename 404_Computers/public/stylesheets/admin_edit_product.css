@@ -6,7 +6,7 @@
 
 .editProductSection{
     width: 100%;
-    padding: 0 30px;
+    padding: 0 5px;
 }
 
 .switchButton {
@@ -135,7 +135,7 @@
 .editProductSaveCancel{
     display: flex;
     justify-content: center;
-    margin: 20px auto 0 auto;
+    margin: 20px auto;
     gap: 10px;
 }
 
@@ -173,6 +173,7 @@
 .imagesTitle{
     font-size: 20px;
     margin-left: 5px;
+    margin-top: 20px;
 }
 
 .imagesBoxProduct{
@@ -180,6 +181,10 @@
 }
 
 @media screen and (min-width: 768px){
+    .editProductSection{
+        padding: 0 30px;
+    }
+
     .dataEditSection{
         display: grid;
         grid-template-areas: 

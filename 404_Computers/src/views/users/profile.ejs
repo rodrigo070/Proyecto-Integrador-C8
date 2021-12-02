@@ -22,6 +22,7 @@
         </div>
 
         <div class="main-conteiner-pefil">
+          <img class="profilePicP" src="/images/users/<%=user.image %>" alt="<%=user.image %>">
           <h2>Mis Datos</h3><!-- primer encabezado que se ve en la vista -->
 
           <div class="subtitulo-mis-datos">
@@ -31,7 +32,7 @@
           <div class="info">
             <div class="contenedor-flex">
               <div class="indicador">
-                <span>Usuario</span>
+                <span>Usuario: </span>
               </div>
               <div class="indicador-value">
                 <span><%= users.name %> </span>
@@ -40,7 +41,7 @@
             <div class="info">
               <div class="contenedor-flex">
                 <div class="indicador">
-                  <span>E-mail</span>
+                  <span>E-mail: </span>
                 </div>
                 <div class="indicador-value">
                   <span><%= users.email %></span>
@@ -52,7 +53,7 @@
           <div class="info">
             <div class="contenedor-flex">
               <div class="indicador">
-                <span>Nombre y Apellido:</span>
+                <span>Nombre:</span>
               </div>
               <div class="indicador-value">
                 <span><%= users.name %> <%= users.surname %><!-- Aca iría el nombre de la cuenta --></span>
@@ -71,36 +72,14 @@
             <div class="info">
               <div class="contenedor-flex">
                 <div class="indicador">
-                  <span>Telefono</span>
+                  <span>Telefono:</span>
                 </div>
                 <div class="indicador-value">
                   <span><%= users.phone ? users.phone : "-- ---- ----" %></span>
                 </div>
               </div>
             </div>
-            <div class="subtitulo-mis-datos">
-              Tarjetas
-            </div>
-            <div class="tarjetas-contenedoras">
-              <div class="img-tarjetas">
-                <img src="/images/payments_Logos/visa-debito.svg" alt="">
-              </div>
-              <div class="datos-tarjetas">
-               <p>Terminada en: 1234 </p>
-               <p class="info-tarjeta">Visa Argentina,S.A.</p>
-               <p class="info-tarjeta">Vencimiento: 10/03/2030</p>
-              </div>
-            </div>
-            <div class="tarjetas-contenedoras">
-              <div class="img-tarjetas">
-                <img src="/images/payments_Logos/mastercard.svg" alt="">
-              </div>
-              <div class="datos-tarjetas">
-               <p>Terminada en: 1234 </p>
-               <p class="info-tarjeta">MasterCard</p>
-               <p class="info-tarjeta">Vencimiento: 10/03/2030</p>
-              </div>
-            </div>
+            
             <div class="subtitulo-mis-datos">
               Domicilio
             </div>
@@ -108,14 +87,9 @@
             <div class="tarjetas-contenedoras">
               <div class="datos-tarjetas">
                 <p><%= users.address ? users.address : "Direccion" %> </p>
-                <p class="info-tarjeta">Buenos Aires(1655), Localidad falsa</p>
-                <p class="info-tarjeta"><%= users.name %> <%= users.surname %> - +54 <%= users.phone ? users.phone : "-- ---- ----" %> </p><!-- lo de +54 no se si dejarlo o no por ahora lo dejo mas adelante lo hablamos -->
+                <p class="info-tarjeta"><%= users.province  %> , <%= users.city %> </p>
                </div>
             </div>
-            <div class="tarjetas-contenedoras">
-              <h4>Agregar otro Domicilio</h4>
-            </div>
-
 
           </div>
 

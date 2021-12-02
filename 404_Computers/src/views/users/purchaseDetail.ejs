@@ -5,14 +5,17 @@
   <div class="container_Page">
     <%- include('../partials/header.ejs') %>   
     <main>
-      <section class="purchaseDetailContainer">
+        <div style="width: 90%; margin: 20px auto;">
+            <a style="padding: 6px 15px; border-radius: 1rem; border: 1px solid rgba(0,0,0,0.3);" href="/mis-compras">Volver a Mis Compras</a>
+        </div>
+        <section class="purchaseDetailContainer">
         <div style="grid-area: title;" class="titles">N° de Orden: #<%= details[0].order_ID %></div>
         <div style="grid-area: pay;">
             <p>Recibimos tu Pago por : <%= payment %></p>
         </div>
         <div class="purchaseDetailBox">
             <div class="purchaseDetailItem" style="border-bottom: 1px solid rgba(0,0,0,0.3);">
-                <p>N°</p>
+                <p>ID</p>
                 <p>Producto</p>
                 <p>Precio</p>
                 <p>Unidades</p>
@@ -23,16 +26,27 @@
                 <div class="purchaseDetailItem">
                     <p>#<%= i %> </p>
                     <p><%= details[i].item_Name %></p>
-                    <p><%= details[i].item_Price / details[i].item_Quantity %></p>
+                    <p>$<%= toThousand(details[i].item_Price / details[i].item_Quantity) %></p>
                     <p><%= details[i].item_Quantity %></p>
-                    <p><%= details[i].item_Price %></p>
+                    <p>$<%= toThousand(details[i].item_Price) %></p>
                 </div>
             <% } %>
+            <div style="border-top: 1px solid rgba(0,0,0,0.3);">
+                <p style="text-align: center;">Total Abonado: $<%= toThousand(totalPurchased) %> </p>
+            </div>
         </div>
         <div class="purchaseDetailFormBox">
-            <p><%= details[0].homeAddress %></p>
+            <p style="font-size: 18px; padding-top: 15px;">Datos de Facturación</p>
+            <div class="formTextPurchase">
+                <p>Domicilio: </p>
+                <p><%= details[0].homeAddress %></p>
+                <p style="padding-top: 8px;">Codigo Postal: </p>
+                <p><%= details[0].cpCode %></p>
+            </div>
         </div>
-      </section>
+        </section>
+        <!-- SLIDER DE MARCAS (INTEL, GIGABYTE ETC)  -->
+        <%- include('../partials/sliderBrands.ejs') %>   
     </main>
     <%- include('../partials/footer.ejs') %> 
   </div>

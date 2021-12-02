@@ -10,7 +10,7 @@
         <% for( let i = 0; i < userPurchases.length; i++ ) { %>
           <% if (i === 0) { %>
             <div class="purchasesBox">
-              <p>Orden de Compra: <%= userPurchases[i].order_ID %></p>
+              <p>Orden de Compra N°<%= userPurchases[i].order_ID %></p>
               <div>
                 <p>Cantidad de Productos: <%= userPurchases[i].item_Quantity %></p>
                 <% if (userPurchases[i].payment_Option === 1) { %>
@@ -25,7 +25,7 @@
             </div>
           <% } else if (i > 0 && userPurchases[i].order_ID != userPurchases[i-1].order_ID) { %>
             <div class="purchasesBox">
-              <p>Orden de Compra: <%= userPurchases[i].order_ID %></p>
+              <p>Orden de Compra N°<%= userPurchases[i].order_ID %></p>
               <div>
                 <p>Cantidad de Productos: <%= userPurchases[i].item_Quantity %></p>
                 <% if (userPurchases[i].payment_Option === 1) { %>

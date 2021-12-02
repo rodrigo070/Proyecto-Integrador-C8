@@ -539,7 +539,7 @@ module.exports = {
             }
           )
             .then(() => {
-              res.redirect("/admin/lista-productos");
+              res.redirect("/admin");
             })
             .catch((error) =>
               console.log(

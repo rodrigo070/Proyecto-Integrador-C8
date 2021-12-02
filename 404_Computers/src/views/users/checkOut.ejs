@@ -80,7 +80,7 @@
                             <input type="number" name="cpCode" id="cpcode" placeholder="Ej: 2000">
                         </div>
                         <div>
-                            <button name="calculate" onclick="shippingCost()" value="">Calcular</button>
+                            <a name="calculate" onclick="shippingCost()" value="">Calcular</a>
                         </div>
                         <div>
                             <label>Costo:</label>
@@ -180,7 +180,7 @@
                     </div>
                 </div>
                 <div class="checkOut_confirm_Box">
-                    <button type="submit" onclick="location.href='www.mercadopago.com.ar'">Confirmar Compra</button>
+                    <button type="submit" onclick="openMP();">Confirmar Compra</button>
                 </div>
             </form>
             <!-- SLIDER DE MARCAS (INTEL, GIGABYTE ETC)  -->
@@ -189,5 +189,10 @@
     </main>
     <%- include('../partials/footer.ejs') %> 
   </div>
+  <script>
+      function openMP(){
+          window.open('https://www.mercadopago.com.ar', '_blank');
+      }
+  </script>
 </body>
 </html>

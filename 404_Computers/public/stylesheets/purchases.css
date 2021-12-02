@@ -32,6 +32,8 @@
     background: #8358fa7a;
 }
 
+.purchaseDetailBox:hover,
+.purchaseDetailFormBox:hover,
 .purchasesBox:hover{
     border: 1px solid #4911e469;
 }
@@ -43,15 +45,17 @@
     "pay pay"
     "list formDetail";
     grid-template-columns: 68% 28%;
-    background: #d4c5ff7a;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.2);
     padding: 20px;
     border-radius: 1rem;
     gap: 4%;
+    margin-bottom: 60px;
 }
 
 .purchaseDetailBox{
     grid-area: list;
-    background: #fcfbffba;
+    background: #f3f0ffba;
     padding: 20px;
     border-radius: 1rem;
     width: 100%;
@@ -67,9 +71,22 @@
 
 .purchaseDetailFormBox{
     grid-area: formDetail;
-    background: #fcfbffba;
+    background: #f3f0ffba;
     text-align: center;
     width: 100%;
     border-radius: 1rem;
     margin-bottom: 20px;
+}
+
+.purchaseDetailBox,
+.purchaseDetailFormBox{
+    transition: all .5s;
+    border: 1px solid transparent;
+}
+
+.formTextPurchase{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    text-align: left;
 }

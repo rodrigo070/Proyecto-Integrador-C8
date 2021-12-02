@@ -24,16 +24,24 @@
               <p><%= usuario.name %></p>
               <p><%= usuario.surname %></p>
               <p><%= usuario.email %></p>
-              <a href="/admin/editar-usuario/<%= usuario.id %>" title="Editar Usuario"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-              <i id="btnDeleteUser" class="fa fa-trash" aria-hidden="true"></i>
-              
-              <div class="modalFormBox">
-                <form class="modalFormContent" action="/admin/borrarUsuario/<%- usuario.id %>?_method=DELETE" method="POST">
-                  <p>¿Desea Borrar a <%= usuario.name %>?</p>
-                  <button class="cancelDeleteBTN" type="button" title="Cancelar">Cancelar</button>
-                  <button type="submit" title="Borrar Usuario">Confirmar</button>
-                </form>
-              </div>
+
+              <% if (typeof session.user != "undefined") { %>
+                <% if (session.user.role === "ROLE_SUPER_ADMIN") { %>
+                  <a href="/admin/editar-usuario/<%= usuario.id %>" title="Editar Usuario"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                  <i id="btnDeleteUser" class="fa fa-trash" aria-hidden="true"></i>
+                  
+                  <div class="modalFormBox">
+                    <form class="modalFormContent" action="/admin/borrarUsuario/<%- usuario.id %>?_method=DELETE" method="POST">
+                      <p>¿Desea Borrar a <%= usuario.name %>?</p>
+                      <button class="cancelDeleteBTN" type="button" title="Cancelar">Cancelar</button>
+                      <button type="submit" title="Borrar Usuario">Confirmar</button>
+                    </form>
+                  </div>
+                <% } else { %>
+                  <a title="Editar Usuario"><i style="color: grey !important;" class="fa fa-pencil" aria-hidden="true"></i></a>
+                  <i id="btnDeleteUser" style="color: grey !important;" class="fa fa-trash" aria-hidden="true"></i>
+                <% } %>
+            <% } %>
 
             </section>
             <% }) %>

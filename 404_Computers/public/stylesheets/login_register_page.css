@@ -80,6 +80,7 @@
     position: absolute;
     right: 20px;
     top: 12px;
+    cursor: pointer;
 }
 
 .termsAndConditions a{
@@ -208,13 +209,17 @@
     bottom: 0;
     left: 0;
     top: 38px;
-    color: white;
+    color: red;
+    background: white;
+    border-radius: 0.5rem;
 }
 
 .errorLogRegSub{
     display: flex;
     margin-bottom: 15px;
-    color: white;
+    color: red;
+    background: white;
+    border-radius: 0.5rem;
 }
 
 
